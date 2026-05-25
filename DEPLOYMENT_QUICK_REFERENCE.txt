@@ -1,0 +1,211 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    VERCEL DEPLOYMENT - QUICK START                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📋 QUICK CHECKLIST
+
+  ☐ Step 1: Create Supabase account (supabase.com)
+  ☐ Step 2: Create PostgreSQL database in Supabase
+  ☐ Step 3: Get connection string from Supabase
+  ☐ Step 4: Push code to GitHub
+  ☐ Step 5: Create Vercel account (vercel.com)
+  ☐ Step 6: Deploy frontend to Vercel
+  ☐ Step 7: Deploy backend to Vercel
+  ☐ Step 8: Configure environment variables
+  ☐ Step 9: Run database migrations
+  ☐ Step 10: Test deployment
+
+════════════════════════════════════════════════════════════════════════════
+
+🚀 STEP-BY-STEP
+
+STEP 1: CREATE SUPABASE DATABASE (5 min)
+  1. Go to https://supabase.com
+  2. Sign up with GitHub
+  3. Create new project → choose region
+  4. Save the project password
+  5. Go to Settings → Database → Connection string (URI)
+  6. Copy the connection string
+  
+  ✓ Supabase PostgreSQL ready!
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 2: PUSH TO GITHUB (5 min)
+  1. cd C:\Users\staff\Selfassesment-app
+  2. git add .
+  3. git commit -m "chore: prepare for Vercel deployment"
+  4. git push origin main
+  
+  ✓ Code on GitHub!
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 3: DEPLOY FRONTEND (10 min)
+  1. Go to https://vercel.com/dashboard
+  2. Click "Add New" → "Project"
+  3. Import your GitHub repository
+  4. Configuration:
+     - Framework: Next.js
+     - Root Directory: ./frontend
+     - Build Command: npm run build --workspace=frontend
+     - Output Directory: .next
+  5. Click "Deploy"
+  6. Add environment variables:
+     NEXT_PUBLIC_API_URL = https://[YOUR-BACKEND-URL].vercel.app
+     NEXT_PUBLIC_APP_URL = https://[YOUR-FRONTEND-URL].vercel.app
+  7. Redeploy to apply env vars
+  
+  ✓ Frontend deployed!
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 4: DEPLOY BACKEND (10 min)
+  1. In Vercel, click "Add New" → "Project"
+  2. Select SAME GitHub repository again
+  3. Configuration:
+     - Framework: Other
+     - Root Directory: ./backend
+     - Build Command: npm run build
+  4. Click "Deploy"
+  5. Add environment variables:
+     DATABASE_URL = [YOUR-SUPABASE-CONNECTION-STRING]
+     JWT_SECRET = [GENERATE-NEW-SECRET]
+     NODE_ENV = production
+     CORS_ORIGIN = https://[YOUR-FRONTEND-URL].vercel.app
+  6. Redeploy to apply env vars
+  
+  ✓ Backend deployed!
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 5: SETUP DATABASE (5 min)
+  1. In Windows command prompt:
+  
+     cd C:\Users\staff\Selfassesment-app\backend
+     npm install
+     
+  2. Set environment variable (replace with your real URL):
+     
+     $env:DATABASE_URL = "postgresql://postgres:PASSWORD@host:5432/postgres"
+     
+  3. Run migrations:
+     
+     npm run db:push
+     npm run db:seed
+     
+  ✓ Database ready!
+
+────────────────────────────────────────────────────────────────────────────
+
+STEP 6: TEST DEPLOYMENT (5 min)
+  1. Go to your frontend URL: https://[YOUR-FRONTEND].vercel.app
+  2. Login with test account (from seed data):
+     Email: admin@example.com
+     Password: password
+  3. Create a test assessment
+  4. Check dashboard loads data
+  5. Try uploading evidence
+  
+  ✓ All working!
+
+════════════════════════════════════════════════════════════════════════════
+
+🔑 IMPORTANT VALUES TO SAVE
+
+Your Supabase Connection String:
+[PASTE YOUR DATABASE URL HERE]
+
+Your JWT Secret (generate with):
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+Your Frontend URL:
+https://[YOUR-FRONTEND].vercel.app
+
+Your Backend URL:
+https://[YOUR-BACKEND].vercel.app
+
+════════════════════════════════════════════════════════════════════════════
+
+⚠️ ENVIRONMENT VARIABLES REFERENCE
+
+FRONTEND (.env.local or Vercel):
+┌─────────────────────────────────────────────────────────────┐
+│ NEXT_PUBLIC_API_URL=https://your-backend.vercel.app         │
+│ NEXT_PUBLIC_APP_URL=https://your-frontend.vercel.app        │
+└─────────────────────────────────────────────────────────────┘
+
+BACKEND (.env or Vercel):
+┌─────────────────────────────────────────────────────────────┐
+│ DATABASE_URL=postgresql://postgres:pwd@host:5432/database   │
+│ JWT_SECRET=your-random-32-char-secret                       │
+│ NODE_ENV=production                                         │
+│ CORS_ORIGIN=https://your-frontend.vercel.app                │
+└─────────────────────────────────────────────────────────────┘
+
+════════════════════════════════════════════════════════════════════════════
+
+❓ TROUBLESHOOTING
+
+Problem: Frontend shows "Cannot connect to backend"
+Solution: 
+  1. Check NEXT_PUBLIC_API_URL is set correctly in Vercel
+  2. Check backend is deployed and running
+  3. Check browser console for exact error message
+
+Problem: "Database connection refused"
+Solution:
+  1. Verify DATABASE_URL is correct in Vercel backend settings
+  2. Check Supabase project is running
+  3. Try adding IP address to Supabase IP whitelist (Settings → Database)
+
+Problem: Build fails on Vercel
+Solution:
+  1. Check build logs in Vercel dashboard
+  2. Verify package.json scripts are correct
+  3. Check all dependencies are listed in package.json
+
+════════════════════════════════════════════════════════════════════════════
+
+📚 HELPFUL LINKS
+
+- Vercel Dashboard: https://vercel.com/dashboard
+- Supabase Console: https://app.supabase.com
+- Your GitHub: https://github.com/YOUR_USERNAME
+- Vercel Docs: https://vercel.com/docs
+- Next.js Docs: https://nextjs.org/docs
+- Prisma Docs: https://www.prisma.io/docs
+
+════════════════════════════════════════════════════════════════════════════
+
+✅ POST-DEPLOYMENT CHECKLIST
+
+  ☐ Frontend loads without errors
+  ☐ Backend API is responding
+  ☐ Can login with test credentials
+  ☐ Dashboard displays data
+  ☐ Can create new assessment
+  ☐ Can upload evidence files
+  ☐ Can download PDF report
+  ☐ Database migrations completed
+  ☐ All environment variables set
+  ☐ Errors being tracked/logged
+
+════════════════════════════════════════════════════════════════════════════
+
+💡 WHAT'S INCLUDED
+
+✓ ISO 9001:2015 Assessment Framework
+✓ 73 ISO Sections with questions
+✓ Audit Trail & Non-Conformities
+✓ Corrective Actions Workflow
+✓ Evidence Upload & Management
+✓ PDF Report Generation
+✓ CSV Import/Export
+✓ Role-Based Access Control
+✓ Dashboard with Charts
+✓ Mobile Responsive UI
+
+Total Time: ~45 minutes | Cost: Free (Vercel + Supabase free tier)
+
+════════════════════════════════════════════════════════════════════════════

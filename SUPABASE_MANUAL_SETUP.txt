@@ -1,0 +1,159 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                   SUPABASE - MANUAL SETUP GUIDE                            ║
+║              Creating PostgreSQL Database for Deployment                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Your Dashboard Link:
+https://supabase.com/dashboard/org/ebrftwflkcdleqoecogl
+
+════════════════════════════════════════════════════════════════════════════
+
+STEP 1: LOG IN TO SUPABASE
+
+1. Go to: https://supabase.com/dashboard/org/ebrftwflkcdleqoecogl
+2. You'll be prompted to sign in
+3. Click "Continue with GitHub"
+4. Authorize Supabase in GitHub
+5. You'll be taken to your organization dashboard
+
+════════════════════════════════════════════════════════════════════════════
+
+STEP 2: CREATE NEW PROJECT
+
+Once logged in:
+
+1. Look for "New Project" button (usually blue, top right area)
+2. Click it
+3. Fill in the project details:
+
+   ┌─────────────────────────────────────────────────────────┐
+   │ Project Name: selfassessment-app-prod                   │
+   │ Password: [Generate strong password - SAVE THIS]         │
+   │ Region: eu-west-1 (Ireland)  [or your preferred region] │
+   └─────────────────────────────────────────────────────────┘
+
+4. Click "Create new project"
+5. Wait 2-3 minutes for initialization
+   - You'll see a progress indicator
+   - Be patient, database is being set up
+
+════════════════════════════════════════════════════════════════════════════
+
+STEP 3: GET CONNECTION STRING
+
+After project is created:
+
+1. In left sidebar, click "Settings" (gear icon)
+2. Go to "Database" tab
+3. Scroll down to find "Connection string" section
+4. You'll see options like:
+   ┌──────────────────────────────────┐
+   │ ○ Postgres Client                 │
+   │ ○ URI (select this one)           │
+   │ ○ JDBC                            │
+   │ ○ ODBC                            │
+   └──────────────────────────────────┘
+
+5. Click "URI" option
+6. Copy the connection string that appears
+   
+   It looks like:
+   postgresql://postgres:[PASSWORD]@[HOST]:[PORT]/postgres?sslmode=require
+
+════════════════════════════════════════════════════════════════════════════
+
+STEP 4: SAVE CONNECTION STRING
+
+Save the connection string in a secure location:
+
+   Option A: In environment variable file (RECOMMENDED)
+   ┌─────────────────────────────────────────────────────────┐
+   │ Create file: .env.production                            │
+   │ Content:                                                │
+   │ DATABASE_URL=[YOUR_CONNECTION_STRING]                   │
+   └─────────────────────────────────────────────────────────┘
+
+   Option B: In password manager
+   ┌─────────────────────────────────────────────────────────┐
+   │ Save the entire connection string                        │
+   │ Label: "Selfassessment-app PostgreSQL Production"        │
+   └─────────────────────────────────────────────────────────┘
+
+   Option C: In secure notes
+   ┌─────────────────────────────────────────────────────────┐
+   │ Write down:                                             │
+   │ - Database: selfassessment-app-prod                     │
+   │ - Host: [HOST from connection string]                   │
+   │ - User: postgres                                        │
+   │ - Password: [password you created]                      │
+   │ - Port: 5432                                            │
+   └─────────────────────────────────────────────────────────┘
+
+⚠️ IMPORTANT: Never commit .env files to Git!
+   It's already in .gitignore, so you're safe.
+
+════════════════════════════════════════════════════════════════════════════
+
+STEP 5: ENABLE BACKUPS (OPTIONAL BUT RECOMMENDED)
+
+For production database, set up backups:
+
+1. In Settings (same area as connection string)
+2. Look for "Backups" or "Database Backups"
+3. Enable automated backups
+4. Choose backup frequency (daily recommended)
+
+This protects your data in case of issues.
+
+════════════════════════════════════════════════════════════════════════════
+
+✅ SETUP COMPLETE!
+
+You now have:
+  ✓ Supabase organization set up
+  ✓ PostgreSQL database created
+  ✓ Connection string obtained
+  ✓ Ready to deploy
+
+════════════════════════════════════════════════════════════════════════════
+
+WHAT'S YOUR CONNECTION STRING LOOK LIKE?
+
+Example format:
+postgresql://postgres:AbCdEf123456@db.ebrftwflkcdleqoecogl.supabase.co:5432/postgres?sslmode=require
+
+Breaking it down:
+  - postgres       → username
+  - AbCdEf123456   → password (the one you created)
+  - db.xxx.co      → host (unique to your project)
+  - 5432           → port (always this for PostgreSQL)
+  - postgres       → database name
+  - sslmode=require → security setting
+
+════════════════════════════════════════════════════════════════════════════
+
+NEXT STEPS:
+
+Once you have the connection string:
+
+1. Save it to .env.production file
+2. Push code to GitHub
+3. Deploy frontend to Vercel
+4. Deploy backend to Vercel
+5. Add DATABASE_URL to Vercel backend environment
+6. Run migrations: npm run db:push && npm run db:seed
+
+════════════════════════════════════════════════════════════════════════════
+
+WHEN YOU'RE READY:
+
+Tell me:
+  "I've created the Supabase project and have my connection string"
+
+And I'll help you with:
+  - Pushing to GitHub
+  - Deploying to Vercel
+  - Running database migrations
+  - Testing everything
+
+════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Surface tokens ── */
+    --background: #F6F8F9;
+    --foreground: #0F172A;
+    --card: #ffffff;
+    --card-foreground: #1E293B;
+    --popover: #ffffff;
+    --popover-foreground: #0F172A;
+
+    /* ── Primary: Mint ── */
+    --primary: #3EAA9E;
+    --primary-foreground: #ffffff;
+
+    /* ── Secondary ── */
+    --secondary: #F0FAFA;
+    --secondary-foreground: #276D66;
+
+    /* ── Muted ── */
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+
+    /* ── Accent ── */
+    --accent: #DDF4F3;
+    --accent-foreground: #276D66;
+
+    /* ── Destructive ── */
+    --destructive: #EF4444;
+    --destructive-foreground: #ffffff;
+
+    /* ── Borders & inputs ── */
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #3EAA9E;
+
+    /* ── Radius ── */
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* ── Glass panel utility ── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Score button animations ── */
+.score-button {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.score-button:hover {
+  @apply transform scale-105;
+}
+
+.score-button.selected {
+  @apply ring-2 ring-offset-2;
+}
+
+/* ── Progress bar animation ── */
+.progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+
+/* ── Focus ring utility ── */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3EAA9E;
+}

@@ -1,0 +1,192 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                   SUPABASE SETUP - STEP BY STEP                            ║
+║                  PostgreSQL Database for Production                        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+⏱️  Expected time: 5-10 minutes
+
+════════════════════════════════════════════════════════════════════════════
+
+PART 1: CREATE SUPABASE ACCOUNT (if you don't have one)
+
+1. Go to https://supabase.com
+2. Click "Start your project"
+3. Sign up with GitHub (recommended):
+   - Click "Continue with GitHub"
+   - Authorize Supabase
+   - Complete GitHub sign-up if needed
+4. You'll be redirected to Supabase dashboard
+
+✓ Supabase account created!
+
+════════════════════════════════════════════════════════════════════════════
+
+PART 2: CREATE NEW PROJECT
+
+1. In Supabase dashboard, click "New project" (or the blue button)
+2. Fill in project details:
+   
+   Project name:     "selfassessment-app-prod" 
+   Password:         Generate strong password (save this!)
+   Region:           Choose closest to your users
+                     - EU: Ireland
+                     - US: us-east-1 (Virginia)
+                     - Asia: ap-southeast-1 (Singapore)
+   
+3. Click "Create new project"
+4. Wait for initialization (2-3 minutes)
+   - You'll see a loading screen with a progress bar
+   - The project is being created on Supabase servers
+
+✓ Project created!
+
+════════════════════════════════════════════════════════════════════════════
+
+PART 3: GET CONNECTION STRING
+
+Once initialized, you'll see the project dashboard.
+
+Method A: Copy connection string directly
+1. Left sidebar → "Settings" → "Database"
+2. Scroll down to "Connection string"
+3. Select "URI" from the dropdown (it's a tab/radio button)
+4. Copy the entire connection string
+   
+   It looks like:
+   postgresql://postgres:[YOUR-PASSWORD]@[HOST]:[PORT]/postgres
+   
+5. Replace [YOUR-PASSWORD] with the password you created in Part 2
+
+Method B: Manual connection string
+If you prefer to construct it yourself:
+   
+   Protocol:  postgresql://
+   User:      postgres
+   Password:  [the password you saved]
+   Host:      [HOST] (shown in settings)
+   Port:      5432
+   Database:  postgres
+
+✓ Connection string obtained!
+
+════════════════════════════════════════════════════════════════════════════
+
+PART 4: SAVE YOUR CONNECTION STRING
+
+Create a file called `.env.production` and save it securely:
+
+File: C:\Users\staff\Selfassesment-app\.env.production
+
+Content:
+┌─────────────────────────────────────────────────────────────┐
+│ DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@HOST:5432 │
+│/postgres                                                     │
+└─────────────────────────────────────────────────────────────┘
+
+Replace:
+  - YOUR_PASSWORD = password you created
+  - HOST = your supabase host (shown in settings)
+
+Do NOT commit this file to GitHub! It's in .gitignore.
+
+════════════════════════════════════════════════════════════════════════════
+
+PART 5: VERIFY CONNECTION (OPTIONAL)
+
+You can test the connection from your local machine:
+
+1. Open PowerShell
+2. Install PostgreSQL client (if needed):
+   choco install postgresql
+   (or download from https://www.postgresql.org/download/windows/)
+
+3. Test connection:
+   psql "YOUR_CONNECTION_STRING"
+   
+4. If connected, you'll see:
+   postgres=#
+
+5. Exit with: \q
+
+✓ Connection verified!
+
+════════════════════════════════════════════════════════════════════════════
+
+✅ SUPABASE SETUP COMPLETE!
+
+You now have:
+  ✓ Supabase project created
+  ✓ PostgreSQL database running
+  ✓ Connection string saved
+  ✓ Ready for migrations
+
+════════════════════════════════════════════════════════════════════════════
+
+NEXT STEPS:
+
+Step 2: Push code to GitHub
+  → Once you have connection string, commit it (with .env in .gitignore)
+  → Push to GitHub
+
+Step 3: Deploy frontend to Vercel
+  → Import your GitHub repo
+
+Step 4: Deploy backend to Vercel
+  → Use same repo
+  → Add DATABASE_URL environment variable
+
+Step 5: Run migrations
+  → npm run db:push
+  → npm run db:seed
+
+════════════════════════════════════════════════════════════════════════════
+
+⚠️ IMPORTANT NOTES:
+
+1. SAVE YOUR PASSWORD
+   - You'll need it to construct the connection string
+   - Supabase won't show it again
+   - Write it down or save in password manager
+
+2. CONNECTION STRING CONTAINS PASSWORD
+   - Never commit to Git (it's in .gitignore)
+   - Never share publicly
+   - Add to Vercel secrets only (not in code)
+
+3. FREE TIER LIMITS
+   - Database size: 500 MB
+   - Bandwidth: 2 GB
+   - Good for testing/small production apps
+   - Upgrade anytime if you need more
+
+4. BACKUPS
+   - Supabase includes daily backups on free tier
+   - Set up in Settings → Backups once deployed
+
+════════════════════════════════════════════════════════════════════════════
+
+❓ TROUBLESHOOTING
+
+Q: I forgot my password
+A: Go to Supabase Settings → Database → scroll down
+   Click "Reset password" to create a new one
+
+Q: Connection string shows as masked/hidden
+A: Click the "Reveal" button or copy icon next to it
+
+Q: Can't find the connection string
+A: 
+   1. Left sidebar → "Settings"
+   2. Click "Database" tab (or scroll down)
+   3. Look for "Connection String" section
+   4. Select "URI" from dropdown
+
+Q: Getting connection timeout
+A: 
+   1. Check your internet connection
+   2. Verify hostname in connection string
+   3. Try connecting from a different network
+
+════════════════════════════════════════════════════════════════════════════
+
+When ready for next steps, let me know and we'll deploy to GitHub and Vercel!

@@ -1,0 +1,34 @@
+{
+  "name": "auditflow",
+  "version": "1.0.0",
+  "description": "AuditFlow - ISO 9001 Quality Management & Audit Platform",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "db:seed": "npm run db:seed --workspace=backend"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/pdfkit": "^0.13.8",
+    "@types/supertest": "^6.0.2",
+    "concurrently": "^8.2.2",
+    "prisma": "^6.19.3",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.6",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,50 @@
+# Dependencies - never copy local node_modules into container
+**/node_modules
+
+# Build outputs
+**/.next
+**/dist
+**/out
+**/coverage
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.example
+
+# Uploads (mounted as volume in production)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Test files
+**/__tests__
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+**/jest.config.js
+**/jest.setup.ts
+
+# Logs
+**/*.log
+**/npm-debug.log*
+
+# IDE and OS files
+**/.idea
+**/.vscode
+**/*.swp
+**/*.swo
+**/.DS_Store
+**/Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker files (avoid recursion)
+**/Dockerfile*
+**/.dockerignore
+
+# Documentation
+*.md
+!README.md

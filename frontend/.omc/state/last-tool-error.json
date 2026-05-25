@@ -1,0 +1,7 @@
+{
+  "tool_name": "PowerShell",
+  "tool_input_preview": "{\"command\":\"cd \\\"C:\\\\Users\\\\staff\\\\Selfassesment-app\\\\frontend\\\"; npx jest \\\"src/lib/__tests__/store.test.ts\\\" --no-coverage 2>&1 | Select-Object -Last 15\",\"timeout\":60000,\"description\":\"Run store uni...",
+  "error": "Exit code 1\n     \u001b[90m   |\u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\r\n     \u001b[90m 6 |\u001b[39m   \u001b[90m// Clear localStorage\u001b[39m\r\n     \u001b[90m 7 |\u001b[39m   localStorage\u001b[33m.\u001b[39mclear()\u001b[33m;\u001b[39m\r\n     \u001b[90m 8 |\u001b[39m\u001b[0m\r\n      at Resolver._throwModNotFoundError (../node_modules/jest-resolve/build/resolver.js:427:11)\r\n      at Object.<anonymous> (../node_modules/@testing-library/react/dist/pure.js:45:46)\r\n      at Object.<anonymous> (../node_modules/@testing-library/react/dist/index.js:7:13)\r\n      at O...",
+  "timestamp": "2026-05-19T21:04:17.737Z",
+  "retry_count": 1
+}
