@@ -1,21 +1,17 @@
 {
-  "version": 2,
-  "buildCommand": "npm run build --workspace=backend",
-  "functions": {
-    "backend/src/index.ts": {
-      "runtime": "nodejs20.x",
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/src/index.ts"
+    "version": 2,
+    "regions": ["fra1"],
+    "buildCommand": "npm run build",
+    "functions": {
+          "api/index.js": {
+                  "memory": 1024,
+                  "maxDuration": 60
+          }
     },
-    {
-      "src": "/(.*)",
-      "dest": "/backend/src/index.ts"
-    }
-  ]
+    "routes": [
+          {
+                  "src": "/(.*)",
+                  "dest": "/api/index.js"
+          }
+    ]
 }
