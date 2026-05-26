@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@iso9001/shared'],
+  transpilePackages: ['@auditflow/shared'],
   output: 'standalone',
-    eslint: { ignoreDuringBuilds: true },
+  eslint: { ignoreDuringBuilds: true },
 }
 
 module.exports = nextConfig
