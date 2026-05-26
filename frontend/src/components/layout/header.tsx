@@ -79,7 +79,7 @@ export function Header() {
   const notificationsRef = useRef<HTMLDivElement>(null);
 
   const unreadCount = placeholderNotifications.filter((n) => !n.read).length;
-  const pageInfo = getPageInfo(pathname);
+  const pageInfo = getPageInfo(pathname ?? '/');
 
   const handleLogout = () => {
     clearAuth();

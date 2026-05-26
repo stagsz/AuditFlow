@@ -66,7 +66,7 @@ export function Sidebar() {
   }, [mobileMenuOpen]);
 
   const NavLink = ({ item, isMobile = false }: { item: typeof mainNavigation[0] & { badge?: string; admin?: boolean }; isMobile?: boolean }) => {
-    const isActive = pathname.startsWith(item.href);
+    const isActive = (pathname ?? '').startsWith(item.href);
     const showLabel = sidebarOpen || isMobile;
 
     return (

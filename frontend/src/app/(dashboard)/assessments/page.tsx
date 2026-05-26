@@ -91,14 +91,15 @@ export default function AssessmentsPage() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const safeParams = searchParams ?? new URLSearchParams();
 
   // Get filter values from URL
-  const statusFilter = searchParams.get('status') || '';
-  const searchTermFromUrl = searchParams.get('q') || '';
-  const page = parseInt(searchParams.get('page') || '1', 10);
-  const pageSize = parseInt(searchParams.get('pageSize') || '10', 10);
-  const sortBy = (searchParams.get('sortBy') || 'createdAt') as SortField;
-  const sortOrder = (searchParams.get('sortOrder') || 'desc') as SortOrder;
+  const statusFilter = safeParams.get('status') || '';
+  const searchTermFromUrl = safeParams.get('q') || '';
+  const page = parseInt(safeParams.get('page') || '1', 10);
+  const pageSize = parseInt(safeParams.get('pageSize') || '10', 10);
+  const sortBy = (safeParams.get('sortBy') || 'createdAt') as SortField;
+  const sortOrder = (safeParams.get('sortOrder') || 'desc') as SortOrder;
 
   // Local state for search input (for immediate feedback)
   const [searchInput, setSearchInput] = useState(searchTermFromUrl);
@@ -112,7 +113,7 @@ export default function AssessmentsPage() {
   // Update URL with new filter values
   const updateQueryParams = useCallback(
     (updates: Record<string, string | null>) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(safeParams.toString());
 
       Object.entries(updates).forEach(([key, value]) => {
         if (value === null || value === '') {
@@ -130,9 +131,9 @@ export default function AssessmentsPage() {
       }
 
       const queryString = params.toString();
-      router.push(queryString ? `${pathname}?${queryString}` : pathname);
+      router.push(queryString ? `${pathname ?? '/'}?${queryString}` : pathname ?? '/');
     },
-    [router, pathname, searchParams]
+    [router, pathname, safeParams]
   );
 
   // Sync URL when debounced search value changes
@@ -183,7 +184,7 @@ export default function AssessmentsPage() {
   // Clear all filters
   const handleClearFilters = useCallback(() => {
     setSearchInput('');
-    router.push(pathname);
+    router.push(pathname ?? '/');
   }, [router, pathname]);
 
   const handleExportCSV = async () => {

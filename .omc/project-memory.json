@@ -149,14 +149,44 @@
   "hotPaths": [
     {
       "path": "frontend\\src\\app\\(dashboard)\\admin\\users\\page.tsx",
+      "accessCount": 9,
+      "lastAccessed": 1779828606704,
+      "type": "file"
+    },
+    {
+      "path": "frontend\\src",
+      "accessCount": 6,
+      "lastAccessed": 1779828541588,
+      "type": "directory"
+    },
+    {
+      "path": "frontend\\src\\app\\(dashboard)\\assessments\\page.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1779828631246,
+      "type": "file"
+    },
+    {
+      "path": "frontend\\src\\app\\(dashboard)\\non-conformities\\page.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1779828640677,
+      "type": "file"
+    },
+    {
+      "path": "frontend\\src\\components\\layout\\sidebar.tsx",
       "accessCount": 3,
-      "lastAccessed": 1779827145437,
+      "lastAccessed": 1779828619019,
+      "type": "file"
+    },
+    {
+      "path": "frontend\\src\\components\\layout\\header.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1779828620268,
       "type": "file"
     },
     {
       "path": "",
-      "accessCount": 1,
-      "lastAccessed": 1779811849419,
+      "accessCount": 2,
+      "lastAccessed": 1779828415348,
       "type": "directory"
     },
     {
@@ -181,6 +211,12 @@
       "path": "backend\\src\\config\\index.ts",
       "accessCount": 1,
       "lastAccessed": 1779811870964,
+      "type": "file"
+    },
+    {
+      "path": "vercel.json",
+      "accessCount": 1,
+      "lastAccessed": 1779828439421,
       "type": "file"
     }
   ],
