@@ -11,7 +11,7 @@ import {
   ShieldOff,
   ArrowUpDown,
   ArrowUp,
-  ArrowDown,
+  ArrowDown,h
   Check,
   X,
   Pencil,
@@ -103,7 +103,7 @@ function SortableColumnHeader({
 export default function AdminUsersPage() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()!;
   const { user: currentUser } = useAuthStore();
 
   // Route guard: SYSTEM_ADMIN and QUALITY_MANAGER only
