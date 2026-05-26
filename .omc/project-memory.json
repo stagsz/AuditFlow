@@ -1,0 +1,188 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779811800616,
+  "projectRoot": "C:\\Users\\staff\\anthropicFun\\AuditFlow",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": ">=18.0.0",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "npm",
+    "runtime": "Node.js 18.0.0"
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+      "dev:backend": "npm run dev --workspace=backend",
+      "dev:frontend": "npm run dev --workspace=frontend",
+      "build": "npm run build --workspaces",
+      "test": "npm run test --workspaces",
+      "lint": "npm run lint --workspaces",
+      "db:migrate": "npm run db:migrate --workspace=backend",
+      "db:seed": "npm run db:seed --workspace=backend"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": true,
+    "workspaces": [
+      "backend",
+      "frontend",
+      "shared"
+    ],
+    "mainDirectories": [
+      "docs"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "backend": {
+      "path": "backend",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1779811800550,
+      "keyFiles": [
+        "check-templates.ts",
+        "Dockerfile",
+        "jest.config.js",
+        "package.json",
+        "test_output.txt"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 3,
+      "lastAccessed": 1779811800552,
+      "keyFiles": [
+        "API.md",
+        "DEPLOYMENT.md",
+        "SETUP.md"
+      ]
+    },
+    "frontend": {
+      "path": "frontend",
+      "purpose": null,
+      "fileCount": 15,
+      "lastAccessed": 1779811800564,
+      "keyFiles": [
+        "design-reference.html",
+        "Dockerfile",
+        "jest.config.js",
+        "next-env.d.ts",
+        "next.config.js"
+      ]
+    },
+    "presentations": {
+      "path": "presentations",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1779811800565,
+      "keyFiles": [
+        "create_presentation.js",
+        "POWERPOINT_INFO.md",
+        "PRESENTATION_PACKAGE_INDEX.md",
+        "PRESENTATION_QUICK_REFERENCE.md",
+        "PRESENTATION_README.md"
+      ]
+    },
+    "shared": {
+      "path": "shared",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1779811800566,
+      "keyFiles": [
+        "package.json",
+        "tsconfig.json"
+      ]
+    },
+    "backend\\src": {
+      "path": "backend\\src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1779811800566,
+      "keyFiles": [
+        "index.ts"
+      ]
+    },
+    "shared\\dist": {
+      "path": "shared\\dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 4,
+      "lastAccessed": 1779811800568,
+      "keyFiles": [
+        "index.d.ts",
+        "index.d.ts.map",
+        "index.js"
+      ]
+    },
+    "shared\\types": {
+      "path": "shared\\types",
+      "purpose": "Type definitions",
+      "fileCount": 1,
+      "lastAccessed": 1779811800568,
+      "keyFiles": [
+        "index.ts"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1779811849419,
+      "type": "directory"
+    },
+    {
+      "path": "backend\\package.json",
+      "accessCount": 1,
+      "lastAccessed": 1779811856064,
+      "type": "file"
+    },
+    {
+      "path": "backend",
+      "accessCount": 1,
+      "lastAccessed": 1779811856261,
+      "type": "directory"
+    },
+    {
+      "path": "backend\\src\\index.ts",
+      "accessCount": 1,
+      "lastAccessed": 1779811860161,
+      "type": "file"
+    },
+    {
+      "path": "backend\\src\\config\\index.ts",
+      "accessCount": 1,
+      "lastAccessed": 1779811870964,
+      "type": "file"
+    },
+    {
+      "path": "frontend\\src\\app\\(dashboard)\\admin\\users\\page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1779811895858,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
