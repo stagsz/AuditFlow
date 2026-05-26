@@ -148,6 +148,12 @@
   },
   "hotPaths": [
     {
+      "path": "frontend\\src\\app\\(dashboard)\\admin\\users\\page.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1779827145437,
+      "type": "file"
+    },
+    {
       "path": "",
       "accessCount": 1,
       "lastAccessed": 1779811849419,
@@ -175,12 +181,6 @@
       "path": "backend\\src\\config\\index.ts",
       "accessCount": 1,
       "lastAccessed": 1779811870964,
-      "type": "file"
-    },
-    {
-      "path": "frontend\\src\\app\\(dashboard)\\admin\\users\\page.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1779811895858,
       "type": "file"
     }
   ],
