@@ -11,7 +11,7 @@ import {
   ShieldOff,
   ArrowUpDown,
   ArrowUp,
-  ArrowDown,h
+  ArrowDown,
   Check,
   X,
   Pencil,
