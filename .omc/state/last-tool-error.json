@@ -1,7 +1,0 @@
-{
-  "tool_name": "PowerShell",
-  "tool_input_preview": "{\"command\":\"Test-Path \\\"C:\\\\Users\\\\staff\\\\anthropicFun\\\\AuditFlow\\\\frontend\\\\node_modules\\\"; Get-ChildItem \\\"C:\\\\Users\\\\staff\\\\anthropicFun\\\\AuditFlow\\\\frontend\\\\node_modules\\\\.bin\\\" -Filter \\\"tsc*\\\" ...",
-  "error": "Exit code 1\nFalse",
-  "timestamp": "2026-05-26T20:52:16.317Z",
-  "retry_count": 6
-}
