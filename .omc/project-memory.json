@@ -185,8 +185,8 @@
     },
     {
       "path": "",
-      "accessCount": 2,
-      "lastAccessed": 1779828415348,
+      "accessCount": 3,
+      "lastAccessed": 1779829244807,
       "type": "directory"
     },
     {
@@ -217,6 +217,18 @@
       "path": "vercel.json",
       "accessCount": 1,
       "lastAccessed": 1779828439421,
+      "type": "file"
+    },
+    {
+      "path": "frontend\\package.json",
+      "accessCount": 1,
+      "lastAccessed": 1779829252880,
+      "type": "file"
+    },
+    {
+      "path": "backend\\.env.example",
+      "accessCount": 1,
+      "lastAccessed": 1779829287930,
       "type": "file"
     }
   ],

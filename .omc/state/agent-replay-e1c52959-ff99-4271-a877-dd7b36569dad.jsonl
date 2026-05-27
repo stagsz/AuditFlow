@@ -5,3 +5,4 @@
 {"t":0,"agent":"aa24e2e","agent_type":"Explore","event":"agent_stop","success":true,"duration_ms":38930}
 {"t":0,"agent":"a860dbe","agent_type":"executor","event":"agent_start","parent_mode":"none"}
 {"t":0,"agent":"a860dbe","agent_type":"executor","event":"agent_stop","success":true,"duration_ms":355304}
+{"t":0,"agent":"system","event":"skill_invoked","skill_name":"vercel:deploy"}

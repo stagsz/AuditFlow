@@ -125,3 +125,6 @@ backend/dist/
 
 # Turbo
 .turbo/
+
+# OMC / Claude Code state (not deployable)
+.omc/
