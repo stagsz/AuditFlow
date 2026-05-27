@@ -190,6 +190,12 @@
       "type": "directory"
     },
     {
+      "path": "vercel.json",
+      "accessCount": 2,
+      "lastAccessed": 1779871651507,
+      "type": "file"
+    },
+    {
       "path": "backend\\package.json",
       "accessCount": 1,
       "lastAccessed": 1779811856064,
@@ -214,12 +220,6 @@
       "type": "file"
     },
     {
-      "path": "vercel.json",
-      "accessCount": 1,
-      "lastAccessed": 1779828439421,
-      "type": "file"
-    },
-    {
       "path": "frontend\\package.json",
       "accessCount": 1,
       "lastAccessed": 1779829252880,
@@ -229,6 +229,12 @@
       "path": "backend\\.env.example",
       "accessCount": 1,
       "lastAccessed": 1779829287930,
+      "type": "file"
+    },
+    {
+      "path": "railway.json",
+      "accessCount": 1,
+      "lastAccessed": 1779871658296,
       "type": "file"
     }
   ],

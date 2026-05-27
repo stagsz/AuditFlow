@@ -1,17 +1,8 @@
 {
-    "version": 2,
-    "regions": ["fra1"],
-    "buildCommand": "npm run build",
-    "functions": {
-          "api/index.js": {
-                  "memory": 1024,
-                  "maxDuration": 60
-          }
-    },
-    "routes": [
-          {
-                  "src": "/(.*)",
-                  "dest": "/api/index.js"
-          }
-    ]
+  "version": 2,
+  "regions": ["fra1"],
+  "buildCommand": "cd frontend && npm run build",
+  "outputDirectory": "frontend/.next",
+  "installCommand": "npm install",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- frontend/"
 }
