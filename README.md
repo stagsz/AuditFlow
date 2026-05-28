@@ -4,7 +4,7 @@
 
 AuditFlow is an enterprise-grade ISO 9001 Quality Management & Audit Platform designed to simplify self-assessments, audit workflows, non-conformity tracking, and corrective action management.
 
-## 🎯 Features
+##Features
 
 ### Core Capabilities
 - **Self-Assessment Management**: Create and manage ISO 9001 self-assessments with guided workflows

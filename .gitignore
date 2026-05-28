@@ -122,6 +122,7 @@ backend/dist/
 
 # Vercel
 .vercel
+.txt
 
 # Turbo
 .turbo/
