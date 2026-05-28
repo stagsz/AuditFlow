@@ -626,7 +626,7 @@ export class NonConformityService {
 
       // All corrective actions must be completed or verified
       const incompleteActions = ncr.correctiveActions.filter(
-        (ca) => ca.status !== 'COMPLETED' && ca.status !== 'VERIFIED'
+        (ca: any) => ca.status !== 'COMPLETED' && ca.status !== 'VERIFIED'
       );
       if (incompleteActions.length > 0) {
         throw new ValidationError('Cannot resolve an NCR until all corrective actions are completed');
@@ -641,7 +641,7 @@ export class NonConformityService {
 
       // All corrective actions must be verified
       const unverifiedActions = ncr.correctiveActions.filter(
-        (ca) => ca.status !== 'VERIFIED'
+        (ca: any) => ca.status !== 'VERIFIED'
       );
       if (unverifiedActions.length > 0) {
         throw new ValidationError('Cannot close an NCR until all corrective actions are verified');
@@ -756,7 +756,7 @@ export class NonConformityService {
 
     // Create NCRs for each failing response
     const createdNCRs = await prisma.$transaction(
-      failingResponses.map((response) => {
+      failingResponses.map((response: any) => {
         const sectionInfo = response.section
           ? `${response.section.sectionNumber} ${response.section.title}`
           : 'Unknown Section';

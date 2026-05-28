@@ -121,8 +121,8 @@ export class ResponseService {
       where: { isActive: true },
     });
 
-    const answeredCount = responses.filter((r) => r.score !== null).length;
-    const draftCount = responses.filter((r) => r.isDraft).length;
+    const answeredCount = responses.filter((r: any) => r.score !== null).length;
+    const draftCount = responses.filter((r: any) => r.isDraft).length;
 
     return {
       responses,
@@ -316,7 +316,7 @@ export class ResponseService {
       },
     });
 
-    const questionMap = new Map(questions.map((q) => [q.id, q]));
+    const questionMap = new Map(questions.map((q: any) => [q.id, q]));
 
     const missingQuestions = questionIds.filter((id) => !questionMap.has(id));
     if (missingQuestions.length > 0) {
@@ -358,7 +358,7 @@ export class ResponseService {
             assessmentId,
             questionId: data.questionId,
             userId,
-            sectionId: question.section?.id || null,
+            sectionId: (question as any).section?.id || null,
             score: data.score ?? null,
             justification: data.justification ?? null,
             isDraft: data.isDraft ?? true,
@@ -394,7 +394,7 @@ export class ResponseService {
     );
 
     // Trigger score recalculation if any non-draft responses
-    const hasNonDraft = results.some((r) => !r.isDraft);
+    const hasNonDraft = results.some((r: any) => !r.isDraft);
     if (hasNonDraft) {
       await this.triggerScoreCalculation(assessmentId);
     }

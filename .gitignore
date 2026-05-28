@@ -129,3 +129,5 @@ backend/dist/
 
 # OMC / Claude Code state (not deployable)
 .omc/
+what 
+.env*.local

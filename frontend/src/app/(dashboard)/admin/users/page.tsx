@@ -204,7 +204,7 @@ export default function AdminUsersPage() {
   // Clear all filters
   const handleClearFilters = useCallback(() => {
     setSearchInput('');
-    router.push(pathname);
+    router.push(pathname ?? '/admin/users');
   }, [router, pathname]);
 
   // Modal state

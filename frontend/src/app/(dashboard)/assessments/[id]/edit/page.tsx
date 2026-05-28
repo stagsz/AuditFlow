@@ -42,7 +42,7 @@ function EditAssessmentSkeleton() {
 export default function EditAssessmentPage() {
   const router = useRouter();
   const params = useParams();
-  const assessmentId = params.id as string;
+  const assessmentId = (params?.id ?? '') as string;
 
   const { data, isLoading, isError } = useAssessment(assessmentId);
   const updateAssessment = useUpdateAssessment();

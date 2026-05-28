@@ -1,8 +1,14 @@
 {
-  "version": 2,
-  "regions": ["fra1"],
-  "buildCommand": "cd frontend && npm run build",
-  "outputDirectory": "frontend/.next",
-  "installCommand": "npm install",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- frontend/"
+  "experimentalServices": {
+    "frontend": {
+      "root": "frontend",
+      "routePrefix": "/",
+      "framework": "nextjs"
+    },
+    "backend": {
+      "root": "backend",
+      "routePrefix": "/_/backend",
+      "entrypoint": "api/index.ts"
+    }
+  }
 }

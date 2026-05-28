@@ -106,7 +106,7 @@ export default function AssessmentDetailPage() {
   const { user } = useAuthStore();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const assessmentId = params.id as string;
+  const assessmentId = (params?.id ?? '') as string;
   const { data, isLoading, isError } = useAssessment(assessmentId);
   const deleteAssessment = useDeleteAssessment();
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);

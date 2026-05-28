@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@auditflow/shared'],
-  output: 'standalone',
   eslint: { ignoreDuringBuilds: true },
 }
 

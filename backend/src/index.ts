@@ -1,3 +1,4 @@
+/// <reference path="./types/express.d.ts" />
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -76,7 +77,7 @@ process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
 // Only start server if not in test environment and running as main module
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   startServer();
 }
 

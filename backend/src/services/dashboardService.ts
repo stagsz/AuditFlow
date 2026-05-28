@@ -68,8 +68,8 @@ export class DashboardService {
 
     // Ensure all statuses are present
     for (const status of Object.values(AssessmentStatus)) {
-      if (!(status in assessmentByStatus)) {
-        assessmentByStatus[status] = 0;
+      if (!(status as string in assessmentByStatus)) {
+        assessmentByStatus[status as string] = 0;
       }
     }
 
@@ -105,8 +105,8 @@ export class DashboardService {
 
     // Ensure all NCR statuses are present
     for (const status of Object.values(NCRStatus)) {
-      if (!(status in ncrByStatus)) {
-        ncrByStatus[status] = 0;
+      if (!(status as string in ncrByStatus)) {
+        ncrByStatus[status as string] = 0;
       }
     }
 
@@ -118,8 +118,8 @@ export class DashboardService {
 
     // Ensure all severities are present
     for (const severity of Object.values(Severity)) {
-      if (!(severity in ncrBySeverity)) {
-        ncrBySeverity[severity] = 0;
+      if (!(severity as string in ncrBySeverity)) {
+        ncrBySeverity[severity as string] = 0;
       }
     }
 
@@ -140,7 +140,7 @@ export class DashboardService {
     let complianceScore = 0;
     if (completedAssessments.length > 0) {
       const totalScore = completedAssessments.reduce(
-        (sum, assessment) => sum + (assessment.overallScore || 0),
+        (sum: any, assessment: any) => sum + (assessment.overallScore || 0),
         0
       );
       complianceScore = Math.round((totalScore / completedAssessments.length) * 10) / 10;
@@ -259,7 +259,7 @@ export class DashboardService {
       }
 
       // Calculate score
-      const totalScore = responses.reduce((sum, r) => sum + (r.score || 0), 0);
+      const totalScore = responses.reduce((sum: any, r: any) => sum + (r.score || 0), 0);
       const maxPossibleScore = questionsAnswered * 3;
       const scorePercentage = (totalScore / maxPossibleScore) * 100;
 
@@ -309,7 +309,7 @@ export class DashboardService {
       let complianceScore = 0;
       if (completedAssessments.length > 0) {
         const totalScore = completedAssessments.reduce(
-          (sum, a) => sum + (a.overallScore || 0),
+          (sum: any, a: any) => sum + (a.overallScore || 0),
           0
         );
         complianceScore = Math.round((totalScore / completedAssessments.length) * 10) / 10;
@@ -366,7 +366,7 @@ export class DashboardService {
       select: { id: true },
     });
 
-    questionIds.push(...directQuestions.map((q) => q.id));
+    questionIds.push(...directQuestions.map((q: any) => q.id));
 
     // Get child sections
     const childSections = await prisma.iSOStandardSection.findMany({

@@ -46,7 +46,7 @@ export class TemplateService {
     });
 
     // Parse JSON fields
-    const templates = templatesRaw.map(t => ({
+    const templates = templatesRaw.map((t: any) => ({
       ...t,
       includedClauses: t.includedClauses ? JSON.parse(t.includedClauses as string) : null,
       includedSections: t.includedSections ? JSON.parse(t.includedSections as string) : null,

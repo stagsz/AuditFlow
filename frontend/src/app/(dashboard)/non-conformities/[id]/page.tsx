@@ -178,7 +178,7 @@ export default function NonConformityDetailPage() {
   const [showActionModal, setShowActionModal] = useState(false);
   const [actionToVerify, setActionToVerify] = useState<CorrectiveAction | null>(null);
 
-  const ncrId = params.id as string;
+  const ncrId = (params?.id ?? '') as string;
   const { data, isLoading, isError } = useNonConformity(ncrId);
   const updateNCR = useUpdateNonConformity();
 

@@ -77,7 +77,7 @@ export class CSVImportService {
 
     // Import sections and questions
     try {
-      await prisma.$transaction(async (tx) => {
+      await prisma.$transaction(async (tx: any) => {
         for (const [sectionNumber, sectionData] of sectionMap) {
           // Create or update section
           const existingSection = await tx.iSOStandardSection.findUnique({

@@ -66,7 +66,7 @@ function AuditPageSkeleton() {
 export default function AssessmentAuditPage() {
   const params = useParams();
   const router = useRouter();
-  const assessmentId = params.id as string;
+  const assessmentId = (params?.id ?? '') as string;
 
   // Fetch assessment data
   const { data: assessmentData, isLoading: assessmentLoading, isError } = useAssessment(assessmentId);

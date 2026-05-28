@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git status && git diff\",\"description\":\"Check what changes are staged/unstaged\"}",
-  "error": "Exit code 128\nfatal: not a git repository (or any of the parent directories): .git",
-  "timestamp": "2026-05-25T09:56:25.379Z",
+  "tool_name": "PowerShell",
+  "tool_input_preview": "{\"command\":\"Set-Location \\\"C:\\\\Users\\\\staff\\\\anthropicFun\\\\AuditFlow\\\\backend\\\"; npx tsc --noEmit *>&1 | Out-String\",\"timeout\":60000,\"description\":\"Verify current TypeScript error state in backend\"}",
+  "error": "Exit code 2\nsrc/types/enums.ts(10,3): error TS2305: Module '\"@prisma/client\"' has no exported member 'UserRole'.\r\nsrc/types/enums.ts(11,3): error TS2305: Module '\"@prisma/client\"' has no exported member 'AssessmentStatus'.\r\nsrc/types/enums.ts(12,3): error TS2305: Module '\"@prisma/client\"' has no exported member 'AuditType'.\r\nsrc/types/enums.ts(13,3): error TS2305: Module '\"@prisma/client\"' has no exported member 'TeamMemberRole'.\r\nsrc/types/enums.ts(14,3): error TS2305: Module '\"@prisma/client\"'...",
+  "timestamp": "2026-05-28T20:54:56.664Z",
   "retry_count": 2
 }

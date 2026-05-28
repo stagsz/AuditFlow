@@ -272,7 +272,7 @@ export class AssessmentService {
 
     // Calculate progress for each assessment
     const totalQuestions = await prisma.auditQuestion.count();
-    const assessmentsWithProgress = assessments.map((assessment) => ({
+    const assessmentsWithProgress = assessments.map((assessment: any) => ({
       ...assessment,
       progress: totalQuestions > 0
         ? Math.round((assessment._count.responses / totalQuestions) * 100)
@@ -426,10 +426,10 @@ export class AssessmentService {
     for (const [sectionId, responses] of sectionResponses) {
       const section = responses[0].section;
       // Exclude null scores and score 0 (N/A) from calculations
-      const validResponses = responses.filter((r) => r.score !== null && r.score !== 0);
+      const validResponses = responses.filter((r: any) => r.score !== null && r.score !== 0);
 
       if (validResponses.length > 0) {
-        const actualScore = validResponses.reduce((sum, r) => sum + (r.score || 0), 0);
+        const actualScore = validResponses.reduce((sum: any, r: any) => sum + (r.score || 0), 0);
         const maxPossibleScore = validResponses.length * 5; // Updated from 3 to 5 for new scoring scale
         const scorePercentage = (actualScore / maxPossibleScore) * 100;
 
@@ -495,7 +495,7 @@ export class AssessmentService {
         templateId: original.templateId,
         previousAssessmentId: id,
         teamMembers: {
-          create: original.teamMembers.map((tm) => ({
+          create: original.teamMembers.map((tm: any) => ({
             user: { connect: { id: tm.userId } },
             role: tm.role as TeamMemberRole,
           })),
@@ -557,7 +557,7 @@ export class AssessmentService {
     };
 
     // Build CSV rows
-    const rows = assessments.map((assessment) => {
+    const rows = assessments.map((assessment: any) => {
       const leadAuditorName = assessment.leadAuditor
         ? `${assessment.leadAuditor.firstName} ${assessment.leadAuditor.lastName}`.trim()
         : '';

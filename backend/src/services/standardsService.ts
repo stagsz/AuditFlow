@@ -72,7 +72,7 @@ export class StandardsService {
     if (options?.includedSections) {
       // Filter by specific section IDs
       const sectionIdSet = new Set(options.includedSections);
-      filteredSections = sections.filter(s => sectionIdSet.has(s.id));
+      filteredSections = sections.filter((s: any) => sectionIdSet.has(s.id));
     } else if (options?.includedClauses) {
       // Filter by clause numbers (e.g., ["4", "5", "8"])
       filteredSections = this.filterByClauseNumbers(sections, options.includedClauses);
