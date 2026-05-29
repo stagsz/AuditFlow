@@ -8,6 +8,20 @@ const logFormat = printf(({ level, message, timestamp, stack }) => {
 });
 
 const isTest = process.env.NODE_ENV === 'test';
+const isVercel = !!process.env.VERCEL;
+
+const fileTransports =
+  !isTest && !isVercel
+    ? [
+        new winston.transports.File({
+          filename: 'logs/error.log',
+          level: 'error',
+        }),
+        new winston.transports.File({
+          filename: 'logs/combined.log',
+        }),
+      ]
+    : [];
 
 export const logger = winston.createLogger({
   level: config.isDevelopment ? 'debug' : 'info',
@@ -23,18 +37,12 @@ export const logger = winston.createLogger({
         new winston.transports.Console({
           format: combine(colorize(), logFormat),
         }),
-        new winston.transports.File({
-          filename: 'logs/error.log',
-          level: 'error',
-        }),
-        new winston.transports.File({
-          filename: 'logs/combined.log',
-        }),
+        ...fileTransports,
       ],
 });
 
-// Create logs directory if it doesn't exist (skip in test mode)
+// Create logs directory only in local environments with file transports
 import fs from 'fs';
-if (!isTest && !fs.existsSync('logs')) {
+if (!isTest && !isVercel && !fs.existsSync('logs')) {
   fs.mkdirSync('logs');
 }

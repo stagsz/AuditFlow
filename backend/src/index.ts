@@ -11,6 +11,9 @@ import routes from './routes';
 
 const app = express();
 
+// Trust Vercel's reverse proxy for correct IP detection
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet());
 app.use(cors(config.cors));

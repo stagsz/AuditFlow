@@ -43,7 +43,7 @@ export default function RegisterPage() {
         password: data.password,
         firstName: data.firstName,
         lastName: data.lastName,
-        organizationId: 'default-org-001',
+        organizationId: '00000000-0000-4000-8000-000000000001',
       });
       toast.success('Account created successfully! Please sign in.');
       router.push('/login');
