@@ -119,7 +119,7 @@ export function Sidebar() {
           </div>
           {(sidebarOpen || isMobile) && (
             <div>
-              <h1 className="font-bold text-lg tracking-tight text-navy-900 leading-tight">IsoForma</h1>
+              <h1 className="font-bold text-lg tracking-tight text-navy-900 leading-tight">AuditFlow</h1>
               <p className="text-xs text-slate-500 font-medium">Compliance Platform</p>
             </div>
           )}
