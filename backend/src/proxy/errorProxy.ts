@@ -70,7 +70,7 @@ export function globalErrorHandler(
       success: false,
       error: {
         code: error.code,
-        
+          message: error.message,
         ...(config.isDevelopment && error.details && { details: error.details }),
       },
     });
