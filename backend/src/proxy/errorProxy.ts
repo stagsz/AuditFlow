@@ -82,10 +82,9 @@ export function globalErrorHandler(
     success: false,
     error: {
       code: 'INTERNAL_ERROR',
-      message: config.isProduction
-        ? 'An unexpected error occurred'
-        : error.message,
-      ...(config.isDevelopment && { stack: error.stack }),
+      // TODO: revert after debugging — temporarily exposing error.message in production
+      message: error.message,
+      name: error.constructor?.name,
     },
   });
 }
