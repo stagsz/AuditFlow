@@ -11,7 +11,7 @@ import { config } from '../config';
 export function withErrorHandling<T extends (req: Request, res: Response, next: NextFunction) => Promise<void> | void>(
   handler: T
 ): T {
-  const errorHandledHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {h
+  const errorHandledHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await Promise.resolve(handler(req, res, next));
     } catch (error) {
