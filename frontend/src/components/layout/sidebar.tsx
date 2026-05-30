@@ -37,6 +37,54 @@ const settingsNavigation = [
   { name: 'Help', href: '/help', icon: HelpCircle },
 ];
 
+type NavItem = typeof mainNavigation[0] & { badge?: string; admin?: boolean };
+
+function NavLink({ item, isMobile = false }: { item: NavItem; isMobile?: boolean }) {
+  const pathname = usePathname();
+  const { sidebarOpen } = useUIStore();
+  const isActive = (pathname ?? '').startsWith(item.href);
+  const showLabel = sidebarOpen || isMobile;
+
+  return (
+    <Link
+      href={item.href}
+      className={clsx(
+        'flex items-center py-3 rounded-2xl transition-all duration-200 group relative',
+        showLabel ? 'gap-3 px-4' : 'justify-center px-2',
+        isActive
+          ? 'bg-white shadow-soft-1 text-mint-600'
+          : 'text-slate-500 hover:bg-white hover:shadow-soft-1 hover:text-navy-800'
+      )}
+    >
+      {isActive && (
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-mint-500 rounded-r-full" />
+      )}
+      <item.icon
+        size={20}
+        className={clsx(
+          'flex-shrink-0 transition-colors',
+          isActive ? 'text-mint-500' : 'group-hover:text-mint-500'
+        )}
+      />
+      {showLabel && (
+        <>
+          <span className={clsx(
+            'text-sm font-semibold',
+            isActive ? 'text-navy-900' : ''
+          )}>
+            {item.name}
+          </span>
+          {isActive && item.badge === 'count' && (
+            <span className="ml-auto bg-mint-100 text-mint-700 py-0.5 px-2 rounded-full text-[10px] font-bold">
+              ACTIVE
+            </span>
+          )}
+        </>
+      )}
+    </Link>
+  );
+}
+
 export function Sidebar() {
   const pathname = usePathname();
   const { sidebarOpen, mobileMenuOpen, toggleSidebar, closeMobileMenu } = useUIStore();
@@ -64,50 +112,6 @@ export function Sidebar() {
     }
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
-
-  const NavLink = ({ item, isMobile = false }: { item: typeof mainNavigation[0] & { badge?: string; admin?: boolean }; isMobile?: boolean }) => {
-    const isActive = (pathname ?? '').startsWith(item.href);
-    const showLabel = sidebarOpen || isMobile;
-
-    return (
-      <Link
-        href={item.href}
-        className={clsx(
-          'flex items-center py-3 rounded-2xl transition-all duration-200 group relative',
-          showLabel ? 'gap-3 px-4' : 'justify-center px-2',
-          isActive
-            ? 'bg-white shadow-soft-1 text-mint-600'
-            : 'text-slate-500 hover:bg-white hover:shadow-soft-1 hover:text-navy-800'
-        )}
-      >
-        {isActive && (
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-mint-500 rounded-r-full" />
-        )}
-        <item.icon
-          size={20}
-          className={clsx(
-            'flex-shrink-0 transition-colors',
-            isActive ? 'text-mint-500' : 'group-hover:text-mint-500'
-          )}
-        />
-        {showLabel && (
-          <>
-            <span className={clsx(
-              'text-sm font-semibold',
-              isActive ? 'text-navy-900' : ''
-            )}>
-              {item.name}
-            </span>
-            {isActive && item.badge === 'count' && (
-              <span className="ml-auto bg-mint-100 text-mint-700 py-0.5 px-2 rounded-full text-[10px] font-bold">
-                ACTIVE
-              </span>
-            )}
-          </>
-        )}
-      </Link>
-    );
-  };
 
   const NavContent = ({ isMobile = false }: { isMobile?: boolean }) => (
     <div className={`flex h-full flex-col bg-surface border-r border-slate-200/60 pt-8 pb-6 ${sidebarOpen || isMobile ? 'px-5' : 'px-2'}`}>
