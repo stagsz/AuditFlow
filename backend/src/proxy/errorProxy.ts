@@ -83,6 +83,7 @@ export function globalErrorHandler(
     error: {
       code: 'INTERNAL_ERROR',
       message: 'An internal server error occurred',
+      _debug: { name: error.constructor?.name, msg: error.message.slice(0, 400) },
     },
   });
 }
