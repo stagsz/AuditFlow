@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git add backend/prisma/schema.prisma frontend/src/components/layout/header.tsx frontend/src/components/layout/sidebar.tsx && git commit -m \\\"feat: add onboarding schema — Division, Departm...",
-  "error": "Exit code 128\nfatal: pathspec 'backend/prisma/schema.prisma' did not match any files",
-  "timestamp": "2026-05-29T20:10:21.910Z",
-  "retry_count": 6
+  "tool_input_preview": "{\"command\":\"cd backend && npx jest src/__tests__/onboarding.test.ts --forceExit --no-coverage 2>&1 | head -60\",\"description\":\"Get full test error output\"}",
+  "error": "Exit code 1\n/usr/bin/bash: line 3: cd: backend: No such file or directory",
+  "timestamp": "2026-05-30T15:25:42.938Z",
+  "retry_count": 2
 }
