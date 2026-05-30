@@ -11,7 +11,7 @@ import { config } from '../config';
 export function withErrorHandling<T extends (req: Request, res: Response, next: NextFunction) => Promise<void> | void>(
   handler: T
 ): T {
-  const errorHandledHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const errorHandledHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {h
     try {
       await Promise.resolve(handler(req, res, next));
     } catch (error) {
@@ -70,7 +70,7 @@ export function globalErrorHandler(
       success: false,
       error: {
         code: error.code,
-        message: error.message,
+        
         ...(config.isDevelopment && error.details && { details: error.details }),
       },
     });
@@ -82,9 +82,7 @@ export function globalErrorHandler(
     success: false,
     error: {
       code: 'INTERNAL_ERROR',
-      // TODO: revert after debugging — temporarily exposing error.message in production
-      message: error.message,
-      name: error.constructor?.name,
+      message: 'An internal server error occurred',
     },
   });
 }
