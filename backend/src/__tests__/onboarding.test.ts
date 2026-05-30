@@ -1,6 +1,7 @@
 import request from 'supertest';
 import app from '../index';
 import { prisma } from '../config/database';
+import '@testing-library/jest-dom';
 
 const VALID_PAYLOAD = {
   firstName: 'Alice',

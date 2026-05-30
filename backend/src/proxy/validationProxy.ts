@@ -159,35 +159,22 @@ export const assessmentSchemas = {
 // Question Response Validation Schemas
 // -----------------------------------------------------------------------------
 
+const responseFieldsSchema = z.object({
+  score: z.number().int().min(0).max(5).optional(),
+  justification: z.string().max(5000).optional(),
+  verifiedSubPoints: z.array(z.string()).optional(),
+  actionProposal: z.string().max(5000).optional(),
+  conclusion: z.string().max(5000).optional(),
+  isDraft: z.boolean().optional(),
+});
+
 export const responseSchemas = {
-  create: z.object({
+  create: responseFieldsSchema.extend({
     questionId: z.string().uuid(),
-    score: z.number().int().min(0).max(5).optional(),
-    justification: z.string().max(5000).optional(),
-    verifiedSubPoints: z.array(z.string()).optional(),
-    actionProposal: z.string().max(5000).optional(),
-    conclusion: z.string().max(5000).optional(),
     isDraft: z.boolean().default(true),
   }),
-
-  update: z.object({
-    score: z.number().int().min(0).max(5).optional(),
-    justification: z.string().max(5000).optional(),
-    verifiedSubPoints: z.array(z.string()).optional(),
-    actionProposal: z.string().max(5000).optional(),
-    conclusion: z.string().max(5000).optional(),
-    isDraft: z.boolean().optional(),
-  }),
-
-  bulkUpdate: z.array(z.object({
-    questionId: z.string().uuid(),
-    score: z.number().int().min(0).max(5).optional(),
-    justification: z.string().max(5000).optional(),
-    verifiedSubPoints: z.array(z.string()).optional(),
-    actionProposal: z.string().max(5000).optional(),
-    conclusion: z.string().max(5000).optional(),
-    isDraft: z.boolean().optional(),
-  })),
+  update: responseFieldsSchema,
+  bulkUpdate: z.array(responseFieldsSchema.extend({ questionId: z.string().uuid() })),
 };
 
 // -----------------------------------------------------------------------------
@@ -228,6 +215,13 @@ export const userSchemas = {
 // Corrective Action Validation Schemas
 // -----------------------------------------------------------------------------
 
+const rootCauseAnalysisSchema = z.object({
+  method: z.enum(['FIVE_WHYS', 'FISHBONE', 'PARETO', 'OTHER']),
+  findings: z.string(),
+  rootCause: z.string(),
+  contributingFactors: z.array(z.string()).optional(),
+});
+
 export const actionSchemas = {
   create: z.object({
     nonConformityId: z.string().uuid(),
@@ -237,12 +231,7 @@ export const actionSchemas = {
     assigneeId: z.string().uuid(),
     reviewerId: z.string().uuid().optional(),
     dueDate: z.coerce.date().optional(),
-    rootCauseAnalysis: z.object({
-      method: z.enum(['FIVE_WHYS', 'FISHBONE', 'PARETO', 'OTHER']),
-      findings: z.string(),
-      rootCause: z.string(),
-      contributingFactors: z.array(z.string()).optional(),
-    }).optional(),
+    rootCauseAnalysis: rootCauseAnalysisSchema.optional(),
   }),
 
   update: z.object({
@@ -255,12 +244,7 @@ export const actionSchemas = {
     dueDate: z.coerce.date().optional(),
     completedDate: z.coerce.date().optional(),
     verifiedDate: z.coerce.date().optional(),
-    rootCauseAnalysis: z.object({
-      method: z.enum(['FIVE_WHYS', 'FISHBONE', 'PARETO', 'OTHER']),
-      findings: z.string(),
-      rootCause: z.string(),
-      contributingFactors: z.array(z.string()).optional(),
-    }).optional(),
+    rootCauseAnalysis: rootCauseAnalysisSchema.optional(),
     effectiveness: z.object({
       isEffective: z.boolean(),
       verificationMethod: z.string(),
