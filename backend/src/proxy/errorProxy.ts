@@ -34,6 +34,8 @@ export function globalErrorHandler(
   _next: NextFunction
 ): void {
   // Log the error
+  // eslint-disable-next-line no-console
+  console.error('[AUDITFLOW_ERR]', error.constructor?.name, error.message);
   logger.error('Error occurred', {
     error: error.message,
     stack: error.stack,
