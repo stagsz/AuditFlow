@@ -1,7 +1,7 @@
 {
-  "tool_name": "PowerShell",
-  "tool_input_preview": "{\"command\":\"cd C:\\\\Users\\\\staff\\\\anthropicFun\\\\AuditFlow\\\\backend; $env:DATABASE_URL=\\\"postgresql://postgres.fqnorsqggyshqfmihivw:IQ1fpT3u35RX2X6Z@aws-0-eu-west-1.pooler.supabase.com:6543/postgres\\\"; ...",
-  "error": "Exit code 1\n> @auditflow/backend@1.0.0 db:seed\n> tsx prisma/seed.ts\n\nStarting database seeding...\n\n\nSeeding ISO 9001:2015 standard sections...\n  + Section 4: Context of the Organization\n    + Section 4.1: Understanding the organization and its context\n    + Section 4.2: Understanding the needs and expectations of interested parties\n    + Section 4.3: Determining the scope of the quality management system\n    + Section 4.4: Quality management system and its processes\n  + Section 5: Leadership\n   ...",
-  "timestamp": "2026-05-28T21:37:09.056Z",
-  "retry_count": 2
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"git add backend/prisma/schema.prisma frontend/src/components/layout/header.tsx frontend/src/components/layout/sidebar.tsx && git commit -m \\\"feat: add onboarding schema — Division, Departm...",
+  "error": "Exit code 128\nfatal: pathspec 'backend/prisma/schema.prisma' did not match any files",
+  "timestamp": "2026-05-29T20:10:21.910Z",
+  "retry_count": 6
 }
