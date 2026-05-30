@@ -10,7 +10,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'IsoForma — Compliance Platform',
+  title: 'AuditFlow — Compliance Platform',
   description: 'ISO 9001:2015 Self-Assessment & Audit Management',
 };
 

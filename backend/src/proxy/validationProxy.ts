@@ -270,3 +270,62 @@ export const actionSchemas = {
     }).optional(),
   }),
 };
+
+// -----------------------------------------------------------------------------
+// Onboarding Validation Schemas
+// -----------------------------------------------------------------------------
+
+export const onboardingSchemas = {
+  setup: z.object({
+    firstName: z.string().min(1, 'First name required'),
+    lastName: z.string().min(1, 'Last name required'),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+    company: z.object({
+      name: z.string().min(1, 'Company name required'),
+      slug: z
+        .string()
+        .min(2, 'Slug must be at least 2 characters')
+        .max(50, 'Slug must be at most 50 characters')
+        .regex(/^[a-z0-9-]+$/, 'Slug may only contain lowercase letters, numbers, and hyphens'),
+      industry: z.string().optional(),
+      country: z.string().optional(),
+    }),
+    divisions: z.array(z.object({ name: z.string().min(1) })),
+    departments: z.array(
+      z.object({
+        name: z.string().min(1),
+        divisionIndex: z.number().int().min(0).optional(),
+      })
+    ),
+    roles: z.array(
+      z.object({
+        name: z.string().min(1),
+        permissionLevel: z.enum(['MANAGER', 'AUDITOR', 'DEPT_HEAD', 'VIEWER']),
+      })
+    ),
+  }),
+};
+
+// -----------------------------------------------------------------------------
+// Org Invite Validation Schemas
+// -----------------------------------------------------------------------------
+
+export const orgInviteSchemas = {
+  join: z.object({
+    firstName: z.string().min(1, 'First name required'),
+    lastName: z.string().min(1, 'Last name required'),
+    email: z.string().email('Invalid email'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+  }),
+  approve: z.object({
+    action: z.enum(['approve', 'reject']),
+    orgRoleId: z.string().uuid().optional(),
+  }),
+  slugParam: z.object({
+    slug: z.string().min(1),
+  }),
+  inviteIdParam: z.object({
+    id: z.string().uuid('Invalid invite ID'),
+  }),
+};
