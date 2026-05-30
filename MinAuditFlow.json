@@ -1,0 +1,23 @@
+{
+  "id": 17066319,
+  "name": "MinAuditFlow",
+  "target": "branch",
+  "source_type": "Repository",
+  "source": "stagsz/AuditFlow",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": []
+    }
+  },
+  "rules": [
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "non_fast_forward"
+    }
+  ],
+  "bypass_actors": []
+}
