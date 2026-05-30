@@ -70,7 +70,7 @@ export function globalErrorHandler(
       success: false,
       error: {
         code: error.code,
-          message: error.message,
+        message: error.message,
         ...(config.isDevelopment && error.details && { details: error.details }),
       },
     });
@@ -83,7 +83,6 @@ export function globalErrorHandler(
     error: {
       code: 'INTERNAL_ERROR',
       message: 'An internal server error occurred',
-      _debug: { name: error.constructor?.name, msg: error.message },
     },
   });
 }
