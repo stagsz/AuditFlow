@@ -11,9 +11,9 @@ import { useAuthStore } from '@/lib/store';
 import { X, Lock } from 'lucide-react';
 
 const PERMISSION_OPTIONS = [
-  { value: 'manager', label: 'Manager' },
-  { value: 'auditor', label: 'Auditor' },
-  { value: 'viewer', label: 'Viewer' },
+  { value: 'MANAGER', label: 'Manager' },
+  { value: 'AUDITOR', label: 'Auditor' },
+  { value: 'VIEWER', label: 'Viewer' },
 ];
 
 export default function Step4Roles() {
