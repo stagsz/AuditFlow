@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { AlertTriangle, Bell, CheckCircle, Clock, Download, LogOut, Menu, Search } from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/lib/store';
+import { orgInviteApi } from '@/lib/api';
 
 const placeholderNotifications = [
   {
@@ -77,8 +79,17 @@ export function Header() {
   const { sidebarOpen, openMobileMenu } = useUIStore();
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const notificationsRef = useRef<HTMLDivElement>(null);
+  const [pendingInvites, setPendingInvites] = useState(0);
 
   const unreadCount = placeholderNotifications.filter((n) => !n.read).length;
+
+  useEffect(() => {
+    if (!user) return;
+    orgInviteApi.pendingCount()
+      .then((res) => setPendingInvites(res.data?.data?.count ?? 0))
+      .catch(() => {});
+  }, [user]);
+
   const pageInfo = getPageInfo(pathname ?? '/');
 
   const handleLogout = () => {
@@ -225,6 +236,20 @@ export function Header() {
             <Download size={16} />
             Export Report
           </button>
+
+          {/* Pending invites bell */}
+          <Link
+            href="/admin/invites"
+            className="relative w-11 h-11 rounded-full bg-white shadow-soft-1 border border-slate-100 flex items-center justify-center hover:bg-slate-50 transition-colors"
+            aria-label="Pending invites"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-navy-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            {pendingInvites > 0 && (
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white" />
+            )}
+          </Link>
 
           {/* Logout */}
           <button

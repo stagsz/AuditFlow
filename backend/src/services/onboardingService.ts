@@ -29,18 +29,12 @@ export class OnboardingService {
 
     return prisma.$transaction(async (tx) => {
       const org = await tx.organization.create({
-        data: {
-          name: data.company.name,
-          slug: data.company.slug,
-          setupComplete: true,
-        },
+        data: { name: data.company.name, slug: data.company.slug, setupComplete: true },
       });
 
       const divisionIds: string[] = [];
       for (const div of data.divisions) {
-        const created = await tx.division.create({
-          data: { name: div.name, organizationId: org.id },
-        });
+        const created = await tx.division.create({ data: { name: div.name, organizationId: org.id } });
         divisionIds.push(created.id);
       }
 
@@ -49,29 +43,18 @@ export class OnboardingService {
           data: {
             name: dept.name,
             organizationId: org.id,
-            divisionId:
-              dept.divisionIndex !== undefined ? divisionIds[dept.divisionIndex] : null,
+            divisionId: dept.divisionIndex !== undefined ? (divisionIds[dept.divisionIndex] ?? null) : null,
           },
         });
       }
 
       const adminRole = await tx.orgRole.create({
-        data: {
-          name: 'Admin',
-          permissionLevel: 'ADMIN',
-          isDefault: false,
-          organizationId: org.id,
-        },
+        data: { name: 'Admin', permissionLevel: 'ADMIN', isDefault: false, organizationId: org.id },
       });
 
       for (const role of data.roles) {
         await tx.orgRole.create({
-          data: {
-            name: role.name,
-            permissionLevel: role.permissionLevel,
-            isDefault: true,
-            organizationId: org.id,
-          },
+          data: { name: role.name, permissionLevel: role.permissionLevel, isDefault: true, organizationId: org.id },
         });
       }
 
@@ -87,28 +70,14 @@ export class OnboardingService {
         },
       });
 
-      const payload = {
-        userId: user.id,
-        email: user.email,
-        role: user.role,
-        organizationId: org.id,
-      };
-      const accessToken = jwt.sign(payload, config.jwt.secret, {
-        expiresIn: config.jwt.expiresIn as jwt.SignOptions['expiresIn'],
-      });
-      const refreshToken = jwt.sign(payload, config.jwt.refreshSecret, {
-        expiresIn: config.jwt.refreshExpiresIn as jwt.SignOptions['expiresIn'],
-      });
+      const payload = { userId: user.id, email: user.email, role: user.role, organizationId: org.id };
+      const accessToken = jwt.sign(payload, config.jwt.secret, { expiresIn: config.jwt.expiresIn as jwt.SignOptions['expiresIn'] });
+      const refreshToken = jwt.sign(payload, config.jwt.refreshSecret, { expiresIn: config.jwt.refreshExpiresIn as jwt.SignOptions['expiresIn'] });
 
       await tx.user.update({ where: { id: user.id }, data: { refreshToken } });
 
       return {
-        user: {
-          id: user.id,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-        },
+        user: { id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName },
         accessToken,
         refreshToken,
         expiresIn: 3600,

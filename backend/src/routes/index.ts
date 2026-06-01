@@ -9,6 +9,8 @@ import healthRoutes from './healthRoutes';
 import { evidenceRouter, responseEvidenceRouter } from './evidenceRoutes';
 import { nonConformityRouter, assessmentNCRRouter } from './nonConformityRoutes';
 import { actionRouter, ncrActionRouter } from './correctiveActionRoutes';
+import onboardingRoutes from './onboardingRoutes';
+import orgInviteRoutes from './orgInviteRoutes';
 
 const router = Router();
 
@@ -28,5 +30,7 @@ router.use('/non-conformities/:id/actions', ncrActionRouter);
 router.use('/dashboard', dashboardRoutes);
 router.use('/users', userRoutes);
 router.use('/templates', templateRoutes);
+router.use('/onboarding', onboardingRoutes);
+router.use('/org', orgInviteRoutes);
 
 export default router;

@@ -290,6 +290,27 @@ export const nonConformitiesApi = {
     api.get(`/assessments/${assessmentId}/non-conformities/summary`),
 };
 
+export const onboardingApi = {
+  setup: (data: {
+    firstName: string; lastName: string; email: string; password: string;
+    company: { name: string; slug: string; industry?: string; country?: string };
+    divisions: { name: string }[];
+    departments: { name: string; divisionIndex?: number }[];
+    roles: { name: string; permissionLevel: string }[];
+  }) => api.post('/onboarding/setup', data),
+  checkSlug: (slug: string) => api.get(`/onboarding/check-slug/${slug}`),
+};
+
+export const orgInviteApi = {
+  getOrg: (slug: string) => api.get(`/org/invite/${slug}`),
+  join: (slug: string, data: { firstName: string; lastName: string; email: string; password: string }) =>
+    api.post(`/org/invite/${slug}/join`, data),
+  listInvites: () => api.get('/org/invites'),
+  pendingCount: () => api.get('/org/invites/count'),
+  resolve: (id: string, action: 'approve' | 'reject', orgRoleId?: string) =>
+    api.post(`/org/invites/${id}/resolve`, { action, orgRoleId }),
+};
+
 export const evidenceApi = {
   upload: (
     responseId: string,
