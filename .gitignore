@@ -131,3 +131,4 @@ backend/dist/
 .omc/
 what 
 .env*.local
+.env*

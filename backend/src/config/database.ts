@@ -1,10 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import { config } from './index';
 
-// Prisma client singleton
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
+
+// Strip UTF-8 BOM that PowerShell 5.1 can inject when setting Vercel env vars via piped files
+const stripBom = (s: string | undefined) => s?.replace(/^﻿/, '').trim();
+
+const dbUrl =
+  stripBom(process.env.DATABASE_URL) ||
+  stripBom(process.env.POSTGRES_PRISMA_URL) ||
+  stripBom(process.env.POSTGRES_URL);
 
 export const prisma =
   globalForPrisma.prisma ??
@@ -12,14 +19,12 @@ export const prisma =
     log: config.isDevelopment ? ['query', 'error', 'warn'] : ['error'],
     datasources: {
       db: {
-        url: process.env.DATABASE_URL,
+        url: dbUrl,
       },
     },
   });
 
-if (!config.isProduction) {
-  globalForPrisma.prisma = prisma;
-}
+globalForPrisma.prisma = prisma;
 
 export async function connectDatabase(): Promise<void> {
   try {
