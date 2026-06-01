@@ -1,77 +1,204 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code and Hermes agents when working with the AuditFlow codebase.
 
-## Commands
+## Project Overview
 
-### Development
-```bash
-# Backend (port 3001)
-cd backend && npm run dev
+AuditFlow is an ISO 9001 Quality Management & Audit Platform for SMEs in Europe.
+It helps quality managers prepare for and manage internal/external audits, track NCRs, and run
+self-assessments mapped to ISO 9001:2015 clause structure.
 
-# Frontend (port 3000)
-cd frontend && npm run dev
+**Live app:** https://audit-flow-zeta.vercel.app  
+**Backend base URL:** https://audit-flow-zeta.vercel.app/_/backend/api  
+**Supabase project:** fqnorsqggyshqfmihivw (Pro plan — pgvector available)  
+**GitHub:** https://github.com/stagsz/AuditFlow
+
+---
+
+## Monorepo Structure
+
+```
+AuditFlow/
+├── backend/          # Express + TypeScript API (deployed as Vercel serverless)
+│   ├── prisma/       # Prisma schema + migrations
+│   ├── src/
+│   │   ├── config/       # database.ts (Prisma client), config.ts (env vars)
+│   │   ├── controllers/  # Request handlers (thin — delegate to services)
+│   │   ├── proxy/        # authProxy.ts, validationProxy.ts (Zod schemas)
+│   │   ├── routes/       # Express router definitions
+│   │   ├── services/     # Business logic (fat services)
+│   │   ├── types/        # enums.ts, shared types
+│   │   └── utils/        # errors.ts (custom error classes)
+├── frontend/         # Next.js 14 App Router (deployed to Vercel)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── (auth)/       # /login, /register
+│   │   │   ├── (dashboard)/  # /dashboard, /audits, /ncr, etc.
+│   │   │   ├── onboarding/   # /onboarding wizard (4 steps)
+│   │   │   └── join/         # /join/[token] invite flow
+│   │   ├── components/       # React components
+│   │   │   └── onboarding/   # Step1–Step4 wizard components
+│   │   ├── lib/
+│   │   │   ├── api.ts        # All API calls (axios client)
+│   │   │   └── store/        # Zustand stores
+│   │   └── providers.tsx     # React Query + auth providers
+├── shared/           # Shared types between frontend and backend
+└── landing/          # Standalone landing page HTML (index.html)
+    └── index.html    # NOT yet integrated into Next.js — lives separately
 ```
 
-### Build & Type Check
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 14, App Router, TypeScript, Tailwind CSS, React Query, Zustand |
+| Backend | Express.js, TypeScript, Prisma ORM |
+| Database | PostgreSQL via Supabase (Pro plan) |
+| Auth | JWT (accessToken in localStorage), withAuth proxy middleware |
+| Validation | Zod schemas in validationProxy.ts |
+| Deploy | Vercel (both frontend and backend as serverless functions) |
+| ORM | Prisma 6 — schema at backend/prisma/schema.prisma |
+
+---
+
+## Critical Rules
+
+### Migrations — NEVER auto-run on deploy
+- `prisma migrate deploy` is NOT in the Vercel build script
+- All migrations must be run manually in Supabase SQL Editor
+- When adding a new migration: create the SQL file in `backend/prisma/migrations/`, then
+  instruct the user to run it manually in Supabase
+
+### Prisma column naming
+- Prisma schema uses camelCase field names with `@map("snake_case")` for DB columns
+- If a migration creates columns manually, use snake_case in SQL but camelCase in Prisma schema
+- Always add `@map()` annotations when column names differ
+
+### Zod validation — enum values must be UPPERCASE
+- All enums in validationProxy.ts use UPPERCASE values: `'MANAGER'`, `'AUDITOR'`, `'VIEWER'`
+- Frontend must send uppercase enum values — never lowercase
+- Check validationProxy.ts before adding new fields to existing endpoints
+
+### Auth pattern
+- Use `withAuth(handler)` from `../proxy/authProxy` — NOT a separate middleware file
+- JWT payload contains: `{ userId, email, role, organizationId }`
+- Access via `(req as any).user` inside handlers after withAuth wraps them
+
+### API routing on Vercel
+- Backend is served under `/_/backend/api/...` in production
+- Frontend api.ts base URL: `/api` in dev, `/_/backend/api` in prod (set via env)
+- Never hardcode backend URLs
+
+---
+
+## Common Commands
+
 ```bash
-cd backend && npm run build        # prisma generate && tsc
-cd frontend && npm run build       # next build
+# Dev (run both together)
+npm run dev
+
+# TypeScript check (run before every commit)
+cd backend && npx tsc --noEmit
+cd frontend && npx tsc --noEmit
+
+# Build check
+cd backend && npm run build
+cd frontend && npm run build
+
+# Deploy — just git push to main, Vercel picks it up automatically
+git push
+
+# Prisma generate (after schema changes)
+cd backend && npx prisma generate
+
+# View DB schema
+cd backend && npx prisma studio
 ```
 
-### Tests
-```bash
-cd backend && npm test             # jest --forceExit
-cd backend && npm run test:watch
-cd backend && npm run test:coverage
-# Run a single test file:
-cd backend && npx jest src/__tests__/auth.test.ts
+---
+
+## Database Enums (backend/src/types/enums.ts)
+
+```
+UserRole:        SYSTEM_ADMIN | QUALITY_MANAGER | INTERNAL_AUDITOR | DEPARTMENT_HEAD | VIEWER
+AssessmentStatus: DRAFT | IN_PROGRESS | UNDER_REVIEW | COMPLETED | ARCHIVED
+AuditType:       INTERNAL | EXTERNAL | SURVEILLANCE | CERTIFICATION
+TeamMemberRole:  LEAD_AUDITOR | AUDITOR | OBSERVER
+Severity:        MINOR | MAJOR | CRITICAL
+NCRStatus:       OPEN | IN_PROGRESS | RESOLVED | CLOSED
+ActionStatus:    PENDING | IN_PROGRESS | COMPLETED | VERIFIED
 ```
 
-### Lint
-```bash
-cd backend && npm run lint
-cd frontend && npm run lint
+---
+
+## Key Patterns
+
+### Adding a new endpoint
+1. Add Zod schema to `backend/src/proxy/validationProxy.ts`
+2. Add service method to relevant service in `backend/src/services/`
+3. Add controller method to `backend/src/controllers/`
+4. Add route in `backend/src/routes/`, register with `withAuth` + `withValidation`
+5. Add API call to `frontend/src/lib/api.ts`
+6. Run `npx tsc --noEmit` in both backend and frontend before committing
+
+### Adding a DB model
+1. Add model to `backend/prisma/schema.prisma`
+2. Run `npx prisma generate` to update client
+3. Write migration SQL manually → save to `backend/prisma/migrations/YYYYMMDDHHMMSS_name/migration.sql`
+4. Tell user to run migration in Supabase SQL Editor
+5. Never run `prisma migrate dev` against production DB
+
+### Frontend API calls
+All API calls go through `frontend/src/lib/api.ts`. Pattern:
+```ts
+export const thingApi = {
+  list: () => api.get('/things'),
+  create: (data: CreateThingDto) => api.post('/things', data),
+  update: (id: string, data: UpdateThingDto) => api.put(`/things/${id}`, data),
+  delete: (id: string) => api.delete(`/things/${id}`),
+};
 ```
 
-### Database
-```bash
-cd backend && npm run db:migrate   # prisma migrate dev
-cd backend && npm run db:push      # prisma db push (no migration files)
-cd backend && npm run db:seed      # tsx prisma/seed.ts
-cd backend && npm run db:studio    # prisma studio
+---
+
+## Known Pitfalls
+
+- **Vercel builds fail** if `prisma migrate deploy` is in build script — it's been removed, don't add it back
+- **camelCase vs snake_case**: Supabase SQL uses snake_case, Prisma uses camelCase — always add `@map()`
+- **Empty user fields in onboarding**: If user is already logged in and navigates to /onboarding, `personal` store fields (firstName, lastName, email, password) are empty — use `/onboarding/setup-org` endpoint instead of `/onboarding/setup`
+- **Enum case sensitivity**: Zod rejects lowercase enums — always uppercase
+- **withAuth location**: It's in `proxy/authProxy.ts`, not `middleware/auth.ts`
+- **Frontend env vars**: Must be prefixed with `NEXT_PUBLIC_` to be accessible client-side
+- **Docker is NOT used in production** — local dev only, and even then direct npm run dev is preferred
+
+---
+
+## Environment Variables
+
+### Backend (Vercel env)
+```
+DATABASE_URL          # Supabase connection pooling URL
+DIRECT_URL            # Supabase direct connection URL (for migrations)
+JWT_SECRET            # JWT signing secret
+NODE_ENV              # production
 ```
 
-## Architecture
+### Frontend (Vercel env)
+```
+NEXT_PUBLIC_API_URL   # Backend API base URL
+```
 
-### Monorepo Deployment (Vercel)
-This is a monorepo deployed as a **single Vercel project** using `experimentalServices` in `vercel.json`. The frontend (Next.js) serves `/` and the backend (Express) is mounted at `/_/backend`. The Vercel entrypoint for the backend is `backend/api/index.ts` — this file connects the database and exports the Express app.
+---
 
-Frontend calls the backend via `NEXT_PUBLIC_API_URL` which is set to `/_/backend/api` in production. Locally the frontend points at `http://localhost:3001/api`.
+## Test Accounts
+- System admin: hermes@greisz.se / Sidvolt2
+- App URL: https://audit-flow-zeta.vercel.app
 
-### Backend Layer Pattern
-Requests flow through: `Route → withValidation/withAuth proxy wrappers → asyncHandler → Controller → Service → Prisma`
+---
 
-- **`src/proxy/`** — reusable Express middleware factories: `withAuth`, `withRoles`, `withValidation`, `withOrgAccess`. Validation schemas live in `proxy/validationProxy.ts` (Zod).
-- **`src/controllers/`** — thin handlers that destructure `req.body` and call services.
-- **`src/services/`** — all business logic and Prisma queries.
-- **`src/proxy/errorProxy.ts`** — global error handler and 404 handler mounted last in `index.ts`.
-
-The `Request` type is augmented with `req.user` via `backend/src/types/express.d.ts`. A triple-slash reference `/// <reference path="./types/express.d.ts" />` at the top of `src/index.ts` is required for Vercel's type checker to pick it up.
-
-### Frontend Auth Flow
-- Tokens stored in `localStorage` (`accessToken`, `refreshToken`).
-- Axios instance in `frontend/src/lib/api.ts` adds the Bearer token on every request and auto-refreshes on 401.
-- Protected routes check auth state; unauthenticated users are redirected to `/login`.
-
-### Database
-- **Supabase PostgreSQL** via Prisma ORM.
-- Use the **pooler URL** (`aws-0-eu-west-1.pooler.supabase.com:6543`) for the production `DATABASE_URL` on Vercel, with `?pgbouncer=true&connection_limit=1` appended.
-- Use the **direct URL** (`db.fqnorsqggyshqfmihivw.supabase.co:5432`) for migrations and seeding — PgBouncer in transaction mode doesn't support prepared statements.
-- Default seeded org ID: `00000000-0000-4000-8000-000000000001`. Seed credentials: `admin@example.com / admin123`, `quality.manager@example.com / quality123`, `auditor@example.com / auditor123`.
-
-### Key Non-Obvious Config
-- `app.set('trust proxy', 1)` in `backend/src/index.ts` — required for `express-rate-limit` to work behind Vercel's proxy.
-- Winston file transports are disabled on Vercel (`process.env.VERCEL`) because the serverless filesystem is read-only.
-- `backend/tsconfig.json` intentionally has no `rootDir` — Vercel's `@vercel/backends` type checker adds `api/index.ts` as a root file outside `src/`.
-- Rate limiting is skipped when `NODE_ENV === 'test'`; `startServer()` is skipped when `NODE_ENV === 'test'` or `VERCEL` is set.
+## Company OS
+Strategy, marketing plans, and operational documents live in:
+`C:\Users\staff\anthropicFun\Boarder_room\AuditFlow\`
+(separate from this codebase — that's the "board room" layer)
