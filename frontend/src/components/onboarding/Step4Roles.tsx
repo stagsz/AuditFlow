@@ -40,8 +40,7 @@ export default function Step4Roles() {
   const handleFinish = async () => {
     setIsSubmitting(true);
     try {
-      const res = await onboardingApi.setup({
-        ...store.personal,
+      const orgData = {
         company: store.company,
         divisions: store.divisions.map((d) => ({ name: d.name })),
         departments: store.departments.map((d) => ({
@@ -51,13 +50,25 @@ export default function Step4Roles() {
             : undefined,
         })),
         roles: store.roles.map((r) => ({ name: r.name, permissionLevel: r.permissionLevel })),
-      });
+      };
 
-      const { user, accessToken, refreshToken, inviteUrl } = res.data.data;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      setAuth(user, accessToken, refreshToken);
-      store.setInviteUrl(inviteUrl ?? '');
+      // If user is already logged in, use setup-org (no user creation needed)
+      const isLoggedIn = !!localStorage.getItem('accessToken');
+      let inviteUrl: string;
+
+      if (isLoggedIn) {
+        const res = await onboardingApi.setupOrg(orgData);
+        inviteUrl = res.data.data.inviteUrl ?? '';
+      } else {
+        const res = await onboardingApi.setup({ ...store.personal, ...orgData });
+        const { user, accessToken, refreshToken } = res.data.data;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        setAuth(user, accessToken, refreshToken);
+        inviteUrl = res.data.data.inviteUrl ?? '';
+      }
+
+      store.setInviteUrl(inviteUrl);
       store.setStep(5);
     } catch (err: unknown) {
       const msg =

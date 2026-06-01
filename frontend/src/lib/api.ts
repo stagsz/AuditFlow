@@ -299,6 +299,12 @@ export const onboardingApi = {
     roles: { name: string; permissionLevel: string }[];
   }) => api.post('/onboarding/setup', data),
   checkSlug: (slug: string) => api.get(`/onboarding/check-slug/${slug}`),
+  setupOrg: (data: {
+    company: { name: string; slug: string; industry?: string; country?: string };
+    divisions: { name: string }[];
+    departments: { name: string; divisionIndex?: number }[];
+    roles: { name: string; permissionLevel: string }[];
+  }) => api.post('/onboarding/setup-org', data),
 };
 
 export const orgInviteApi = {

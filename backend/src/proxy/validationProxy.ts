@@ -289,6 +289,31 @@ export const onboardingSchemas = {
       })
     ),
   }),
+  setupOrg: z.object({
+    company: z.object({
+      name: z.string().min(1, 'Company name required'),
+      slug: z
+        .string()
+        .min(2, 'Slug must be at least 2 characters')
+        .max(50, 'Slug must be at most 50 characters')
+        .regex(/^[a-z0-9-]+$/, 'Slug may only contain lowercase letters, numbers, and hyphens'),
+      industry: z.string().optional(),
+      country: z.string().optional(),
+    }),
+    divisions: z.array(z.object({ name: z.string().min(1) })),
+    departments: z.array(
+      z.object({
+        name: z.string().min(1),
+        divisionIndex: z.number().int().min(0).optional(),
+      })
+    ),
+    roles: z.array(
+      z.object({
+        name: z.string().min(1),
+        permissionLevel: z.enum(['MANAGER', 'AUDITOR', 'DEPT_HEAD', 'VIEWER']),
+      })
+    ),
+  }),
 };
 
 // -----------------------------------------------------------------------------

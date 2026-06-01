@@ -91,6 +91,64 @@ export class OnboardingService {
     const org = await prisma.organization.findUnique({ where: { slug } });
     return org === null;
   }
+
+  // Setup org structure for an already-authenticated user
+  async setupOrgForExistingUser(
+    userId: string,
+    data: {
+      company: { name: string; slug: string; industry?: string; country?: string };
+      divisions: { name: string }[];
+      departments: { name: string; divisionIndex?: number }[];
+      roles: { name: string; permissionLevel: 'MANAGER' | 'AUDITOR' | 'DEPT_HEAD' | 'VIEWER' }[];
+    }
+  ) {
+    const existingSlug = await prisma.organization.findUnique({ where: { slug: data.company.slug } });
+    if (existingSlug) throw new ConflictError('Company URL is already taken');
+
+    return prisma.$transaction(async (tx) => {
+      const org = await tx.organization.create({
+        data: { name: data.company.name, slug: data.company.slug, setupComplete: true },
+      });
+
+      const divisionIds: string[] = [];
+      for (const div of data.divisions) {
+        const created = await tx.division.create({ data: { name: div.name, organizationId: org.id } });
+        divisionIds.push(created.id);
+      }
+
+      for (const dept of data.departments) {
+        await tx.department.create({
+          data: {
+            name: dept.name,
+            organizationId: org.id,
+            divisionId: dept.divisionIndex !== undefined ? (divisionIds[dept.divisionIndex] ?? null) : null,
+          },
+        });
+      }
+
+      const adminRole = await tx.orgRole.create({
+        data: { name: 'Admin', permissionLevel: 'ADMIN', isDefault: false, organizationId: org.id },
+      });
+
+      for (const role of data.roles) {
+        await tx.orgRole.create({
+          data: { name: role.name, permissionLevel: role.permissionLevel, isDefault: true, organizationId: org.id },
+        });
+      }
+
+      // Move the existing user to the new org as SYSTEM_ADMIN
+      await tx.user.update({
+        where: { id: userId },
+        data: {
+          organizationId: org.id,
+          role: UserRole.SYSTEM_ADMIN,
+          orgRoleId: adminRole.id,
+        },
+      });
+
+      return { orgSlug: org.slug, inviteUrl: `/join/${org.slug}` };
+    });
+  }
 }
 
 export const onboardingService = new OnboardingService();
