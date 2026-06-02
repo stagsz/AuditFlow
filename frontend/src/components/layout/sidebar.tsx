@@ -116,7 +116,7 @@ export function Sidebar() {
   const NavContent = ({ isMobile = false }: { isMobile?: boolean }) => (
     <div className={`flex h-full flex-col bg-surface border-r border-slate-200/60 pt-8 pb-6 ${sidebarOpen || isMobile ? 'px-5' : 'px-2'}`}>
       {/* Logo */}
-      <div className={`flex px-3 mb-12 ${sidebarOpen || isMobile ? 'items-center justify-between' : 'flex-col items-center gap-3 px-0'}`}>
+      <div className={`flex px-3 mb-10 ${sidebarOpen || isMobile ? 'items-center justify-between' : 'flex-col items-center gap-3 px-0'}`}>
         <div className="flex items-center gap-3 cursor-pointer">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-mint-400 to-mint-600 shadow-soft-2 flex items-center justify-center text-white flex-shrink-0">
             <ShieldCheck size={22} />
@@ -146,6 +146,19 @@ export function Sidebar() {
         )}
       </div>
 
+      {/* New assessment CTA */}
+      {sidebarOpen && (
+        <div className="px-4 mb-4">
+          <Link
+            href="/assessments/new"
+            className="flex items-center justify-center gap-2 rounded-full bg-mint-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-mint-600 transition-colors"
+          >
+            <ClipboardCheck size={16} />
+            New assessment
+          </Link>
+        </div>
+      )}
+
       {/* Main Menu */}
       <nav className="flex-1 space-y-2 overflow-y-auto">
         {(sidebarOpen || isMobile) && (
@@ -163,7 +176,6 @@ export function Sidebar() {
             <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400">Settings</p>
           </div>
         )}
-        {!sidebarOpen && !isMobile && <div className="mt-6" />}
         {settingsNavigation
           .filter((item) => !item.admin || isAdmin)
           .map((item) => (

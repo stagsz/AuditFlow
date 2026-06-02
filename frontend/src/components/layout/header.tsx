@@ -171,16 +171,27 @@ export function Header() {
           </button>
 
           {/* Notifications */}
-          <div className="relative" ref={notificationsRef}>
+          <div className="ml-auto flex items-center gap-3 md:gap-4">
+            <div className="hidden md:flex flex-col items-end">
+              <p className="text-sm font-semibold text-navy-900">
+                {(user?.organization?.name) || 'Organization'}
+              </p>
+              <p className="text-xs text-slate-500 font-medium">
+                {(user?.role ?? '').replace(/_/g, ' ')}
+              </p>
+            </div>
+            <div className="h-9 w-px bg-slate-200" />
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="w-11 h-11 rounded-full bg-white shadow-soft-1 border border-slate-100 flex items-center justify-center relative hover:bg-slate-50 transition-colors"
+              className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center relative hover:border-mint-500 hover:text-mint-600 transition-colors"
               aria-label="Notifications"
               aria-expanded={notificationsOpen}
             >
-              <Bell size={20} className="text-navy-700" />
+              <Bell size={18} className="text-navy-700" />
               {unreadCount > 0 && (
-                <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white" />
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border-2 border-white px-1">
+                  {unreadCount}
+                </span>
               )}
             </button>
 
