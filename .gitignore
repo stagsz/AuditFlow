@@ -129,6 +129,19 @@ backend/dist/
 
 # OMC / Claude Code state (not deployable)
 .omc/
-what 
+what
 .env*.local
 .env*
+
+# Local AI/config files
+CLAUDE.md
+
+# Build artifacts
+frontend/tsconfig.tsbuildinfo
+
+# Internal ops notes
+docs/legal/GDPR_COMPLIANCE_REVIEW.md
+
+# Legacy/one-time artifacts not needed at runtime
+supabase/migrations/
+backend/prisma/seed*.ts
