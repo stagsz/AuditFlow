@@ -15,7 +15,7 @@ export default function LandingPage() {
           <Link href="#features" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Features</Link>
           <Link href="#how" className="text-sm text-[#6b7280] hover:text-[#0e1117]">How it works</Link>
           <Link href="#pricing" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Pricing</Link>
-          <Link href="/register" className="rounded-md bg-[#0e1117] px-4 py-2 text-sm font-medium text-white hover:bg-[#0f766e]">Get started</Link>
+          <Link href="/register" className="rounded-md bg-[#0e1117] px-4 py-2 text-sm font-medium text-white hover:bg-[#0f766e]">Start 30-day free trial</Link>
         </div>
       </nav>
 
@@ -34,7 +34,7 @@ export default function LandingPage() {
               Replace spreadsheets and email chains with one platform for self-assessments, audits, NCR tracking, and CAPA.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <Link href="/register" className="inline-flex items-center rounded-md bg-[#0f766e] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0a5c55]">Start free trial</Link>
+              <Link href="/register" className="inline-flex items-center rounded-md bg-[#0f766e] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0a5c55]">Start 30-day free trial</Link>
               <Link href="#how" className="inline-flex items-center gap-2 text-sm text-[#0e1117] border-b border-[#e4e2dd] pb-[1px] hover:border-[#0e1117]">
                 See how it works <span aria-hidden>→</span>
               </Link>
@@ -177,54 +177,54 @@ export default function LandingPage() {
               Pricing
             </div>
             <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight">Straightforward plans. No surprises.</h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#6b7280]">All plans include full ISO 9001:2015 clause coverage. Upgrade as your team grows.</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#6b7280]">All plans include full ISO 9001:2015 clause coverage. Free while in beta.</p>
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             <div className="rounded-xl border border-[#e4e2dd] bg-white p-7">
-              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[#6b7280]">Starter</div>
+              <div className="text-xs font-medium uppercase tracking-[0.06em] text-white/50">Free</div>
               <div className="mt-2 flex items-baseline gap-1">
-                <div className="text-4xl font-semibold tracking-tight">€49</div>
-                <div className="text-xs text-[#6b7280]">per month</div>
+                <div className="text-4xl font-semibold tracking-tight">€0</div>
+                <div className="text-xs text-white/60">forever</div>
               </div>
-              <div className="mt-1 text-xs text-[#6b7280]">Up to 10 users</div>
-              <div className="my-5 h-px bg-[#e4e2dd]" />
+              <div className="mt-1 text-xs text-white/50">Up to 10 users</div>
+              <div className="my-5 h-px bg-white/10" />
               <ul className="flex flex-col gap-2 text-sm text-[#6b7280]">
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Unlimited audits</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Self-assessment module</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> NCR & CAPA tracking</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Basic reporting & dashboards</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Unlimited audits</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Self-assessment module</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> NCR & CAPA tracking</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Basic reporting & dashboards</li>
               </ul>
-              <Link href="/register" className="mt-6 block w-full rounded-lg border border-[#e4e2dd] py-2.5 text-center text-sm font-medium text-[#0e1117] hover:border-[#0e1117]">Start 14-day trial</Link>
+              <Link href="/register" className="mt-6 block w-full rounded-lg bg-white py-2.5 text-center text-sm font-medium text-[#0e1117] hover:bg-[#d1fae5]">Start 30-day trial</Link>
             </div>
 
-            <div className="rounded-xl border border-[#0e1117] bg-[#0e1117] p-7 text-white">
-              <div className="text-xs font-medium uppercase tracking-[0.06em] text-white/50">Professional</div>
+            <div className="rounded-xl border border-[#e4e2dd] bg-white p-7">
+              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[#6b7280]">Professional</div>
               <div className="mt-2 flex items-baseline gap-1">
-                <div className="text-4xl font-semibold tracking-tight">€149</div>
+                <div className="text-4xl font-semibold tracking-tight">€0</div>
                 <div className="text-xs text-white/60">per month</div>
               </div>
               <div className="mt-1 text-xs text-white/50">Up to 50 users</div>
               <div className="my-5 h-px bg-white/10" />
-              <ul className="flex flex-col gap-2 text-sm text-white/65">
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Everything in Starter</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Advanced analytics & custom dashboards</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Evidence attachment & storage</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Audit report generation (PDF)</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Role-based access control</li>
+              <ul className="flex flex-col gap-2 text-sm text-[#6b7280]">
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Everything in Free</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Advanced analytics & custom dashboards</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Evidence attachment & storage</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Audit report generation (PDF)</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Role-based access control</li>
               </ul>
-              <Link href="/register" className="mt-6 block w-full rounded-lg bg-white py-2.5 text-center text-sm font-medium text-[#0e1117] hover:bg-[#d1fae5]">Start 14-day trial</Link>
+              <Link href="/register" className="mt-6 block w-full rounded-lg border border-[#0f766e] bg-[#0f766e] py-2.5 text-center text-sm font-medium text-white hover:bg-[#0a5c55]">Start 30-day trial</Link>
             </div>
 
             <div className="rounded-xl border border-[#e4e2dd] bg-white p-7">
               <div className="text-xs font-medium uppercase tracking-[0.06em] text-[#6b7280]">Enterprise</div>
               <div className="mt-2 text-4xl font-semibold tracking-tight">Custom</div>
               <div className="mt-1 text-xs text-[#6b7280]">50+ users</div>
-              <div className="my-5 h-px bg-[#e4e2dd]" />
+              <div className="my-5 h-px bg-white/10" />
               <ul className="flex flex-col gap-2 text-sm text-[#6b7280]">
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> SSO / SAML integration</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Custom audit templates</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> API access</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> SLA-backed support</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> SSO / SAML integration</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> Custom audit templates</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> API access</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-emerald-300">✓</span> SLA-backed support</li>
               </ul>
               <a href="mailto:hello@auditflow.io" className="mt-6 block w-full rounded-lg border border-[#e4e2dd] py-2.5 text-center text-sm font-medium text-[#0e1117] hover:border-[#0e1117]">Contact sales</a>
             </div>
@@ -238,7 +238,7 @@ export default function LandingPage() {
           <h2 className="font-serif text-[clamp(26px,4vw,38px)] leading-[1.12] tracking-tight text-white">Ready to run your next audit with confidence?</h2>
           <p className="mx-auto mt-3 max-w-lg text-sm text-white/55">Set up in minutes. No consultants, no all-day training required.</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/register" className="inline-flex items-center rounded-md bg-[#0f766e] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0a5c55]">Start free trial</Link>
+            <Link href="/register" className="inline-flex items-center rounded-md bg-[#0f766e] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0a5c55]">Start 30-day free trial</Link>
             <a href="mailto:hello@auditflow.io" className="inline-flex items-center gap-2 border-b border-white/20 pb-[1px] text-sm text-white/60 hover:text-white">Schedule a demo <span aria-hidden>→</span></a>
           </div>
         </div>
