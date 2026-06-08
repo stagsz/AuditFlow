@@ -54,7 +54,19 @@ export const config = {
   encryptionKey: process.env.ENCRYPTION_KEY || '',
 
   // Auto-save
-  autoSaveIntervalSeconds: 30,
-} as const;
+    autoSaveIntervalSeconds: 30,
+
+    // Email
+    email: {
+      smtpHost: process.env.SMTP_HOST || '',
+      smtpPort: parseInt(process.env.SMTP_PORT || '587', 10),
+      smtpSecure: process.env.SMTP_SECURE === 'true',
+      smtpUser: process.env.SMTP_USER || '',
+      smtpPass: process.env.SMTP_PASS || '',
+      fromEmail: process.env.EMAIL_FROM || 'noreply@auditflow.io',
+      fromName: process.env.EMAIL_FROM_NAME || 'AuditFlow',
+      appUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow-zeta.vercel.app',
+    },
+  } as const;
 
 export type Config = typeof config;

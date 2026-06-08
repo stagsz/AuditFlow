@@ -338,3 +338,45 @@ export const orgInviteSchemas = {
     id: z.string().uuid('Invalid invite ID'),
   }),
 };
+
+// -----------------------------------------------------------------------------
+// Beta Invite Validation Schemas
+// -----------------------------------------------------------------------------
+
+export const betaInviteSchemas = {
+  create: z.object({
+    email: z.string().email('Invalid email').optional(),
+    expiresInDays: z.coerce.number().int().min(1).max(365).default(30),
+    maxUses: z.coerce.number().int().min(1).max(100).default(1),
+    metadata: z.record(z.string(), z.any()).optional(),
+  }),
+  send: z.object({
+    email: z.string().email('Invalid email'),
+    message: z.string().max(2000).optional(),
+  }),
+  bulkCreate: z.object({
+    count: z.coerce.number().int().min(1).max(100),
+    expiresInDays: z.coerce.number().int().min(1).max(365).default(30),
+    maxUses: z.coerce.number().int().min(1).max(100).default(1),
+  }),
+  listQuery: commonSchemas.pagination.merge(commonSchemas.search).merge(
+    z.object({
+      status: z.string().transform((val) => val.split(',')).pipe(
+        z.array(z.enum(['ACTIVE', 'EXPIRED', 'USED_UP', 'REVOKED']))
+      ).optional(),
+    })
+  ),
+  codeParam: z.object({
+    code: z.string().min(1, 'Invite code is required'),
+  }),
+  inviteIdParam: z.object({
+    id: z.string().uuid('Invalid invite ID'),
+  }),
+  validateCode: z.object({
+    code: z.string().min(1, 'Invite code is required'),
+  }),
+  trackUsage: z.object({
+    code: z.string().min(1, 'Invite code is required'),
+    referrer: z.string().url().optional(),
+  }),
+};

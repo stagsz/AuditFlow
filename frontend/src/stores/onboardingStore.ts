@@ -41,6 +41,8 @@ interface OnboardingState {
   departments: Department[];
   roles: OrgRole[];
   inviteUrl: string;
+  betaInviteCode: string | null;
+  betaInviteValidated: boolean;
 
   setStep: (step: number) => void;
   setPersonal: (data: PersonalData) => void;
@@ -54,6 +56,8 @@ interface OnboardingState {
   removeRole: (id: string) => void;
   updateRole: (id: string, patch: Partial<OrgRole>) => void;
   setInviteUrl: (url: string) => void;
+  setBetaInviteCode: (code: string | null) => void;
+  setBetaInviteValidated: (validated: boolean) => void;
   reset: () => void;
 }
 
@@ -71,6 +75,8 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   departments: [],
   roles: [],
   inviteUrl: '',
+  betaInviteCode: null,
+  betaInviteValidated: false,
 
   setStep: (step) => set({ step }),
   setPersonal: (personal) => set({ personal }),
@@ -91,5 +97,7 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   updateRole: (id, patch) => set((s) => ({ roles: s.roles.map((r) => r.id === id ? { ...r, ...patch } : r) })),
 
   setInviteUrl: (inviteUrl) => set({ inviteUrl }),
-  reset: () => set({ step: 1, personal: defaultPersonal, company: defaultCompany, divisions: [], departments: [], roles: [], inviteUrl: '' }),
+  setBetaInviteCode: (betaInviteCode) => set({ betaInviteCode }),
+  setBetaInviteValidated: (betaInviteValidated) => set({ betaInviteValidated }),
+  reset: () => set({ step: 1, personal: defaultPersonal, company: defaultCompany, divisions: [], departments: [], roles: [], inviteUrl: '', betaInviteCode: null, betaInviteValidated: false }),
 }));

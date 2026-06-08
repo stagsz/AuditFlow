@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useOnboardingStore } from '@/stores/onboardingStore';
+import { betaInviteApi } from '@/lib/api';
+import { Loader2, Shield, CheckCircle, AlertCircle, Send } from 'lucide-react';
 
 // ---- schemas ----
 const createSchema = z.object({
@@ -32,6 +34,17 @@ type CreateFormData = z.infer<typeof createSchema>;
 type JoinFormData = z.infer<typeof joinSchema>;
 type Mode = 'choose' | 'create' | 'join';
 
+interface ValidatedInvite {
+  id: string;
+  code: string;
+  email: string | null;
+  maxUses: number;
+  usedCount: number;
+  expiresAt: string;
+  organization: { id: string; name: string; slug: string } | null;
+  createdBy: { id: string; firstName: string; lastName: string; email: string };
+}
+
 // ---- icon ----
 function UserPlusIcon() {
   return (
@@ -43,23 +56,52 @@ function UserPlusIcon() {
 }
 
 // ---- sub-forms ----
-function CreateForm({ onBack }: { onBack: () => void }) {
+function CreateForm({
+  onBack,
+  betaInviteCode,
+  betaInviteData,
+}: {
+  onBack: () => void;
+  betaInviteCode?: string;
+  betaInviteData?: ValidatedInvite | null;
+}) {
   const router = useRouter();
   const setPersonal = useOnboardingStore((s) => s.setPersonal);
+  const setBetaInviteCode = useOnboardingStore((s) => s.setBetaInviteCode);
+  const setBetaInviteValidated = useOnboardingStore((s) => s.setBetaInviteValidated);
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<CreateFormData>({
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<CreateFormData>({
     resolver: zodResolver(createSchema),
+    defaultValues: {
+      email: betaInviteData?.email ?? '',
+    },
   });
 
   const onSubmit = async (data: CreateFormData) => {
+    // If email was pre-filled from invite, verify it matches
+    if (betaInviteData?.email && betaInviteData.email !== data.email) {
+      toast.error('Email must match the invite reservation');
+      return;
+    }
+
     setPersonal({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
     });
-    router.push('/onboarding');
+
+    if (betaInviteCode) {
+      setBetaInviteCode(betaInviteCode);
+      setBetaInviteValidated(true);
+      router.push(`/onboarding?beta_invite=${betaInviteCode}`);
+    } else {
+      router.push('/onboarding');
+    }
   };
+
+  // If email is pre-filled from invite, make it read-only
+  const emailDisabled = !!betaInviteData?.email;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -89,7 +131,14 @@ function CreateForm({ onBack }: { onBack: () => void }) {
         placeholder="you@company.com"
         error={errors.email?.message}
         autoComplete="email"
+        disabled={emailDisabled}
+        className={emailDisabled ? 'bg-gray-50' : ''}
       />
+      {betaInviteData?.email && (
+        <p className="text-xs text-emerald-600 flex items-center gap-1">
+          <CheckCircle size={12} /> This invite is reserved for this email
+        </p>
+      )}
 
       <Input
         {...register('password')}
@@ -172,29 +221,124 @@ function JoinForm({ onBack }: { onBack: () => void }) {
 
 // ---- main page ----
 export default function RegisterPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [mode, setMode] = useState<Mode>('choose');
+  const [betaInviteCode, setBetaInviteCode] = useState<string | null>(null);
+  const [betaInviteData, setBetaInviteData] = useState<ValidatedInvite | null>(null);
+  const [betaInviteLoading, setBetaInviteLoading] = useState(false);
+  const [betaInviteError, setBetaInviteError] = useState<string | null>(null);
+
+  // Check for beta_invite in query params on mount
+  useEffect(() => {
+    const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
+    if (code) {
+      setBetaInviteCode(code);
+      validateInvite(code);
+      // Auto-switch to create mode when coming from beta invite
+      setMode('create');
+    }
+  }, [searchParams]);
+
+  const validateInvite = async (code: string) => {
+    setBetaInviteLoading(true);
+    setBetaInviteError(null);
+    try {
+      const res = await betaInviteApi.validateCode(code);
+      const data = res.data?.data;
+      if (data.valid) {
+        setBetaInviteData(data.invite);
+      } else {
+        setBetaInviteError(data.reason || 'Invalid invitation code');
+      }
+    } catch {
+      setBetaInviteError('Failed to validate invitation');
+    } finally {
+      setBetaInviteLoading(false);
+    }
+  };
+
+  // Show loading state while validating beta invite
+  if (betaInviteLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <Card className="w-full max-w-md text-center">
+          <CardContent className="py-12">
+            <div className="mx-auto w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+              <Loader2 className="animate-spin text-emerald-600" size={28} />
+            </div>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Validating invitation...</h2>
+            <p className="text-gray-500">Please wait while we verify your beta invite code.</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Show error if beta invite validation failed
+  if (betaInviteError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <Card className="w-full max-w-md text-center">
+          <CardContent className="py-12">
+            <div className="mx-auto w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-4">
+              <AlertCircle className="w-8 h-8 text-red-600" />
+            </div>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Invalid Invitation</h2>
+            <p className="text-gray-500">{betaInviteError}</p>
+            <Button variant="outline" className="mt-4" onClick={() => router.push('/register')}>
+              Continue without invitation
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // If beta invite is valid, show a banner
+  const showInviteBanner = betaInviteCode && betaInviteData?.valid !== false;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-4 shadow-sm">
-            <UserPlusIcon />
+            {showInviteBanner ? <Send className="w-8 h-8 text-emerald-600" /> : <UserPlusIcon />}
           </div>
           <CardTitle className="text-2xl">
-            {mode === 'choose' && 'Get Started'}
-            {mode === 'create' && 'Create a new company'}
+            {showInviteBanner ? 'Beta Invitation' : mode === 'choose' && 'Get Started'}
+            {mode === 'create' && !showInviteBanner && 'Create a new company'}
             {mode === 'join' && 'Join an existing company'}
           </CardTitle>
           <CardDescription>
-            {mode === 'choose' && 'How would you like to use AuditFlow?'}
-            {mode === 'create' && 'Enter your details to set up your organisation'}
+            {showInviteBanner && betaInviteData?.organization?.name
+              ? `Exclusive beta access for ${betaInviteData.organization.name}`
+              : showInviteBanner
+              ? 'You have been invited to join the AuditFlow beta program'
+              : mode === 'choose' && 'How would you like to use AuditFlow?'}
+            {mode === 'create' && !showInviteBanner && 'Enter your details to set up your organisation'}
             {mode === 'join' && 'Enter your invite link or company slug'}
           </CardDescription>
         </CardHeader>
 
         <CardContent>
-          {mode === 'choose' && (
+          {showInviteBanner && betaInviteData && (
+            <div className="mb-6 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+              <div className="flex items-center gap-2 text-emerald-700 mb-2">
+                <Shield size={18} />
+                <span className="font-medium">Valid beta invitation</span>
+              </div>
+              <p className="text-sm text-emerald-700 font-mono bg-emerald-100 px-2 py-1 rounded">{betaInviteData.code}</p>
+              {betaInviteData.email && (
+                <p className="text-sm text-emerald-700 mt-1">Reserved for: <strong>{betaInviteData.email}</strong></p>
+              )}
+              <p className="text-xs text-emerald-600 mt-1">
+                {betaInviteData.usedCount} of {betaInviteData.maxUses} uses • Expires {new Date(betaInviteData.expiresAt).toLocaleDateString()}
+              </p>
+            </div>
+          )}
+
+          {mode === 'choose' && !showInviteBanner && (
             <div className="space-y-3">
               <Button className="w-full" onClick={() => setMode('create')}>
                 Create a new company
@@ -211,10 +355,15 @@ export default function RegisterPage() {
             </div>
           )}
 
-          {mode === 'create' && <CreateForm onBack={() => setMode('choose')} />}
-          {mode === 'join'   && <JoinForm   onBack={() => setMode('choose')} />}
+          {mode === 'create' && <CreateForm
+            onBack={() => { setMode('choose'); setBetaInviteCode(null); setBetaInviteData(null); }}
+            betaInviteCode={betaInviteCode ?? undefined}
+            betaInviteData={betaInviteData ?? undefined}
+          />}
 
-          {mode !== 'choose' && (
+          {mode === 'join' && <JoinForm onBack={() => setMode('choose')} />}
+
+          {(mode !== 'choose' || showInviteBanner) && (
             <p className="text-center text-sm text-gray-600 mt-4">
               Already have an account?{' '}
               <Link href="/login" className="text-emerald-600 hover:text-emerald-700 font-medium">

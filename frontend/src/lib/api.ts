@@ -317,6 +317,22 @@ export const orgInviteApi = {
     api.post(`/org/invites/${id}/resolve`, { action, orgRoleId }),
 };
 
+export const betaInviteApi = {
+  create: (data: { email?: string; expiresInDays?: number; maxUses?: number; metadata?: Record<string, any> }) =>
+    api.post('/beta-invites', data),
+  bulkCreate: (data: { count: number; expiresInDays?: number; maxUses?: number }) =>
+    api.post('/beta-invites/bulk', data),
+  list: (params?: { page?: number; pageSize?: number; search?: string; status?: string[] }) =>
+    api.get('/beta-invites', { params }),
+  getById: (id: string) => api.get(`/beta-invites/${id}`),
+  validateCode: (code: string) => api.post('/invite/validate', { code }),
+  trackUsage: (code: string, referrer?: string) => api.post('/invite/track', { code, referrer }),
+  getAnalytics: (days?: number) => api.get('/beta-invites/analytics', { params: { days } }),
+  send: (id: string, email: string, message?: string) => api.post(`/beta-invites/${id}/send`, { email, message }),
+  sendReminder: (id: string) => api.post(`/beta-invites/${id}/reminder`),
+  revoke: (id: string) => api.post(`/beta-invites/${id}/revoke`),
+};
+
 export const evidenceApi = {
   upload: (
     responseId: string,

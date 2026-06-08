@@ -72,6 +72,13 @@ enum InviteStatus {
   REJECTED
 }
 
+enum BetaInviteStatus {
+  ACTIVE
+  EXPIRED
+  USED_UP
+  REVOKED
+}
+
 enum Priority {
   LOW
   MEDIUM
@@ -100,6 +107,7 @@ model Organization {
   departments   Department[]
   orgRoles      OrgRole[]
   invites       UserOrgInvite[]
+  betaInvites   BetaInvite[]
 
   @@map("organizations")
 }
@@ -171,6 +179,8 @@ model User {
   orgRoleId         String?
   orgRole           OrgRole?       @relation(fields: [orgRoleId], references: [id])
   invites           UserOrgInvite[]
+  betaInvitesCreated BetaInvite[] @relation("BetaInviteCreatedBy")
+  betaInviteUsages   BetaInviteUsage[]
 
   @@index([organizationId])
   @@map("users")
@@ -413,4 +423,44 @@ model UserOrgInvite {
   @@index([userId])
   @@index([organizationId])
   @@map("user_org_invites")
+}
+
+model BetaInvite {
+  id              String           @id @default(uuid())
+  code            String           @unique @map("code")
+  email           String?
+  status          BetaInviteStatus @default(ACTIVE)
+  expiresAt       DateTime
+  maxUses         Int              @default(1)
+  usedCount       Int              @default(0)
+  metadata        Json?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  createdById     String
+  createdBy       User             @relation("BetaInviteCreatedBy", fields: [createdById], references: [id])
+  organizationId  String?
+  organization    Organization?    @relation(fields: [organizationId], references: [id])
+  usages          BetaInviteUsage[]
+
+  @@index([email])
+  @@index([status])
+  @@index([expiresAt])
+  @@map("beta_invites")
+}
+
+model BetaInviteUsage {
+  id            String      @id @default(uuid())
+  betaInviteId  String
+  betaInvite    BetaInvite  @relation(fields: [betaInviteId], references: [id], onDelete: Cascade)
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id])
+  ipAddress     String?
+  userAgent     String?
+  referrer      String?
+  converted     Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+
+  @@index([betaInviteId])
+  @@index([userId])
+  @@map("beta_invite_usages")
 }

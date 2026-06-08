@@ -16,6 +16,7 @@ export {
   ActionStatus,
   Priority,
   EvidenceType,
+  BetaInviteStatus,
 } from '@prisma/client';
 
 // Re-export types for TypeScript usage
@@ -29,4 +30,5 @@ export type {
   ActionStatus as ActionStatusType,
   Priority as PriorityType,
   EvidenceType as EvidenceTypeType,
+  BetaInviteStatus as BetaInviteStatusType,
 } from '@prisma/client';

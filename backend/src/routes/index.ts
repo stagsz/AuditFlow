@@ -11,6 +11,7 @@ import { nonConformityRouter, assessmentNCRRouter } from './nonConformityRoutes'
 import { actionRouter, ncrActionRouter } from './correctiveActionRoutes';
 import onboardingRoutes from './onboardingRoutes';
 import orgInviteRoutes from './orgInviteRoutes';
+import betaInviteRoutes from './betaInviteRoutes';
 
 const router = Router();
 
@@ -32,5 +33,6 @@ router.use('/users', userRoutes);
 router.use('/templates', templateRoutes);
 router.use('/onboarding', onboardingRoutes);
 router.use('/org', orgInviteRoutes);
+router.use('/', betaInviteRoutes);
 
 export default router;

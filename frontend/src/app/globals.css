@@ -4,53 +4,68 @@
 
 @layer base {
   :root {
-    /* ── Surface tokens ── */
-    --background: #F6F8F9;
-    --foreground: #0F172A;
-    --card: #ffffff;
-    --card-foreground: #1E293B;
-    --popover: #ffffff;
-    --popover-foreground: #0F172A;
+    /* ── Design tokens from standalone landing page ── */
+    --ink: #0e1117;
+    --ink-light: #1c2230;
+    --surface: #f9f8f6;
+    --muted: #6b7280;
+    --border: #e4e2dd;
+    --teal: #0f766e;
+    --teal-dark: #0a5c55;
+    --teal-dim: #d1fae5;
+    --white: #ffffff;
+    --type-sans: 'Inter', system-ui, sans-serif;
+  }
 
-    /* ── Primary: Mint ── */
-    --primary: #3EAA9E;
-    --primary-foreground: #ffffff;
-
-    /* ── Secondary ── */
-    --secondary: #F0FAFA;
-    --secondary-foreground: #276D66;
-
-    /* ── Muted ── */
-    --muted: #F1F5F9;
-    --muted-foreground: #64748B;
-
-    /* ── Accent ── */
-    --accent: #DDF4F3;
-    --accent-foreground: #276D66;
-
-    /* ── Destructive ── */
-    --destructive: #EF4444;
-    --destructive-foreground: #ffffff;
-
-    /* ── Borders & inputs ── */
-    --border: #E2E8F0;
-    --input: #E2E8F0;
-    --ring: #3EAA9E;
-
-    /* ── Radius ── */
-    --radius: 0.75rem;
+  /* Map Tailwind colors to design tokens */
+  :root {
+    --color-ink: var(--ink);
+    --color-ink-light: var(--ink-light);
+    --color-surface: var(--surface);
+    --color-muted: var(--muted);
+    --color-border: var(--border);
+    --color-teal: var(--teal);
+    --color-teal-dark: var(--teal-dark);
+    --color-teal-dim: var(--teal-dim);
   }
 }
 
 @layer base {
   * {
+    box-sizing: border-box;
     border-color: var(--border);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    font-family: var(--font-inter), var(--type-sans);
+    background-color: var(--surface);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Font utility classes */
+  .font-serif {
+    font-family: var(--font-dm-serif-display), Georgia, serif;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -65,44 +80,114 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E2E8F0;
+  background: var(--border);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #CBD5E1;
+  background: var(--muted);
 }
 
 /* ── Glass panel utility ── */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(249, 248, 246, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-}
-
-/* ── Score button animations ── */
-.score-button {
-  @apply transition-all duration-200 ease-in-out;
-}
-
-.score-button:hover {
-  @apply transform scale-105;
-}
-
-.score-button.selected {
-  @apply ring-2 ring-offset-2;
-}
-
-/* ── Progress bar animation ── */
-.progress-bar {
-  transition: width 0.5s ease-in-out;
 }
 
 /* ── Focus ring utility ── */
 .focus-ring {
   outline: none;
 }
+
 .focus-ring:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3EAA9E;
+  box-shadow: 0 0 0 2px var(--white), 0 0 0 4px var(--teal);
+}
+
+/* ── Button base styles for consistent CTA sizing ── */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-md bg-[var(--teal)] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--teal-dark)];
+}
+
+.btn-ghost {
+  @apply inline-flex items-center gap-2 text-sm font-medium text-[var(--ink)] border-b border-[var(--border)] pb-[1px] transition-colors hover:border-[var(--ink)];
+}
+
+.btn-ghost::after {
+  content: '→';
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-md border border-[var(--border)] px-5 py-2.5 text-sm font-medium text-[var(--ink)] transition-colors hover:border-[var(--ink)];
+}
+
+/* ── Section label utility ── */
+.section-label {
+  @apply mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-[var(--teal)];
+}
+
+.section-label::before {
+  content: '';
+  @apply block h-px w-4 bg-[var(--teal)];
+}
+
+/* ── Hero eyebrow utility ── */
+.hero-eyebrow {
+  @apply mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-[var(--teal)];
+}
+
+.hero-eyebrow::before {
+  content: '';
+  @apply block h-px w-5 bg-[var(--teal)];
+}
+
+/* ── Badge utilities ── */
+.badge-open {
+  @apply rounded bg-red-500/15 px-2 py-0.5 text-[10px] font-medium text-red-300;
+}
+
+.badge-review {
+  @apply rounded bg-amber-300/15 px-2 py-0.5 text-[10px] font-medium text-amber-200;
+}
+
+.badge-closed {
+  @apply rounded bg-emerald-400/15 px-2 py-0.5 text-[10px] font-medium text-emerald-200;
+}
+
+/* ── Feature card hover ── */
+.feat-card {
+  @apply transition-colors hover:bg-[#fafafa9];
+}
+
+/* ── Testimonial quote ── */
+.t-quote {
+  @apply text-base leading-relaxed text-[var(--ink)];
+}
+
+.t-quote::before {
+  content: '"';
+  @apply block mb-1.5 text-3xl leading-none text-[var(--teal)] font-serif;
+}
+
+/* ── Plan card utilities ── */
+.plan-card {
+  @apply rounded-xl border p-7 transition-colors;
+}
+
+.plan-card-featured {
+  @apply border-[var(--ink)] bg-[var(--ink)] text-white;
+}
+
+.plan-divider {
+  @apply my-5 h-px bg-[var(--border)];
+}
+
+.plan-card-featured .plan-divider {
+  @apply bg-white/10;
+}
+
+/* ── Clause card hover ── */
+.clause-card {
+  @apply transition-all hover:border-[var(--teal)] hover:shadow-[0_4px_16px_rgba(15,118,110,0.08)];
 }
