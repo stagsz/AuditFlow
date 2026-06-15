@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { ConfirmationDialog } from '@/components/ui/confirmation-dialog';
 import { useAuthStore } from '@/lib/store';
 import { toast } from 'sonner';
-import { Plus, Search, Mail, Copy, Trash2, Send, BarChart2, Loader2, Calendar, Users, CheckCircle, XCircle, AlertTriangle } from 'lucide-react';
+import { Plus, Search, Mail, Copy, Trash2, Send, BarChart2, Loader2, Calendar, Users, CheckCircle, XCircle, AlertTriangle, X } from 'lucide-react';
 
 interface BetaInvite {
   id: string;

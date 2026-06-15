@@ -18,7 +18,7 @@ function OnboardingContent() {
   const { step, betaInviteValidated, betaInviteCode, setBetaInviteCode, setBetaInviteValidated, reset } = useOnboardingStore();
 
   useEffect(() => {
-    const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
+    const code = ((searchParams?.get('beta_invite') || searchParams?.get('invite_code')) ?? '').trim();
     if (code && !betaInviteValidated && betaInviteCode !== code) {
       const validateInvite = async () => {
         try {
@@ -50,7 +50,7 @@ function OnboardingContent() {
 
 export default function OnboardingPage() {
   const searchParams = useSearchParams();
-  const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
+  const code = ((searchParams?.get('beta_invite') || searchParams?.get('invite_code')) ?? '').trim();
   const { betaInviteValidated, betaInviteCode } = useOnboardingStore();
 
   if (code && !betaInviteValidated && betaInviteCode !== code) {

@@ -231,13 +231,12 @@ export default function RegisterPage() {
 
   // Check for beta_invite in query params on mount
   useEffect(() => {
-    const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
-    if (code) {
-      setBetaInviteCode(code);
-      validateInvite(code);
-      // Auto-switch to create mode when coming from beta invite
-      setMode('create');
-    }
+    const code = (searchParams?.get('beta_invite') || searchParams?.get('invite_code') || '').trim();
+    if (!code) return;
+    setBetaInviteCode(code);
+    validateInvite(code);
+    // Auto-switch to create mode when coming from beta invite
+    setMode('create');
   }, [searchParams]);
 
   const validateInvite = async (code: string) => {
@@ -296,7 +295,7 @@ export default function RegisterPage() {
   }
 
   // If beta invite is valid, show a banner
-  const showInviteBanner = betaInviteCode && betaInviteData?.valid !== false;
+  const showInviteBanner = Boolean(betaInviteCode && betaInviteData);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
