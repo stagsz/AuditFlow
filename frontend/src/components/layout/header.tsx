@@ -213,6 +213,7 @@ export function Header() {
                         className={`px-4 py-3 hover:bg-slate-50 cursor-pointer border-b border-slate-50 last:border-b-0 transition-colors ${
                           !notification.read ? 'bg-mint-50/40' : ''
                         }`}
+                        onClick={() => setNotificationsOpen(false)}
                       >
                         <div className="flex gap-3">
                           <div className="flex-shrink-0 mt-0.5">
