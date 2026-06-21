@@ -62,7 +62,7 @@ export class BetaInviteService {
         expiresAt,
         maxUses: data.maxUses,
         usedCount: 0,
-        metadata: data.metadata ?? null,
+        metadata: data.metadata ?? undefined,
         createdById: data.createdById,
         organizationId: data.organizationId ?? null,
       },
@@ -279,7 +279,7 @@ export class BetaInviteService {
       throw new ValidationError('Invalid or expired invite code');
     }
 
-    const invite = validation.invite;
+    const invite = validation.invite!;
 
     const usage = await prisma.betaInviteUsage.create({
       data: {
