@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -100,9 +100,6 @@ function CreateForm({
     }
   };
 
-  // If email is pre-filled from invite, make it read-only
-  const emailDisabled = !!betaInviteData?.email;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
@@ -131,8 +128,7 @@ function CreateForm({
         placeholder="you@company.com"
         error={errors.email?.message}
         autoComplete="email"
-        disabled={emailDisabled}
-        className={emailDisabled ? 'bg-gray-50' : ''}
+        disabled={!!betaInviteData?.email}
       />
       {betaInviteData?.email && (
         <p className="text-xs text-emerald-600 flex items-center gap-1">
@@ -177,7 +173,6 @@ function JoinForm({ onBack }: { onBack: () => void }) {
   });
 
   const onSubmit = async (data: JoinFormData) => {
-    // Extract last path segment as slug (handles both raw slug and full URL)
     const raw = data.slugOrUrl.trim();
     let slug: string;
     try {
@@ -185,7 +180,6 @@ function JoinForm({ onBack }: { onBack: () => void }) {
       const parts = url.pathname.replace(/\/$/, '').split('/');
       slug = parts[parts.length - 1];
     } catch {
-      // Not a URL — treat the whole value as a slug
       slug = raw.replace(/\/$/, '').split('/').pop() ?? raw;
     }
 
@@ -219,8 +213,7 @@ function JoinForm({ onBack }: { onBack: () => void }) {
   );
 }
 
-// ---- main page ----
-export default function RegisterPage() {
+function RegisterPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<Mode>('choose');
@@ -235,7 +228,6 @@ export default function RegisterPage() {
     if (code) {
       setBetaInviteCode(code);
       validateInvite(code);
-      // Auto-switch to create mode when coming from beta invite
       setMode('create');
     }
   }, [searchParams]);
@@ -258,7 +250,6 @@ export default function RegisterPage() {
     }
   };
 
-  // Show loading state while validating beta invite
   if (betaInviteLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -275,7 +266,6 @@ export default function RegisterPage() {
     );
   }
 
-  // Show error if beta invite validation failed
   if (betaInviteError) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
@@ -295,7 +285,6 @@ export default function RegisterPage() {
     );
   }
 
-  // If beta invite is valid, show a banner
   const showInviteBanner = betaInviteCode && betaInviteData?.valid !== false;
 
   return (
@@ -306,8 +295,7 @@ export default function RegisterPage() {
             {showInviteBanner ? <Send className="w-8 h-8 text-emerald-600" /> : <UserPlusIcon />}
           </div>
           <CardTitle className="text-2xl">
-            {showInviteBanner ? 'Beta Invitation' : mode === 'choose' && 'Get Started'}
-            {mode === 'create' && !showInviteBanner && 'Create a new company'}
+            {showInviteBanner ? 'Beta Invitation' : mode === 'create' && 'Create a new company'}
             {mode === 'join' && 'Join an existing company'}
           </CardTitle>
           <CardDescription>
@@ -317,7 +305,7 @@ export default function RegisterPage() {
               ? 'You have been invited to join the AuditFlow beta program'
               : mode === 'choose' && 'How would you like to use AuditFlow?'}
             {mode === 'create' && !showInviteBanner && 'Enter your details to set up your organisation'}
-            {mode === 'join' && 'Enter your invite link or company slug'}
+            {mode === 'join' && !showInviteBanner && 'Enter your invite link or company slug'}
           </CardDescription>
         </CardHeader>
 
@@ -374,5 +362,25 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+          <div className="w-full max-w-md text-center">
+            <div className="mx-auto w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+              <Loader2 className="animate-spin text-emerald-600" size={28} />
+            </div>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Loading...</h2>
+            <p className="text-gray-500">Please wait.</p>
+          </div>
+        </div>
+      }
+    >
+      <RegisterPageInner />
+    </Suspense>
   );
 }
