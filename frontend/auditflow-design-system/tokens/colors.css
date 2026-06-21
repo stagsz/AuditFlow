@@ -1,0 +1,115 @@
+/* ==========================================================================
+   AuditFlow — Color tokens  ·  "Natural" palette
+   Warm stone neutrals · terracotta/clay brand · natural-pigment status colors.
+   Reference semantics in product code, not raw ramps (use --text-body etc).
+   ========================================================================== */
+
+:root {
+  /* --- Clay / terracotta (primary brand) — warm, grounded, "quality" ----- */
+  --clay-50:  #FBF1EB;
+  --clay-100: #F4DCCD;
+  --clay-200: #E8B89B;
+  --clay-300: #D89169;
+  --clay-400: #C66E43;
+  --clay-500: #B05630;
+  --clay-600: #9C4A2A;   /* primary action */
+  --clay-700: #7E3B22;   /* hover / pressed */
+  --clay-800: #62301D;
+  --clay-900: #4A2517;
+
+  /* --- Stone (warm neutrals) — structure, text, surfaces ----------------- */
+  --stone-50:  #FAF8F4;
+  --stone-100: #F1EDE5;
+  --stone-200: #E6DED2;
+  --stone-300: #D5CABA;
+  --stone-400: #AB9E8B;
+  --stone-500: #827666;
+  --stone-600: #5E564A;
+  --stone-700: #453F36;
+  --stone-800: #2D2823;
+  --stone-900: #211D18;   /* warm "ink" — strongest text & brand dark */
+
+  /* --- Conformance semantics (ISO finding outcomes, natural pigments) ----- */
+  /* Conformant / pass — moss green */
+  --green-50:  #ECF2E6;
+  --green-100: #D3E4C6;
+  --green-500: #4E8A47;
+  --green-600: #3F7339;
+  --green-700: #335E30;
+
+  /* Observation / minor — ochre */
+  --amber-50:  #F9EFD7;
+  --amber-100: #F0DBA8;
+  --amber-500: #C5891B;
+  --amber-600: #A06E13;
+  --amber-700: #7F5712;
+
+  /* Nonconformity / major — garnet (cool red, distinct from clay brand) */
+  --red-50:  #F8E9EC;
+  --red-100: #EFCBD2;
+  --red-500: #B23246;
+  --red-600: #97283A;
+  --red-700: #7A2030;
+
+  /* Informational / guidance — dusty denim */
+  --blue-50:  #EAF0F3;
+  --blue-100: #CFDEE6;
+  --blue-500: #44708C;
+  --blue-600: #365A71;
+
+  /* ====================================================================== */
+  /* SEMANTIC ALIASES — prefer these in product code                        */
+  /* ====================================================================== */
+
+  /* Brand */
+  --brand:            var(--clay-600);
+  --brand-strong:     var(--clay-700);
+  --brand-soft:       var(--clay-50);
+  --brand-on:         #FFFFFF;
+
+  /* Text */
+  --text-strong:      var(--stone-900);
+  --text-body:        var(--stone-700);
+  --text-muted:       var(--stone-500);
+  --text-subtle:      var(--stone-400);
+  --text-on-brand:    #FFFFFF;
+  --text-link:        var(--clay-600);
+
+  /* Surfaces */
+  --surface-page:     var(--stone-50);
+  --surface-card:     #FFFFFF;
+  --surface-sunken:   var(--stone-100);
+  --surface-inverse:  var(--stone-900);
+  --surface-brand:    var(--clay-600);
+  --sidebar-bg:       var(--stone-900);   /* tweakable: app sidebar background */
+
+  /* Borders & lines */
+  --border-subtle:    var(--stone-200);
+  --border-default:   var(--stone-300);
+  --border-strong:    var(--stone-400);
+  --border-focus:     var(--clay-500);
+
+  /* Finding status — surface / border / text / solid */
+  --status-pass-bg:     var(--green-50);
+  --status-pass-line:   var(--green-100);
+  --status-pass-fg:     var(--green-700);
+  --status-pass-solid:  var(--green-500);
+
+  --status-obs-bg:      var(--amber-50);
+  --status-obs-line:    var(--amber-100);
+  --status-obs-fg:      var(--amber-700);
+  --status-obs-solid:   var(--amber-500);
+
+  --status-fail-bg:     var(--red-50);
+  --status-fail-line:   var(--red-100);
+  --status-fail-fg:     var(--red-700);
+  --status-fail-solid:  var(--red-500);
+
+  --status-na-bg:       var(--stone-100);
+  --status-na-line:     var(--stone-200);
+  --status-na-fg:       var(--stone-500);
+  --status-na-solid:    var(--stone-400);
+
+  /* Focus ring */
+  --ring: 0 0 0 3px color-mix(in srgb, var(--clay-500) 32%, transparent);
+}

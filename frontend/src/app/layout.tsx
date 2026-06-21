@@ -1,19 +1,26 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, DM_Serif_Display } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display',
   display: 'swap',
 });
 
-const dmSerifDisplay = DM_Serif_Display({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-dm-serif-display',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -132,14 +139,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${dmSerifDisplay.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${ibmPlexSans.className} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

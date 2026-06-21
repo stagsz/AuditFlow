@@ -1,0 +1,38 @@
+/* ==========================================================================
+   AuditFlow — Elevation: radii, borders, shadows
+   Restrained, professional. Soft layered shadows; tight-to-medium radii.
+   ========================================================================== */
+
+:root {
+  /* Corner radii — precise, not pill-soft */
+  --radius-xs:   3px;
+  --radius-sm:   5px;
+  --radius-md:   8px;    /* default card / control */
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-pill: 999px;
+
+  /* Border widths */
+  --border-hairline: 1px;
+  --border-thick:    1.5px;
+
+  /* Shadows — warm-tinted, soft, layered */
+  --shadow-xs: 0 1px 2px rgba(33, 29, 24, 0.06);
+  --shadow-sm: 0 1px 2px rgba(33, 29, 24, 0.06),
+               0 1px 3px rgba(33, 29, 24, 0.08);
+  --shadow-md: 0 2px 4px rgba(33, 29, 24, 0.05),
+               0 6px 14px rgba(33, 29, 24, 0.09);
+  --shadow-lg: 0 8px 16px rgba(33, 29, 24, 0.09),
+               0 18px 40px rgba(33, 29, 24, 0.13);
+  --shadow-focus: var(--ring);
+
+  /* Inset for sunken wells / inputs */
+  --shadow-inset: inset 0 1px 2px rgba(33, 29, 24, 0.06);
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1);   /* @kind other */
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);   /* @kind other */
+  --dur-fast:   120ms;  /* @kind other */
+  --dur-medium: 200ms;  /* @kind other */
+  --dur-slow:   320ms;  /* @kind other */
+}

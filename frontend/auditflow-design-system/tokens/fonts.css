@@ -1,0 +1,12 @@
+/* ==========================================================================
+   AuditFlow — Webfonts
+   --------------------------------------------------------------------------
+   SUBSTITUTION NOTE: No brand fonts were supplied. These three Google Fonts
+   were chosen to match AuditFlow's "engineered confidence" voice:
+     • Space Grotesk  — display / headings / large numerals (geometric, precise)
+     • IBM Plex Sans  — body & UI (technical, highly legible, trustworthy)
+     • IBM Plex Mono  — clause numbers, IDs, metadata, scores (tabular feel)
+   Swap these for the licensed brand faces when available.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
