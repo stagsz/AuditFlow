@@ -10,21 +10,21 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-[var(--brand)] text-white shadow-md hover:bg-[var(--brand-strong)] hover:shadow-lg',
+          'bg-[linear-gradient(var(--brand),_var(--brand-strong))] text-white shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] hover:brightness-110',
         destructive:
-          'bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg',
+          'bg-red-600 text-white shadow-[var(--shadow-md)] hover:bg-red-700 hover:shadow-[var(--shadow-lg)]',
         outline:
-          'border-2 border-[var(--brand-soft)] bg-[var(--surface-card)] text-[var(--brand)] shadow-md hover:bg-[var(--brand-soft)] hover:border-[var(--brand-soft)] hover:shadow-lg',
+          'border-2 border-[var(--brand-soft)] bg-[var(--surface-card)] text-[var(--brand)] shadow-[var(--shadow-md)] hover:bg-[var(--brand-soft)] hover:border-[var(--brand)] hover:shadow-[var(--shadow-lg)]',
         secondary:
-          'bg-[var(--surface-sunken)] text-[var(--text-strong)] shadow-md hover:bg-[var(--stone-200)] hover:shadow-lg',
+          'bg-[var(--surface-sunken)] text-[var(--text-strong)] shadow-[var(--shadow-md)] hover:bg-[var(--stone-200)] hover:shadow-[var(--shadow-lg)]',
         ghost:
           'text-[var(--text-muted)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-strong)]',
         link:
           'text-[var(--brand-strong)] underline-offset-4 hover:underline hover:text-[var(--brand)]',
         success:
-          'bg-green-600 text-white shadow-md hover:bg-green-700 hover:shadow-lg',
+          'bg-green-600 text-white shadow-[var(--shadow-md)] hover:bg-green-700 hover:shadow-[var(--shadow-lg)]',
         warning:
-          'bg-yellow-500 text-white shadow-md hover:bg-yellow-600 hover:shadow-lg',
+          'bg-yellow-500 text-white shadow-[var(--shadow-md)] hover:bg-yellow-600 hover:shadow-[var(--shadow-lg)]',
       },
       size: {
         default: 'h-10 px-5 py-2 text-sm rounded-xl',

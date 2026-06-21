@@ -124,7 +124,7 @@ export function ActionStatusDropdown({
           />
 
           {/* Dropdown menu */}
-          <div className="absolute left-0 top-full mt-1 z-20 bg-[var(--surface-card)] rounded-md shadow-lg border border-[var(--border-subtle)] py-1 min-w-[160px]">
+          <div className="absolute left-0 top-full mt-1 z-20 bg-[var(--surface-card)] rounded-md shadow-[var(--shadow-lg)] border border-[var(--border-subtle)] py-1 min-w-[160px]">
             <div className="px-3 py-1.5 border-b border-[var(--border-subtle)]">
               <p className="text-xs text-[var(--text-muted)]">Change status to:</p>
             </div>

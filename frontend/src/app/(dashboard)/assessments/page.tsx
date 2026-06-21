@@ -362,7 +362,7 @@ export default function AssessmentsPage() {
           </Card>
         ) : (
           assessments.map((assessment) => (
-            <Card key={assessment.id} className="hover:shadow-md transition-shadow">
+            <Card key={assessment.id} className="hover:shadow-[var(--shadow-md)] transition-shadow">
               <CardContent className="py-4">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">

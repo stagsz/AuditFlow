@@ -189,14 +189,14 @@ export function Header() {
             >
               <Bell size={18} className="text-[var(--text-body)]" />
               {unreadCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border-2 border-white px-1">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-[var(--status-fail-solid)] text-white text-[10px] font-bold rounded-full border-2 border-white px-1">
                   {unreadCount}
                 </span>
               )}
             </button>
 
             {notificationsOpen && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[var(--surface-card)] rounded-2xl shadow-lg border border-[var(--border-subtle)] overflow-hidden z-50 animate-enter">
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[var(--surface-card)] rounded-2xl shadow-[var(--shadow-lg)] border border-[var(--border-subtle)] overflow-hidden z-50 animate-enter">
                 <div className="px-4 py-3 border-b border-[var(--border-subtle)] flex items-center justify-between">
                   <h3 className="font-bold text-[var(--text-strong)]">Notifications</h3>
                   {unreadCount > 0 && (
@@ -244,7 +244,7 @@ export function Header() {
           </div>
 
           {/* Export button */}
-          <button className="hidden md:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-md hover:shadow-lg transition-all items-center gap-2 transform hover:-translate-y-0.5">
+          <button className="hidden md:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
             <Download size={16} />
             Export Report
           </button>
@@ -252,21 +252,21 @@ export function Header() {
           {/* Pending invites bell */}
           <Link
             href="/admin/invites"
-            className="relative w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-sm border border-[var(--border-subtle)] flex items-center justify-center hover:bg-[var(--surface-sunken)] transition-colors"
+            className="relative w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] flex items-center justify-center hover:bg-[var(--surface-sunken)] transition-colors"
             aria-label="Pending invites"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-[var(--text-body)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
             {pendingInvites > 0 && (
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border border-white" />
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-[var(--status-fail-solid)] rounded-full border border-white" />
             )}
           </Link>
 
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-sm border border-[var(--border-subtle)] flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:text-red-600 text-[var(--text-muted)] transition-colors"
+            className="w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:text-red-600 text-[var(--text-muted)] transition-colors"
             title="Logout"
           >
             <LogOut size={18} />

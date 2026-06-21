@@ -25,11 +25,11 @@ export function ProgressBar({
 
   const getColor = () => {
     if (colorScheme === 'compliance') {
-      if (percentage >= 70) return 'bg-green-500';
-      if (percentage >= 50) return 'bg-amber-500';
-      return 'bg-red-500';
+      if (percentage >= 70) return 'bg-[var(--status-pass-solid)]';
+      if (percentage >= 50) return 'bg-[var(--status-obs-solid)]';
+      return 'bg-[var(--status-fail-solid)]';
     }
-    return 'bg-[var(--brand-soft)]0';
+    return 'bg-[var(--brand-soft)]';
   };
 
   const heights = {
@@ -95,9 +95,9 @@ export function CircularProgress({
 
   const getColor = () => {
     if (colorScheme === 'compliance') {
-      if (percentage >= 70) return '#23a663'; // green-500
-      if (percentage >= 50) return '#f99d07'; // amber-500
-      return '#f83b3b'; // red-500
+      if (percentage >= 70) return 'var(--status-pass-solid)'; // green-500
+      if (percentage >= 50) return 'var(--status-obs-solid)'; // amber-500
+      return 'var(--status-fail-solid)'; // red-500
     }
     return 'var(--brand)'; // emerald-500
   };
@@ -106,7 +106,7 @@ export function CircularProgress({
     <div className={clsx('relative inline-flex items-center justify-center', className)}>
       <svg width={size} height={size} className="transform -rotate-90">
         <circle
-          className="text-gray-200"
+          className="text-[var(--border-subtle)]"
           strokeWidth={strokeWidth}
           stroke="currentColor"
           fill="transparent"

@@ -31,7 +31,7 @@ export function CrownedCard({
   crownHeight = 45,
 }: CrownedCardProps) {
   const elevationClasses = {
-    sm: 'shadow-sm',
+    sm: 'shadow-[var(--shadow-sm)]',
     md: 'shadow-crown',
     lg: 'shadow-crown-hover',
   };

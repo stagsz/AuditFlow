@@ -302,7 +302,7 @@ export default function HelpPage() {
 
             <div className="bg-red-50 border border-red-300 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-red-500 text-white font-semibold flex items-center justify-center text-sm">
+                <div className="w-8 h-8 rounded-full bg-[var(--status-fail-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   1
                 </div>
                 <h4 className="font-medium text-red-900">Non-Compliant</h4>
@@ -327,7 +327,7 @@ export default function HelpPage() {
 
             <div className="bg-amber-50 border border-amber-300 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-amber-500 text-white font-semibold flex items-center justify-center text-sm">
+                <div className="w-8 h-8 rounded-full bg-[var(--status-obs-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   3
                 </div>
                 <h4 className="font-medium text-amber-900">Developing</h4>
@@ -340,7 +340,7 @@ export default function HelpPage() {
 
             <div className="bg-green-50 border border-green-300 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-green-500 text-white font-semibold flex items-center justify-center text-sm">
+                <div className="w-8 h-8 rounded-full bg-[var(--status-pass-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   4
                 </div>
                 <h4 className="font-medium text-green-900">Established</h4>

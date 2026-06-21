@@ -427,7 +427,7 @@ export default function DesignShowcasePage() {
             Shadows & Elevation
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[var(--surface-card)] rounded-crown p-8 shadow-sm">
+            <div className="bg-[var(--surface-card)] rounded-crown p-8 shadow-[var(--shadow-sm)]">
               <h4 className="font-display font-bold text-harmony-dark-text mb-2">
                 Small (sm)
               </h4>

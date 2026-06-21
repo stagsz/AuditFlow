@@ -291,7 +291,7 @@ function RegisterPageInner() {
     <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+          <div className="mx-auto w-16 h-16 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4 shadow-[var(--shadow-sm)]">
             {showInviteBanner ? <Send className="w-8 h-8 text-[var(--brand-strong)]" /> : <UserPlusIcon />}
           </div>
           <CardTitle className="text-2xl">

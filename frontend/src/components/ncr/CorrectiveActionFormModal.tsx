@@ -310,7 +310,7 @@ export function CorrectiveActionFormModal({
 
                   {/* User dropdown */}
                   {showUserDropdown && userSearch.length >= 2 && (
-                    <div className="absolute z-10 mt-1 w-full bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-md shadow-lg max-h-48 overflow-auto">
+                    <div className="absolute z-10 mt-1 w-full bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-md shadow-[var(--shadow-lg)] max-h-48 overflow-auto">
                       {userSearchResults.length > 0 ? (
                         userSearchResults.map((user) => (
                           <button

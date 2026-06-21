@@ -116,10 +116,10 @@ export function QuestionCard({
                 disabled={disabled}
                 className={cn(
                   'relative p-4 rounded-xl border-2 transition-all duration-300',
-                  'hover:shadow-md hover:-translate-y-0.5',
+                  'hover:shadow-[var(--shadow-md)] hover:-translate-y-0.5',
                   'disabled:opacity-50 disabled:cursor-not-allowed',
                   isActive
-                    ? cn(colors.activeBg, colors.activeBorder, colors.activeText, 'shadow-md scale-105')
+                    ? cn(colors.activeBg, colors.activeBorder, colors.activeText, 'shadow-[var(--shadow-md)] scale-105')
                     : cn(colors.bg, colors.border, colors.text)
                 )}
               >
@@ -132,7 +132,7 @@ export function QuestionCard({
 
                 {/* Active indicator */}
                 {isActive && (
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-harmony-forest rounded-full flex items-center justify-center shadow-md">
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-harmony-forest rounded-full flex items-center justify-center shadow-[var(--shadow-md)]">
                     <svg
                       className="w-4 h-4 text-white"
                       fill="none"

@@ -86,7 +86,7 @@ export default function DashboardPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Overall Compliance */}
-        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
           <CardContent className="flex items-center justify-between p-5">
             <div>
               <p className="text-sm font-semibold text-[var(--text-muted)]">Overall Compliance</p>
@@ -115,7 +115,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Assessments */}
-        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
           <CardContent className="flex items-center justify-between p-5">
             <div>
               <p className="text-sm font-semibold text-[var(--text-muted)]">Total Assessments</p>
@@ -130,7 +130,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Non-Conformities */}
-        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
           <CardContent className="flex items-center justify-between p-5">
             <div>
               <p className="text-sm font-semibold text-[var(--text-muted)]">Active Non-Conformities</p>
@@ -143,7 +143,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Closed NCRs */}
-        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
           <CardContent className="flex items-center justify-between p-5">
             <div>
               <p className="text-sm font-semibold text-[var(--text-muted)]">NCRs Closed</p>

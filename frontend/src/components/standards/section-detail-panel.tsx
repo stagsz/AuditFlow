@@ -29,7 +29,7 @@ function ScoreCriteria({ score1, score2, score3 }: ScoreCriteriaProps) {
       {/* Score 1 - Non-compliant */}
       <div className="rounded-xl border border-red-200 bg-red-50 p-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-xs font-bold">
+          <div className="w-6 h-6 rounded-full bg-[var(--status-fail-solid)] text-white flex items-center justify-center text-xs font-bold">
             1
           </div>
           <span className="text-sm font-medium text-red-700">Non-Compliant</span>
@@ -40,7 +40,7 @@ function ScoreCriteria({ score1, score2, score3 }: ScoreCriteriaProps) {
       {/* Score 2 - Partially compliant */}
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold">
+          <div className="w-6 h-6 rounded-full bg-[var(--status-obs-solid)] text-white flex items-center justify-center text-xs font-bold">
             2
           </div>
           <span className="text-sm font-medium text-amber-700">Partially Compliant</span>
@@ -51,7 +51,7 @@ function ScoreCriteria({ score1, score2, score3 }: ScoreCriteriaProps) {
       {/* Score 3 - Fully compliant */}
       <div className="rounded-xl border border-green-200 bg-green-50 p-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold">
+          <div className="w-6 h-6 rounded-full bg-[var(--status-pass-solid)] text-white flex items-center justify-center text-xs font-bold">
             3
           </div>
           <span className="text-sm font-medium text-green-700">Fully Compliant</span>

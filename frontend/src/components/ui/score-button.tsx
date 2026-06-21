@@ -26,7 +26,7 @@ const scoreConfig = {
     label: 'Non-Compliant',
     shortLabel: '1',
     bgColor: 'bg-red-50 hover:bg-red-100',
-    selectedBg: 'bg-red-500',
+    selectedBg: 'bg-[var(--status-fail-solid)]',
     textColor: 'text-red-700',
     selectedText: 'text-white',
     borderColor: 'border-red-200',
@@ -37,7 +37,7 @@ const scoreConfig = {
     label: 'Initial',
     shortLabel: '2',
     bgColor: 'bg-amber-50 hover:bg-amber-100',
-    selectedBg: 'bg-amber-500',
+    selectedBg: 'bg-[var(--status-obs-solid)]',
     textColor: 'text-amber-700',
     selectedText: 'text-white',
     borderColor: 'border-amber-200',
@@ -59,7 +59,7 @@ const scoreConfig = {
     label: 'Established',
     shortLabel: '4',
     bgColor: 'bg-green-50 hover:bg-green-100',
-    selectedBg: 'bg-green-500',
+    selectedBg: 'bg-[var(--status-pass-solid)]',
     textColor: 'text-green-700',
     selectedText: 'text-white',
     borderColor: 'border-green-200',
@@ -91,7 +91,7 @@ export function ScoreButton({ score, selected, onClick, criteria, disabled }: Sc
         className={clsx(
           'score-button flex flex-col items-center justify-center p-3 rounded-xl border-2 min-w-[90px] transition-all duration-200',
           selected
-            ? `${config.selectedBg} ${config.selectedBorder} ${config.selectedText} ring-2 ring-offset-2 ${config.ringColor} shadow-md`
+            ? `${config.selectedBg} ${config.selectedBorder} ${config.selectedText} ring-2 ring-offset-2 ${config.ringColor} shadow-[var(--shadow-md)]`
             : `${config.bgColor} ${config.borderColor} ${config.textColor}`,
           disabled && 'opacity-50 cursor-not-allowed'
         )}

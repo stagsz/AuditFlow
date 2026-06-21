@@ -157,7 +157,7 @@ export function TeamMemberSelect({ value, onChange, error }: TeamMemberSelectPro
 
         {/* Dropdown */}
         {isOpen && search.length >= 2 && (
-          <div className="absolute z-10 mt-1 w-full bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-md shadow-lg max-h-60 overflow-auto">
+          <div className="absolute z-10 mt-1 w-full bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-md shadow-[var(--shadow-lg)] max-h-60 overflow-auto">
             {availableUsers.length > 0 ? (
               availableUsers.map((user) => (
                 <button

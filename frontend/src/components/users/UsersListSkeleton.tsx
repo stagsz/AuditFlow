@@ -65,7 +65,7 @@ export function UsersListSkeleton({ rowCount = 5 }: UsersListSkeletonProps) {
       </div>
 
       {/* Filters skeleton */}
-      <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+      <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
         <div className="p-6">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
@@ -80,7 +80,7 @@ export function UsersListSkeleton({ rowCount = 5 }: UsersListSkeletonProps) {
       </div>
 
       {/* Users table skeleton */}
-      <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+      <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-[var(--surface-sunken)] border-b">

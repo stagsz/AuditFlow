@@ -91,7 +91,7 @@ export default function BetaInviteLandingPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">
-        <Card className="w-full max-w-md shadow-lg">
+        <Card className="w-full max-w-md shadow-[var(--shadow-lg)]">
           <CardContent className="py-12 flex items-center justify-center">
             <Loader2 className="animate-spin text-[var(--text-subtle)]" size={32} />
           </CardContent>
@@ -152,7 +152,7 @@ export default function BetaInviteLandingPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] py-12 px-4">
-      <Card className="w-full max-w-md shadow-lg">
+      <Card className="w-full max-w-md shadow-[var(--shadow-lg)]">
         <CardHeader className="text-center pb-2">
           <div className="mx-auto w-14 h-14 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4">
             <Shield className="w-8 h-8 text-[var(--brand-strong)]" />

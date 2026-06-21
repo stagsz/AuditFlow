@@ -216,7 +216,7 @@ export default function ReportsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-[var(--surface-card)] rounded-xl shadow-sm border border-[var(--border-subtle)] p-4">
+      <div className="bg-[var(--surface-card)] rounded-xl shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] p-4">
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search */}
           <div className="flex-1 relative">
@@ -249,7 +249,7 @@ export default function ReportsPage() {
 
       {/* Assessments List */}
       {filteredAssessments.length === 0 ? (
-        <div className="bg-[var(--surface-card)] rounded-xl shadow-sm border border-[var(--border-subtle)] p-8 text-center">
+        <div className="bg-[var(--surface-card)] rounded-xl shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] p-8 text-center">
           <FileText className="mx-auto text-[var(--text-subtle)] mb-4" size={48} />
           <h3 className="text-lg font-medium text-[var(--text-strong)] mb-2">No Reports Available</h3>
           <p className="text-[var(--text-muted)]">
@@ -263,7 +263,7 @@ export default function ReportsPage() {
           {filteredAssessments.map((assessment) => (
             <div
               key={assessment.id}
-              className="bg-[var(--surface-card)] rounded-xl shadow-sm border border-[var(--border-subtle)] p-6 hover:shadow-md transition-shadow"
+              className="bg-[var(--surface-card)] rounded-xl shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] p-6 hover:shadow-[var(--shadow-md)] transition-shadow"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 {/* Assessment Info */}

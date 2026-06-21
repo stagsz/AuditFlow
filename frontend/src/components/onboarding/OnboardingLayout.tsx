@@ -11,7 +11,7 @@ export default function OnboardingLayout({ step, children }: { step: number; chi
           <CardDescription>Step {step} of 4 — {STEP_LABELS[step - 1]}</CardDescription>
           <div className="flex gap-1 mt-2">
             {STEP_LABELS.map((_, i) => (
-              <div key={i} className={`h-1.5 flex-1 rounded-full ${i < step ? 'bg-[var(--brand-soft)]0' : 'bg-[var(--stone-200)]'}`} />
+              <div key={i} className={`h-1.5 flex-1 rounded-full ${i < step ? 'bg-[var(--brand-soft)]' : 'bg-[var(--stone-200)]'}`} />
             ))}
           </div>
         </CardHeader>

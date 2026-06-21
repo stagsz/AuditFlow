@@ -258,7 +258,7 @@ export default function AssessmentAuditHarmonyPage() {
   return (
     <div className="min-h-screen bg-harmony-warm-white">
       {/* Header */}
-      <div className="bg-[var(--surface-card)] border-b border-harmony-light-beige sticky top-0 z-20 shadow-sm">
+      <div className="bg-[var(--surface-card)] border-b border-harmony-light-beige sticky top-0 z-20 shadow-[var(--shadow-sm)]">
         <div className="max-w-[1600px] mx-auto px-8 py-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">

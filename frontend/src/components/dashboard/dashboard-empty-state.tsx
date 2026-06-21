@@ -19,7 +19,7 @@ export function DashboardEmptyState() {
       </div>
 
       {/* Empty State Card */}
-      <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
+      <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
         <EmptyState
           icon={ClipboardCheck}
           title="Welcome to ISO 9001 Self-Assessment"

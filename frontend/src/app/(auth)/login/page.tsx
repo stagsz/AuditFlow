@@ -61,9 +61,9 @@ export default function LoginPage() {
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-sky-100/40 rounded-full blur-3xl" />
       </div>
 
-      <Card className="w-full max-w-md shadow-lg relative">
+      <Card className="w-full max-w-md shadow-[var(--shadow-lg)] relative">
         <CardHeader className="text-center pb-2">
-          <div className="mx-auto w-16 h-16 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+          <div className="mx-auto w-16 h-16 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4 shadow-[var(--shadow-sm)]">
             <Shield className="w-9 h-9 text-[var(--brand-strong)]" />
           </div>
           <CardTitle className="text-2xl font-display">ISO 9001 Audit Management</CardTitle>

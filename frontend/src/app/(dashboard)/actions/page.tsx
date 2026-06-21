@@ -213,7 +213,7 @@ export default function ActionsPage() {
               {filteredActions.map((action) => (
                 <div
                   key={action.id}
-                  className="border border-[var(--border-subtle)] rounded-xl p-4 hover:shadow-md transition-shadow"
+                  className="border border-[var(--border-subtle)] rounded-xl p-4 hover:shadow-[var(--shadow-md)] transition-shadow"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 space-y-2">

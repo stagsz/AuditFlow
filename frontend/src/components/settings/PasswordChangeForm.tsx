@@ -115,11 +115,11 @@ export function PasswordChangeForm() {
     if (/[^A-Za-z0-9]/.test(password)) strength++;
 
     if (strength <= 2) {
-      return { label: 'Weak', color: 'bg-red-500', width: '33%' };
+      return { label: 'Weak', color: 'bg-[var(--status-fail-solid)]', width: '33%' };
     } else if (strength <= 4) {
-      return { label: 'Medium', color: 'bg-amber-500', width: '66%' };
+      return { label: 'Medium', color: 'bg-[var(--status-obs-solid)]', width: '66%' };
     } else {
-      return { label: 'Strong', color: 'bg-green-500', width: '100%' };
+      return { label: 'Strong', color: 'bg-[var(--status-pass-solid)]', width: '100%' };
     }
   };
 

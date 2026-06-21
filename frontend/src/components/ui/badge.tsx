@@ -19,7 +19,7 @@ const badgeVariants = cva(
         'solid-sage': 'bg-[var(--brand)] text-white',
         'solid-info': 'bg-blue-600 text-white',
         'solid-success': 'bg-green-600 text-white',
-        'solid-warning': 'bg-amber-500 text-white',
+        'solid-warning': 'bg-[var(--status-obs-solid)] text-white',
         'solid-danger': 'bg-red-600 text-white',
       },
       size: {

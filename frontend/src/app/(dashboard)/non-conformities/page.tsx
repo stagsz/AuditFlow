@@ -330,7 +330,7 @@ export default function NonConformitiesPage() {
           </Card>
         ) : (
           nonConformities.map((ncr) => (
-            <Card key={ncr.id} className="hover:shadow-md transition-shadow">
+            <Card key={ncr.id} className="hover:shadow-[var(--shadow-md)] transition-shadow">
               <CardContent className="py-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">

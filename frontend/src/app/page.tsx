@@ -68,7 +68,7 @@ export default function LandingPage() {
               </div>
               <div className="mt-3 flex flex-col gap-2">
                 <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
-                  <span className="rounded bg-red-500/15 px-2 py-0.5 text-[10px] font-medium text-red-300">Open</span>
+                  <span className="rounded bg-[var(--status-fail-solid)]/15 px-2 py-0.5 text-[10px] font-medium text-red-300">Open</span>
                   <span className="flex-1 truncate text-xs text-white/55">Calibration records missing — Clause 7.1.5</span>
                   <span className="text-[11px] text-white/25">May 28</span>
                 </div>

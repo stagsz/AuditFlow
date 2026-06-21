@@ -221,15 +221,15 @@ export function SectionScoreSummary({ responses }: SectionScoreSummaryProps) {
         {/* Score Legend */}
         <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t text-xs">
           <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded bg-green-500" />
+            <div className="w-3 h-3 rounded bg-[var(--status-pass-solid)]" />
             <span className="text-[var(--text-muted)]">≥70% Compliant</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded bg-amber-500" />
+            <div className="w-3 h-3 rounded bg-[var(--status-obs-solid)]" />
             <span className="text-[var(--text-muted)]">50-69% Partial</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded bg-red-500" />
+            <div className="w-3 h-3 rounded bg-[var(--status-fail-solid)]" />
             <span className="text-[var(--text-muted)]">&lt;50% Non-Compliant</span>
           </div>
         </div>

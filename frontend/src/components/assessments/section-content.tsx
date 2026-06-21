@@ -296,10 +296,10 @@ export function SectionQuestionList({
                   !hasScore && 'bg-[var(--surface-sunken)] text-[var(--text-subtle)]',
                   hasScore &&
                     (response.score === 3
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-[var(--status-pass-solid)] text-white'
                       : response.score === 2
-                      ? 'bg-amber-500 text-white'
-                      : 'bg-red-500 text-white')
+                      ? 'bg-[var(--status-obs-solid)] text-white'
+                      : 'bg-[var(--status-fail-solid)] text-white')
                 )}
               >
                 {hasScore ? response.score : '-'}

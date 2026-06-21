@@ -251,7 +251,7 @@ export function QuestionCardCompact({
       onClick={onClick}
       className={clsx(
         'w-full text-left p-4 rounded-xl border-l-4 bg-[var(--surface-card)] border border-[var(--border-subtle)] transition-all',
-        'hover:shadow-md hover:border-[var(--border-default)]',
+        'hover:shadow-[var(--shadow-md)] hover:border-[var(--border-default)]',
         hasScore ? scoreColors[currentScore] : 'border-l-gray-300',
         className
       )}
@@ -291,10 +291,10 @@ export function QuestionCardCompact({
               'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
               !hasScore && 'bg-[var(--surface-sunken)] text-[var(--text-subtle)]',
               currentScore === 0 && 'bg-[var(--surface-sunken)]0 text-white',
-              currentScore === 1 && 'bg-red-500 text-white',
+              currentScore === 1 && 'bg-[var(--status-fail-solid)] text-white',
               currentScore === 2 && 'bg-orange-500 text-white',
-              currentScore === 3 && 'bg-amber-500 text-white',
-              currentScore === 4 && 'bg-green-500 text-white',
+              currentScore === 3 && 'bg-[var(--status-obs-solid)] text-white',
+              currentScore === 4 && 'bg-[var(--status-pass-solid)] text-white',
               currentScore === 5 && 'bg-blue-500 text-white'
             )}
           >
