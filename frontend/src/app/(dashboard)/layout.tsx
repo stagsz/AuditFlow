@@ -26,14 +26,14 @@ export default function DashboardLayout({
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-surface flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-mint-500" />
+      <div className="min-h-screen bg-[var(--surface-page)] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand)]" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-surface text-navy-800">
+    <div className="min-h-screen bg-[var(--surface-page)] text-[var(--text-body)]">
       <Sidebar />
       <Header />
       <main

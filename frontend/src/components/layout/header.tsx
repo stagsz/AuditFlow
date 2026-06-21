@@ -115,9 +115,9 @@ export function Header() {
         sidebarOpen ? 'md:left-72' : 'md:left-16'
       }`}
       style={{
-        background: 'rgba(255, 255, 255, 0.85)',
+        background: 'rgba(255, 255, 255, 0.9)',
         backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(226, 232, 240, 0.5)',
+        borderBottom: '1px solid var(--border-subtle)',
       }}
     >
       <div className="flex items-center justify-between h-full px-4 md:px-8">
@@ -125,17 +125,17 @@ export function Header() {
         <div className="flex items-center gap-4">
           <button
             onClick={openMobileMenu}
-            className="p-2 text-slate-500 hover:text-navy-800 hover:bg-white rounded-xl md:hidden transition-colors"
+            className="p-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-sunken)] rounded-xl md:hidden transition-colors"
             aria-label="Open menu"
           >
             <Menu size={24} />
           </button>
           <div className="flex flex-col">
-            <h2 className="text-xl md:text-2xl font-extrabold text-navy-900 tracking-tight">
+            <h2 className="text-xl md:text-2xl font-extrabold text-[var(--text-strong)] tracking-tight">
               {pageInfo.title}
             </h2>
             {pageInfo.subtitle && (
-              <p className="text-sm text-slate-500 font-medium mt-0.5 hidden sm:block">
+              <p className="text-sm text-[var(--text-muted)] font-medium mt-0.5 hidden sm:block">
                 {pageInfo.subtitle}
               </p>
             )}
@@ -148,46 +148,46 @@ export function Header() {
           <div className="relative group hidden md:block">
             <Search
               size={18}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-mint-500 transition-colors"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-subtle)] group-focus-within:text-[var(--brand)] transition-colors"
             />
             <input
               type="text"
               placeholder="Search clauses, findings..."
-              className="w-56 lg:w-72 bg-white shadow-inner-soft border border-slate-200 rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-mint-500/30 focus:border-mint-500 transition-all placeholder:text-slate-400 text-navy-800"
+              className="w-56 lg:w-72 bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--border-focus)] transition-all placeholder:text-[var(--text-subtle)] text-[var(--text-strong)]"
             />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-              <kbd className="bg-slate-100 text-slate-400 border border-slate-200 rounded px-1.5 py-0.5 text-[10px] font-bold">
+              <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
                 Ctrl
               </kbd>
-              <kbd className="bg-slate-100 text-slate-400 border border-slate-200 rounded px-1.5 py-0.5 text-[10px] font-bold">
+              <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
                 K
               </kbd>
             </div>
           </div>
 
           {/* Mobile search */}
-          <button className="p-2 text-slate-500 hover:text-navy-800 hover:bg-white rounded-xl md:hidden transition-colors">
+          <button className="p-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-sunken)] rounded-xl md:hidden transition-colors">
             <Search size={20} />
           </button>
 
           {/* Notifications */}
           <div className="ml-auto flex items-center gap-3 md:gap-4">
             <div className="hidden md:flex flex-col items-end">
-              <p className="text-sm font-semibold text-navy-900">
+              <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {(user?.organization?.name) || 'Organization'}
               </p>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-[var(--text-muted)] font-medium">
                 {(user?.role ?? '').replace(/_/g, ' ')}
               </p>
             </div>
-            <div className="h-9 w-px bg-slate-200" />
+            <div className="h-9 w-px bg-[var(--border-subtle)]" />
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
-              className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center relative hover:border-mint-500 hover:text-mint-600 transition-colors"
+              className="w-10 h-10 rounded-full bg-[var(--surface-card)] border border-[var(--border-subtle)] flex items-center justify-center relative hover:border-[var(--brand)] hover:text-[var(--brand)] transition-colors"
               aria-label="Notifications"
               aria-expanded={notificationsOpen}
             >
-              <Bell size={18} className="text-navy-700" />
+              <Bell size={18} className="text-[var(--text-body)]" />
               {unreadCount > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border-2 border-white px-1">
                   {unreadCount}
@@ -196,11 +196,11 @@ export function Header() {
             </button>
 
             {notificationsOpen && (
-              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-soft-3 border border-slate-200 overflow-hidden z-50 animate-enter">
-                <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
-                  <h3 className="font-bold text-navy-900">Notifications</h3>
+              <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[var(--surface-card)] rounded-2xl shadow-lg border border-[var(--border-subtle)] overflow-hidden z-50 animate-enter">
+                <div className="px-4 py-3 border-b border-[var(--border-subtle)] flex items-center justify-between">
+                  <h3 className="font-bold text-[var(--text-strong)]">Notifications</h3>
                   {unreadCount > 0 && (
-                    <span className="text-xs font-bold text-mint-600 bg-mint-50 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-bold text-[var(--brand-strong)] bg-[var(--brand-soft)] px-2 py-0.5 rounded-full">
                       {unreadCount} unread
                     </span>
                   )}
@@ -210,8 +210,8 @@ export function Header() {
                     {placeholderNotifications.map((notification) => (
                       <li
                         key={notification.id}
-                        className={`px-4 py-3 hover:bg-slate-50 cursor-pointer border-b border-slate-50 last:border-b-0 transition-colors ${
-                          !notification.read ? 'bg-mint-50/40' : ''
+                        className={`px-4 py-3 hover:bg-[var(--surface-sunken)] cursor-pointer border-b border-[var(--border-subtle)] last:border-b-0 transition-colors ${
+                          !notification.read ? 'bg-[var(--brand-soft)]' : ''
                         }`}
                         onClick={() => setNotificationsOpen(false)}
                       >
@@ -220,22 +220,22 @@ export function Header() {
                             <NotificationIcon type={notification.type} />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className={`text-sm ${!notification.read ? 'font-bold text-navy-900' : 'text-slate-700'}`}>
+                            <p className={`text-sm ${!notification.read ? 'font-bold text-[var(--text-strong)]' : 'text-[var(--text-body)]'}`}>
                               {notification.title}
                             </p>
-                            <p className="text-sm text-slate-500 truncate">{notification.message}</p>
-                            <p className="text-xs text-slate-400 mt-1">{notification.time}</p>
+                            <p className="text-sm text-[var(--text-muted)] truncate">{notification.message}</p>
+                            <p className="text-xs text-[var(--text-subtle)] mt-1">{notification.time}</p>
                           </div>
                           {!notification.read && (
-                            <span className="w-2 h-2 bg-mint-500 rounded-full block flex-shrink-0 mt-2" />
+                            <span className="w-2 h-2 bg-[var(--brand)] rounded-full block flex-shrink-0 mt-2" />
                           )}
                         </div>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="px-4 py-3 border-t border-slate-100 bg-slate-50">
-                  <button className="w-full text-sm text-mint-600 hover:text-mint-700 font-bold transition-colors">
+                <div className="px-4 py-3 border-t border-[var(--border-subtle)] bg-[var(--surface-sunken)]">
+                  <button className="w-full text-sm text-[var(--brand)] hover:text-[var(--brand-strong)] font-bold transition-colors">
                     View all notifications
                   </button>
                 </div>
@@ -244,7 +244,7 @@ export function Header() {
           </div>
 
           {/* Export button */}
-          <button className="hidden md:flex bg-mint-500 hover:bg-mint-600 text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-mint-glow hover:shadow-mint-glow-lg transition-all items-center gap-2 transform hover:-translate-y-0.5">
+          <button className="hidden md:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-md hover:shadow-lg transition-all items-center gap-2 transform hover:-translate-y-0.5">
             <Download size={16} />
             Export Report
           </button>
@@ -252,10 +252,10 @@ export function Header() {
           {/* Pending invites bell */}
           <Link
             href="/admin/invites"
-            className="relative w-11 h-11 rounded-full bg-white shadow-soft-1 border border-slate-100 flex items-center justify-center hover:bg-slate-50 transition-colors"
+            className="relative w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-sm border border-[var(--border-subtle)] flex items-center justify-center hover:bg-[var(--surface-sunken)] transition-colors"
             aria-label="Pending invites"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-navy-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-[var(--text-body)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
             {pendingInvites > 0 && (
@@ -266,7 +266,7 @@ export function Header() {
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="w-11 h-11 rounded-full bg-white shadow-soft-1 border border-slate-100 flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:text-red-600 text-slate-500 transition-colors"
+            className="w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-sm border border-[var(--border-subtle)] flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:text-red-600 text-[var(--text-muted)] transition-colors"
             title="Logout"
           >
             <LogOut size={18} />
