@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useOnboardingStore } from '@/stores/onboardingStore';
 import { betaInviteApi } from '@/lib/api';
@@ -49,10 +49,30 @@ function OnboardingContent() {
 }
 
 export default function OnboardingPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+          <div className="w-full max-w-md text-center">
+            <div className="mx-auto w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+              <Loader2 className="animate-spin text-emerald-600" size={28} />
+            </div>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Loading...</h2>
+            <p className="text-gray-500">Please wait.</p>
+          </div>
+        </div>
+      }
+    >
+      <OnboardingContentInner />
+    </Suspense>
+  );
+}
+
+function OnboardingContentInner() {
   const searchParams = useSearchParams();
-  const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
   const { betaInviteValidated, betaInviteCode } = useOnboardingStore();
 
+  const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
   if (code && !betaInviteValidated && betaInviteCode !== code) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
