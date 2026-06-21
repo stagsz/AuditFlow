@@ -42,7 +42,7 @@ function AuditPageSkeleton() {
       </div>
 
       {/* Navigation tabs skeleton */}
-      <div className="border-b border-gray-200 pb-2">
+      <div className="border-b border-[var(--border-subtle)] pb-2">
         <div className="flex gap-4">
           {[1, 2, 3, 4, 5, 6, 7].map((i) => (
             <Skeleton key={i} width={80} height={32} />
@@ -216,13 +216,13 @@ export default function AssessmentAuditPage() {
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">Assessment Not Found</h1>
+          <h1 className="text-2xl font-bold text-[var(--text-strong)]">Assessment Not Found</h1>
         </div>
         <Card>
           <CardContent className="py-12 text-center">
             <AlertTriangle className="mx-auto h-12 w-12 text-red-400 mb-4" />
-            <p className="text-gray-700 font-medium">Failed to load assessment</p>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-[var(--text-body)] font-medium">Failed to load assessment</p>
+            <p className="text-[var(--text-muted)] text-sm mt-1">
               The assessment may have been deleted or you don't have permission to access it.
             </p>
             <Link href="/assessments">
@@ -248,8 +248,8 @@ export default function AssessmentAuditPage() {
             </Button>
           </Link>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">{assessment.title}</h1>
-            <p className="text-sm text-gray-500">
+            <h1 className="text-xl font-bold text-[var(--text-strong)]">{assessment.title}</h1>
+            <p className="text-sm text-[var(--text-muted)]">
               {statusLabels[assessment.status]} - Conducting Audit
             </p>
           </div>

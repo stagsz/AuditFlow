@@ -91,7 +91,7 @@ export function QuestionCard({
 
         {guidance && (
           <div className="ml-14 p-4 bg-harmony-warm-white rounded-xl border border-harmony-light-beige">
-            <p className="text-sm text-gray-600 leading-generous italic">
+            <p className="text-sm text-[var(--text-muted)] leading-generous italic">
               {guidance}
             </p>
           </div>
@@ -168,8 +168,8 @@ export function QuestionCard({
             'w-full px-4 py-3 rounded-xl border-2 transition-all duration-200',
             'focus:outline-none focus:ring-2 focus:ring-harmony-olive focus:border-harmony-olive',
             'disabled:opacity-50 disabled:cursor-not-allowed',
-            'bg-white border-harmony-light-beige text-gray-700',
-            'placeholder:text-gray-400 leading-generous resize-none'
+            'bg-[var(--surface-card)] border-harmony-light-beige text-[var(--text-body)]',
+            'placeholder:text-[var(--text-subtle)] leading-generous resize-none'
           )}
         />
       </div>

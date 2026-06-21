@@ -220,8 +220,8 @@ export default function AdminBetaInvitesPage() {
       <div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Beta Invitations</h1>
-            <p className="text-gray-500">Manage beta invite codes and track conversions</p>
+            <h1 className="text-2xl font-bold text-[var(--text-strong)]">Beta Invitations</h1>
+            <p className="text-[var(--text-muted)]">Manage beta invite codes and track conversions</p>
           </div>
           <div className="flex gap-2">{actionButtons}</div>
         </div>
@@ -305,11 +305,11 @@ export default function AdminBetaInvitesPage() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-500">Total Invites</p>
-                    <p className="text-2xl font-bold text-gray-900">{analytics.totalInvites}</p>
+                    <p className="text-sm text-[var(--text-muted)]">Total Invites</p>
+                    <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.totalInvites}</p>
                   </div>
-                  <div className="p-3 bg-emerald-100 rounded-lg">
-                    <Plus size={20} className="text-emerald-600" />
+                  <div className="p-3 bg-[var(--brand-soft)] rounded-lg">
+                    <Plus size={20} className="text-[var(--brand-strong)]" />
                   </div>
                 </div>
               </CardContent>
@@ -318,8 +318,8 @@ export default function AdminBetaInvitesPage() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-500">Total Usages</p>
-                    <p className="text-2xl font-bold text-gray-900">{analytics.totalUsages}</p>
+                    <p className="text-sm text-[var(--text-muted)]">Total Usages</p>
+                    <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.totalUsages}</p>
                   </div>
                   <div className="p-3 bg-blue-100 rounded-lg">
                     <Users size={20} className="text-blue-600" />
@@ -331,8 +331,8 @@ export default function AdminBetaInvitesPage() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-500">Converted</p>
-                    <p className="text-2xl font-bold text-gray-900">{analytics.totalConverted}</p>
+                    <p className="text-sm text-[var(--text-muted)]">Converted</p>
+                    <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.totalConverted}</p>
                   </div>
                   <div className="p-3 bg-purple-100 rounded-lg">
                     <CheckCircle size={20} className="text-purple-600" />
@@ -344,8 +344,8 @@ export default function AdminBetaInvitesPage() {
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-500">Conversion Rate</p>
-                    <p className="text-2xl font-bold text-gray-900">{analytics.conversionRate}%</p>
+                    <p className="text-sm text-[var(--text-muted)]">Conversion Rate</p>
+                    <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.conversionRate}%</p>
                   </div>
                   <div className="p-3 bg-orange-100 rounded-lg">
                     <BarChart2 size={20} className="text-orange-600" />
@@ -361,7 +361,7 @@ export default function AdminBetaInvitesPage() {
           <CardContent className="p-4">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-subtle)]" size={18} />
                 <Input
                   placeholder="Search by code or email..."
                   value={search}
@@ -390,34 +390,34 @@ export default function AdminBetaInvitesPage() {
           <CardContent className="p-0">
             {loading ? (
               <div className="py-12 flex items-center justify-center">
-                <Loader2 className="animate-spin text-gray-400" size={32} />
+                <Loader2 className="animate-spin text-[var(--text-subtle)]" size={32} />
               </div>
             ) : invites.length === 0 ? (
               <div className="py-12 text-center">
-                <Mail className="mx-auto h-12 w-12 text-gray-300 mb-4" />
-                <p className="text-gray-500">No beta invites found</p>
-                <p className="text-sm text-gray-400 mt-1">Create your first invite to get started</p>
+                <Mail className="mx-auto h-12 w-12 text-[var(--text-subtle)] mb-4" />
+                <p className="text-[var(--text-muted)]">No beta invites found</p>
+                <p className="text-sm text-[var(--text-subtle)] mt-1">Create your first invite to get started</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-100 bg-gray-50">
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Uses</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expires</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <tr className="border-b border-[var(--border-subtle)] bg-[var(--surface-sunken)]">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Code</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Uses</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Expires</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Created</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-100">
                     {invites.map((invite) => (
-                      <tr key={invite.id} className="hover:bg-gray-50">
+                      <tr key={invite.id} className="hover:bg-[var(--surface-sunken)]">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
-                            <code className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">{invite.code}</code>
+                            <code className="font-mono text-sm bg-[var(--surface-sunken)] px-2 py-1 rounded">{invite.code}</code>
                             <Button variant="ghost" size="icon" onClick={() => handleCopyCode(invite.code)} className="h-7 w-7">
                               <Copy size={14} />
                             </Button>
@@ -425,9 +425,9 @@ export default function AdminBetaInvitesPage() {
                         </td>
                         <td className="px-6 py-4">
                           {invite.email ? (
-                            <span className="text-sm text-gray-900">{invite.email}</span>
+                            <span className="text-sm text-[var(--text-strong)]">{invite.email}</span>
                           ) : (
-                            <span className="text-sm text-gray-400">(any email)</span>
+                            <span className="text-sm text-[var(--text-subtle)]">(any email)</span>
                           )}
                         </td>
                         <td className="px-6 py-4">
@@ -435,13 +435,13 @@ export default function AdminBetaInvitesPage() {
                             {statusLabels[invite.status]}
                           </Badge>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900">
+                        <td className="px-6 py-4 text-sm text-[var(--text-strong)]">
                           {invite.usedCount} / {invite.maxUses}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
+                        <td className="px-6 py-4 text-sm text-[var(--text-muted)]">
                           {format(new Date(invite.expiresAt), 'MMM d, yyyy')}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-500">
+                        <td className="px-6 py-4 text-sm text-[var(--text-muted)]">
                           {format(new Date(invite.createdAt), 'MMM d, yyyy HH:mm')}
                         </td>
                         <td className="px-6 py-4">
@@ -453,7 +453,7 @@ export default function AdminBetaInvitesPage() {
                                   size="icon"
                                   onClick={() => openSendDialog(invite)}
                                   disabled={actioning === 'send'}
-                                  className="h-7 w-7 text-emerald-600 hover:bg-emerald-50"
+                                  className="h-7 w-7 text-[var(--brand-strong)] hover:bg-[var(--brand-soft)]"
                                   title="Send invitation"
                                 >
                                   <Send size={14} />
@@ -493,8 +493,8 @@ export default function AdminBetaInvitesPage() {
 
             {/* Pagination */}
             {pagination.totalPages > 1 && (
-              <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+              <div className="px-6 py-4 border-t border-[var(--border-subtle)] flex items-center justify-between">
+                <p className="text-sm text-[var(--text-muted)]">
                   Page {pagination.page} of {pagination.totalPages} ({pagination.total} total)
                 </p>
                 <div className="flex gap-2">
@@ -530,22 +530,22 @@ export default function AdminBetaInvitesPage() {
           aria-modal="true"
         >
           <Card className="w-full max-w-md shadow-xl animate-enter">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 rounded-t-2xl bg-emerald-50">
-              <CardTitle id="send-dialog-title" className="flex items-center gap-2 text-emerald-600">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 rounded-t-2xl bg-[var(--brand-soft)]">
+              <CardTitle id="send-dialog-title" className="flex items-center gap-2 text-[var(--brand-strong)]">
                 <Send className="h-5 w-5" />
                 Send Invitation
               </CardTitle>
               <button
                 type="button"
                 onClick={() => setSendInviteId(null)}
-                className="text-gray-400 hover:text-gray-600 transition-colors rounded-lg p-1 hover:bg-gray-100"
+                className="text-[var(--text-subtle)] hover:text-[var(--text-muted)] transition-colors rounded-lg p-1 hover:bg-[var(--surface-sunken)]"
                 aria-label="Close dialog"
               >
                 <X className="h-5 w-5" />
               </button>
             </CardHeader>
             <CardContent className="space-y-4 pt-4">
-              <p className="text-gray-600">Enter the recipient's email to send the invitation link.</p>
+              <p className="text-[var(--text-muted)]">Enter the recipient's email to send the invitation link.</p>
               <Input
                 type="email"
                 label="Recipient Email"

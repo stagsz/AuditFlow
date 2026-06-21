@@ -80,7 +80,7 @@ export function SectionFlowNavigation({
         <h2 className="font-display font-bold text-xl text-harmony-dark-text mb-2">
           Audit Journey
         </h2>
-        <p className="text-sm text-gray-600 leading-generous">
+        <p className="text-sm text-[var(--text-muted)] leading-generous">
           Navigate through ISO 9001 sections to complete your assessment
         </p>
       </div>
@@ -91,7 +91,7 @@ export function SectionFlowNavigation({
         {showLeftArrow && (
           <button
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-crown flex items-center justify-center hover:bg-harmony-warm-white transition-colors duration-200"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-[var(--surface-card)] rounded-full shadow-crown flex items-center justify-center hover:bg-harmony-warm-white transition-colors duration-200"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-5 h-5 text-harmony-forest" />
@@ -102,7 +102,7 @@ export function SectionFlowNavigation({
         {showRightArrow && (
           <button
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-crown flex items-center justify-center hover:bg-harmony-warm-white transition-colors duration-200"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-[var(--surface-card)] rounded-full shadow-crown flex items-center justify-center hover:bg-harmony-warm-white transition-colors duration-200"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-5 h-5 text-harmony-forest" />
@@ -158,19 +158,19 @@ export function SectionFlowNavigation({
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-harmony-forest" />
-              <span className="text-gray-600">
+              <span className="text-[var(--text-muted)]">
                 Completed: {sections.filter((s) => s.progress === 100).length}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-harmony-lime" />
-              <span className="text-gray-600">
+              <span className="text-[var(--text-muted)]">
                 In Progress: {sections.filter((s) => s.progress > 0 && s.progress < 100).length}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-harmony-sage opacity-40" />
-              <span className="text-gray-600">
+              <span className="text-[var(--text-muted)]">
                 Pending: {sections.filter((s) => s.progress === 0).length}
               </span>
             </div>

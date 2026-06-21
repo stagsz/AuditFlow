@@ -74,7 +74,7 @@ export function ProcessStageCard({
             {title}
           </h3>
           {description && (
-            <p className="text-sm text-gray-600 line-clamp-2 leading-generous">
+            <p className="text-sm text-[var(--text-muted)] line-clamp-2 leading-generous">
               {description}
             </p>
           )}

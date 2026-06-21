@@ -82,14 +82,14 @@ export default function Step4Roles() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-[var(--text-muted)]">
         Define custom roles for your team. Admin is always included.
       </p>
 
       {/* Locked admin role */}
-      <div className="flex items-center justify-between bg-gray-100 rounded-lg px-3 py-2 opacity-70">
-        <span className="text-sm font-medium text-gray-700">Admin</span>
-        <Lock size={14} className="text-gray-400" />
+      <div className="flex items-center justify-between bg-[var(--surface-sunken)] rounded-lg px-3 py-2 opacity-70">
+        <span className="text-sm font-medium text-[var(--text-body)]">Admin</span>
+        <Lock size={14} className="text-[var(--text-subtle)]" />
       </div>
 
       <div className="flex gap-2">
@@ -114,15 +114,15 @@ export default function Step4Roles() {
       {store.roles.length > 0 && (
         <ul className="space-y-2">
           {store.roles.map((r) => (
-            <li key={r.id} className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+            <li key={r.id} className="flex items-center justify-between bg-[var(--surface-sunken)] rounded-lg px-3 py-2">
               <div>
-                <span className="text-sm text-gray-800">{r.name}</span>
-                <span className="ml-2 text-xs text-gray-400 capitalize">({r.permissionLevel})</span>
+                <span className="text-sm text-[var(--text-strong)]">{r.name}</span>
+                <span className="ml-2 text-xs text-[var(--text-subtle)] capitalize">({r.permissionLevel})</span>
               </div>
               <button
                 type="button"
                 onClick={() => store.removeRole(r.id)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
+                className="text-[var(--text-subtle)] hover:text-red-500 transition-colors"
                 aria-label={`Remove ${r.name}`}
               >
                 <X size={16} />

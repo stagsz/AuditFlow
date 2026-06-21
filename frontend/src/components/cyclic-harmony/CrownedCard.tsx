@@ -59,7 +59,7 @@ export function CrownedCard({
   return (
     <div
       className={cn(
-        'relative bg-white rounded-crown overflow-visible',
+        'relative bg-[var(--surface-card)] rounded-crown overflow-visible',
         elevationClasses[elevation],
         interactiveClasses,
         activeClasses,

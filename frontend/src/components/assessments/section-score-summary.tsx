@@ -171,8 +171,8 @@ export function SectionScoreSummary({ responses }: SectionScoreSummaryProps) {
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
-            <BarChart3 className="mx-auto h-12 w-12 text-gray-300 mb-3" />
-            <p className="text-gray-500 text-sm">
+            <BarChart3 className="mx-auto h-12 w-12 text-[var(--text-subtle)] mb-3" />
+            <p className="text-[var(--text-muted)] text-sm">
               No scored responses yet. Complete questions to see section scores.
             </p>
           </div>
@@ -187,7 +187,7 @@ export function SectionScoreSummary({ responses }: SectionScoreSummaryProps) {
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-base">Section Scores</CardTitle>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-[var(--text-muted)] mt-1">
               Overall: {overallScore}% compliance
             </p>
           </div>
@@ -222,15 +222,15 @@ export function SectionScoreSummary({ responses }: SectionScoreSummaryProps) {
         <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t text-xs">
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded bg-green-500" />
-            <span className="text-gray-600">≥70% Compliant</span>
+            <span className="text-[var(--text-muted)]">≥70% Compliant</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded bg-amber-500" />
-            <span className="text-gray-600">50-69% Partial</span>
+            <span className="text-[var(--text-muted)]">50-69% Partial</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded bg-red-500" />
-            <span className="text-gray-600">&lt;50% Non-Compliant</span>
+            <span className="text-[var(--text-muted)]">&lt;50% Non-Compliant</span>
           </div>
         </div>
       </CardContent>

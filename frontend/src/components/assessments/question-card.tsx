@@ -38,7 +38,7 @@ interface QuestionCardProps {
 }
 
 const scoreColors: Record<0 | 1 | 2 | 3 | 4 | 5, string> = {
-  0: 'border-l-gray-500 bg-gray-50/30',
+  0: 'border-l-gray-500 bg-[var(--surface-sunken)]/30',
   1: 'border-l-red-500 bg-red-50/30',
   2: 'border-l-orange-500 bg-orange-50/30',
   3: 'border-l-yellow-500 bg-amber-50/30',
@@ -88,16 +88,16 @@ export function QuestionCard({
         <div className="flex items-start justify-between gap-4 mb-4">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--brand-soft)] text-[var(--brand)]">
                 {question.questionNumber}
               </span>
               {question.standardReference && (
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-[var(--text-muted)]">
                   Ref: {question.standardReference}
                 </span>
               )}
             </div>
-            <p className="text-gray-900 font-medium">{question.questionText}</p>
+            <p className="text-[var(--text-strong)] font-medium">{question.questionText}</p>
           </div>
 
           {/* Current Score Badge */}
@@ -105,7 +105,7 @@ export function QuestionCard({
             <div
               className={clsx(
                 'flex-shrink-0 px-3 py-1.5 rounded-xl text-sm font-medium',
-                currentScore === 0 && 'bg-gray-100 text-gray-700',
+                currentScore === 0 && 'bg-[var(--surface-sunken)] text-[var(--text-body)]',
                 currentScore === 1 && 'bg-red-50 text-red-700',
                 currentScore === 2 && 'bg-orange-100 text-orange-700',
                 currentScore === 3 && 'bg-amber-50 text-amber-700',
@@ -133,7 +133,7 @@ export function QuestionCard({
 
         {/* Score Buttons */}
         <div className="mb-4">
-          <p className="text-sm font-medium text-gray-700 mb-3 text-center">
+          <p className="text-sm font-medium text-[var(--text-body)] mb-3 text-center">
             Select Compliance Score
           </p>
           <ScoreGroup
@@ -157,7 +157,7 @@ export function QuestionCard({
             <div className="flex items-center justify-between mb-2">
               <label
                 htmlFor={`justification-${question.id}`}
-                className="text-sm font-medium text-gray-700 flex items-center gap-1.5"
+                className="text-sm font-medium text-[var(--text-body)] flex items-center gap-1.5"
               >
                 Justification / Notes
                 {requiresJustification && (
@@ -169,7 +169,7 @@ export function QuestionCard({
               <span
                 className={clsx(
                   'text-xs',
-                  isOverLimit ? 'text-red-500 font-medium' : 'text-gray-500'
+                  isOverLimit ? 'text-red-500 font-medium' : 'text-[var(--text-muted)]'
                 )}
               >
                 {justificationLength.toLocaleString()} / {MAX_JUSTIFICATION_LENGTH.toLocaleString()}
@@ -188,14 +188,14 @@ export function QuestionCard({
               rows={3}
               className={clsx(
                 'w-full rounded-md border px-3 py-2 text-sm resize-y min-h-[80px] max-h-[200px]',
-                'placeholder:text-gray-400',
+                'placeholder:text-[var(--text-subtle)]',
                 'focus:outline-none focus:ring-2 focus:border-transparent',
-                'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50',
+                'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--surface-sunken)]',
                 requiresJustification && !hasJustification
                   ? 'border-amber-400 focus:ring-amber-500 bg-amber-50/50'
                   : isOverLimit
                   ? 'border-red-400 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-emerald-400 bg-white'
+                  : 'border-[var(--border-default)] focus:ring-[var(--brand)] bg-[var(--surface-card)]'
               )}
             />
             {showJustificationWarning && (
@@ -220,7 +220,7 @@ export function QuestionCard({
         {/* Draft Indicator */}
         {response?.isDraft && (
           <div className="mt-4 flex items-center justify-end">
-            <span className="text-xs text-gray-500 italic">Draft - not yet saved</span>
+            <span className="text-xs text-[var(--text-muted)] italic">Draft - not yet saved</span>
           </div>
         )}
       </CardContent>
@@ -250,8 +250,8 @@ export function QuestionCardCompact({
       type="button"
       onClick={onClick}
       className={clsx(
-        'w-full text-left p-4 rounded-xl border-l-4 bg-white border border-gray-200 transition-all',
-        'hover:shadow-md hover:border-gray-300',
+        'w-full text-left p-4 rounded-xl border-l-4 bg-[var(--surface-card)] border border-[var(--border-subtle)] transition-all',
+        'hover:shadow-md hover:border-[var(--border-default)]',
         hasScore ? scoreColors[currentScore] : 'border-l-gray-300',
         className
       )}
@@ -259,14 +259,14 @@ export function QuestionCardCompact({
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700">
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[var(--surface-sunken)] text-[var(--text-body)]">
               {question.questionNumber}
             </span>
             {hasScore && (
               <span
                 className={clsx(
                   'inline-flex items-center px-2 py-0.5 rounded text-xs font-medium',
-                  currentScore === 0 && 'bg-gray-100 text-gray-700',
+                  currentScore === 0 && 'bg-[var(--surface-sunken)] text-[var(--text-body)]',
                   currentScore === 1 && 'bg-red-50 text-red-700',
                   currentScore === 2 && 'bg-orange-100 text-orange-700',
                   currentScore === 3 && 'bg-amber-50 text-amber-700',
@@ -278,19 +278,19 @@ export function QuestionCardCompact({
               </span>
             )}
             {!hasScore && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-500">
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[var(--surface-sunken)] text-[var(--text-muted)]">
                 Not scored
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-900 truncate">{question.questionText}</p>
+          <p className="text-sm text-[var(--text-strong)] truncate">{question.questionText}</p>
         </div>
         <div className="flex-shrink-0">
           <div
             className={clsx(
               'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold',
-              !hasScore && 'bg-gray-100 text-gray-400',
-              currentScore === 0 && 'bg-gray-500 text-white',
+              !hasScore && 'bg-[var(--surface-sunken)] text-[var(--text-subtle)]',
+              currentScore === 0 && 'bg-[var(--surface-sunken)]0 text-white',
               currentScore === 1 && 'bg-red-500 text-white',
               currentScore === 2 && 'bg-orange-500 text-white',
               currentScore === 3 && 'bg-amber-500 text-white',

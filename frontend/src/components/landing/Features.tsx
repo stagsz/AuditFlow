@@ -35,7 +35,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="border-t border-b border-[#e4e2dd] bg-white">
+    <section id="features" className="border-t border-b border-[#e4e2dd] bg-[var(--surface-card)]">
       <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
         <div className="mb-16">
           <div className="section-label">Platform capabilities</div>
@@ -48,7 +48,7 @@ export default function Features() {
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
           {features.map((feature) => (
-            <div key={feature.title} className="feat-card rounded-lg border border-[#e4e2dd] bg-white p-6">
+            <div key={feature.title} className="feat-card rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
               <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">{feature.num}</div>
               <div className="mt-4 text-sm font-medium text-[#0e1117]">{feature.title}</div>
               <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">{feature.desc}</p>

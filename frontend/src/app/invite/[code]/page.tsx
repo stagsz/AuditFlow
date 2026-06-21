@@ -90,10 +90,10 @@ export default function BetaInviteLandingPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">
         <Card className="w-full max-w-md shadow-lg">
           <CardContent className="py-12 flex items-center justify-center">
-            <Loader2 className="animate-spin text-gray-400" size={32} />
+            <Loader2 className="animate-spin text-[var(--text-subtle)]" size={32} />
           </CardContent>
         </Card>
       </div>
@@ -101,14 +101,14 @@ export default function BetaInviteLandingPage() {
   }
 
   const renderErrorState = (icon: React.ReactNode, title: string, description: string) => (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">
       <Card className="w-full max-w-md text-center">
         <CardContent className="py-12">
           <div className="mx-auto w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-4">
             {icon}
           </div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">{title}</h2>
-          <p className="text-gray-500">{description}</p>
+          <h2 className="text-xl font-bold text-[var(--text-strong)] mb-2">{title}</h2>
+          <p className="text-[var(--text-muted)]">{description}</p>
         </CardContent>
       </Card>
     </div>
@@ -151,11 +151,11 @@ export default function BetaInviteLandingPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] py-12 px-4">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="text-center pb-2">
-          <div className="mx-auto w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-4">
-            <Shield className="w-8 h-8 text-emerald-600" />
+          <div className="mx-auto w-14 h-14 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4">
+            <Shield className="w-8 h-8 text-[var(--brand-strong)]" />
           </div>
           <CardTitle className="text-xl">
             You're Invited to AuditFlow Beta
@@ -165,18 +165,18 @@ export default function BetaInviteLandingPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4 mb-6 p-4 bg-emerald-50 rounded-lg">
-            <div className="flex items-center gap-2 text-emerald-700">
+          <div className="space-y-4 mb-6 p-4 bg-[var(--brand-soft)] rounded-lg">
+            <div className="flex items-center gap-2 text-[var(--brand)]">
               <CheckCircle size={18} />
-              <span className="font-medium">Valid invitation code: <code className="font-mono bg-emerald-100 px-1.5 rounded">{invite.code}</code></span>
+              <span className="font-medium">Valid invitation code: <code className="font-mono bg-[var(--brand-soft)] px-1.5 rounded">{invite.code}</code></span>
             </div>
             {invite.email && (
-              <div className="flex items-center gap-2 text-emerald-700">
+              <div className="flex items-center gap-2 text-[var(--brand)]">
                 <Link2 size={18} />
                 <span className="font-medium">Reserved for: {invite.email}</span>
               </div>
             )}
-            <div className="flex items-center gap-2 text-emerald-700">
+            <div className="flex items-center gap-2 text-[var(--brand)]">
               <Users size={18} />
               <span className="font-medium">
                 {invite.usedCount} of {invite.maxUses} uses • Expires {new Date(invite.expiresAt).toLocaleDateString()}
@@ -184,7 +184,7 @@ export default function BetaInviteLandingPage() {
             </div>
           </div>
 
-          <p className="text-gray-600 text-center mb-6">
+          <p className="text-[var(--text-muted)] text-center mb-6">
             Create your account to join the AuditFlow beta program and get early access to our ISO 9001 Quality Management Platform.
           </p>
 
@@ -193,7 +193,7 @@ export default function BetaInviteLandingPage() {
             Continue to Sign Up
           </Button>
 
-          <p className="text-xs text-gray-400 text-center mt-4">
+          <p className="text-xs text-[var(--text-subtle)] text-center mt-4">
             By continuing, you agree to our Terms of Service and Privacy Policy.
           </p>
         </CardContent>

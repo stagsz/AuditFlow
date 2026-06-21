@@ -37,8 +37,8 @@ export function NavigationButtons({
           'group flex items-center gap-3 px-6 py-3 rounded-xl transition-all duration-300',
           'font-medium text-harmony-dark-text',
           hasPrevious
-            ? 'bg-white border-2 border-harmony-sage hover:border-harmony-olive hover:bg-harmony-warm-white hover:-translate-x-1 shadow-crown hover:shadow-crown-hover'
-            : 'bg-harmony-light-beige text-gray-400 cursor-not-allowed opacity-50'
+            ? 'bg-[var(--surface-card)] border-2 border-harmony-sage hover:border-harmony-olive hover:bg-harmony-warm-white hover:-translate-x-1 shadow-crown hover:shadow-crown-hover'
+            : 'bg-harmony-light-beige text-[var(--text-subtle)] cursor-not-allowed opacity-50'
         )}
       >
         <ChevronLeft
@@ -59,7 +59,7 @@ export function NavigationButtons({
           'font-medium',
           hasNext
             ? 'bg-gradient-to-r from-harmony-lime to-harmony-sage text-harmony-dark-text hover:from-harmony-sage hover:to-harmony-olive hover:translate-x-1 shadow-crown hover:shadow-crown-hover'
-            : 'bg-harmony-light-beige text-gray-400 cursor-not-allowed opacity-50'
+            : 'bg-harmony-light-beige text-[var(--text-subtle)] cursor-not-allowed opacity-50'
         )}
       >
         <span>{nextLabel}</span>

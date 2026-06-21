@@ -73,18 +73,18 @@ function SortableColumnHeader({
   return (
     <button
       onClick={() => onSort(field)}
-      className="flex items-center gap-1 font-medium text-gray-600 hover:text-gray-900 transition-colors"
+      className="flex items-center gap-1 font-medium text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors"
       aria-label={`Sort by ${label}`}
     >
       {label}
       {isActive ? (
         currentSortOrder === 'asc' ? (
-          <ArrowUp className="h-4 w-4 text-emerald-600" />
+          <ArrowUp className="h-4 w-4 text-[var(--brand-strong)]" />
         ) : (
-          <ArrowDown className="h-4 w-4 text-emerald-600" />
+          <ArrowDown className="h-4 w-4 text-[var(--brand-strong)]" />
         )
       ) : (
-        <ArrowUpDown className="h-4 w-4 text-gray-400" />
+        <ArrowUpDown className="h-4 w-4 text-[var(--text-subtle)]" />
       )}
     </button>
   );
@@ -216,8 +216,8 @@ export default function NonConformitiesPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Non-Conformities</h1>
-          <p className="text-gray-500">
+          <h1 className="text-2xl font-bold text-[var(--text-strong)]">Non-Conformities</h1>
+          <p className="text-[var(--text-muted)]">
             Track and manage non-conformances identified during assessments
           </p>
         </div>
@@ -230,7 +230,7 @@ export default function NonConformitiesPage() {
             <div className="flex-1">
               <div className="relative">
                 <Search
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[var(--text-subtle)]"
                   size={18}
                 />
                 <Input
@@ -275,7 +275,7 @@ export default function NonConformitiesPage() {
         <Card>
           <CardContent className="py-3">
             <div className="flex items-center gap-6 text-sm">
-              <span className="text-gray-500 font-medium">Sort by:</span>
+              <span className="text-[var(--text-muted)] font-medium">Sort by:</span>
               <SortableColumnHeader
                 field="createdAt"
                 label="Created"
@@ -315,8 +315,8 @@ export default function NonConformitiesPage() {
           <Card>
             <CardContent className="py-12 text-center">
               <AlertCircle className="mx-auto h-12 w-12 text-red-400 mb-4" />
-              <p className="text-gray-700 font-medium">Failed to load non-conformities</p>
-              <p className="text-gray-500 text-sm mt-1">Please try refreshing the page</p>
+              <p className="text-[var(--text-body)] font-medium">Failed to load non-conformities</p>
+              <p className="text-[var(--text-muted)] text-sm mt-1">Please try refreshing the page</p>
             </CardContent>
           </Card>
         ) : nonConformities.length === 0 ? (
@@ -337,33 +337,33 @@ export default function NonConformitiesPage() {
                     <div className="flex items-center gap-3 mb-2">
                       <Link
                         href={`/non-conformities/${ncr.id}`}
-                        className="text-lg font-semibold text-gray-900 hover:text-emerald-600 truncate"
+                        className="text-lg font-semibold text-[var(--text-strong)] hover:text-[var(--brand-strong)] truncate"
                       >
                         {ncr.title}
                       </Link>
                       <span
                         className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap ${
-                          statusColors[ncr.status] || 'bg-gray-100 text-gray-700'
+                          statusColors[ncr.status] || 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                         }`}
                       >
                         {ncr.status.replace('_', ' ')}
                       </span>
                       <span
                         className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap ${
-                          severityColors[ncr.severity] || 'bg-gray-100 text-gray-700'
+                          severityColors[ncr.severity] || 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                         }`}
                       >
                         {ncr.severity}
                       </span>
                     </div>
 
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">{ncr.description}</p>
+                    <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-3">{ncr.description}</p>
 
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--text-muted)]">
                       {/* Assessment link */}
                       <Link
                         href={`/assessments/${ncr.assessment.id}`}
-                        className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700"
+                        className="flex items-center gap-1 text-[var(--brand-strong)] hover:text-[var(--brand)]"
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
                         {ncr.assessment.title}
@@ -379,7 +379,7 @@ export default function NonConformitiesPage() {
 
                       {/* Question info */}
                       {ncr.response?.question && (
-                        <span className="text-gray-400">
+                        <span className="text-[var(--text-subtle)]">
                           Q{ncr.response.question.questionNumber}
                         </span>
                       )}

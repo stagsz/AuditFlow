@@ -35,34 +35,34 @@ export default function Hero() {
               <span className="ml-1 text-xs text-white/30">AuditFlow — Dashboard</span>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-3">
-              <div className="rounded-lg border border-white/6 bg-white/5 p-3">
+              <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">
                 <div className="text-lg font-semibold text-white tracking-tight">94%</div>
                 <div className="text-[11px] text-white/40">Compliance score</div>
-                <div className="mt-1 text-[11px] text-emerald-300">↑ 6% this quarter</div>
+                <div className="mt-1 text-[11px] text-[var(--brand-soft)]">↑ 6% this quarter</div>
               </div>
-              <div className="rounded-lg border border-white/6 bg-white/5 p-3">
+              <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">
                 <div className="text-lg font-semibold text-white tracking-tight">12</div>
                 <div className="text-[11px] text-white/40">Open NCRs</div>
-                <div className="mt-1 text-[11px] text-emerald-300">↓ 4 from last audit</div>
+                <div className="mt-1 text-[11px] text-[var(--brand-soft)]">↓ 4 from last audit</div>
               </div>
-              <div className="rounded-lg border border-white/6 bg-white/5 p-3">
+              <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">
                 <div className="text-lg font-semibold text-white tracking-tight">3</div>
                 <div className="text-[11px] text-white/40">Audits this month</div>
-                <div className="mt-1 text-[11px] text-emerald-300">On schedule</div>
+                <div className="mt-1 text-[11px] text-[var(--brand-soft)]">On schedule</div>
               </div>
             </div>
             <div className="mt-3 flex flex-col gap-2">
-              <div className="flex items-center gap-2 rounded-md bg-white/4 border border-white/5 px-3 py-2">
+              <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
                 <span className="badge-open">Open</span>
                 <span className="flex-1 truncate text-xs text-white/55">Calibration records missing — Clause 7.1.5</span>
                 <span className="text-[11px] text-white/25">May 28</span>
               </div>
-              <div className="flex items-center gap-2 rounded-md bg-white/4 border border-white/5 px-3 py-2">
+              <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
                 <span className="badge-review">Review</span>
                 <span className="flex-1 truncate text-xs text-white/55">Supplier qualification procedure update</span>
                 <span className="text-[11px] text-white/25">May 26</span>
               </div>
-              <div className="flex items-center gap-2 rounded-md bg-white/4 border border-white/5 px-3 py-2">
+              <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
                 <span className="badge-closed">Closed</span>
                 <span className="flex-1 truncate text-xs text-white/55">Internal audit report Q1 — Clause 9.2</span>
                 <span className="text-[11px] text-white/25">May 20</span>

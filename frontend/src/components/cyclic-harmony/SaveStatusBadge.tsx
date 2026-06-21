@@ -57,9 +57,9 @@ export function SaveStatusBadge({
         return {
           icon: Cloud,
           text: pendingCount > 0 ? `${pendingCount} unsaved changes` : 'No changes',
-          bgColor: 'bg-gray-50',
-          borderColor: 'border-gray-200',
-          textColor: 'text-gray-600',
+          bgColor: 'bg-[var(--surface-sunken)]',
+          borderColor: 'border-[var(--border-subtle)]',
+          textColor: 'text-[var(--text-muted)]',
           iconClass: '',
         };
     }

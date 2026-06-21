@@ -204,7 +204,7 @@ export function Sidebar() {
       {/* Collapsed user avatar */}
       {user && !sidebarOpen && !isMobile && (
         <div className="mt-auto flex justify-center">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-mint-300 to-mint-500 flex items-center justify-center text-white text-sm font-bold border-2 border-white shadow-sm">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--brand)] to-[var(--brand-strong)] flex items-center justify-center text-white text-sm font-bold border-2 border-white shadow-sm">
             {user.firstName[0]}{user.lastName[0]}
           </div>
         </div>

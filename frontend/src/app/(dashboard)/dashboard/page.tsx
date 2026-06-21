@@ -68,10 +68,10 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-5xl font-display font-extrabold tracking-tight text-navy-900">
+          <h1 className="text-5xl font-display font-extrabold tracking-tight text-[var(--text-strong)]">
             Dashboard
           </h1>
-          <p className="text-base font-medium text-muted-foreground mt-1">
+          <p className="text-base font-medium text-[var(--text-muted)] mt-1">
             ISO 9001:2015 Quality Management System Overview
           </p>
         </div>
@@ -86,18 +86,18 @@ export default function DashboardPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Overall Compliance */}
-        <Card className="border border-slate-200 bg-white shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
           <CardContent className="flex items-center justify-between p-5">
             <div>
-              <p className="text-sm font-semibold text-slate-500">Overall Compliance</p>
+              <p className="text-sm font-semibold text-[var(--text-muted)]">Overall Compliance</p>
               <div className="mt-2 flex items-center gap-2">
-                <span className="text-5xl font-extrabold tracking-tight text-navy-900">
+                <span className="text-5xl font-extrabold tracking-tight text-[var(--text-strong)]">
                   {complianceScore.toFixed(1)}%
                 </span>
                 {trendInfo.change > 0 && (
                   <span
                     className={`text-sm font-semibold ${
-                      trendInfo.direction === 'UP' ? 'text-emerald-600' : 'text-red-600'
+                      trendInfo.direction === 'UP' ? 'text-[var(--brand-strong)]' : 'text-red-600'
                     }`}
                   >
                     {trendInfo.direction === 'UP' ? (
@@ -115,11 +115,11 @@ export default function DashboardPage() {
         </Card>
 
         {/* Assessments */}
-        <Card className="border border-slate-200 bg-white shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
           <CardContent className="flex items-center justify-between p-5">
             <div>
-              <p className="text-sm font-semibold text-slate-500">Total Assessments</p>
-              <p className="mt-2 text-5xl font-extrabold tracking-tight text-navy-900">
+              <p className="text-sm font-semibold text-[var(--text-muted)]">Total Assessments</p>
+              <p className="mt-2 text-5xl font-extrabold tracking-tight text-[var(--text-strong)]">
                 {overviewData?.assessmentCounts?.total || 0}
               </p>
             </div>
@@ -130,11 +130,11 @@ export default function DashboardPage() {
         </Card>
 
         {/* Non-Conformities */}
-        <Card className="border border-slate-200 bg-white shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
           <CardContent className="flex items-center justify-between p-5">
             <div>
-              <p className="text-sm font-semibold text-slate-500">Active Non-Conformities</p>
-              <p className="mt-2 text-5xl font-extrabold tracking-tight text-navy-900">{openNCRs}</p>
+              <p className="text-sm font-semibold text-[var(--text-muted)]">Active Non-Conformities</p>
+              <p className="mt-2 text-5xl font-extrabold tracking-tight text-[var(--text-strong)]">{openNCRs}</p>
             </div>
             <div className="rounded-2xl bg-amber-50 p-3">
               <AlertTriangle className="h-7 w-7 text-amber-600" />
@@ -143,16 +143,16 @@ export default function DashboardPage() {
         </Card>
 
         {/* Closed NCRs */}
-        <Card className="border border-slate-200 bg-white shadow-sm">
+        <Card className="border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
           <CardContent className="flex items-center justify-between p-5">
             <div>
-              <p className="text-sm font-semibold text-slate-500">NCRs Closed</p>
-              <p className="mt-2 text-5xl font-extrabold tracking-tight text-navy-900">
+              <p className="text-sm font-semibold text-[var(--text-muted)]">NCRs Closed</p>
+              <p className="mt-2 text-5xl font-extrabold tracking-tight text-[var(--text-strong)]">
                 {ncrCounts?.closed || 0}
               </p>
             </div>
-            <div className="rounded-2xl bg-emerald-50 p-3">
-              <CheckCircle className="h-7 w-7 text-emerald-600" />
+            <div className="rounded-2xl bg-[var(--brand-soft)] p-3">
+              <CheckCircle className="h-7 w-7 text-[var(--brand-strong)]" />
             </div>
           </CardContent>
         </Card>
@@ -202,9 +202,9 @@ export default function DashboardPage() {
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {Object.entries(overviewData.assessmentCounts.byStatus).map(([status, count]) => (
-                <div key={status} className="p-4 bg-gray-50 rounded-xl text-center border border-gray-100">
-                  <p className="text-2xl font-bold text-gray-900">{count}</p>
-                  <p className="text-sm text-gray-500 capitalize mt-1">
+                <div key={status} className="p-4 bg-[var(--surface-sunken)] rounded-xl text-center border border-[var(--border-subtle)]">
+                  <p className="text-2xl font-bold text-[var(--text-strong)]">{count}</p>
+                  <p className="text-sm text-[var(--text-muted)] capitalize mt-1">
                     {status.toLowerCase().replace('_', ' ')}
                   </p>
                 </div>
@@ -223,9 +223,9 @@ export default function DashboardPage() {
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {Object.entries(overviewData.ncrCounts.byStatus).map(([status, count]) => (
-                <div key={status} className="p-4 bg-gray-50 rounded-xl text-center border border-gray-100">
-                  <p className="text-2xl font-bold text-gray-900">{count}</p>
-                  <p className="text-sm text-gray-500 capitalize mt-1">
+                <div key={status} className="p-4 bg-[var(--surface-sunken)] rounded-xl text-center border border-[var(--border-subtle)]">
+                  <p className="text-2xl font-bold text-[var(--text-strong)]">{count}</p>
+                  <p className="text-sm text-[var(--text-muted)] capitalize mt-1">
                     {status.toLowerCase().replace('_', ' ')}
                   </p>
                 </div>

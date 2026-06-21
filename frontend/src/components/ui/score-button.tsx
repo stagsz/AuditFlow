@@ -14,11 +14,11 @@ const scoreConfig = {
   0: {
     label: 'Not Applicable',
     shortLabel: 'N/A',
-    bgColor: 'bg-gray-100 hover:bg-gray-200',
-    selectedBg: 'bg-gray-500',
-    textColor: 'text-gray-600',
+    bgColor: 'bg-[var(--surface-sunken)] hover:bg-[var(--stone-200)]',
+    selectedBg: 'bg-[var(--surface-sunken)]0',
+    textColor: 'text-[var(--text-muted)]',
     selectedText: 'text-white',
-    borderColor: 'border-gray-300',
+    borderColor: 'border-[var(--border-default)]',
     selectedBorder: 'border-gray-600',
     ringColor: 'ring-gray-400',
   },
@@ -104,7 +104,7 @@ export function ScoreButton({ score, selected, onClick, criteria, disabled }: Sc
       {criteria && criteria.trim() && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 w-64 z-10 pointer-events-none shadow-xl">
           <div className="font-medium mb-1">{config.label}</div>
-          <div className="text-gray-300 text-xs">{criteria}</div>
+          <div className="text-[var(--text-subtle)] text-xs">{criteria}</div>
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-8 border-transparent border-t-gray-900" />
         </div>
       )}

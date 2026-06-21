@@ -70,24 +70,24 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
       // Default fallback UI
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] p-4">
           <Card className="max-w-lg w-full">
             <CardHeader className="text-center">
               <div className="mx-auto rounded-full bg-red-50 p-4 mb-4 w-fit">
                 <AlertTriangle className="h-12 w-12 text-red-600" />
               </div>
-              <CardTitle className="text-xl text-gray-900">
+              <CardTitle className="text-xl text-[var(--text-strong)]">
                 Something went wrong
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-center text-gray-600">
+              <p className="text-center text-[var(--text-muted)]">
                 An unexpected error occurred. Please try again or return to the home page.
               </p>
 
               {process.env.NODE_ENV === 'development' && this.state.error && (
-                <div className="mt-4 p-4 bg-gray-100 rounded-md overflow-auto">
-                  <p className="text-sm font-medium text-gray-700 mb-2">
+                <div className="mt-4 p-4 bg-[var(--surface-sunken)] rounded-md overflow-auto">
+                  <p className="text-sm font-medium text-[var(--text-body)] mb-2">
                     Error details:
                   </p>
                   <pre className="text-xs text-red-600 whitespace-pre-wrap break-words">
@@ -95,10 +95,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                   </pre>
                   {this.state.errorInfo?.componentStack && (
                     <>
-                      <p className="text-sm font-medium text-gray-700 mt-3 mb-2">
+                      <p className="text-sm font-medium text-[var(--text-body)] mt-3 mb-2">
                         Component stack:
                       </p>
-                      <pre className="text-xs text-gray-600 whitespace-pre-wrap break-words max-h-40 overflow-y-auto">
+                      <pre className="text-xs text-[var(--text-muted)] whitespace-pre-wrap break-words max-h-40 overflow-y-auto">
                         {this.state.errorInfo.componentStack}
                       </pre>
                     </>

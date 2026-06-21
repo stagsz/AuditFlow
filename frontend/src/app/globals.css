@@ -211,7 +211,7 @@
 }
 
 .plan-card-featured .plan-divider {
-  @apply bg-white/10;
+  @apply bg-[var(--surface-card)]/10;
 }
 
 /* ── Clause card hover ─ */

@@ -8,7 +8,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={clsx(
-        'rounded-2xl border border-gray-200 bg-white shadow-md hover:shadow-lg transition-shadow duration-200',
+        'rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-md hover:shadow-lg transition-shadow duration-200',
         className
       )}
       {...props}
@@ -46,7 +46,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => (
     <p
       ref={ref}
-      className={clsx('text-sm text-gray-500', className)}
+      className={clsx('text-sm text-[var(--text-muted)]', className)}
       {...props}
     />
   )

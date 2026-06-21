@@ -19,7 +19,7 @@ const roleColors: Record<string, string> = {
   QUALITY_MANAGER: 'bg-blue-50 text-blue-700',
   INTERNAL_AUDITOR: 'bg-green-50 text-green-700',
   DEPARTMENT_HEAD: 'bg-orange-100 text-orange-700',
-  VIEWER: 'bg-gray-100 text-gray-700',
+  VIEWER: 'bg-[var(--surface-sunken)] text-[var(--text-body)]',
 };
 
 // Role permissions matrix
@@ -146,12 +146,12 @@ interface ProfileFieldProps {
 function ProfileField({ icon, label, value }: ProfileFieldProps) {
   return (
     <div className="flex items-start gap-4 py-4">
-      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500">
+      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-[var(--surface-sunken)] flex items-center justify-center text-[var(--text-muted)]">
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-gray-500">{label}</p>
-        <div className="mt-1 text-gray-900">{value}</div>
+        <p className="text-sm font-medium text-[var(--text-muted)]">{label}</p>
+        <div className="mt-1 text-[var(--text-strong)]">{value}</div>
       </div>
     </div>
   );
@@ -164,7 +164,7 @@ export default function SettingsPage() {
   if (!user) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600" />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--brand)]" />
       </div>
     );
   }
@@ -175,15 +175,15 @@ export default function SettingsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-500">View your profile information</p>
+        <h1 className="text-2xl font-bold text-[var(--text-strong)]">Settings</h1>
+        <p className="text-[var(--text-muted)]">View your profile information</p>
       </div>
 
       {/* Profile Card */}
       <Card>
         <CardHeader>
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-full bg-emerald-600 flex items-center justify-center text-white text-xl font-semibold">
+            <div className="h-16 w-16 rounded-full bg-[var(--brand)] flex items-center justify-center text-white text-xl font-semibold">
               {user.firstName?.[0]?.toUpperCase() || ''}
               {user.lastName?.[0]?.toUpperCase() || ''}
             </div>
@@ -194,7 +194,7 @@ export default function SettingsPage() {
               <CardDescription className="mt-1">
                 <span
                   className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    roleColors[user.role] || 'bg-gray-100 text-gray-700'
+                    roleColors[user.role] || 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                   }`}
                 >
                   {roleLabels[user.role] || user.role}
@@ -221,7 +221,7 @@ export default function SettingsPage() {
               value={
                 <span
                   className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    roleColors[user.role] || 'bg-gray-100 text-gray-700'
+                    roleColors[user.role] || 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                   }`}
                 >
                   {roleLabels[user.role] || user.role}
@@ -249,7 +249,7 @@ export default function SettingsPage() {
               icon={<Calendar className="h-5 w-5" />}
               label="Account ID"
               value={
-                <span className="font-mono text-sm text-gray-600">
+                <span className="font-mono text-sm text-[var(--text-muted)]">
                   {user.id}
                 </span>
               }
@@ -262,7 +262,7 @@ export default function SettingsPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Lock className="h-5 w-5 text-emerald-600" />
+            <Lock className="h-5 w-5 text-[var(--brand-strong)]" />
             <CardTitle>Role-Based Access Control</CardTitle>
           </div>
           <CardDescription>Your current role and permissions in the system</CardDescription>
@@ -272,10 +272,10 @@ export default function SettingsPage() {
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-sm font-semibold text-gray-900 mb-1">Your Current Role</h3>
+                <h3 className="text-sm font-semibold text-[var(--text-strong)] mb-1">Your Current Role</h3>
                 <span
                   className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                    roleColors[user.role] || 'bg-gray-100 text-gray-700'
+                    roleColors[user.role] || 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                   }`}
                 >
                   {roleLabels[user.role] || user.role}
@@ -285,16 +285,16 @@ export default function SettingsPage() {
 
             {currentRolePermissions && (
               <div>
-                <p className="text-sm text-gray-600 mb-4">{currentRolePermissions.description}</p>
+                <p className="text-sm text-[var(--text-muted)] mb-4">{currentRolePermissions.description}</p>
 
                 {/* Permissions Breakdown */}
                 <div className="space-y-4">
                   {currentRolePermissions.permissions.map((perm, idx) => (
-                    <div key={idx} className="border-l-2 border-emerald-200 pl-4">
-                      <h4 className="text-sm font-medium text-gray-900 mb-2">{perm.category}</h4>
+                    <div key={idx} className="border-l-2 border-[var(--border-subtle)] pl-4">
+                      <h4 className="text-sm font-medium text-[var(--text-strong)] mb-2">{perm.category}</h4>
                       <ul className="space-y-1">
                         {perm.access.map((item, itemIdx) => (
-                          <li key={itemIdx} className="flex items-start gap-2 text-sm text-gray-600">
+                          <li key={itemIdx} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
                             <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <span>{item}</span>
                           </li>
@@ -308,16 +308,16 @@ export default function SettingsPage() {
           </div>
 
           {/* All Roles Comparison */}
-          <div className="pt-6 border-t border-gray-200">
+          <div className="pt-6 border-t border-[var(--border-subtle)]">
             <button
               onClick={() => setShowAllRoles(!showAllRoles)}
               className="flex items-center justify-between w-full text-left"
             >
-              <h3 className="text-sm font-semibold text-gray-900">All Roles & Permissions</h3>
+              <h3 className="text-sm font-semibold text-[var(--text-strong)]">All Roles & Permissions</h3>
               {showAllRoles ? (
-                <ChevronUp className="h-5 w-5 text-gray-400" />
+                <ChevronUp className="h-5 w-5 text-[var(--text-subtle)]" />
               ) : (
-                <ChevronDown className="h-5 w-5 text-gray-400" />
+                <ChevronDown className="h-5 w-5 text-[var(--text-subtle)]" />
               )}
             </button>
 
@@ -327,30 +327,30 @@ export default function SettingsPage() {
                   <div
                     key={role}
                     className={`rounded-xl border-2 p-4 ${
-                      role === user.role ? 'border-emerald-300 bg-emerald-50' : 'border-gray-200'
+                      role === user.role ? 'border-[var(--brand-soft)] bg-[var(--brand-soft)]' : 'border-[var(--border-subtle)]'
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-2">
                       <span
                         className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
-                          roleColors[role] || 'bg-gray-100 text-gray-700'
+                          roleColors[role] || 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                         }`}
                       >
                         {roleLabels[role] || role}
                       </span>
                       {role === user.role && (
-                        <span className="text-xs font-medium text-emerald-700">(Your Role)</span>
+                        <span className="text-xs font-medium text-[var(--brand)]">(Your Role)</span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-600 mb-3">{data.description}</p>
+                    <p className="text-sm text-[var(--text-muted)] mb-3">{data.description}</p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {data.permissions.map((perm, idx) => (
                         <div key={idx}>
-                          <h4 className="text-xs font-semibold text-gray-700 mb-1">{perm.category}</h4>
+                          <h4 className="text-xs font-semibold text-[var(--text-body)] mb-1">{perm.category}</h4>
                           <ul className="space-y-0.5">
                             {perm.access.map((item, itemIdx) => (
-                              <li key={itemIdx} className="flex items-start gap-1.5 text-xs text-gray-600">
+                              <li key={itemIdx} className="flex items-start gap-1.5 text-xs text-[var(--text-muted)]">
                                 <Check className="h-3 w-3 text-green-600 mt-0.5 flex-shrink-0" />
                                 <span>{item}</span>
                               </li>
@@ -366,7 +366,7 @@ export default function SettingsPage() {
           </div>
 
           {/* Help Text */}
-          <div className="pt-6 border-t border-gray-200">
+          <div className="pt-6 border-t border-[var(--border-subtle)]">
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
               <h4 className="text-sm font-semibold text-blue-900 mb-2">Need Different Access?</h4>
               <p className="text-sm text-blue-800">

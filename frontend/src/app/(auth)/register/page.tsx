@@ -48,7 +48,7 @@ interface ValidatedInvite {
 // ---- icon ----
 function UserPlusIcon() {
   return (
-    <svg className="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-10 h-10 text-[var(--brand-strong)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
         d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
     </svg>
@@ -131,7 +131,7 @@ function CreateForm({
         disabled={!!betaInviteData?.email}
       />
       {betaInviteData?.email && (
-        <p className="text-xs text-emerald-600 flex items-center gap-1">
+        <p className="text-xs text-[var(--brand-strong)] flex items-center gap-1">
           <CheckCircle size={12} /> This invite is reserved for this email
         </p>
       )}
@@ -252,14 +252,14 @@ function RegisterPageInner() {
 
   if (betaInviteLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">
         <Card className="w-full max-w-md text-center">
           <CardContent className="py-12">
-            <div className="mx-auto w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-              <Loader2 className="animate-spin text-emerald-600" size={28} />
+            <div className="mx-auto w-14 h-14 bg-[var(--brand-soft)] rounded-full flex items-center justify-center mb-4">
+              <Loader2 className="animate-spin text-[var(--brand-strong)]" size={28} />
             </div>
-            <h2 className="text-xl font-bold text-gray-800 mb-2">Validating invitation...</h2>
-            <p className="text-gray-500">Please wait while we verify your beta invite code.</p>
+            <h2 className="text-xl font-bold text-[var(--text-strong)] mb-2">Validating invitation...</h2>
+            <p className="text-[var(--text-muted)]">Please wait while we verify your beta invite code.</p>
           </CardContent>
         </Card>
       </div>
@@ -268,14 +268,14 @@ function RegisterPageInner() {
 
   if (betaInviteError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">
         <Card className="w-full max-w-md text-center">
           <CardContent className="py-12">
             <div className="mx-auto w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-4">
               <AlertCircle className="w-8 h-8 text-red-600" />
             </div>
-            <h2 className="text-xl font-bold text-gray-800 mb-2">Invalid Invitation</h2>
-            <p className="text-gray-500">{betaInviteError}</p>
+            <h2 className="text-xl font-bold text-[var(--text-strong)] mb-2">Invalid Invitation</h2>
+            <p className="text-[var(--text-muted)]">{betaInviteError}</p>
             <Button variant="outline" className="mt-4" onClick={() => router.push('/register')}>
               Continue without invitation
             </Button>
@@ -288,11 +288,11 @@ function RegisterPageInner() {
   const showInviteBanner = betaInviteCode && betaInviteData?.valid !== false;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-4 shadow-sm">
-            {showInviteBanner ? <Send className="w-8 h-8 text-emerald-600" /> : <UserPlusIcon />}
+          <div className="mx-auto w-16 h-16 bg-[var(--brand-soft)] rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+            {showInviteBanner ? <Send className="w-8 h-8 text-[var(--brand-strong)]" /> : <UserPlusIcon />}
           </div>
           <CardTitle className="text-2xl">
             {showInviteBanner ? 'Beta Invitation' : mode === 'create' && 'Create a new company'}
@@ -311,16 +311,16 @@ function RegisterPageInner() {
 
         <CardContent>
           {showInviteBanner && betaInviteData && (
-            <div className="mb-6 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
-              <div className="flex items-center gap-2 text-emerald-700 mb-2">
+            <div className="mb-6 p-4 bg-[var(--brand-soft)] rounded-lg border border-[var(--border-subtle)]">
+              <div className="flex items-center gap-2 text-[var(--brand)] mb-2">
                 <Shield size={18} />
                 <span className="font-medium">Valid beta invitation</span>
               </div>
-              <p className="text-sm text-emerald-700 font-mono bg-emerald-100 px-2 py-1 rounded">{betaInviteData.code}</p>
+              <p className="text-sm text-[var(--brand)] font-mono bg-[var(--brand-soft)] px-2 py-1 rounded">{betaInviteData.code}</p>
               {betaInviteData.email && (
-                <p className="text-sm text-emerald-700 mt-1">Reserved for: <strong>{betaInviteData.email}</strong></p>
+                <p className="text-sm text-[var(--brand)] mt-1">Reserved for: <strong>{betaInviteData.email}</strong></p>
               )}
-              <p className="text-xs text-emerald-600 mt-1">
+              <p className="text-xs text-[var(--brand-strong)] mt-1">
                 {betaInviteData.usedCount} of {betaInviteData.maxUses} uses • Expires {new Date(betaInviteData.expiresAt).toLocaleDateString()}
               </p>
             </div>
@@ -334,9 +334,9 @@ function RegisterPageInner() {
               <Button variant="outline" className="w-full" onClick={() => setMode('join')}>
                 Join an existing company
               </Button>
-              <p className="text-center text-sm text-gray-600 pt-2">
+              <p className="text-center text-sm text-[var(--text-muted)] pt-2">
                 Already have an account?{' '}
-                <Link href="/login" className="text-emerald-600 hover:text-emerald-700 font-medium">
+                <Link href="/login" className="text-[var(--brand-strong)] hover:text-[var(--brand)] font-medium">
                   Sign in
                 </Link>
               </p>
@@ -352,9 +352,9 @@ function RegisterPageInner() {
           {mode === 'join' && <JoinForm onBack={() => setMode('choose')} />}
 
           {(mode !== 'choose' || showInviteBanner) && (
-            <p className="text-center text-sm text-gray-600 mt-4">
+            <p className="text-center text-sm text-[var(--text-muted)] mt-4">
               Already have an account?{' '}
-              <Link href="/login" className="text-emerald-600 hover:text-emerald-700 font-medium">
+              <Link href="/login" className="text-[var(--brand-strong)] hover:text-[var(--brand)] font-medium">
                 Sign in
               </Link>
             </p>
@@ -369,13 +369,13 @@ export default function RegisterPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">
           <div className="w-full max-w-md text-center">
-            <div className="mx-auto w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-              <Loader2 className="animate-spin text-emerald-600" size={28} />
+            <div className="mx-auto w-14 h-14 bg-[var(--brand-soft)] rounded-full flex items-center justify-center mb-4">
+              <Loader2 className="animate-spin text-[var(--brand-strong)]" size={28} />
             </div>
-            <h2 className="text-xl font-bold text-gray-800 mb-2">Loading...</h2>
-            <p className="text-gray-500">Please wait.</p>
+            <h2 className="text-xl font-bold text-[var(--text-strong)] mb-2">Loading...</h2>
+            <p className="text-[var(--text-muted)]">Please wait.</p>
           </div>
         </div>
       }

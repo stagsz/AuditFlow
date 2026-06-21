@@ -66,7 +66,7 @@ function NotificationIcon({ type }: { type: 'warning' | 'info' | 'success' }) {
     case 'warning':
       return <AlertTriangle size={16} className="text-amber-500" />;
     case 'success':
-      return <CheckCircle size={16} className="text-emerald-500" />;
+      return <CheckCircle size={16} className="text-[var(--brand)]" />;
     default:
       return <Clock size={16} className="text-blue-500" />;
   }
