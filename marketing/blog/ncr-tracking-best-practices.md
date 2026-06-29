@@ -15,6 +15,8 @@ Why most NCR registers become paper trails, and a lightweight workflow for root 
 - Finding logged, no owner assigned.
 - Action planned, no due date.
 - Closed without evidence.
+- Review delayed until the next audit.
+- Root cause is surface-level and repeats.
 
 ### A better workflow
 1. **Raise** — capture clause reference, severity, and evidence source immediately.
@@ -26,3 +28,14 @@ Why most NCR registers become paper trails, and a lightweight workflow for root 
 - [ ] Severity classification is applied at creation.
 - [ ] Owner and due date are mandatory before status can move out of Open.
 - [ ] Effectiveness verification is recorded before transition to Closed.
+
+### Why most systems fail
+Most teams treat the NCR register as reactive. It becomes a backlog of findings rather than a system of improvement. Common failure modes: late assignment, vague root cause, no verification, no link to process owner.
+
+### Best practices that work
+- Close is blocked unless evidence is attached.
+- Root cause uses 5 Whys or a short fishbone.
+- Effectively responding means next audit shows zero recurrence.
+
+### AuditFlow fits the workflow
+From NCR to closure, AuditFlow keeps the evidence, owner, target date, and verification record in one place and keeps your auditor’s evidence package ready.
