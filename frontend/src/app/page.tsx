@@ -15,6 +15,7 @@ export default function LandingPage() {
           <Link href="#features" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Features</Link>
           <Link href="#how" className="text-sm text-[#6b7280] hover:text-[#0e1117]">How it works</Link>
           <Link href="#pricing" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Pricing</Link>
+          <Link href="/blog" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Blog</Link>
           <Link href="/register" className="rounded-md bg-[#0e1117] px-4 py-2 text-sm font-medium text-white hover:bg-[#0f766e]">Start 30-day free trial</Link>
         </div>
       </nav>
