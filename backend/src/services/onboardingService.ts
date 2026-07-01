@@ -1,9 +1,11 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { Prisma } from '@prisma/client';
 import { prisma } from '../config/database';
 import { config } from '../config';
 import { ConflictError } from '../utils/errors';
 import { UserRole } from '../types/enums';
+import { deriveAssessmentScope } from './assessmentScopeService';
 
 interface ReadinessProfileData {
   companySize?: 'MICRO' | 'SMALL' | 'MEDIUM' | 'LARGE';
@@ -27,6 +29,40 @@ interface SetupOrgData {
   roles: { name: string; permissionLevel: 'MANAGER' | 'AUDITOR' | 'DEPT_HEAD' | 'VIEWER' }[];
 }
 
+// Seeds a new org's starter assessment templates. Every org gets the full
+// assessment; orgs whose readiness profile suggests starting narrower also
+// get a recommended scoped template marked as the default (editable by the
+// user on the create-assessment screen — never silently auto-applied).
+async function seedStarterTemplates(
+  tx: Prisma.TransactionClient,
+  organizationId: string,
+  profile?: ReadinessProfileData
+): Promise<void> {
+  const recommended = deriveAssessmentScope(profile);
+
+  await tx.assessmentTemplate.create({
+    data: {
+      name: 'Full ISO 9001:2015 Assessment',
+      description: 'Comprehensive assessment covering all clauses (4-10) of ISO 9001:2015.',
+      isDefault: !recommended,
+      includedClauses: null,
+      organizationId,
+    },
+  });
+
+  if (recommended) {
+    await tx.assessmentTemplate.create({
+      data: {
+        name: recommended.name,
+        description: recommended.description,
+        isDefault: true,
+        includedClauses: JSON.stringify(recommended.includedClauses),
+        organizationId,
+      },
+    });
+  }
+}
+
 export class OnboardingService {
   async setupOrganization(data: SetupOrgData) {
     const [existingEmail, existingSlug] = await Promise.all([
@@ -38,7 +74,7 @@ export class OnboardingService {
 
     const passwordHash = await bcrypt.hash(data.password, 12);
 
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const org = await tx.organization.create({
         data: {
           name: data.company.name,
@@ -52,6 +88,8 @@ export class OnboardingService {
       await tx.organizationProfile.create({
         data: { organizationId: org.id, ...data.profile },
       });
+
+      await seedStarterTemplates(tx, org.id, data.profile);
 
       const divisionIds: string[] = [];
       for (const div of data.divisions) {
@@ -127,7 +165,7 @@ export class OnboardingService {
     const existingSlug = await prisma.organization.findUnique({ where: { slug: data.company.slug } });
     if (existingSlug) throw new ConflictError('Company URL is already taken');
 
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const org = await tx.organization.create({
         data: {
           name: data.company.name,
@@ -141,6 +179,8 @@ export class OnboardingService {
       await tx.organizationProfile.create({
         data: { organizationId: org.id, ...data.profile },
       });
+
+      await seedStarterTemplates(tx, org.id, data.profile);
 
       const divisionIds: string[] = [];
       for (const div of data.divisions) {
