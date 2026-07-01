@@ -5,12 +5,23 @@ import { config } from '../config';
 import { ConflictError } from '../utils/errors';
 import { UserRole } from '../types/enums';
 
+interface ReadinessProfileData {
+  companySize?: 'MICRO' | 'SMALL' | 'MEDIUM' | 'LARGE';
+  qmsStatus?: 'NONE' | 'BUILDING' | 'INFORMAL' | 'DOCUMENTED';
+  certificationStatus?: 'NOT_CERTIFIED' | 'IN_PROGRESS' | 'CERTIFIED_SURVEILLANCE' | 'CERTIFIED_RECERTIFYING';
+  lastAuditSummary?: string;
+  improvementNotes?: string;
+  standardsKnowledgeLevel?: 'NONE' | 'BASIC' | 'TRAINED' | 'CERTIFIED_AUDITOR';
+  hoursPerWeek?: number;
+}
+
 interface SetupOrgData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   company: { name: string; slug: string; industry?: string; country?: string };
+  profile?: ReadinessProfileData;
   divisions: { name: string }[];
   departments: { name: string; divisionIndex?: number }[];
   roles: { name: string; permissionLevel: 'MANAGER' | 'AUDITOR' | 'DEPT_HEAD' | 'VIEWER' }[];
@@ -29,7 +40,17 @@ export class OnboardingService {
 
     return prisma.$transaction(async (tx) => {
       const org = await tx.organization.create({
-        data: { name: data.company.name, slug: data.company.slug, setupComplete: true },
+        data: {
+          name: data.company.name,
+          slug: data.company.slug,
+          industry: data.company.industry,
+          country: data.company.country,
+          setupComplete: true,
+        },
+      });
+
+      await tx.organizationProfile.create({
+        data: { organizationId: org.id, ...data.profile },
       });
 
       const divisionIds: string[] = [];
@@ -97,6 +118,7 @@ export class OnboardingService {
     userId: string,
     data: {
       company: { name: string; slug: string; industry?: string; country?: string };
+      profile?: ReadinessProfileData;
       divisions: { name: string }[];
       departments: { name: string; divisionIndex?: number }[];
       roles: { name: string; permissionLevel: 'MANAGER' | 'AUDITOR' | 'DEPT_HEAD' | 'VIEWER' }[];
@@ -107,7 +129,17 @@ export class OnboardingService {
 
     return prisma.$transaction(async (tx) => {
       const org = await tx.organization.create({
-        data: { name: data.company.name, slug: data.company.slug, setupComplete: true },
+        data: {
+          name: data.company.name,
+          slug: data.company.slug,
+          industry: data.company.industry,
+          country: data.company.country,
+          setupComplete: true,
+        },
+      });
+
+      await tx.organizationProfile.create({
+        data: { organizationId: org.id, ...data.profile },
       });
 
       const divisionIds: string[] = [];

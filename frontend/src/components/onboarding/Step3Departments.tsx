@@ -98,10 +98,10 @@ export default function Step3Departments() {
       )}
 
       <div className="flex gap-2 pt-2">
-        <Button type="button" variant="outline" className="flex-1" onClick={() => setStep(2)}>
+        <Button type="button" variant="outline" className="flex-1" onClick={() => setStep(3)}>
           Back
         </Button>
-        <Button type="button" className="flex-1" onClick={() => setStep(4)}>
+        <Button type="button" className="flex-1" onClick={() => setStep(5)}>
           Continue
         </Button>
       </div>
