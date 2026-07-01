@@ -15,6 +15,7 @@ import {
   Calendar,
   Hash,
   HelpCircle,
+  Sparkles,
 } from 'lucide-react';
 import {
   useNonConformity,
@@ -28,7 +29,9 @@ import { NCRStatusWorkflow } from '@/components/ncr/NCRStatusWorkflow';
 import { CorrectiveActionList } from '@/components/ncr/CorrectiveActionList';
 import { CorrectiveActionFormModal } from '@/components/ncr/CorrectiveActionFormModal';
 import { VerificationFormModal } from '@/components/ncr/VerificationFormModal';
+import { RootCauseAgentModal } from '@/components/ncr/RootCauseAgentModal';
 import { CorrectiveAction } from '@/hooks/useCorrectiveActions';
+import { RootCauseWhyStep } from '@/lib/api';
 
 const statusColors: Record<string, string> = {
   OPEN: 'bg-red-50 text-red-700',
@@ -177,6 +180,8 @@ export default function NonConformityDetailPage() {
   const [isEditingRootCause, setIsEditingRootCause] = useState(false);
   const [showActionModal, setShowActionModal] = useState(false);
   const [actionToVerify, setActionToVerify] = useState<CorrectiveAction | null>(null);
+  const [showAIChat, setShowAIChat] = useState(false);
+  const [aiPrefill, setAiPrefill] = useState<{ rootCause: string; method: string } | null>(null);
 
   const ncrId = (params?.id ?? '') as string;
   const { data, isLoading, isError } = useNonConformity(ncrId);
@@ -199,9 +204,15 @@ export default function NonConformityDetailPage() {
       });
       toast.success('Root cause saved successfully');
       setIsEditingRootCause(false);
+      setAiPrefill(null);
     } catch {
       toast.error('Failed to save root cause');
     }
+  };
+
+  const handleAcceptAIRootCause = (rootCause: string, _whyChain: RootCauseWhyStep[]) => {
+    setAiPrefill({ rootCause, method: '5_WHYS' });
+    setIsEditingRootCause(true);
   };
 
   if (isLoading) {
@@ -324,19 +335,29 @@ export default function NonConformityDetailPage() {
                 Root Cause Analysis
               </CardTitle>
               {canEdit && !isEditingRootCause && (
-                <Button variant="outline" size="sm" onClick={() => setIsEditingRootCause(true)}>
-                  <Edit className="h-4 w-4 mr-2" />
-                  {ncr.rootCause ? 'Edit' : 'Add Root Cause'}
-                </Button>
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={() => setShowAIChat(true)}>
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    AI 5 Whys
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={() => setIsEditingRootCause(true)}>
+                    <Edit className="h-4 w-4 mr-2" />
+                    {ncr.rootCause ? 'Edit' : 'Add Root Cause'}
+                  </Button>
+                </div>
               )}
             </CardHeader>
             <CardContent>
               {isEditingRootCause ? (
                 <RootCauseForm
-                  rootCause={ncr.rootCause || ''}
-                  rootCauseMethod={ncr.rootCauseMethod || ''}
+                  key={aiPrefill ? 'ai-prefill' : 'existing'}
+                  rootCause={aiPrefill?.rootCause ?? ncr.rootCause ?? ''}
+                  rootCauseMethod={aiPrefill?.method ?? ncr.rootCauseMethod ?? ''}
                   onSave={handleSaveRootCause}
-                  onCancel={() => setIsEditingRootCause(false)}
+                  onCancel={() => {
+                    setIsEditingRootCause(false);
+                    setAiPrefill(null);
+                  }}
                   isSaving={updateNCR.isPending}
                 />
               ) : ncr.rootCause ? (
@@ -545,6 +566,14 @@ export default function NonConformityDetailPage() {
         isOpen={actionToVerify !== null}
         onClose={() => setActionToVerify(null)}
         action={actionToVerify}
+      />
+
+      {/* AI 5 Whys Root Cause Agent Modal */}
+      <RootCauseAgentModal
+        isOpen={showAIChat}
+        onClose={() => setShowAIChat(false)}
+        ncrId={ncrId}
+        onAccept={handleAcceptAIRootCause}
       />
     </div>
   );
