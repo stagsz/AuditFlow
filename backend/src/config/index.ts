@@ -55,6 +55,12 @@ export const config = {
 
   autoSaveIntervalSeconds: 30,
 
+  // AI (root cause analysis agent)
+  ai: {
+    anthropicApiKey: process.env.ANTHROPIC_API_KEY || '',
+    model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-5',
+  },
+
   // Email
   email: {
     smtpHost: process.env.SMTP_HOST || '',

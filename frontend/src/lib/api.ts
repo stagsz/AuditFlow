@@ -290,6 +290,29 @@ export const nonConformitiesApi = {
     api.get(`/assessments/${assessmentId}/non-conformities/summary`),
 };
 
+export interface RootCauseChatMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+export interface RootCauseWhyStep {
+  question: string;
+  answer: string;
+}
+
+export interface RootCauseChatResult {
+  reply: string;
+  isComplete: boolean;
+  rootCause?: string;
+  whyChain?: RootCauseWhyStep[];
+  contributingFactors?: string[];
+}
+
+export const rootCauseAgentApi = {
+  chat: (ncrId: string, messages: RootCauseChatMessage[]) =>
+    api.post(`/non-conformities/${ncrId}/root-cause-agent/chat`, { messages }),
+};
+
 export const onboardingApi = {
   setup: (data: {
     firstName: string; lastName: string; email: string; password: string;
