@@ -16,6 +16,8 @@
         "@supabase/ssr": "^0.4.0",
         "@supabase/supabase-js": "^2.45.0",
         "@tanstack/react-query": "^5.17.9",
+        "@vercel/analytics": "^2.0.1",
+        "@vercel/speed-insights": "^2.0.0",
         "autoprefixer": "^10.4.17",
         "axios": "^1.6.5",
         "class-variance-authority": "^0.7.0",
