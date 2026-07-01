@@ -149,6 +149,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${ibmPlexSans.className} antialiased`}>
+        <Analytics />
+        <SpeedInsights />
         <Providers>{children}</Providers>
       </body>
     </html>
