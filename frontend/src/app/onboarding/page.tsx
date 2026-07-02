@@ -10,6 +10,7 @@ import Step2ReadinessCheck from '@/components/onboarding/Step2ReadinessCheck';
 import Step3Divisions from '@/components/onboarding/Step2Divisions';
 import Step4Departments from '@/components/onboarding/Step3Departments';
 import Step5Roles from '@/components/onboarding/Step4Roles';
+import Step6AIInterview from '@/components/onboarding/Step6AIInterview';
 import OnboardingComplete from '@/components/onboarding/OnboardingComplete';
 import { Loader2, CheckCircle } from 'lucide-react';
 
@@ -37,7 +38,8 @@ function OnboardingContent() {
     }
   }, [searchParams, betaInviteCode, betaInviteValidated, setBetaInviteCode, setBetaInviteValidated]);
 
-  if (step === 6) return <OnboardingComplete />;
+  if (step === 6) return <Step6AIInterview />;
+  if (step === 7) return <OnboardingComplete />;
 
   return (
     <OnboardingLayout step={step}>

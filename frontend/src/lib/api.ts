@@ -342,6 +342,23 @@ export const onboardingApi = {
   }) => api.post('/onboarding/setup-org', data),
 };
 
+export interface ProfileInterviewInsights {
+  priorityClauses: string[];
+  painPoints: string[];
+  summary: string;
+}
+
+export interface ProfileInterviewResult {
+  reply: string;
+  isComplete: boolean;
+  insights?: ProfileInterviewInsights;
+}
+
+export const organizationProfileAgentApi = {
+  chat: (messages: RootCauseChatMessage[]) =>
+    api.post('/organization-profile/agent/chat', { messages }),
+};
+
 export const orgInviteApi = {
   getOrg: (slug: string) => api.get(`/org/invite/${slug}`),
   join: (slug: string, data: { firstName: string; lastName: string; email: string; password: string }) =>

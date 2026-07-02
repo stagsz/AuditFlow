@@ -10,6 +10,7 @@ import { evidenceRouter, responseEvidenceRouter } from './evidenceRoutes';
 import { nonConformityRouter, assessmentNCRRouter } from './nonConformityRoutes';
 import { actionRouter, ncrActionRouter } from './correctiveActionRoutes';
 import onboardingRoutes from './onboardingRoutes';
+import organizationProfileRoutes from './organizationProfileRoutes';
 import orgInviteRoutes from './orgInviteRoutes';
 import betaInviteRoutes from './betaInviteRoutes';
 
@@ -32,6 +33,7 @@ router.use('/dashboard', dashboardRoutes);
 router.use('/users', userRoutes);
 router.use('/templates', templateRoutes);
 router.use('/onboarding', onboardingRoutes);
+router.use('/organization-profile', organizationProfileRoutes);
 router.use('/org', orgInviteRoutes);
 router.use('/', betaInviteRoutes);
 

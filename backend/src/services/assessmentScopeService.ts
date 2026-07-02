@@ -54,3 +54,23 @@ export function deriveAssessmentScope(profile?: ReadinessProfileData | null): Re
       return null;
   }
 }
+
+const VALID_CLAUSES = new Set(['4', '5', '6', '7', '8', '9', '10']);
+
+/**
+ * Folds AI-interview-identified priority clauses into an existing template's
+ * clause scope. A `null` currentIncludedClauses means "full assessment" —
+ * already covers everything, so there's nothing to add. Otherwise returns
+ * the sorted union, so the template stays an editable default rather than a
+ * silently different recommendation.
+ */
+export function mergeAIPriorityClauses(
+  currentIncludedClauses: string[] | null,
+  priorityClauses: string[]
+): string[] | null {
+  if (currentIncludedClauses === null) return null;
+
+  const valid = priorityClauses.filter((c) => VALID_CLAUSES.has(c));
+  const merged = new Set([...currentIncludedClauses, ...valid]);
+  return Array.from(merged).sort((a, b) => Number(a) - Number(b));
+}
