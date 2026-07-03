@@ -128,7 +128,7 @@ model Organization {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   slug          String?  @unique
-  setupComplete Boolean  @default(false) @map("setup_complete")
+  setupComplete Boolean  @default(false)
   industry      String?
   country       String?
 
@@ -234,7 +234,7 @@ model User {
   assignedActions   CorrectiveAction[] @relation("AssignedActions")
   verifiedActions   CorrectiveAction[] @relation("VerifiedActions")
   refreshToken      String?
-  orgRoleId         String?        @map("org_role_id")
+  orgRoleId         String?
   orgRole           OrgRole?       @relation(fields: [orgRoleId], references: [id])
   invites           UserOrgInvite[]
   betaInvitesCreated BetaInvite[] @relation("BetaInviteCreatedBy")
@@ -432,8 +432,8 @@ model CorrectiveAction {
 model Division {
   id             String       @id @default(uuid())
   name           String
-  createdAt      DateTime     @default(now()) @map("created_at")
-  organizationId String       @map("organization_id")
+  createdAt      DateTime     @default(now())
+  organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])
   departments    Department[]
 
@@ -444,10 +444,10 @@ model Division {
 model Department {
   id             String       @id @default(uuid())
   name           String
-  createdAt      DateTime     @default(now()) @map("created_at")
-  organizationId String       @map("organization_id")
+  createdAt      DateTime     @default(now())
+  organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])
-  divisionId     String?      @map("division_id")
+  divisionId     String?
   division       Division?    @relation(fields: [divisionId], references: [id])
 
   @@index([organizationId])
@@ -458,10 +458,10 @@ model Department {
 model OrgRole {
   id              String          @id @default(uuid())
   name            String
-  permissionLevel PermissionLevel @map("permission_level")
-  isDefault       Boolean         @default(false) @map("is_default")
-  createdAt       DateTime        @default(now()) @map("created_at")
-  organizationId  String          @map("organization_id")
+  permissionLevel PermissionLevel
+  isDefault       Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  organizationId  String
   organization    Organization    @relation(fields: [organizationId], references: [id])
   users           User[]
 
@@ -472,10 +472,10 @@ model OrgRole {
 model UserOrgInvite {
   id             String       @id @default(uuid())
   status         InviteStatus @default(PENDING)
-  createdAt      DateTime     @default(now()) @map("created_at")
-  userId         String       @map("user_id")
+  createdAt      DateTime     @default(now())
+  userId         String
   user           User         @relation(fields: [userId], references: [id])
-  organizationId String       @map("organization_id")
+  organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id])
 
   @@index([userId])
