@@ -6,9 +6,11 @@ import { useOnboardingStore } from '@/stores/onboardingStore';
 import { betaInviteApi } from '@/lib/api';
 import OnboardingLayout from '@/components/onboarding/OnboardingLayout';
 import Step1CompanyInfo from '@/components/onboarding/Step1CompanyInfo';
-import Step2Divisions from '@/components/onboarding/Step2Divisions';
-import Step3Departments from '@/components/onboarding/Step3Departments';
-import Step4Roles from '@/components/onboarding/Step4Roles';
+import Step2ReadinessCheck from '@/components/onboarding/Step2ReadinessCheck';
+import Step3Divisions from '@/components/onboarding/Step2Divisions';
+import Step4Departments from '@/components/onboarding/Step3Departments';
+import Step5Roles from '@/components/onboarding/Step4Roles';
+import Step6AIInterview from '@/components/onboarding/Step6AIInterview';
 import OnboardingComplete from '@/components/onboarding/OnboardingComplete';
 import { Loader2, CheckCircle } from 'lucide-react';
 
@@ -36,14 +38,16 @@ function OnboardingContent() {
     }
   }, [searchParams, betaInviteCode, betaInviteValidated, setBetaInviteCode, setBetaInviteValidated]);
 
-  if (step === 5) return <OnboardingComplete />;
+  if (step === 6) return <Step6AIInterview />;
+  if (step === 7) return <OnboardingComplete />;
 
   return (
     <OnboardingLayout step={step}>
       {step === 1 && <Step1CompanyInfo />}
-      {step === 2 && <Step2Divisions />}
-      {step === 3 && <Step3Departments />}
-      {step === 4 && <Step4Roles />}
+      {step === 2 && <Step2ReadinessCheck />}
+      {step === 3 && <Step3Divisions />}
+      {step === 4 && <Step4Departments />}
+      {step === 5 && <Step5Roles />}
     </OnboardingLayout>
   );
 }

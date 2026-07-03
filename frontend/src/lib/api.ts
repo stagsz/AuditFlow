@@ -313,10 +313,21 @@ export const rootCauseAgentApi = {
     api.post(`/non-conformities/${ncrId}/root-cause-agent/chat`, { messages }),
 };
 
+export interface OnboardingReadinessProfile {
+  companySize?: string;
+  qmsStatus?: string;
+  certificationStatus?: string;
+  lastAuditSummary?: string;
+  improvementNotes?: string;
+  standardsKnowledgeLevel?: string;
+  hoursPerWeek?: number;
+}
+
 export const onboardingApi = {
   setup: (data: {
     firstName: string; lastName: string; email: string; password: string;
     company: { name: string; slug: string; industry?: string; country?: string };
+    profile?: OnboardingReadinessProfile;
     divisions: { name: string }[];
     departments: { name: string; divisionIndex?: number }[];
     roles: { name: string; permissionLevel: string }[];
@@ -324,10 +335,28 @@ export const onboardingApi = {
   checkSlug: (slug: string) => api.get(`/onboarding/check-slug/${slug}`),
   setupOrg: (data: {
     company: { name: string; slug: string; industry?: string; country?: string };
+    profile?: OnboardingReadinessProfile;
     divisions: { name: string }[];
     departments: { name: string; divisionIndex?: number }[];
     roles: { name: string; permissionLevel: string }[];
   }) => api.post('/onboarding/setup-org', data),
+};
+
+export interface ProfileInterviewInsights {
+  priorityClauses: string[];
+  painPoints: string[];
+  summary: string;
+}
+
+export interface ProfileInterviewResult {
+  reply: string;
+  isComplete: boolean;
+  insights?: ProfileInterviewInsights;
+}
+
+export const organizationProfileAgentApi = {
+  chat: (messages: RootCauseChatMessage[]) =>
+    api.post('/organization-profile/agent/chat', { messages }),
 };
 
 export const orgInviteApi = {

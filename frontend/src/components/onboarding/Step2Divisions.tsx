@@ -62,13 +62,13 @@ export default function Step2Divisions() {
       )}
 
       <div className="flex gap-2 pt-2">
-        <Button type="button" variant="outline" className="flex-1" onClick={() => setStep(1)}>
+        <Button type="button" variant="outline" className="flex-1" onClick={() => setStep(2)}>
           Back
         </Button>
-        <Button type="button" variant="outline" className="flex-1" onClick={() => setStep(3)}>
+        <Button type="button" variant="outline" className="flex-1" onClick={() => setStep(4)}>
           Skip
         </Button>
-        <Button type="button" className="flex-1" onClick={() => setStep(3)}>
+        <Button type="button" className="flex-1" onClick={() => setStep(4)}>
           Continue
         </Button>
       </div>

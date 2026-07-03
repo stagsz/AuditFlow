@@ -42,6 +42,7 @@ export default function Step4Roles() {
     try {
       const orgData = {
         company: store.company,
+        profile: store.profile,
         divisions: store.divisions.map((d) => ({ name: d.name })),
         departments: store.departments.map((d) => ({
           name: d.name,
@@ -69,7 +70,7 @@ export default function Step4Roles() {
       }
 
       store.setInviteUrl(inviteUrl);
-      store.setStep(5);
+      store.setStep(6);
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { message?: string } } })?.response?.data?.message ??
@@ -133,7 +134,7 @@ export default function Step4Roles() {
       )}
 
       <div className="flex gap-2 pt-2">
-        <Button type="button" variant="outline" className="flex-1" onClick={() => store.setStep(3)}>
+        <Button type="button" variant="outline" className="flex-1" onClick={() => store.setStep(4)}>
           Back
         </Button>
         <Button type="button" className="flex-1" onClick={handleFinish} loading={isSubmitting}>
