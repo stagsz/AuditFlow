@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { Prisma } from '@prisma/client';
 import { prisma } from '../config/database';
 import { config } from '../config';
 import { NotFoundError, ValidationError } from '../utils/errors';
@@ -120,7 +121,7 @@ export const organizationProfileAgentService = {
       await prisma.organizationProfile.update({
         where: { organizationId },
         data: {
-          aiProfile: insights,
+          aiProfile: insights as unknown as Prisma.InputJsonValue,
           interviewTranscript: [...messages, { role: 'assistant', content: textBlock?.text ?? '' }],
         },
       });

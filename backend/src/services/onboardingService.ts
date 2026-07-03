@@ -45,7 +45,7 @@ async function seedStarterTemplates(
       name: 'Full ISO 9001:2015 Assessment',
       description: 'Comprehensive assessment covering all clauses (4-10) of ISO 9001:2015.',
       isDefault: !recommended,
-      includedClauses: null,
+      includedClauses: Prisma.JsonNull,
       organizationId,
     },
   });
