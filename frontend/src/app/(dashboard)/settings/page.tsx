@@ -15,10 +15,10 @@ const roleLabels: Record<string, string> = {
 };
 
 const roleColors: Record<string, string> = {
-  SYSTEM_ADMIN: 'bg-purple-100 text-purple-700',
-  QUALITY_MANAGER: 'bg-blue-50 text-blue-700',
-  INTERNAL_AUDITOR: 'bg-green-50 text-green-700',
-  DEPARTMENT_HEAD: 'bg-orange-100 text-orange-700',
+  SYSTEM_ADMIN: 'bg-purple-500/15 text-purple-300',
+  QUALITY_MANAGER: 'bg-blue-500/15 text-blue-300',
+  INTERNAL_AUDITOR: 'bg-[var(--status-pass-bg)] text-[var(--status-pass-fg)]',
+  DEPARTMENT_HEAD: 'bg-orange-500/15 text-orange-300',
   VIEWER: 'bg-[var(--surface-sunken)] text-[var(--text-body)]',
 };
 
@@ -183,7 +183,7 @@ export default function SettingsPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-full bg-[var(--brand)] flex items-center justify-center text-white text-xl font-semibold">
+            <div className="h-16 w-16 rounded-full bg-[var(--brand)] flex items-center justify-center text-[var(--text-on-brand)] text-xl font-semibold">
               {user.firstName?.[0]?.toUpperCase() || ''}
               {user.lastName?.[0]?.toUpperCase() || ''}
             </div>
@@ -204,7 +204,7 @@ export default function SettingsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-[var(--border-subtle)]">
             <ProfileField
               icon={<User className="h-5 w-5" />}
               label="Full Name"
@@ -244,7 +244,7 @@ export default function SettingsPage() {
           <CardDescription>Your account details and membership information</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-[var(--border-subtle)]">
             <ProfileField
               icon={<Calendar className="h-5 w-5" />}
               label="Account ID"
@@ -295,7 +295,7 @@ export default function SettingsPage() {
                       <ul className="space-y-1">
                         {perm.access.map((item, itemIdx) => (
                           <li key={itemIdx} className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                            <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <Check className="h-4 w-4 text-[var(--status-pass-fg)] mt-0.5 flex-shrink-0" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -351,7 +351,7 @@ export default function SettingsPage() {
                           <ul className="space-y-0.5">
                             {perm.access.map((item, itemIdx) => (
                               <li key={itemIdx} className="flex items-start gap-1.5 text-xs text-[var(--text-muted)]">
-                                <Check className="h-3 w-3 text-green-600 mt-0.5 flex-shrink-0" />
+                                <Check className="h-3 w-3 text-[var(--status-pass-fg)] mt-0.5 flex-shrink-0" />
                                 <span>{item}</span>
                               </li>
                             ))}
@@ -367,9 +367,9 @@ export default function SettingsPage() {
 
           {/* Help Text */}
           <div className="pt-6 border-t border-[var(--border-subtle)]">
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-              <h4 className="text-sm font-semibold text-blue-900 mb-2">Need Different Access?</h4>
-              <p className="text-sm text-blue-800">
+            <div className="bg-[var(--brand-soft)] border border-[var(--border-default)] rounded-xl p-4">
+              <h4 className="text-sm font-semibold text-[var(--text-link)] mb-2">Need Different Access?</h4>
+              <p className="text-sm text-[var(--text-body)]">
                 Contact your System Administrator or Quality Manager to request a role change. Role changes require approval and will be reviewed based on your responsibilities.
               </p>
             </div>

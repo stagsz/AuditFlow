@@ -52,8 +52,8 @@ function NavLink({ item, isMobile = false }: { item: NavItem; isMobile?: boolean
         'flex items-center py-3 rounded-2xl transition-all duration-200 group relative',
         showLabel ? 'gap-3 px-4' : 'justify-center px-2',
         isActive
-          ? 'bg-[var(--surface-sunken)] text-[var(--text-body)] shadow-[var(--shadow-sm)]'
-          : 'text-[var(--text-muted)] hover:bg-[var(--surface-sunken)] hover:text-[var(--text-body)]'
+          ? 'bg-[var(--brand-soft)] text-[var(--text-link)] shadow-[var(--shadow-sm)]'
+          : 'text-[var(--text-muted)] hover:bg-[var(--surface-raised)] hover:text-[var(--text-body)]'
       )}
     >
       {isActive && (
@@ -70,7 +70,7 @@ function NavLink({ item, isMobile = false }: { item: NavItem; isMobile?: boolean
         <>
           <span className={clsx(
             'text-sm font-semibold',
-            isActive ? 'text-[var(--text-strong)]' : 'text-[var(--text-muted)]'
+            isActive ? 'text-[var(--text-link)]' : 'text-[var(--text-muted)]'
           )}>
             {item.name}
           </span>
@@ -118,7 +118,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className={`flex px-3 mb-10 ${sidebarOpen || isMobile ? 'items-center justify-between' : 'flex-col items-center gap-3 px-0'}`}>
         <div className="flex items-center gap-3 cursor-pointer">
-          <div className="w-10 h-10 rounded-2xl bg-[var(--brand)] shadow-[var(--shadow-lg)] flex items-center justify-center text-white flex-shrink-0">
+          <div className="w-10 h-10 rounded-2xl bg-[var(--brand)] shadow-[var(--shadow-lg)] flex items-center justify-center text-[var(--text-on-brand)] flex-shrink-0">
             <ShieldCheck size={22} />
           </div>
           {(sidebarOpen || isMobile) && (
@@ -151,7 +151,7 @@ export function Sidebar() {
         <div className="px-4 mb-4">
           <Link
             href="/assessments/new"
-            className="flex items-center justify-center gap-2 rounded-full bg-[var(--brand)] px-4 py-2.5 text-sm font-semibold text-white shadow-[var(--shadow-sm)] hover:bg-[var(--brand-strong)] transition-colors"
+            className="flex items-center justify-center gap-2 rounded-full bg-[var(--brand)] px-4 py-2.5 text-sm font-semibold text-[var(--text-on-brand)] shadow-[var(--shadow-sm)] hover:bg-[var(--brand-strong)] transition-colors"
           >
             <ClipboardCheck size={16} />
             New assessment
@@ -186,7 +186,7 @@ export function Sidebar() {
       {/* User card */}
       {user && (sidebarOpen || isMobile) && (
         <div className="mt-auto bg-[var(--surface-card)] rounded-3xl p-4 shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] flex items-center gap-3 cursor-pointer hover:shadow-[var(--shadow-md)] transition-shadow">
-          <div className="w-10 h-10 rounded-full bg-[var(--brand)] flex items-center justify-center text-white text-sm font-bold flex-shrink-0 border-2 border-[var(--surface-card)] shadow-[var(--shadow-sm)]">
+          <div className="w-10 h-10 rounded-full bg-[var(--brand)] flex items-center justify-center text-[var(--text-on-brand)] text-sm font-bold flex-shrink-0 border-2 border-[var(--surface-card)] shadow-[var(--shadow-sm)]">
             {user.firstName[0]}{user.lastName[0]}
           </div>
           <div className="flex-1 min-w-0">
@@ -204,7 +204,7 @@ export function Sidebar() {
       {/* Collapsed user avatar */}
       {user && !sidebarOpen && !isMobile && (
         <div className="mt-auto flex justify-center">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--brand)] to-[var(--brand-strong)] flex items-center justify-center text-white text-sm font-bold border-2 border-white shadow-[var(--shadow-sm)]">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--brand)] to-[var(--brand-strong)] flex items-center justify-center text-[var(--text-on-brand)] text-sm font-bold border-2 border-[var(--sidebar-bg)] shadow-[var(--shadow-sm)]">
             {user.firstName[0]}{user.lastName[0]}
           </div>
         </div>

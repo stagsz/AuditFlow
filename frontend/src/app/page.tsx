@@ -4,84 +4,83 @@ import Link from 'next/link';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-[#f9f8f6] text-[#0e1117] antialiased">
+    <div className="min-h-screen bg-[var(--surface-page)] text-[var(--text-body)] antialiased">
 
       {/* ===== NAV ===== */}
-      <nav className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#e4e2dd] bg-[#f9f8f6]/88 px-6 md:px-10 backdrop-blur-md">
-        <Link href="/" className="text-sm font-semibold tracking-tight">
-          Audit<span className="text-[#0f766e]">Flow</span>
+      <nav className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[var(--border-subtle)] bg-[rgba(7,13,15,0.85)] px-6 md:px-10 backdrop-blur-md">
+        <Link href="/" className="text-sm font-semibold tracking-tight text-[var(--text-strong)]">
+          Audit<span className="text-[var(--brand)]">Flow</span>
         </Link>
         <div className="hidden items-center gap-8 md:flex">
-          <Link href="#features" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Features</Link>
-          <Link href="#how" className="text-sm text-[#6b7280] hover:text-[#0e1117]">How it works</Link>
-          <Link href="#pricing" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Pricing</Link>
-          <Link href="/blog" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Blog</Link>
-          <Link href="/register" className="rounded-md bg-[#0e1117] px-4 py-2 text-sm font-medium text-white hover:bg-[#0f766e]">Start 30-day free trial</Link>
+          <Link href="#features" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Features</Link>
+          <Link href="#how" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">How it works</Link>
+          <Link href="#pricing" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Pricing</Link>
+          <Link href="/blog" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Blog</Link>
+          <Link href="/register" className="btn-primary !px-4 !py-2">Start 30-day free trial</Link>
         </div>
       </nav>
 
       {/* ===== HERO ===== */}
-      <div className="mx-auto max-w-7xl md:px-10">
+      <div className="aurora-bg mx-auto max-w-7xl md:px-10">
         <div className="grid items-center gap-8 px-6 pt-28 pb-8 md:grid-cols-2 md:gap-12 md:pt-40 md:pb-14">
           <div>
-            <div className="mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.12em] text-[#0f766e]">
-              <span className="block h-px w-5 bg-[#0f766e]" />
+            <div className="hero-eyebrow">
               ISO 9001 Quality Management
             </div>
-            <h1 className="font-serif text-[clamp(36px,5vw,58px)] leading-[1.08] tracking-[-0.01em]">
-              Audit with <em className="text-[#0f766e]">confidence,</em> not paperwork.
+            <h1 className="font-serif text-[clamp(36px,5vw,58px)] leading-[1.08] tracking-[-0.01em] text-[var(--text-strong)]">
+              Audit with <em className="text-[var(--text-link)]">confidence,</em> not paperwork.
             </h1>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-[#6b7280]">
+            <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--text-muted)]">
               Replace spreadsheets and email chains with one platform for self-assessments, audits, NCR tracking, and CAPA.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <Link href="/register" className="inline-flex items-center rounded-md bg-[#0f766e] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0a5c55]">Start 30-day free trial</Link>
-              <Link href="#how" className="inline-flex items-center gap-2 text-sm text-[#0e1117] border-b border-[#e4e2dd] pb-[1px] hover:border-[#0e1117]">
+              <Link href="/register" className="btn-primary">Start 30-day free trial</Link>
+              <Link href="#how" className="inline-flex items-center gap-2 text-sm text-[var(--text-strong)] border-b border-[var(--border-default)] pb-[1px] hover:border-[var(--text-strong)]">
                 See how it works <span aria-hidden>→</span>
               </Link>
             </div>
           </div>
 
           <div className="hidden md:block">
-            <div className="rounded-xl border border-white/5 bg-[#1c2230] p-6 shadow-2xl shadow-[#0e1117]/12">
+            <div className="glass-card rounded-xl p-6">
               <div className="flex items-center gap-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                <span className="ml-1 text-xs text-white/30">AuditFlow — Dashboard</span>
+                <span className="ml-1 text-xs text-[var(--text-subtle)]">AuditFlow — Dashboard</span>
               </div>
               <div className="mt-4 grid grid-cols-3 gap-3">
-                <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">
-                  <div className="text-lg font-semibold text-white tracking-tight">94%</div>
-                  <div className="text-[11px] text-white/40">Compliance score</div>
-                  <div className="mt-1 text-[11px] text-[var(--brand-soft)]">↑ 6% this quarter</div>
+                <div className="rounded-lg border border-[var(--border-subtle)] bg-white/[0.04] p-3">
+                  <div className="text-lg font-semibold text-[var(--text-strong)] tracking-tight">94%</div>
+                  <div className="text-[11px] text-[var(--text-muted)]">Compliance score</div>
+                  <div className="mt-1 text-[11px] text-[var(--brand)]">↑ 6% this quarter</div>
                 </div>
-                <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">
-                  <div className="text-lg font-semibold text-white tracking-tight">12</div>
-                  <div className="text-[11px] text-white/40">Open NCRs</div>
-                  <div className="mt-1 text-[11px] text-[var(--brand-soft)]">↓ 4 from last audit</div>
+                <div className="rounded-lg border border-[var(--border-subtle)] bg-white/[0.04] p-3">
+                  <div className="text-lg font-semibold text-[var(--text-strong)] tracking-tight">12</div>
+                  <div className="text-[11px] text-[var(--text-muted)]">Open NCRs</div>
+                  <div className="mt-1 text-[11px] text-[var(--brand)]">↓ 4 from last audit</div>
                 </div>
-                <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">
-                  <div className="text-lg font-semibold text-white tracking-tight">3</div>
-                  <div className="text-[11px] text-white/40">Audits this month</div>
-                  <div className="mt-1 text-[11px] text-[var(--brand-soft)]">On schedule</div>
+                <div className="rounded-lg border border-[var(--border-subtle)] bg-white/[0.04] p-3">
+                  <div className="text-lg font-semibold text-[var(--text-strong)] tracking-tight">3</div>
+                  <div className="text-[11px] text-[var(--text-muted)]">Audits this month</div>
+                  <div className="mt-1 text-[11px] text-[var(--brand)]">On schedule</div>
                 </div>
               </div>
               <div className="mt-3 flex flex-col gap-2">
-                <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
-                  <span className="rounded bg-[var(--status-fail-solid)]/15 px-2 py-0.5 text-[10px] font-medium text-red-300">Open</span>
-                  <span className="flex-1 truncate text-xs text-white/55">Calibration records missing — Clause 7.1.5</span>
-                  <span className="text-[11px] text-white/25">May 28</span>
+                <div className="flex items-center gap-2 rounded-md bg-white/[0.03] border border-[var(--border-subtle)] px-3 py-2">
+                  <span className="badge-open">Open</span>
+                  <span className="flex-1 truncate text-xs text-[var(--text-body)]">Calibration records missing — Clause 7.1.5</span>
+                  <span className="text-[11px] text-[var(--text-subtle)]">May 28</span>
                 </div>
-                <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
-                  <span className="rounded bg-amber-300/15 px-2 py-0.5 text-[10px] font-medium text-amber-200">Review</span>
-                  <span className="flex-1 truncate text-xs text-white/55">Supplier qualification procedure update</span>
-                  <span className="text-[11px] text-white/25">May 26</span>
+                <div className="flex items-center gap-2 rounded-md bg-white/[0.03] border border-[var(--border-subtle)] px-3 py-2">
+                  <span className="badge-review">Review</span>
+                  <span className="flex-1 truncate text-xs text-[var(--text-body)]">Supplier qualification procedure update</span>
+                  <span className="text-[11px] text-[var(--text-subtle)]">May 26</span>
                 </div>
-                <div className="flex items-center gap-2 rounded-md bg-[var(--surface-card)]/4 border border-white/5 px-3 py-2">
-                  <span className="rounded bg-[var(--brand-soft)] px-2 py-0.5 text-[10px] font-medium text-[var(--brand)]">Closed</span>
-                  <span className="flex-1 truncate text-xs text-white/55">Internal audit report Q1 — Clause 9.2</span>
-                  <span className="text-[11px] text-white/25">May 20</span>
+                <div className="flex items-center gap-2 rounded-md bg-white/[0.03] border border-[var(--border-subtle)] px-3 py-2">
+                  <span className="badge-closed">Closed</span>
+                  <span className="flex-1 truncate text-xs text-[var(--text-body)]">Internal audit report Q1 — Clause 9.2</span>
+                  <span className="text-[11px] text-[var(--text-subtle)]">May 20</span>
                 </div>
               </div>
             </div>
@@ -90,64 +89,62 @@ export default function LandingPage() {
       </div>
 
       {/* ===== FEATURES ===== */}
-      <section id="features" className="border-t border-b border-[#e4e2dd] bg-[var(--surface-card)]">
+      <section id="features" className="border-t border-b border-[var(--border-subtle)] bg-[var(--ink-1)]">
         <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
           <div className="mb-16">
-            <div className="mb-3 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.1em] text-[#0f766e]">
-              <span className="block h-px w-4 bg-[#0f766e]" />
+            <div className="section-label">
               Platform capabilities
             </div>
-            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight">Everything a QMS needs.<br />Nothing it doesn&apos;t.</h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#6b7280]">
+            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight text-[var(--text-strong)]">Everything a QMS needs.<br />Nothing it doesn&apos;t.</h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">
               Built specifically for ISO 9001 — not a generic task tracker retrofitted with compliance labels.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-            <div className="rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
-              <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">01</div>
-              <div className="mt-4 text-sm font-medium text-[#0e1117]">Self-Assessment Management</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">Guided clause-by-clause workflows for ISO 9001 self-assessments with evidence collection, scoring, and gap analysis.</p>
+            <div className="feat-card rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
+              <div className="text-xs font-medium tracking-[0.06em] text-[var(--brand)]">01</div>
+              <div className="mt-4 text-sm font-medium text-[var(--text-strong)]">Self-Assessment Management</div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Guided clause-by-clause workflows for ISO 9001 self-assessments with evidence collection, scoring, and gap analysis.</p>
             </div>
-            <div className="rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
-              <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">02</div>
-              <div className="mt-4 text-sm font-medium text-[#0e1117]">Audit Planning & Execution</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">Schedule audits, assign auditors, define scope, and run structured sessions with real-time progress tracking.</p>
+            <div className="feat-card rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
+              <div className="text-xs font-medium tracking-[0.06em] text-[var(--brand)]">02</div>
+              <div className="mt-4 text-sm font-medium text-[var(--text-strong)]">Audit Planning & Execution</div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Schedule audits, assign auditors, define scope, and run structured sessions with real-time progress tracking.</p>
             </div>
-            <div className="rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
-              <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">03</div>
-              <div className="mt-4 text-sm font-medium text-[#0e1117]">Non-Conformity Tracking</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">Document, grade, and assign NCRs with full audit trail from discovery through resolution.</p>
+            <div className="feat-card rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
+              <div className="text-xs font-medium tracking-[0.06em] text-[var(--brand)]">03</div>
+              <div className="mt-4 text-sm font-medium text-[var(--text-strong)]">Non-Conformity Tracking</div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Document, grade, and assign NCRs with full audit trail from discovery through resolution.</p>
             </div>
-            <div className="rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
-              <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">04</div>
-              <div className="mt-4 text-sm font-medium text-[#0e1117]">Corrective Actions (CAPA)</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">Root cause analysis, planning, owner assignment, and effectiveness verification in one closed loop.</p>
+            <div className="feat-card rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
+              <div className="text-xs font-medium tracking-[0.06em] text-[var(--brand)]">04</div>
+              <div className="mt-4 text-sm font-medium text-[var(--text-strong)]">Corrective Actions (CAPA)</div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Root cause analysis, planning, owner assignment, and effectiveness verification in one closed loop.</p>
             </div>
-            <div className="rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
-              <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">05</div>
-              <div className="mt-4 text-sm font-medium text-[#0e1117]">Reporting & Analytics</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">Executive dashboards, trend analysis, and compliance reports for management reviews and audits.</p>
+            <div className="feat-card rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
+              <div className="text-xs font-medium tracking-[0.06em] text-[var(--brand)]">05</div>
+              <div className="mt-4 text-sm font-medium text-[var(--text-strong)]">Reporting & Analytics</div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Executive dashboards, trend analysis, and compliance reports for management reviews and audits.</p>
             </div>
-            <div className="rounded-lg border border-[#e4e2dd] bg-[var(--surface-card)] p-6">
-              <div className="text-xs font-medium tracking-[0.06em] text-[#0f766e]">06</div>
-              <div className="mt-4 text-sm font-medium text-[#0e1117]">Role-Based Access Control</div>
-              <p className="mt-2 text-sm leading-relaxed text-[#6b7280]">Admin, Quality Manager, and Auditor roles with granular permissions — each user sees only what they need.</p>
+            <div className="feat-card rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
+              <div className="text-xs font-medium tracking-[0.06em] text-[var(--brand)]">06</div>
+              <div className="mt-4 text-sm font-medium text-[var(--text-strong)]">Role-Based Access Control</div>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">Admin, Quality Manager, and Auditor roles with granular permissions — each user sees only what they need.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== HOW ===== */}
-      <section id="how" className="relative bg-[#0e1117] overflow-hidden">
+      <section id="how" className="relative bg-[var(--surface-page)] overflow-hidden">
         <div className="pointer-events-none absolute -top-48 left-1/2 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(15,118,110,0.35)_0%,transparent_70%)]" aria-hidden />
         <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
           <div className="mb-16">
-            <div className="mb-3 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.1em] text-[var(--brand-soft)]">
-              <span className="block h-px w-4 bg-[var(--brand-soft)]" />
+            <div className="section-label">
               Workflow
             </div>
-            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight text-white">From assessment to certification-ready.</h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/55">A structured four-step process that mirrors how your certification body evaluates your QMS.</p>
+            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight text-[var(--text-strong)]">From assessment to certification-ready.</h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--text-muted)]">A structured four-step process that mirrors how your certification body evaluates your QMS.</p>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
             {[
@@ -156,13 +153,13 @@ export default function LandingPage() {
               {title:'Manage findings',desc:'Raise non-conformities and observations, assign owners, due dates, and corrective actions.'},
               {title:'Close the loop',desc:'Track CAPA completion, verify effectiveness, and generate the final audit report in one click.'},
             ].map((item, idx) => (
-              <div key={item.title} className="relative rounded-lg border border-white/8 bg-[var(--surface-card)]/[0.04] p-5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-md text-xs font-semibold" style={{background: ['rgba(251,146,60,0.15)','rgba(96,165,250,0.15)','rgba(167,139,250,0.15)','rgba(52,211,153,0.15)'][idx], border: `1px solid ${['rgba(251,146,60,0.25)','rgba(96,165,250,0.25)','rgba(167,139,250,0.25)','rgba(52,211,153,0.25)'][idx]}`}}>
+              <div key={item.title} className="relative rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-md text-xs font-semibold text-[var(--text-strong)]" style={{background: ['rgba(251,146,60,0.15)','rgba(96,165,250,0.15)','rgba(167,139,250,0.15)','rgba(52,211,153,0.15)'][idx], border: `1px solid ${['rgba(251,146,60,0.25)','rgba(96,165,250,0.25)','rgba(167,139,250,0.25)','rgba(52,211,153,0.25)'][idx]}`}}>
                   {idx + 1}
                 </div>
                 <div className="mt-3 h-1 w-5 rounded-full" style={{background: ['#fb923c','#60a5fa','#a78bfa','#34d399'][idx]}} />
-                <div className="mt-3 text-sm font-medium text-white">{item.title}</div>
-                <p className="mt-1.5 text-xs leading-relaxed text-white/50">{item.desc}</p>
+                <div className="mt-3 text-sm font-medium text-[var(--text-strong)]">{item.title}</div>
+                <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-muted)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -170,116 +167,115 @@ export default function LandingPage() {
       </section>
 
       {/* ===== PRICING ===== */}
-      <section id="pricing" className="bg-[#f9f8f6]">
+      <section id="pricing" className="bg-[var(--surface-page)]">
         <div className="mx-auto max-w-7xl px-6 py-20 md:px-10">
           <div className="mb-16 text-center">
-            <div className="mx-auto mb-3 flex w-fit items-center gap-3 text-xs font-medium uppercase tracking-[0.1em] text-[#0f766e]">
-              <span className="block h-px w-4 bg-[#0f766e]" />
+            <div className="section-label">
               Pricing
             </div>
-            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight">Straightforward plans. No surprises.</h2>
-            <p className="mt-3 text-sm leading-relaxed text-[#6b7280]">All plans include full ISO 9001:2015 clause coverage. Free while in beta.</p>
+            <h2 className="font-serif text-[clamp(28px,4vw,44px)] leading-[1.12] tracking-tight text-[var(--text-strong)]">Straightforward plans. No surprises.</h2>
+            <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">All plans include full ISO 9001:2015 clause coverage. Free while in beta.</p>
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-            <div className="rounded-xl border border-[#e4e2dd] bg-[var(--surface-card)] p-7">
-              <div className="text-xs font-medium uppercase tracking-[0.06em] text-white/50">Free</div>
+            <div className="plan-card">
+              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[var(--text-muted)]">Free</div>
               <div className="mt-2 flex items-baseline gap-1">
-                <div className="text-4xl font-semibold tracking-tight">€0</div>
-                <div className="text-xs text-white/60">forever</div>
+                <div className="text-4xl font-semibold tracking-tight text-[var(--text-strong)]">€0</div>
+                <div className="text-xs text-[var(--text-subtle)]">forever</div>
               </div>
-              <div className="mt-1 text-xs text-white/50">Up to 10 users</div>
-              <div className="my-5 h-px bg-[var(--surface-card)]/10" />
-              <ul className="flex flex-col gap-2 text-sm text-[#6b7280]">
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> Unlimited audits</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> Self-assessment module</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> NCR & CAPA tracking</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> Basic reporting & dashboards</li>
+              <div className="mt-1 text-xs text-[var(--text-muted)]">Up to 10 users</div>
+              <div className="plan-divider" />
+              <ul className="flex flex-col gap-2 text-sm text-[var(--text-body)]">
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Unlimited audits</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Self-assessment module</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> NCR & CAPA tracking</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Basic reporting & dashboards</li>
               </ul>
-              <Link href="/register" className="mt-6 block w-full rounded-lg bg-[var(--surface-card)] py-2.5 text-center text-sm font-medium text-[#0e1117] hover:bg-[#d1fae5]">Start 30-day trial</Link>
+              <Link href="/register" className="mt-6 block w-full rounded-lg border border-[var(--border-default)] py-2.5 text-center text-sm font-medium text-[var(--text-strong)] hover:border-[var(--border-strong)] hover:bg-white/[0.04]">Start 30-day trial</Link>
             </div>
 
-            <div className="rounded-xl border border-[#e4e2dd] bg-[var(--surface-card)] p-7">
-              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[#6b7280]">Professional</div>
+            <div className="plan-card plan-card-featured">
+              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[var(--text-muted)]">Professional</div>
               <div className="mt-2 flex items-baseline gap-1">
-                <div className="text-4xl font-semibold tracking-tight">€0</div>
-                <div className="text-xs text-white/60">per month</div>
+                <div className="text-4xl font-semibold tracking-tight text-[var(--text-strong)]">€0</div>
+                <div className="text-xs text-[var(--text-subtle)]">per month</div>
               </div>
-              <div className="mt-1 text-xs text-white/50">Up to 50 users</div>
-              <div className="my-5 h-px bg-[var(--surface-card)]/10" />
-              <ul className="flex flex-col gap-2 text-sm text-[#6b7280]">
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Everything in Free</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Advanced analytics & custom dashboards</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Evidence attachment & storage</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Audit report generation (PDF)</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[#0f766e]">✓</span> Role-based access control</li>
+              <div className="mt-1 text-xs text-[var(--text-muted)]">Up to 50 users</div>
+              <div className="plan-divider" />
+              <ul className="flex flex-col gap-2 text-sm text-[var(--text-body)]">
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Everything in Free</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Advanced analytics & custom dashboards</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Evidence attachment & storage</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Audit report generation (PDF)</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Role-based access control</li>
               </ul>
-              <Link href="/register" className="mt-6 block w-full rounded-lg border border-[#0f766e] bg-[#0f766e] py-2.5 text-center text-sm font-medium text-white hover:bg-[#0a5c55]">Start 30-day trial</Link>
+              <Link href="/register" className="btn-primary mt-6 w-full">Start 30-day trial</Link>
             </div>
 
-            <div className="rounded-xl border border-[#e4e2dd] bg-[var(--surface-card)] p-7">
-              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[#6b7280]">Enterprise</div>
-              <div className="mt-2 text-4xl font-semibold tracking-tight">Custom</div>
-              <div className="mt-1 text-xs text-[#6b7280]">50+ users</div>
-              <div className="my-5 h-px bg-[var(--surface-card)]/10" />
-              <ul className="flex flex-col gap-2 text-sm text-[#6b7280]">
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> SSO / SAML integration</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> Custom audit templates</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> API access</li>
-                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand-soft)]">✓</span> SLA-backed support</li>
+            <div className="plan-card">
+              <div className="text-xs font-medium uppercase tracking-[0.06em] text-[var(--text-muted)]">Enterprise</div>
+              <div className="mt-2 text-4xl font-semibold tracking-tight text-[var(--text-strong)]">Custom</div>
+              <div className="mt-1 text-xs text-[var(--text-muted)]">50+ users</div>
+              <div className="plan-divider" />
+              <ul className="flex flex-col gap-2 text-sm text-[var(--text-body)]">
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> SSO / SAML integration</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> Custom audit templates</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> API access</li>
+                <li className="flex items-start gap-2"><span className="mt-0.5 text-[var(--brand)]">✓</span> SLA-backed support</li>
               </ul>
-              <a href="mailto:hello@auditflow.io" className="mt-6 block w-full rounded-lg border border-[#e4e2dd] py-2.5 text-center text-sm font-medium text-[#0e1117] hover:border-[#0e1117]">Contact sales</a>
+              <a href="mailto:hello@auditflow.io" className="mt-6 block w-full rounded-lg border border-[var(--border-default)] py-2.5 text-center text-sm font-medium text-[var(--text-strong)] hover:border-[var(--border-strong)] hover:bg-white/[0.04]">Contact sales</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="bg-[#0e1117]">
+      <section className="bg-[var(--ink-1)]">
         <div className="mx-auto max-w-4xl px-6 py-20 text-center md:px-10">
-          <h2 className="font-serif text-[clamp(26px,4vw,38px)] leading-[1.12] tracking-tight text-white">Ready to run your next audit with confidence?</h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm text-white/55">Set up in minutes. No consultants, no all-day training required.</p>
+          <h2 className="font-serif text-[clamp(26px,4vw,38px)] leading-[1.12] tracking-tight text-[var(--text-strong)]">Ready to run your next audit with confidence?</h2>
+          <p className="mx-auto mt-3 max-w-lg text-sm text-[var(--text-muted)]">Set up in minutes. No consultants, no all-day training required.</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/register" className="inline-flex items-center rounded-md bg-[#0f766e] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0a5c55]">Start 30-day free trial</Link>
-            <a href="mailto:hello@auditflow.io" className="inline-flex items-center gap-2 border-b border-white/20 pb-[1px] text-sm text-white/60 hover:text-white">Schedule a demo <span aria-hidden>→</span></a>
+            <Link href="/register" className="btn-primary">Start 30-day free trial</Link>
+            <a href="mailto:hello@auditflow.io" className="inline-flex items-center gap-2 border-b border-[var(--border-default)] pb-[1px] text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Schedule a demo <span aria-hidden>→</span></a>
           </div>
         </div>
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="border-t border-[#e4e2dd] bg-[var(--surface-card)]">
+      <footer className="border-t border-[var(--border-subtle)] bg-[var(--ink-1)]">
         <div className="mx-auto max-w-7xl px-6 py-10 md:px-10">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="col-span-2 md:col-span-1">
-              <div className="text-sm font-semibold tracking-tight">Audit<span className="text-[#0f766e]">Flow</span></div>
-              <p className="mt-2 text-xs leading-relaxed text-[#6b7280]">Enterprise-grade ISO 9001 quality management and audit platform for teams that take compliance seriously.</p>
+              <div className="text-sm font-semibold tracking-tight text-[var(--text-strong)]">Audit<span className="text-[var(--brand)]">Flow</span></div>
+              <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">Enterprise-grade ISO 9001 quality management and audit platform for teams that take compliance seriously.</p>
             </div>
             <div>
-              <div className="text-xs font-medium uppercase tracking-[0.08em] text-[#0e1117]">Product</div>
+              <div className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--text-strong)]">Product</div>
               <ul className="mt-3 flex flex-col gap-2">
-                <li><Link href="#features" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Features</Link></li>
-                <li><Link href="#pricing" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Pricing</Link></li>
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Changelog</a></li>
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Roadmap</a></li>
+                <li><Link href="#features" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Features</Link></li>
+                <li><Link href="#pricing" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Pricing</Link></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Changelog</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Roadmap</a></li>
               </ul>
             </div>
             <div>
-              <div className="text-xs font-medium uppercase tracking-[0.08em] text-[#0e1117]">Use cases</div>
+              <div className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--text-strong)]">Use cases</div>
               <ul className="mt-3 flex flex-col gap-2">
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Internal audits</a></li>
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Self-assessments</a></li>
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Supplier audits</a></li>
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Management review</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Internal audits</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Self-assessments</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Supplier audits</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Management review</a></li>
               </ul>
             </div>
             <div>
-              <div className="text-xs font-medium uppercase tracking-[0.08em] text-[#0e1117]">Legal</div>
+              <div className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--text-strong)]">Legal</div>
               <ul className="mt-3 flex flex-col gap-2">
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Privacy policy</a></li>
-                <li><a className="text-sm text-[#6b7280] hover:text-[#0e1117]" href="#">Terms of service</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Privacy policy</a></li>
+                <li><a className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]" href="#">Terms of service</a></li>
               </ul>
             </div>
           </div>
-          <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-[#e4e2dd] pt-5 text-xs text-[#6b7280] md:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-between gap-2 border-t border-[var(--border-subtle)] pt-5 text-xs text-[var(--text-muted)] md:flex-row">
             <span>© 2026 AuditFlow. All rights reserved.</span>
             <span>ISO 9001:2015 Quality Management Platform</span>
           </div>

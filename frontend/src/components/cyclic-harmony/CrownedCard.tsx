@@ -32,24 +32,24 @@ export function CrownedCard({
 }: CrownedCardProps) {
   const elevationClasses = {
     sm: 'shadow-[var(--shadow-sm)]',
-    md: 'shadow-crown',
-    lg: 'shadow-crown-hover',
+    md: 'shadow-soft-2',
+    lg: 'shadow-soft-3',
   };
 
   const crownColors = {
-    sage: 'bg-harmony-sage',
-    olive: 'bg-harmony-olive',
-    forest: 'bg-harmony-forest',
-    lime: 'bg-harmony-lime',
-    gradient: 'bg-gradient-to-b from-harmony-lime via-harmony-sage to-harmony-olive',
+    sage: 'bg-mint-500',
+    olive: 'bg-mint-600',
+    forest: 'bg-mint-700',
+    lime: 'bg-mint-300',
+    gradient: 'bg-gradient-to-b from-mint-300 via-mint-500 to-mint-600',
   };
 
   const interactiveClasses = interactive
-    ? 'cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-crown-hover'
+    ? 'cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-3'
     : '';
 
   const activeClasses = active
-    ? 'ring-2 ring-harmony-forest ring-offset-2 scale-[1.02]'
+    ? 'ring-2 ring-[var(--brand)] ring-offset-2 ring-offset-[var(--surface-page)] scale-[1.02]'
     : '';
 
   const disabledClasses = disabled

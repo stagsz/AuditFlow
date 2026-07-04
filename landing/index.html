@@ -3,540 +3,656 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AuditFlow — Streamline your audit journey</title>
+<title>AuditFlow — Walk into your ISO 9001 audit already certain of the outcome</title>
+<meta name="description" content="AuditFlow maps your quality management system to ISO 9001:2015 clauses 4–10, tracks every NCR to closure, and shows you exactly where you stand before the auditor does." />
+<meta property="og:title" content="AuditFlow — ISO 9001 Quality Management for SMEs" />
+<meta property="og:description" content="Clause-mapped self-assessments, NCR tracking and audit readiness for European SMEs." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink:       #0e1117;
-    --ink-light: #1c2230;
-    --surface:   #f9f8f6;
-    --muted:     #6b7280;
-    --border:    #e4e2dd;
-    --teal:      #0f766e;
-    --teal-dark: #0a5c55;
-    --teal-dim:  #d1fae5;
-    --type-sans: 'Inter', system-ui, sans-serif;
-    --type-serif: 'DM Serif Display', Georgia, serif;
+    --ink-0: #070d0f;
+    --ink-1: #0c1619;
+    --ink-2: #122024;
+    --teal: #14b8a6;
+    --teal-deep: #0f766e;
+    --teal-bright: #7ee8dc;
+    --teal-glow: rgba(20, 184, 166, 0.35);
+    --brass: #c8a45c;
+    --paper: #f7f6f2;
+    --paper-card: #ffffff;
+    --tx-hi: #eaf1ef;
+    --tx-mid: #a7bab6;
+    --tx-low: #6d8380;
+    --tx-ink: #14231f;
+    --tx-ink-mid: #5c6d68;
+    --hairline: rgba(234, 241, 239, 0.08);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
   }
 
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: var(--type-sans);
-    background: var(--surface);
-    color: var(--ink);
+    background: var(--ink-0);
+    color: var(--tx-hi);
+    font-family: var(--sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
+  ::selection { background: var(--teal-deep); color: #fff; }
 
-  /* ── NAV ── */
+  h1, h2, h3 { text-wrap: balance; }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+
+  /* ── Scroll progress hairline ── */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--teal-deep), var(--teal), var(--teal-bright));
+    z-index: 300;
+    box-shadow: 0 0 12px var(--teal-glow);
+  }
+
+  /* ── Grain overlay ── */
+  .grain {
+    position: fixed; inset: 0; z-index: 250; pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ── Nav: transparent → glass on scroll ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px;
-    height: 64px;
-    background: rgba(249,248,246,0.88);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    padding: 0 40px; height: 72px;
+    transition: height .35s ease, background .35s ease, border-color .35s ease, box-shadow .35s ease;
+    border-bottom: 1px solid transparent;
   }
-  .nav-logo {
-    font-family: var(--type-sans);
-    font-weight: 600;
-    font-size: 17px;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    text-decoration: none;
+  nav.scrolled {
+    height: 58px;
+    background: rgba(9, 17, 19, 0.72);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-bottom-color: var(--hairline);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
   }
-  .nav-logo span { color: var(--teal); }
-  .nav-links {
-    display: flex; align-items: center; gap: 32px;
-    list-style: none;
+  .logo { font-weight: 600; font-size: 17px; letter-spacing: -0.02em; }
+  .logo b { color: var(--teal); font-weight: 600; }
+  .nav-links { display: flex; gap: 30px; align-items: center; font-size: 13.5px; color: var(--tx-mid); }
+  .nav-links a { transition: color .15s; }
+  .nav-links a:hover { color: var(--tx-hi); }
+
+  /* ── Glossy button ── */
+  .btn {
+    position: relative; display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 26px; border-radius: 10px; overflow: hidden;
+    font-size: 14.5px; font-weight: 500; letter-spacing: -0.01em;
+    background: linear-gradient(180deg, #19d3bf, var(--teal-deep));
+    color: #04211d;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      0 1px 2px rgba(0, 0, 0, 0.4),
+      0 8px 24px var(--teal-glow);
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .nav-links a {
-    font-size: 14px; font-weight: 400;
-    color: var(--muted); text-decoration: none;
-    transition: color .15s;
+  .btn:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -1px 0 rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.4), 0 12px 32px var(--teal-glow); }
+  .btn::after {
+    content: ''; position: absolute; top: 0; left: -80%;
+    width: 50%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+    transition: left .5s ease;
   }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-cta {
-    background: var(--ink); color: #fff !important;
-    padding: 8px 18px; border-radius: 6px;
-    font-weight: 500 !important; font-size: 14px !important;
-    transition: background .15s !important;
+  .btn:hover::after { left: 130%; }
+
+  .btn-quiet {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 10px;
+    font-size: 14.5px; color: var(--tx-mid);
+    border: 1px solid var(--hairline);
+    background: rgba(255, 255, 255, 0.02);
+    transition: color .2s, border-color .2s, background .2s;
   }
-  .nav-cta:hover { background: var(--teal) !important; color: #fff !important; }
+  .btn-quiet:hover { color: var(--tx-hi); border-color: rgba(234, 241, 239, 0.25); background: rgba(255, 255, 255, 0.04); }
 
   /* ── HERO ── */
   .hero {
-    padding: 160px 48px 120px;
-    max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    position: relative; min-height: 100vh;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center;
+    max-width: 1180px; margin: 0 auto; padding: 140px 32px 80px;
   }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 24px;
+  .aurora { position: absolute; inset: -20% -10%; z-index: -1; overflow: hidden; }
+  .aurora::before, .aurora::after {
+    content: ''; position: absolute; border-radius: 50%;
+    filter: blur(90px); opacity: 0.55;
   }
-  .hero-eyebrow::before {
-    content: ''; display: block; width: 20px; height: 1px; background: var(--teal);
+  .aurora::before {
+    width: 640px; height: 640px; top: -10%; right: -5%;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.5), transparent 65%);
+    animation: drift-a 16s ease-in-out infinite alternate;
   }
-  h1 {
-    font-family: var(--type-serif);
-    font-size: clamp(40px, 5vw, 60px);
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 24px;
+  .aurora::after {
+    width: 520px; height: 520px; bottom: -15%; left: -8%;
+    background: radial-gradient(circle, rgba(200, 164, 92, 0.22), transparent 65%);
+    animation: drift-b 20s ease-in-out infinite alternate;
   }
-  h1 em { font-style: italic; color: var(--teal); }
-  .hero-sub {
-    font-size: 18px; line-height: 1.7; color: var(--muted);
-    max-width: 480px; margin-bottom: 40px;
-  }
-  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--teal); color: #fff;
-    padding: 13px 28px; border-radius: 7px;
-    font-size: 15px; font-weight: 500;
-    text-decoration: none; transition: background .15s;
-    letter-spacing: -0.01em;
-  }
-  .btn-primary:hover { background: var(--teal-dark); }
-  .btn-ghost {
-    color: var(--ink); font-size: 15px; font-weight: 400;
-    text-decoration: none; display: flex; align-items: center; gap: 6px;
-    border-bottom: 1px solid var(--border); padding-bottom: 1px;
-    transition: border-color .15s;
-  }
-  .btn-ghost:hover { border-color: var(--ink); }
-  .btn-ghost::after { content: '→'; }
+  @keyframes drift-a { from { transform: translate(0, 0) scale(1); } to { transform: translate(-70px, 60px) scale(1.12); } }
+  @keyframes drift-b { from { transform: translate(0, 0) scale(1); } to { transform: translate(60px, -50px) scale(1.08); } }
 
-  /* hero visual */
-  .hero-visual {
-    background: var(--ink-light);
-    border-radius: 12px; padding: 28px;
-    box-shadow: 0 24px 64px rgba(14,17,23,.12);
-    border: 1px solid rgba(255,255,255,.04);
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 26px;
   }
-  .hv-bar {
-    display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
-  }
-  .hv-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .hv-dot:nth-child(1) { background: #ff5f57; }
-  .hv-dot:nth-child(2) { background: #febc2e; }
-  .hv-dot:nth-child(3) { background: #28c840; }
-  .hv-title { font-size: 12px; color: rgba(255,255,255,.3); margin-left: 4px; font-weight: 400; }
-  .hv-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
-  .hv-stat {
-    background: rgba(255,255,255,.05); border-radius: 8px; padding: 14px;
-    border: 1px solid rgba(255,255,255,.06);
-  }
-  .hv-stat-num { font-size: 26px; font-weight: 600; color: #fff; letter-spacing: -0.03em; }
-  .hv-stat-label { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 2px; }
-  .hv-stat-delta { font-size: 11px; color: #34d399; margin-top: 4px; }
-  .hv-row { display: flex; flex-direction: column; gap: 8px; }
-  .hv-item {
-    display: flex; align-items: center; gap: 12px;
-    background: rgba(255,255,255,.04); border-radius: 6px; padding: 10px 12px;
-    border: 1px solid rgba(255,255,255,.05);
-  }
-  .hv-badge {
-    font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 4px;
-    white-space: nowrap;
-  }
-  .badge-open   { background: rgba(239,68,68,.15);  color: #f87171; }
-  .badge-review { background: rgba(251,191,36,.15); color: #fbbf24; }
-  .badge-closed { background: rgba(52,211,153,.15); color: #34d399; }
-  .hv-item-text { font-size: 12px; color: rgba(255,255,255,.55); flex: 1; }
-  .hv-item-date { font-size: 11px; color: rgba(255,255,255,.25); }
+  .eyebrow::before { content: ''; width: 22px; height: 1px; background: linear-gradient(90deg, transparent, var(--teal)); }
 
-  /* ── SECTION SHARED ── */
-  section { padding: 100px 48px; }
-  .container { max-width: 1200px; margin: 0 auto; }
-  .section-label {
-    font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--teal); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 8px;
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 4.8vw, 64px);
+    line-height: 1.06; letter-spacing: -0.015em; font-weight: 400;
+    margin-bottom: 26px;
   }
-  .section-label::before { content: ''; display: block; width: 16px; height: 1px; background: var(--teal); }
-  h2 {
-    font-family: var(--type-serif);
-    font-size: clamp(32px, 4vw, 48px);
-    line-height: 1.15; letter-spacing: -0.01em;
-    color: var(--ink); margin-bottom: 16px;
+  .hero h1 em {
+    font-style: italic;
+    background: linear-gradient(120deg, var(--teal-bright) 0%, var(--teal) 45%, #0d9488 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .section-intro {
-    font-size: 17px; line-height: 1.7; color: var(--muted);
-    max-width: 560px; margin-bottom: 64px;
+  .hero-sub { font-size: 17.5px; line-height: 1.7; color: var(--tx-mid); max-width: 460px; margin-bottom: 38px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .hero-note { margin-top: 22px; font-size: 12.5px; color: var(--tx-low); display: flex; gap: 8px; align-items: center; }
+  .seal {
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 1px solid var(--brass);
+    display: inline-grid; place-items: center;
+    font-size: 8px; color: var(--brass);
   }
 
-  /* ── FEATURES ── */
-  .features { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .feat {
-    background: #fff; padding: 36px 32px;
-    transition: background .15s;
+  /* ── Glass dashboard mockup ── */
+  .stage { perspective: 1400px; }
+  .glass-card {
+    position: relative;
+    border-radius: 18px;
+    padding: 22px;
+    background:
+      linear-gradient(rgba(18, 32, 36, 0.75), rgba(12, 22, 25, 0.85)) padding-box,
+      linear-gradient(150deg, rgba(126, 232, 220, 0.45), rgba(234, 241, 239, 0.06) 30%, rgba(200, 164, 92, 0.25) 100%) border-box;
+    border: 1px solid transparent;
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.4),
+      0 24px 64px rgba(0, 0, 0, 0.55),
+      0 40px 120px rgba(20, 184, 166, 0.12);
+    transform-style: preserve-3d;
+    transition: transform .25s ease-out;
+    will-change: transform;
   }
-  .feat:hover { background: #fafaf9; }
-  .feat-num { font-size: 12px; color: var(--teal); font-weight: 500; margin-bottom: 20px; letter-spacing: .04em; }
-  .feat-title { font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.02em; }
-  .feat-desc { font-size: 14px; line-height: 1.65; color: var(--muted); }
+  .glass-card::before {
+    content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  }
+  .gc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .gc-title { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; }
+  .gc-title small { display: block; font-weight: 400; color: var(--tx-low); font-size: 11px; margin-top: 2px; }
+  .gc-live {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--teal-bright); display: flex; align-items: center; gap: 6px;
+  }
+  .gc-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-  /* ── HOW IT WORKS ── */
-  .how {
-    background: var(--ink);
-    position: relative; overflow: hidden;
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .kpi {
+    border-radius: 12px; padding: 12px 14px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+    border: 1px solid rgba(234, 241, 239, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
   }
-  .how::before {
-    content: '';
-    position: absolute; top: -180px; left: 50%; transform: translateX(-50%);
-    width: 700px; height: 700px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(15,118,110,.3) 0%, transparent 70%);
+  .kpi b { display: block; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .kpi span { font-size: 10.5px; color: var(--tx-low); letter-spacing: 0.04em; text-transform: uppercase; }
+  .kpi .up { color: var(--teal-bright); } .kpi .warn { color: var(--brass); }
+
+  .bars { display: flex; align-items: flex-end; gap: 7px; height: 74px; padding: 0 4px; margin-bottom: 16px; }
+  .bars i {
+    flex: 1; border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(180deg, rgba(20, 184, 166, 0.9), rgba(15, 118, 110, 0.35));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transform-origin: bottom; transform: scaleY(0);
+    transition: transform .7s cubic-bezier(.2, .7, .3, 1);
+  }
+  .bars.in i { transform: scaleY(1); }
+  .bars i:nth-child(2) { transition-delay: .06s; } .bars i:nth-child(3) { transition-delay: .12s; }
+  .bars i:nth-child(4) { transition-delay: .18s; } .bars i:nth-child(5) { transition-delay: .24s; }
+  .bars i:nth-child(6) { transition-delay: .3s; } .bars i:nth-child(7) { transition-delay: .36s; }
+  .bars i:nth-child(8) { transition-delay: .42s; } .bars i:nth-child(9) { transition-delay: .48s; }
+  .bars i:nth-child(10) { transition-delay: .54s; }
+
+  .ncr-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 9px; font-size: 12px;
+    border: 1px solid rgba(234, 241, 239, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .ncr-row + .ncr-row { margin-top: 7px; }
+  .ncr-row code { font-family: var(--mono); font-size: 11px; color: var(--tx-low); }
+  .ncr-row .grow { flex: 1; color: var(--tx-mid); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pill { font-size: 9.5px; font-weight: 600; letter-spacing: 0.06em; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; }
+  .pill.major { background: rgba(196, 87, 78, 0.16); color: #eba9a1; border: 1px solid rgba(235, 169, 161, 0.25); }
+  .pill.minor { background: rgba(200, 164, 92, 0.14); color: var(--brass); border: 1px solid rgba(200, 164, 92, 0.3); }
+  .pill.ok { background: rgba(20, 184, 166, 0.13); color: var(--teal-bright); border: 1px solid rgba(20, 184, 166, 0.3); }
+
+  .float-chip {
+    position: absolute; z-index: -1;
+    padding: 10px 16px; border-radius: 12px;
+    font-family: var(--mono); font-size: 11.5px; color: var(--tx-mid);
+    background: rgba(18, 32, 36, 0.85);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+  }
+  .chip-a { top: -26px; right: 6%; animation: bob 7s ease-in-out infinite; }
+  .chip-b { bottom: -22px; left: -4%; animation: bob 9s ease-in-out infinite reverse; }
+  .float-chip b { color: var(--teal); font-weight: 500; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+  /* ── Scroll reveal ── */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .3, 1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal[data-d="1"] { transition-delay: .08s; } .reveal[data-d="2"] { transition-delay: .16s; }
+  .reveal[data-d="3"] { transition-delay: .24s; }
+
+  /* ── Stat band ── */
+  .stats {
+    border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent);
+  }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 56px 0; }
+  .stat b {
+    display: block; font-family: var(--serif); font-weight: 400;
+    font-size: 52px; letter-spacing: -0.02em; line-height: 1;
+    font-variant-numeric: tabular-nums; margin-bottom: 10px;
+  }
+  .stat b span { font-size: inherit; color: inherit; font-family: inherit; }
+  .stat b i { font-style: normal; color: var(--teal); font-size: 24px; margin-left: 8px; letter-spacing: 0; }
+  .stat > span { font-size: 13.5px; color: var(--tx-low); }
+
+  /* ── Sections ── */
+  section { position: relative; }
+  .sec-pad { padding: 120px 0; }
+  .sec-head { max-width: 560px; margin-bottom: 64px; }
+  .sec-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.4vw, 42px); line-height: 1.15; margin-bottom: 16px; }
+  .sec-head p { color: var(--tx-mid); font-size: 16px; }
+
+  /* ── Feature cards ── */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .feat-card {
+    position: relative; border-radius: 16px; padding: 28px 26px; overflow: hidden;
+    background: linear-gradient(180deg, var(--ink-2), var(--ink-1));
+    border: 1px solid rgba(234, 241, 239, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.3);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .feat-card::before {
+    content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(20, 184, 166, 0.09), transparent 45%);
+  }
+  .feat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(20, 184, 166, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 2px 4px rgba(0, 0, 0, 0.4), 0 24px 56px rgba(0, 0, 0, 0.45), 0 12px 40px rgba(20, 184, 166, 0.08);
+  }
+  .feat-card:hover::before { opacity: 1; }
+  .feat-icon {
+    width: 40px; height: 40px; border-radius: 11px; margin-bottom: 20px;
+    display: grid; place-items: center; font-size: 17px;
+    background: linear-gradient(180deg, rgba(20, 184, 166, 0.2), rgba(20, 184, 166, 0.06));
+    border: 1px solid rgba(20, 184, 166, 0.25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    color: var(--teal-bright);
+  }
+  .feat-card h3 { font-size: 16.5px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 9px; }
+  .feat-card p { font-size: 13.8px; line-height: 1.65; color: var(--tx-mid); }
+
+  /* ── Sticky scroll story ── */
+  .story { height: 380vh; }
+  .story-sticky {
+    position: sticky; top: 0; height: 100vh;
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; align-items: center;
+    max-width: 1140px; margin: 0 auto; padding: 0 32px;
+  }
+  .story-copy h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3vw, 40px); line-height: 1.15; margin-bottom: 36px; }
+  .story-step { display: flex; gap: 18px; padding: 13px 0; opacity: 0.3; transition: opacity .4s ease; cursor: default; }
+  .story-step.active { opacity: 1; }
+  .story-num {
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: var(--mono); font-size: 12px;
+    border: 1px solid var(--hairline); color: var(--tx-low);
+    transition: all .4s ease;
+  }
+  .story-step.active .story-num {
+    border-color: var(--teal); color: #04211d;
+    background: var(--teal);
+    box-shadow: 0 0 20px var(--teal-glow);
+  }
+  .story-step h3 { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+  .story-step p { font-size: 13.5px; color: var(--tx-mid); max-width: 360px; }
+
+  .story-panels { position: relative; height: 420px; }
+  .story-panel {
+    position: absolute; inset: 0;
+    border-radius: 18px; padding: 28px;
+    background: linear-gradient(180deg, var(--ink-2), var(--ink-1));
+    border: 1px solid rgba(234, 241, 239, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 24px 64px rgba(0, 0, 0, 0.5);
+    opacity: 0; transform: translateY(36px) scale(0.96);
+    transition: opacity .5s ease, transform .5s cubic-bezier(.2, .7, .3, 1);
     pointer-events: none;
   }
-  .how .section-label { color: #34d399; }
-  .how .section-label::before { background: #34d399; }
-  .how h2 { color: #fff; }
-  .how .section-intro { color: rgba(255,255,255,.5); }
-
-  .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; position: relative; z-index: 1; }
-  .step {
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.08);
-    padding: 36px 28px;
-    position: relative;
-    transition: background .2s;
+  .story-panel.active { opacity: 1; transform: none; pointer-events: auto; }
+  .sp-label { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 18px; }
+  .sp-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 13px 16px; border-radius: 10px; font-size: 13px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(234, 241, 239, 0.06);
+    margin-bottom: 9px;
   }
-  .step:first-child { border-radius: 10px 0 0 10px; }
-  .step:last-child  { border-radius: 0 10px 10px 0; }
-  .step:hover { background: rgba(255,255,255,.07); }
+  .sp-row span { color: var(--tx-mid); }
+  .sp-check { color: var(--teal-bright); font-size: 12px; }
+  .sp-bar { height: 7px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); overflow: hidden; margin: 6px 0 14px; }
+  .sp-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--teal-deep), var(--teal)); box-shadow: 0 0 10px var(--teal-glow); }
+  .sp-clause { font-size: 12.5px; color: var(--tx-mid); margin-bottom: 4px; }
 
-  .step-connector {
-    position: absolute; top: 36px; right: -14px;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: var(--ink);
-    border: 1px solid rgba(255,255,255,.12);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 2; font-size: 11px; color: rgba(255,255,255,.3);
-  }
-  .steps .step:last-child .step-connector { display: none; }
-
-  .step-num {
-    width: 40px; height: 40px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 600;
-    margin-bottom: 20px;
-  }
-  .step:nth-child(1) .step-num { background: rgba(251,146,60,.15); color: #fb923c; border: 1px solid rgba(251,146,60,.25); }
-  .step:nth-child(2) .step-num { background: rgba(96,165,250,.15); color: #60a5fa; border: 1px solid rgba(96,165,250,.25); }
-  .step:nth-child(3) .step-num { background: rgba(167,139,250,.15); color: #a78bfa; border: 1px solid rgba(167,139,250,.25); }
-  .step:nth-child(4) .step-num { background: rgba(52,211,153,.15); color: #34d399; border: 1px solid rgba(52,211,153,.25); }
-
-  .step-accent {
-    display: block; width: 24px; height: 2px; border-radius: 2px; margin-bottom: 16px;
-  }
-  .step:nth-child(1) .step-accent { background: #fb923c; }
-  .step:nth-child(2) .step-accent { background: #60a5fa; }
-  .step:nth-child(3) .step-accent { background: #a78bfa; }
-  .step:nth-child(4) .step-accent { background: #34d399; }
-
-  .step-title { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 10px; letter-spacing: -0.02em; }
-  .step-desc { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,.45); }
-
-  /* ── ISO CLAUSE COVERAGE ── */
-  .clauses { background: var(--surface); }
-  .clause-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; }
+  /* ── Clause coverage grid ── */
+  .clause-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
   .clause {
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 8px; padding: 20px;
-    transition: border-color .15s, box-shadow .15s;
+    border-radius: 12px; padding: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.008));
+    border: 1px solid var(--hairline);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: transform .2s ease, border-color .2s, box-shadow .2s ease;
   }
-  .clause:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(15,118,110,.08); }
-  .clause-id { font-size: 11px; color: var(--teal); font-weight: 500; letter-spacing: .04em; margin-bottom: 6px; }
-  .clause-name { font-size: 13px; color: var(--ink); font-weight: 400; line-height: 1.4; }
+  .clause:hover {
+    transform: translateY(-2px);
+    border-color: rgba(20, 184, 166, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(20, 184, 166, 0.1);
+  }
+  .clause-id { font-family: var(--mono); font-size: 11px; color: var(--teal); margin-bottom: 6px; letter-spacing: 0.04em; }
+  .clause-name { font-size: 13px; color: var(--tx-mid); line-height: 1.4; }
 
-  /* ── SOCIAL PROOF ── */
-  .proof { background: #fff; border-top: 1px solid var(--border); }
-  .proof-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    border: 1px solid var(--border); border-radius: 10px;
-    padding: 0; overflow: hidden; margin-bottom: 64px;
+  /* ── Light "paper" section (pricing) ── */
+  .paper-sec {
+    background: var(--paper); color: var(--tx-ink);
+    border-radius: 32px 32px 0 0;
+    box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.45);
   }
-  .proof-stat { flex: 1; padding: 32px; text-align: center; border-right: 1px solid var(--border); }
-  .proof-stat:last-child { border-right: none; }
-  .proof-num { font-size: 36px; font-weight: 600; color: var(--ink); letter-spacing: -0.04em; }
-  .proof-desc { font-size: 13px; color: var(--muted); margin-top: 4px; }
-  .testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
-  .testimonial {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 10px; padding: 28px;
-  }
-  .t-quote { font-size: 15px; line-height: 1.7; color: var(--ink); margin-bottom: 20px; }
-  .t-quote::before { content: '"'; color: var(--teal); font-family: var(--type-serif); font-size: 24px; line-height: 1; display: block; margin-bottom: 6px; }
-  .t-author { display: flex; align-items: center; gap: 12px; }
-  .t-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--teal-dim); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--teal); }
-  .t-name { font-size: 13px; font-weight: 500; color: var(--ink); }
-  .t-role { font-size: 12px; color: var(--muted); }
-
-  /* ── PRICING ── */
-  .pricing { background: var(--surface); border-top: 1px solid var(--border); }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .paper-sec .sec-head h2 { color: var(--tx-ink); }
+  .paper-sec .sec-head p { color: var(--tx-ink-mid); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
   .plan {
-    background: #fff; border: 1px solid var(--border);
-    border-radius: 10px; padding: 36px;
+    border-radius: 16px; padding: 34px 30px;
+    background: var(--paper-card);
+    border: 1px solid rgba(20, 35, 31, 0.08);
+    box-shadow: 0 1px 2px rgba(20, 35, 31, 0.05), 0 12px 32px rgba(20, 35, 31, 0.07);
+    transition: transform .25s ease, box-shadow .25s ease;
   }
+  .plan:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(20, 35, 31, 0.05), 0 20px 48px rgba(20, 35, 31, 0.12); }
   .plan.featured {
-    background: var(--ink); border-color: var(--ink);
+    background:
+      linear-gradient(180deg, #182a2f, #0c1619) padding-box,
+      linear-gradient(150deg, rgba(126, 232, 220, 0.45), rgba(234, 241, 239, 0.08) 40%, rgba(200, 164, 92, 0.3) 100%) border-box;
+    border: 1px solid transparent;
+    color: var(--tx-hi);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 24px 56px rgba(20, 35, 31, 0.35), 0 12px 40px rgba(20, 184, 166, 0.15);
   }
-  .plan-name { font-size: 13px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-  .plan.featured .plan-name { color: rgba(255,255,255,.4); }
-  .plan-price { font-size: 42px; font-weight: 600; color: var(--ink); letter-spacing: -0.04em; margin-bottom: 4px; }
+  .plan-name { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tx-ink-mid); margin-bottom: 12px; }
+  .plan.featured .plan-name { color: var(--teal-bright); }
+  .plan-price { font-family: var(--serif); font-size: 44px; font-weight: 400; color: var(--tx-ink); letter-spacing: -0.02em; margin-bottom: 2px; }
   .plan.featured .plan-price { color: #fff; }
-  .plan-per { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
-  .plan.featured .plan-per { color: rgba(255,255,255,.4); }
-  .plan-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
-  .plan.featured .plan-divider { background: rgba(255,255,255,.1); }
-  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 32px; }
-  .plan-features li { font-size: 14px; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; }
-  .plan.featured .plan-features li { color: rgba(255,255,255,.55); }
-  .plan-features li::before { content: '✓'; color: var(--teal); font-size: 13px; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
-  .plan.featured .plan-features li::before { color: #34d399; }
+  .plan-per { font-size: 13px; color: var(--tx-ink-mid); margin-bottom: 26px; }
+  .plan.featured .plan-per { color: var(--tx-mid); }
+  .plan-divider { height: 1px; background: rgba(20, 35, 31, 0.08); margin-bottom: 22px; }
+  .plan.featured .plan-divider { background: rgba(255, 255, 255, 0.1); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 30px; }
+  .plan-features li { font-size: 14px; color: var(--tx-ink-mid); display: flex; align-items: flex-start; gap: 10px; }
+  .plan.featured .plan-features li { color: var(--tx-mid); }
+  .plan-features li::before { content: '✓'; color: var(--teal-deep); font-size: 13px; font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+  .plan.featured .plan-features li::before { color: var(--teal-bright); }
   .plan-btn {
     display: block; text-align: center;
-    padding: 12px; border-radius: 7px;
-    font-size: 14px; font-weight: 500; text-decoration: none;
-    transition: all .15s;
+    padding: 12px; border-radius: 10px;
+    font-size: 14px; font-weight: 500;
+    transition: all .2s ease;
   }
-  .plan-btn-outline { border: 1px solid var(--border); color: var(--ink); }
-  .plan-btn-outline:hover { border-color: var(--ink); }
-  .plan-btn-primary { background: var(--teal); color: #fff; border: 1px solid var(--teal); }
-  .plan-btn-primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
-  .plan-btn-white { background: #fff; color: var(--ink); }
-  .plan-btn-white:hover { background: var(--teal-dim); }
+  .plan-btn-dark { background: var(--tx-ink); color: #fff; }
+  .plan-btn-dark:hover { background: var(--teal-deep); }
+  .plan-btn-glow {
+    background: linear-gradient(180deg, #19d3bf, var(--teal-deep)); color: #04211d;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 24px var(--teal-glow);
+  }
+  .plan-btn-glow:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 12px 32px var(--teal-glow); }
+  .plan-btn-outline { border: 1px solid rgba(20, 35, 31, 0.15); color: var(--tx-ink); }
+  .plan-btn-outline:hover { border-color: var(--tx-ink); }
 
   /* ── CTA ── */
-  .cta-section {
-    background: var(--ink);
-    padding: 120px 48px;
-    text-align: center;
+  .cta {
+    position: relative; overflow: hidden;
+    text-align: center; padding: 130px 32px;
+    background: var(--ink-0);
   }
-  .cta-section h2 { color: #fff; max-width: 640px; margin: 0 auto 16px; }
-  .cta-section p { font-size: 17px; color: rgba(255,255,255,.5); margin-bottom: 40px; }
-  .cta-actions { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .cta::before {
+    content: ''; position: absolute; left: 50%; top: -180px; transform: translateX(-50%);
+    width: 720px; height: 420px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(20, 184, 166, 0.22), transparent 65%);
+    filter: blur(50px);
+  }
+  .cta h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(32px, 4vw, 50px); margin-bottom: 18px; }
+  .cta h2 em { font-style: italic; color: var(--teal); }
+  .cta p { color: var(--tx-mid); margin-bottom: 38px; font-size: 16.5px; }
 
   /* ── FOOTER ── */
-  footer {
-    background: #fff; border-top: 1px solid var(--border);
-    padding: 48px 48px 36px;
-  }
+  footer { border-top: 1px solid var(--hairline); padding: 56px 0 36px; }
   .footer-inner {
-    max-width: 1200px; margin: 0 auto;
     display: flex; align-items: flex-start; justify-content: space-between; gap: 40px;
     flex-wrap: wrap;
   }
   .footer-brand { max-width: 280px; }
-  .footer-logo { font-weight: 600; font-size: 16px; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
+  .footer-logo { font-weight: 600; font-size: 16px; letter-spacing: -0.02em; margin-bottom: 10px; }
   .footer-logo span { color: var(--teal); }
-  .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .footer-tagline { font-size: 13px; color: var(--tx-low); line-height: 1.6; }
   .footer-links-group { display: flex; flex-direction: column; gap: 10px; }
-  .footer-links-title { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--ink); margin-bottom: 4px; }
-  .footer-links-group a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .15s; }
-  .footer-links-group a:hover { color: var(--ink); }
+  .footer-links-title { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--tx-mid); margin-bottom: 4px; }
+  .footer-links-group a { font-size: 13px; color: var(--tx-low); transition: color .15s; }
+  .footer-links-group a:hover { color: var(--tx-hi); }
   .footer-bottom {
-    max-width: 1200px; margin: 32px auto 0;
-    padding-top: 24px; border-top: 1px solid var(--border);
+    margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--hairline);
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 12px; color: var(--muted);
+    font-size: 12px; color: var(--tx-low);
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
-    .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 120px; }
-    .features-grid { grid-template-columns: repeat(2,1fr); }
-    .steps { grid-template-columns: repeat(2,1fr); }
-    .steps .step::after { display: none; }
-    .clause-grid { grid-template-columns: repeat(3,1fr); }
+    .clause-grid { grid-template-columns: repeat(3, 1fr); }
     .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
-    .testimonials { grid-template-columns: 1fr; }
   }
-  @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .nav-links { display: none; }
-    section, .hero { padding-left: 24px; padding-right: 24px; }
-    .features-grid { grid-template-columns: 1fr; }
-    .clause-grid { grid-template-columns: repeat(2,1fr); }
-    .steps { grid-template-columns: 1fr; }
-    .proof-bar { flex-direction: column; }
-    .proof-stat { border-right: none; border-bottom: 1px solid var(--border); }
-    .proof-stat:last-child { border-bottom: none; }
-    footer { padding: 40px 24px 28px; }
-    .footer-inner { flex-direction: column; }
-    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-    .cta-section { padding: 80px 24px; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 120px; min-height: auto; }
+    .stats-grid { grid-template-columns: 1fr; gap: 28px; }
+    .feat-grid { grid-template-columns: 1fr; }
+    .clause-grid { grid-template-columns: repeat(2, 1fr); }
+    .story { height: auto; }
+    .story-sticky { position: static; height: auto; grid-template-columns: 1fr; padding: 80px 32px; }
+    .story-panels { height: auto; }
+    .story-panel { position: static; opacity: 1; transform: none; margin-bottom: 16px; }
+    .story-step { opacity: 1; }
+    nav { padding: 0 20px; }
+    .nav-links a:not(.btn):not(.btn-quiet) { display: none; }
+    .footer-inner, .footer-bottom { flex-direction: column; gap: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .bars i { transform: scaleY(1); }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">Audit<span>Flow</span></a>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="/register" class="nav-cta">Start 30-day free trial</a></li>
-  </ul>
+<div id="progress"></div>
+<div class="grain"></div>
+
+<nav id="nav">
+  <a class="logo" href="#">Audit<b>Flow</b></a>
+  <div class="nav-links">
+    <a href="#features">Platform</a>
+    <a href="#story">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="/blog">Blog</a>
+    <a class="btn-quiet" href="/login">Sign in</a>
+    <a class="btn" href="/register">Start free →</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div style="max-width:1200px;margin:0 auto;">
-  <div class="hero">
-    <div>
-      <div class="hero-eyebrow">ISO 9001 Quality Management</div>
-      <h1>Audit with<br><em>confidence,</em><br>not paperwork.</h1>
-      <p class="hero-sub">AuditFlow replaces scattered spreadsheets and email chains with a single platform for self-assessments, audit execution, non-conformity tracking, and corrective actions.</p>
-      <div class="hero-actions">
-        <a href="/register" class="btn-primary">Start 30-day free trial</a>
-        <a href="#how" class="btn-ghost">See how it works</a>
-      </div>
+<header class="hero">
+  <div class="aurora"></div>
+  <div>
+    <span class="eyebrow">ISO 9001:2015 · Built for European SMEs</span>
+    <h1>Walk into your audit <em>already certain</em> of the outcome.</h1>
+    <p class="hero-sub">AuditFlow maps your entire quality system to clauses 4–10, tracks every NCR to closure, and shows you exactly where you stand — months before the auditor does.</p>
+    <div class="hero-actions">
+      <a class="btn" href="/register">Start 30-day free trial →</a>
+      <a class="btn-quiet" href="#story">See how it works ↓</a>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hv-bar">
-        <div class="hv-dot"></div><div class="hv-dot"></div><div class="hv-dot"></div>
-        <span class="hv-title">AuditFlow — Dashboard</span>
+    <p class="hero-note"><span class="seal">✓</span> Built on the full ISO 9001:2015 clause structure</p>
+  </div>
+
+  <div class="stage">
+    <div class="glass-card" id="tilt" aria-hidden="true">
+      <span class="float-chip chip-a">Clause <b>8.5.1</b> — Control of production</span>
+      <span class="float-chip chip-b">NCR <b>−32%</b> this quarter</span>
+      <div class="gc-head">
+        <div class="gc-title">Audit readiness<small>Example workspace · Surveillance audit in 41 days</small></div>
+        <span class="gc-live">Live</span>
       </div>
-      <div class="hv-stats">
-        <div class="hv-stat">
-          <div class="hv-stat-num">94%</div>
-          <div class="hv-stat-label">Compliance score</div>
-          <div class="hv-stat-delta">↑ 6% this quarter</div>
-        </div>
-        <div class="hv-stat">
-          <div class="hv-stat-num">12</div>
-          <div class="hv-stat-label">Open NCRs</div>
-          <div class="hv-stat-delta">↓ 4 from last audit</div>
-        </div>
-        <div class="hv-stat">
-          <div class="hv-stat-num">3</div>
-          <div class="hv-stat-label">Audits this month</div>
-          <div class="hv-stat-delta">On schedule</div>
-        </div>
+      <div class="kpis">
+        <div class="kpi"><b class="up">87%</b><span>Readiness</span></div>
+        <div class="kpi"><b>3</b><span>Open NCRs</span></div>
+        <div class="kpi"><b class="warn">2</b><span>Overdue actions</span></div>
       </div>
-      <div class="hv-row">
-        <div class="hv-item">
-          <span class="hv-badge badge-open">Open</span>
-          <span class="hv-item-text">Calibration records missing — Clause 7.1.5</span>
-          <span class="hv-item-date">May 28</span>
-        </div>
-        <div class="hv-item">
-          <span class="hv-badge badge-review">Review</span>
-          <span class="hv-item-text">Supplier qualification procedure update</span>
-          <span class="hv-item-date">May 26</span>
-        </div>
-        <div class="hv-item">
-          <span class="hv-badge badge-closed">Closed</span>
-          <span class="hv-item-text">Internal audit report Q1 — Clause 9.2</span>
-          <span class="hv-item-date">May 20</span>
-        </div>
+      <div class="bars" id="bars">
+        <i style="height:38%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:61%"></i><i style="height:57%"></i><i style="height:70%"></i><i style="height:66%"></i><i style="height:78%"></i><i style="height:84%"></i><i style="height:92%"></i>
       </div>
+      <div class="ncr-row"><code>NCR-041</code><span class="grow">Calibration records missing for torque tools</span><span class="pill major">Major</span></div>
+      <div class="ncr-row"><code>NCR-039</code><span class="grow">Supplier evaluation overdue</span><span class="pill minor">Minor</span></div>
+      <div class="ncr-row"><code>NCR-036</code><span class="grow">Management review minutes — approved &amp; closed</span><span class="pill ok">Closed</span></div>
     </div>
   </div>
-</div>
+</header>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="container">
-    <div class="section-label">Platform capabilities</div>
-    <h2>Everything a QMS needs.<br>Nothing it doesn't.</h2>
-    <p class="section-intro">Built specifically for ISO 9001 — not a generic task tracker retrofitted with compliance labels.</p>
-    <div class="features-grid">
-      <div class="feat">
-        <div class="feat-num">01</div>
-        <div class="feat-title">Self-Assessment Management</div>
-        <div class="feat-desc">Guided clause-by-clause workflows for ISO 9001 self-assessments. Evidence collection, scoring, and gap analysis in one place.</div>
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><b><span data-count="7">0</span><i>clauses</i></b><span>full coverage of ISO 9001:2015 clauses 4 through 10 — every requirement mapped</span></div>
+    <div class="stat reveal" data-d="1"><b><span data-count="4">0</span><i>audit types</i></b><span>internal, external, surveillance and certification audits planned in one place</span></div>
+    <div class="stat reveal" data-d="2"><b><span data-count="0">0</span><i>spreadsheets</i></b><span>NCRs, corrective actions and evidence live in one system — not in Excel</span></div>
+  </div>
+</section>
+
+<section class="sec-pad" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The platform</span>
+      <h2>Everything the auditor will ask for. Nothing you have to hunt down.</h2>
+      <p>Built specifically for ISO 9001 — not a generic task tracker retrofitted with compliance labels.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal"><div class="feat-icon">◫</div><h3>Self-assessment management</h3><p>Guided clause-by-clause workflows with evidence collection, scoring and gap analysis in one place.</p></div>
+      <div class="feat-card reveal" data-d="1"><div class="feat-icon">◔</div><h3>Audit planning &amp; execution</h3><p>Schedule audits, assign internal auditors, define scope, and run structured audit sessions with real-time progress.</p></div>
+      <div class="feat-card reveal" data-d="2"><div class="feat-icon">⚑</div><h3>Non-conformity tracking</h3><p>Document, categorize and assign NCRs with severity grading. Full audit trail from discovery through resolution.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">✎</div><h3>Corrective actions (CAPA)</h3><p>Root cause analysis, action planning, owner assignment and effectiveness verification — closed-loop CAPA.</p></div>
+      <div class="feat-card reveal" data-d="1"><div class="feat-icon">▤</div><h3>Reporting &amp; analytics</h3><p>Executive dashboards, trend analysis and compliance reports ready for management review and certification bodies.</p></div>
+      <div class="feat-card reveal" data-d="2"><div class="feat-icon">◎</div><h3>Role-based access</h3><p>Admin, quality manager and auditor roles with granular permissions. Each user sees exactly what they need to act on.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-sticky">
+    <div class="story-copy">
+      <span class="eyebrow">How it works</span>
+      <h2>From first gap to signed certificate.</h2>
+      <div class="story-step active" data-step="0">
+        <span class="story-num">1</span>
+        <div><h3>Plan your audit</h3><p>Define scope, select ISO 9001 clauses, set the schedule, and assign the audit team. Templates included.</p></div>
       </div>
-      <div class="feat">
-        <div class="feat-num">02</div>
-        <div class="feat-title">Audit Planning & Execution</div>
-        <div class="feat-desc">Schedule audits, assign internal auditors, define scope, and run structured audit sessions with real-time progress tracking.</div>
+      <div class="story-step" data-step="1">
+        <span class="story-num">2</span>
+        <div><h3>Execute &amp; evidence</h3><p>Run structured interviews and observations. Attach evidence directly to findings while you work, not after.</p></div>
       </div>
-      <div class="feat">
-        <div class="feat-num">03</div>
-        <div class="feat-title">Non-Conformity Tracking</div>
-        <div class="feat-desc">Document, categorize, and assign NCRs with severity grading. Full audit trail from discovery through resolution.</div>
+      <div class="story-step" data-step="2">
+        <span class="story-num">3</span>
+        <div><h3>Manage findings</h3><p>Raise non-conformities and observations. Assign owners, due dates, and corrective actions immediately.</p></div>
       </div>
-      <div class="feat">
-        <div class="feat-num">04</div>
-        <div class="feat-title">Corrective Actions (CAPA)</div>
-        <div class="feat-desc">Root cause analysis, action planning, owner assignment, and effectiveness verification — closed-loop CAPA management.</div>
+      <div class="story-step" data-step="3">
+        <span class="story-num">4</span>
+        <div><h3>Close the loop</h3><p>Track CAPA completion, verify effectiveness, and generate the final audit report in one click.</p></div>
       </div>
-      <div class="feat">
-        <div class="feat-num">05</div>
-        <div class="feat-title">Reporting & Analytics</div>
-        <div class="feat-desc">Executive dashboards, trend analysis, and compliance reports ready for management review meetings and certification bodies.</div>
+    </div>
+    <div class="story-panels">
+      <div class="story-panel active">
+        <div class="sp-label">Audit plan · Scope &amp; team</div>
+        <div class="sp-row"><span>Scope — clauses 4–10, production site</span><span class="sp-check">✓ Defined</span></div>
+        <div class="sp-row"><span>Lead auditor — assigned</span><span class="sp-check">✓ Ready</span></div>
+        <div class="sp-row"><span>Checklist shared with team</span><span class="sp-check">✓ Sent</span></div>
+        <div class="sp-row"><span>Schedule — 12–14 May</span><span class="sp-check">✓ Booked</span></div>
       </div>
-      <div class="feat">
-        <div class="feat-num">06</div>
-        <div class="feat-title">Role-Based Access Control</div>
-        <div class="feat-desc">Admin, Quality Manager, and Auditor roles with granular permissions. Each user sees exactly what they need to act on.</div>
+      <div class="story-panel">
+        <div class="sp-label">Self-assessment · Clause coverage</div>
+        <div class="sp-clause">Clause 4 — Context of the organization</div>
+        <div class="sp-bar"><i style="width:92%"></i></div>
+        <div class="sp-clause">Clause 7 — Support</div>
+        <div class="sp-bar"><i style="width:64%"></i></div>
+        <div class="sp-clause">Clause 8 — Operation</div>
+        <div class="sp-bar"><i style="width:48%"></i></div>
+        <div class="sp-clause">Clause 9 — Performance evaluation</div>
+        <div class="sp-bar"><i style="width:71%"></i></div>
+      </div>
+      <div class="story-panel">
+        <div class="sp-label">NCR board · This week</div>
+        <div class="sp-row"><span>Calibration records — torque tools</span><span class="pill major">Major</span></div>
+        <div class="sp-row"><span>Supplier evaluation overdue</span><span class="pill minor">Minor</span></div>
+        <div class="sp-row"><span>Training matrix — welding certs</span><span class="pill minor">Minor</span></div>
+        <div class="sp-row"><span>Document control — obsolete SOP v3</span><span class="pill ok">Closed</span></div>
+      </div>
+      <div class="story-panel">
+        <div class="sp-label">Close-out · Certification audit</div>
+        <div class="sp-row"><span>Corrective actions verified</span><span class="sp-check">✓ Done</span></div>
+        <div class="sp-row"><span>Internal audit reports (12 mo)</span><span class="sp-check">✓ Ready</span></div>
+        <div class="sp-row"><span>Management review minutes</span><span class="sp-check">✓ Ready</span></div>
+        <div class="sp-row"><span>Final audit report</span><span class="sp-check">✓ Generated</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how">
-  <div class="container">
-    <div class="section-label">Workflow</div>
-    <h2>From assessment<br>to certification-ready.</h2>
-    <p class="section-intro">A structured four-step process that mirrors how your certification body evaluates your QMS.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-connector">→</div>
-        <div class="step-num">1</div>
-        <span class="step-accent"></span>
-        <div class="step-title">Plan your audit</div>
-        <div class="step-desc">Define scope, select ISO 9001 clauses, set the schedule, and assign the audit team. Templates included.</div>
-      </div>
-      <div class="step">
-        <div class="step-connector">→</div>
-        <div class="step-num">2</div>
-        <span class="step-accent"></span>
-        <div class="step-title">Execute & evidence</div>
-        <div class="step-desc">Run structured interviews and observations. Attach evidence directly to findings while you work, not after.</div>
-      </div>
-      <div class="step">
-        <div class="step-connector">→</div>
-        <div class="step-num">3</div>
-        <span class="step-accent"></span>
-        <div class="step-title">Manage findings</div>
-        <div class="step-desc">Raise non-conformities and observations. Assign owners, due dates, and corrective actions immediately.</div>
-      </div>
-      <div class="step">
-        <div class="step-connector">→</div>
-        <div class="step-num">4</div>
-        <span class="step-accent"></span>
-        <div class="step-title">Close the loop</div>
-        <div class="step-desc">Track CAPA completion, verify effectiveness, and generate the final audit report in one click.</div>
-      </div>
+<section class="sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Coverage</span>
+      <h2>Full ISO 9001:2015 clause coverage.</h2>
+      <p>Every requirement mapped — from organizational context to management review, operations, and continuous improvement.</p>
     </div>
-  </div>
-</section>
-
-<!-- ISO CLAUSE COVERAGE -->
-<section class="clauses">
-  <div class="container">
-    <div class="section-label">Coverage</div>
-    <h2>Full ISO 9001:2015 clause coverage.</h2>
-    <p class="section-intro">Every requirement mapped — from organizational context to management review, operations, and continuous improvement.</p>
-    <div class="clause-grid">
+    <div class="clause-grid reveal">
       <div class="clause"><div class="clause-id">Clause 4</div><div class="clause-name">Context of the Organization</div></div>
       <div class="clause"><div class="clause-id">Clause 5</div><div class="clause-name">Leadership</div></div>
       <div class="clause"><div class="clause-id">Clause 6</div><div class="clause-name">Planning</div></div>
@@ -545,82 +661,24 @@
       <div class="clause"><div class="clause-id">Clause 9</div><div class="clause-name">Performance Evaluation</div></div>
       <div class="clause"><div class="clause-id">Clause 9.2</div><div class="clause-name">Internal Audit</div></div>
       <div class="clause"><div class="clause-id">Clause 9.3</div><div class="clause-name">Management Review</div></div>
-      <div class="clause"><div class="clause-id">Clause 10</div><div class="clause-name">Improvement & CAPA</div></div>
-      <div class="clause"><div class="clause-id">10.2</div><div class="clause-name">Nonconformity & Corrective Action</div></div>
+      <div class="clause"><div class="clause-id">Clause 10</div><div class="clause-name">Improvement &amp; CAPA</div></div>
+      <div class="clause"><div class="clause-id">10.2</div><div class="clause-name">Nonconformity &amp; Corrective Action</div></div>
     </div>
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
-<section class="proof">
-  <div class="container">
-    <div class="section-label">Results</div>
-    <h2>Quality teams move faster<br>with AuditFlow.</h2>
-    <p class="section-intro">Replacing manual processes with structured workflows changes how teams experience compliance work.</p>
-    <div class="proof-bar">
-      <div class="proof-stat">
-        <div class="proof-num">60%</div>
-        <div class="proof-desc">Reduction in audit preparation time</div>
-      </div>
-      <div class="proof-stat">
-        <div class="proof-num">3×</div>
-        <div class="proof-desc">Faster CAPA closure rates</div>
-      </div>
-      <div class="proof-stat">
-        <div class="proof-num">100%</div>
-        <div class="proof-desc">Audit trail completeness</div>
-      </div>
-      <div class="proof-stat">
-        <div class="proof-num">0</div>
-        <div class="proof-desc">Spreadsheets required</div>
-      </div>
+<section class="paper-sec sec-pad" id="pricing">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Pricing</span>
+      <h2>Straightforward plans. No surprises.</h2>
+      <p>All plans include full ISO 9001:2015 clause coverage. Free while in beta.</p>
     </div>
-    <div class="testimonials">
-      <div class="testimonial">
-        <p class="t-quote">We went from three days of audit prep to half a day. Having everything in one place — checklists, evidence, NCRs — completely changed how our team works before certification visits.</p>
-        <div class="t-author">
-          <div class="t-avatar">ML</div>
-          <div>
-            <div class="t-name">Maria Lindström</div>
-            <div class="t-role">Quality Manager, Lindström Engineering</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <p class="t-quote">The corrective action workflow is the best I've used. Root cause, action, verification — all tracked with full history. Our ISO 9001 surveillance audit was genuinely the smoothest we've had.</p>
-        <div class="t-author">
-          <div class="t-avatar">AK</div>
-          <div>
-            <div class="t-name">Anders Karlsson</div>
-            <div class="t-role">Head of QA, Nordsystem AB</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial">
-        <p class="t-quote">The dashboard gives management the visibility they actually want — not raw data, but compliance trends and open action items. Our quarterly review meetings are finally productive.</p>
-        <div class="t-author">
-          <div class="t-avatar">SB</div>
-          <div>
-            <div class="t-name">Sofia Björk</div>
-            <div class="t-role">Operations Director, Teknikgruppen</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="container">
-    <div class="section-label">Pricing</div>
-    <h2>Straightforward plans.<br>No surprises.</h2>
-    <p class="section-intro">All plans include full ISO 9001:2015 clause coverage. Free while in beta.</p>
     <div class="pricing-grid">
-      <div class="plan featured">
+      <div class="plan featured reveal">
         <div class="plan-name">Free</div>
         <div class="plan-price">€0</div>
-        <div class="plan-per">forever &mdash; up to 10 users</div>
+        <div class="plan-per">forever — up to 10 users</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
           <li>Unlimited audits</li>
@@ -630,12 +688,12 @@
           <li>Basic reporting &amp; dashboards</li>
           <li>Email support</li>
         </ul>
-        <a href="/register" class="plan-btn plan-btn-white">Start 30-day trial</a>
+        <a href="/register" class="plan-btn plan-btn-glow">Start 30-day trial</a>
       </div>
-      <div class="plan">
+      <div class="plan reveal" data-d="1">
         <div class="plan-name">Professional</div>
         <div class="plan-price">€0</div>
-        <div class="plan-per">per month &mdash; up to 50 users</div>
+        <div class="plan-per">per month — up to 50 users</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
           <li>Everything in Free</li>
@@ -646,12 +704,12 @@
           <li>Multi-department &amp; division support</li>
           <li>Priority support</li>
         </ul>
-        <a href="/register" class="plan-btn plan-btn-white">Start 30-day trial</a>
+        <a href="/register" class="plan-btn plan-btn-dark">Start 30-day trial</a>
       </div>
-      <div class="plan">
+      <div class="plan reveal" data-d="2">
         <div class="plan-name">Enterprise</div>
         <div class="plan-price">Custom</div>
-        <div class="plan-per">50+ users &mdash; tailored to your org</div>
+        <div class="plan-per">50+ users — tailored to your org</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
           <li>Everything in Professional</li>
@@ -668,52 +726,132 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container">
-    <h2>Ready to run your next audit with confidence?</h2>
-    <p>Set up in minutes. No consultants, no training day required.</p>
-    <div class="cta-actions">
-      <a href="/register" class="btn-primary">Start 30-day free trial</a>
-      <a href="#" style="color:rgba(255,255,255,.5);font-size:14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;">Schedule a demo →</a>
-    </div>
-  </div>
+<section class="cta">
+  <h2>Your next audit could be <em>the calm one</em>.</h2>
+  <p>Set up in minutes. No consultants, no training day required.</p>
+  <a class="btn" href="/register">Start 30-day free trial →</a>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="footer-logo">Audit<span>Flow</span></div>
-      <div class="footer-tagline">Enterprise-grade ISO 9001 quality management and audit platform. Built for teams that take compliance seriously.</div>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Audit<span>Flow</span></div>
+        <div class="footer-tagline">ISO 9001 quality management and audit platform. Built for teams that take compliance seriously.</div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-links-title">Product</div>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/blog">Blog</a>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-links-title">Use cases</div>
+        <a href="#features">Internal audits</a>
+        <a href="#features">Self-assessments</a>
+        <a href="#story">Management review</a>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-links-title">Company</div>
+        <a href="mailto:hello@auditflow.io">Contact</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms of service</a>
+      </div>
     </div>
-    <div class="footer-links-group">
-      <div class="footer-links-title">Product</div>
-      <a href="#">Features</a>
-      <a href="#">Pricing</a>
-      <a href="#">Changelog</a>
-      <a href="#">Roadmap</a>
+    <div class="footer-bottom">
+      <span>© 2026 AuditFlow. All rights reserved.</span>
+      <span>ISO 9001:2015 Quality Management Platform</span>
     </div>
-    <div class="footer-links-group">
-      <div class="footer-links-title">Use cases</div>
-      <a href="#">Internal audits</a>
-      <a href="#">Self-assessments</a>
-      <a href="#">Supplier audits</a>
-      <a href="#">Management review</a>
-    </div>
-    <div class="footer-links-group">
-      <div class="footer-links-title">Company</div>
-      <a href="#">About</a>
-      <a href="#">Security</a>
-      <a href="#">Privacy policy</a>
-      <a href="#">Terms of service</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 AuditFlow. All rights reserved.</span>
-    <span>ISO 9001:2015 Quality Management Platform</span>
   </div>
 </footer>
 
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav elevation + scroll progress */
+  var nav = document.getElementById('nav');
+  var progress = document.getElementById('progress');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 24);
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+      updateStory();
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* reveals + counters + bars */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.reveal, .bars').forEach(function (el) { io.observe(el); });
+
+  function countUp(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    var target = parseInt(el.dataset.count, 10);
+    if (reduced || target === 0) { el.textContent = target; return; }
+    var start = null, dur = 1400;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* 3D tilt on hero card */
+  var tilt = document.getElementById('tilt');
+  var stage = tilt.parentElement;
+  if (!reduced && window.matchMedia('(pointer: fine)').matches) {
+    stage.addEventListener('mousemove', function (ev) {
+      var r = stage.getBoundingClientRect();
+      var px = (ev.clientX - r.left) / r.width - 0.5;
+      var py = (ev.clientY - r.top) / r.height - 0.5;
+      tilt.style.transform = 'rotateY(' + (px * 7) + 'deg) rotateX(' + (-py * 6) + 'deg) translateZ(0)';
+    });
+    stage.addEventListener('mouseleave', function () { tilt.style.transform = ''; });
+  }
+
+  /* mouse-following glow on feature cards */
+  document.querySelectorAll('.feat-card').forEach(function (card) {
+    card.addEventListener('mousemove', function (ev) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+    });
+  });
+
+  /* sticky scroll story */
+  var story = document.getElementById('story');
+  var steps = document.querySelectorAll('.story-step');
+  var panels = document.querySelectorAll('.story-panel');
+  var mobile = window.matchMedia('(max-width: 900px)');
+  function updateStory() {
+    if (mobile.matches) return;
+    var rect = story.getBoundingClientRect();
+    var total = story.offsetHeight - window.innerHeight;
+    var p = Math.min(Math.max(-rect.top / total, 0), 0.999);
+    var idx = Math.floor(p * panels.length);
+    steps.forEach(function (s, i) { s.classList.toggle('active', i === idx); });
+    panels.forEach(function (pl, i) { pl.classList.toggle('active', i === idx); });
+  }
+
+  onScroll();
+})();
+</script>
 </body>
 </html>

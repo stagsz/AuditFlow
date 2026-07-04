@@ -103,7 +103,7 @@ export default function AdminInvitesPage() {
       ) : (
         <Card>
           <CardContent className="p-0">
-            <ul className="divide-y divide-gray-100">
+            <ul className="divide-y divide-[var(--border-subtle)]">
               {pendingInvites.map((invite) => (
                 <li key={invite.id} className="flex flex-col sm:flex-row sm:items-center gap-3 px-6 py-4">
                   <div className="flex-1 min-w-0">
@@ -141,7 +141,7 @@ export default function AdminInvitesPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="text-red-600 border-red-200 hover:bg-red-50"
+                      className="text-[var(--status-fail-fg)] border-[var(--status-fail-line)] hover:bg-[var(--status-fail-bg)]"
                       onClick={() => handleReject(invite.id)}
                       disabled={actioning === invite.id}
                       loading={actioning === invite.id}

@@ -117,7 +117,7 @@ export function TeamMemberSelect({ value, onChange, error }: TeamMemberSelectPro
         <div
           className={clsx(
             'flex items-center border rounded-md bg-[var(--surface-card)] px-3 py-2 gap-2',
-            error ? 'border-red-400' : 'border-[var(--border-default)]',
+            error ? 'border-[var(--status-fail-line)]' : 'border-[var(--border-default)]',
             'focus-within:ring-2 focus-within:ring-[var(--brand)] focus-within:border-transparent'
           )}
         >
@@ -129,7 +129,7 @@ export function TeamMemberSelect({ value, onChange, error }: TeamMemberSelectPro
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onFocus={() => setIsOpen(true)}
-            className="flex-1 text-sm outline-none placeholder:text-[var(--text-subtle)]"
+            className="flex-1 text-sm outline-none bg-transparent text-[var(--text-strong)] placeholder:text-[var(--text-subtle)]"
           />
           {loading && (
             <svg
@@ -200,7 +200,7 @@ export function TeamMemberSelect({ value, onChange, error }: TeamMemberSelectPro
         </div>
       )}
 
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+      {error && <p className="mt-1 text-sm text-[var(--status-fail-fg)]">{error}</p>}
     </div>
   );
 }
@@ -233,9 +233,9 @@ function SelectedMember({ member, onRemove, onRoleChange }: SelectedMemberProps)
   if (loading) {
     return (
       <div className="flex items-center gap-3 p-3 bg-[var(--surface-sunken)] rounded-md animate-pulse">
-        <div className="h-8 w-8 rounded-full bg-[var(--stone-200)]" />
+        <div className="h-8 w-8 rounded-full bg-[var(--surface-raised)]" />
         <div className="flex-1">
-          <div className="h-4 w-32 bg-[var(--stone-200)] rounded" />
+          <div className="h-4 w-32 bg-[var(--surface-raised)] rounded" />
         </div>
       </div>
     );
@@ -262,7 +262,7 @@ function SelectedMember({ member, onRemove, onRoleChange }: SelectedMemberProps)
         <select
           value={member.role}
           onChange={(e) => onRoleChange(e.target.value)}
-          className="appearance-none bg-[var(--surface-card)] border border-[var(--border-default)] rounded-md px-3 py-1.5 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)] focus:border-transparent"
+          className="appearance-none bg-[var(--surface-card)] text-[var(--text-strong)] border border-[var(--border-default)] rounded-md px-3 py-1.5 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)] focus:border-transparent"
         >
           {teamMemberRoleOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -278,7 +278,7 @@ function SelectedMember({ member, onRemove, onRoleChange }: SelectedMemberProps)
       <button
         type="button"
         onClick={onRemove}
-        className="text-[var(--text-subtle)] hover:text-red-500 transition-colors"
+        className="text-[var(--text-subtle)] hover:text-[var(--status-fail-fg)] transition-colors"
         title="Remove member"
       >
         <X className="h-5 w-5" />

@@ -147,11 +147,11 @@ export default function ReportsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'COMPLETED':
-        return 'bg-green-50 text-green-800';
+        return 'bg-[var(--status-pass-bg)] text-[var(--status-pass-fg)] border border-[var(--status-pass-line)]';
       case 'UNDER_REVIEW':
-        return 'bg-blue-50 text-blue-800';
+        return 'bg-[var(--brand-soft)] text-[var(--text-link)]';
       case 'IN_PROGRESS':
-        return 'bg-amber-50 text-amber-800';
+        return 'bg-[var(--status-obs-bg)] text-[var(--status-obs-fg)] border border-[var(--status-obs-line)]';
       case 'DRAFT':
         return 'bg-[var(--surface-sunken)] text-[var(--text-strong)]';
       default:
@@ -161,9 +161,9 @@ export default function ReportsPage() {
 
   const getScoreColor = (score: number | null) => {
     if (score === null) return 'text-[var(--text-subtle)]';
-    if (score >= 2.5) return 'text-green-600';
-    if (score >= 1.5) return 'text-amber-600';
-    return 'text-red-600';
+    if (score >= 2.5) return 'text-[var(--status-pass-fg)]';
+    if (score >= 1.5) return 'text-[var(--status-obs-fg)]';
+    return 'text-[var(--status-fail-fg)]';
   };
 
   if (isLoading) {
@@ -188,8 +188,8 @@ export default function ReportsPage() {
   if (error) {
     return (
       <div className="p-6">
-        <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-          <p className="text-red-800">Error loading assessments. Please try again.</p>
+        <div className="bg-[var(--status-fail-bg)] border border-[var(--status-fail-line)] rounded-xl p-4">
+          <p className="text-[var(--status-fail-fg)]">Error loading assessments. Please try again.</p>
         </div>
       </div>
     );
@@ -208,7 +208,7 @@ export default function ReportsPage() {
         <button
           onClick={handleExportAll}
           disabled={downloadingId === 'all'}
-          className="flex items-center gap-2 px-4 py-2 bg-[var(--brand)] text-white rounded-xl hover:bg-[var(--brand-strong)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 px-4 py-2 bg-[var(--brand)] text-[var(--text-on-brand)] rounded-xl hover:bg-[var(--brand-strong)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <FileSpreadsheet size={18} />
           {downloadingId === 'all' ? 'Exporting...' : 'Export All to CSV'}
@@ -226,7 +226,7 @@ export default function ReportsPage() {
               placeholder="Search assessments..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-[var(--border-default)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+              className="w-full pl-10 pr-4 py-2 bg-[var(--surface-sunken)] text-[var(--text-strong)] placeholder:text-[var(--text-subtle)] border border-[var(--border-default)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
             />
           </div>
 
@@ -236,7 +236,7 @@ export default function ReportsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-[var(--border-default)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+              className="px-4 py-2 bg-[var(--surface-sunken)] text-[var(--text-strong)] border border-[var(--border-default)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
             >
               <option value="">Completed & Under Review</option>
               <option value="COMPLETED">Completed Only</option>
@@ -319,9 +319,9 @@ export default function ReportsPage() {
       )}
 
       {/* Info Card */}
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-        <h4 className="font-semibold text-blue-900 mb-2">Available Report Formats:</h4>
-        <ul className="space-y-1 text-blue-800 text-sm">
+      <div className="bg-[var(--brand-soft)] border border-[var(--border-subtle)] rounded-xl p-4">
+        <h4 className="font-semibold text-[var(--text-strong)] mb-2">Available Report Formats:</h4>
+        <ul className="space-y-1 text-[var(--text-body)] text-sm">
           <li>• <strong>PDF</strong> - Comprehensive report with charts and detailed findings</li>
           <li>• <strong>PowerPoint</strong> - Professional presentation with slides for executive summary, findings, and recommendations</li>
           <li>• <strong>CSV</strong> - Export all assessment data for analysis in spreadsheet applications</li>
@@ -329,17 +329,17 @@ export default function ReportsPage() {
       </div>
 
       {/* PowerPoint Setup Notice */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-        <h4 className="font-semibold text-amber-900 mb-2">📋 PowerPoint Setup Required</h4>
-        <p className="text-sm text-amber-800 mb-2">
+      <div className="bg-[var(--status-obs-bg)] border border-[var(--status-obs-line)] rounded-xl p-4">
+        <h4 className="font-semibold text-[var(--status-obs-fg)] mb-2">📋 PowerPoint Setup Required</h4>
+        <p className="text-sm text-[var(--text-body)] mb-2">
           To enable PowerPoint report generation, the server administrator needs to install the required package.
         </p>
-        <div className="bg-amber-100 border border-amber-300 rounded p-2 mt-2">
-          <p className="text-xs font-mono text-amber-900">
+        <div className="bg-[var(--surface-sunken)] border border-[var(--status-obs-line)] rounded p-2 mt-2">
+          <p className="text-xs font-mono text-[var(--status-obs-fg)]">
             Server command: <span className="font-bold">npm install pptxgenjs</span>
           </p>
-          <p className="text-xs text-amber-700 mt-1">
-            Run this in the <code className="bg-amber-200 px-1 rounded">backend/</code> directory and restart the server.
+          <p className="text-xs text-[var(--text-muted)] mt-1">
+            Run this in the <code className="bg-[var(--surface-raised)] px-1 rounded">backend/</code> directory and restart the server.
           </p>
         </div>
       </div>

@@ -11,7 +11,7 @@ const selectVariants = cva(
     variants: {
       variant: {
         default: 'border-[var(--border-default)] hover:border-[var(--border-strong)] focus:border-transparent',
-        error: 'border-red-400 focus:ring-red-400 bg-red-50/30',
+        error: 'border-[var(--status-fail-line)] focus:ring-[var(--status-fail-solid)] bg-[var(--status-fail-bg)]',
       },
       size: {
         default: 'h-10 px-3.5 py-2',

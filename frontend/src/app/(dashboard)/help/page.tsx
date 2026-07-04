@@ -90,12 +90,12 @@ export default function HelpPage() {
           </div>
 
           <div className="space-y-3">
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div className="bg-blue-500/10 border border-blue-400/25 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-blue-600 mt-0.5" />
+                <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-blue-900 mb-1">Full ISO 9001:2015 Assessment</h4>
-                  <p className="text-sm text-blue-700 mb-2">73 sections - All Clauses (4-10)</p>
+                  <h4 className="font-medium text-blue-200 mb-1">Full ISO 9001:2015 Assessment</h4>
+                  <p className="text-sm text-blue-300 mb-2">73 sections - All Clauses (4-10)</p>
                   <p className="text-sm text-[var(--text-muted)]">
                     Comprehensive assessment covering all ISO 9001:2015 requirements. Best for
                     certification audits and complete QMS reviews.
@@ -104,12 +104,12 @@ export default function HelpPage() {
               </div>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+            <div className="bg-green-500/10 border border-green-400/25 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <Zap className="h-5 w-5 text-green-600 mt-0.5" />
+                <Zap className="h-5 w-5 text-green-400 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-green-900 mb-1">Quick Check Assessment</h4>
-                  <p className="text-sm text-green-700 mb-2">Approximately 20 sections - Essential Requirements</p>
+                  <h4 className="font-medium text-green-200 mb-1">Quick Check Assessment</h4>
+                  <p className="text-sm text-green-300 mb-2">Approximately 20 sections - Essential Requirements</p>
                   <p className="text-sm text-[var(--text-muted)]">
                     Focused assessment covering essential QMS requirements. Ideal for quarterly
                     reviews and management meetings.
@@ -118,12 +118,12 @@ export default function HelpPage() {
               </div>
             </div>
 
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-4">
+            <div className="bg-purple-500/10 border border-purple-400/25 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <Users className="h-5 w-5 text-purple-600 mt-0.5" />
+                <Users className="h-5 w-5 text-purple-400 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-purple-900 mb-1">Leadership & Planning Focus</h4>
-                  <p className="text-sm text-purple-700 mb-2">Approximately 15 sections - Clauses 5, 6</p>
+                  <h4 className="font-medium text-purple-200 mb-1">Leadership & Planning Focus</h4>
+                  <p className="text-sm text-purple-300 mb-2">Approximately 15 sections - Clauses 5, 6</p>
                   <p className="text-sm text-[var(--text-muted)]">
                     Targeted assessment focusing on leadership, quality policy, organizational roles,
                     and planning. Perfect for management reviews.
@@ -132,12 +132,12 @@ export default function HelpPage() {
               </div>
             </div>
 
-            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+            <div className="bg-orange-500/10 border border-orange-400/25 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <Target className="h-5 w-5 text-orange-600 mt-0.5" />
+                <Target className="h-5 w-5 text-orange-400 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-orange-900 mb-1">Operations & Delivery Focus</h4>
-                  <p className="text-sm text-orange-700 mb-2">Approximately 15 sections - Clause 8</p>
+                  <h4 className="font-medium text-orange-200 mb-1">Operations & Delivery Focus</h4>
+                  <p className="text-sm text-orange-300 mb-2">Approximately 15 sections - Clause 8</p>
                   <p className="text-sm text-[var(--text-muted)]">
                     Deep dive into operational processes including customer requirements, design,
                     supplier management, and production control.
@@ -146,12 +146,12 @@ export default function HelpPage() {
               </div>
             </div>
 
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+            <div className="bg-indigo-500/10 border border-indigo-400/25 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <BookOpen className="h-5 w-5 text-indigo-600 mt-0.5" />
+                <BookOpen className="h-5 w-5 text-indigo-400 mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-indigo-900 mb-1">Documentation & Support Review</h4>
-                  <p className="text-sm text-indigo-700 mb-2">Approximately 12 sections - Clause 7</p>
+                  <h4 className="font-medium text-indigo-200 mb-1">Documentation & Support Review</h4>
+                  <p className="text-sm text-indigo-300 mb-2">Approximately 12 sections - Clause 7</p>
                   <p className="text-sm text-[var(--text-muted)]">
                     Focused review of support processes including resources, competence, awareness,
                     and documented information.
@@ -160,12 +160,12 @@ export default function HelpPage() {
               </div>
             </div>
 
-            <div className="bg-teal-50 border border-teal-200 rounded-xl p-4">
+            <div className="bg-[var(--brand-soft)] border border-[var(--border-default)] rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <Star className="h-5 w-5 text-teal-600 mt-0.5" />
+                <Star className="h-5 w-5 text-[var(--text-link)] mt-0.5" />
                 <div>
-                  <h4 className="font-medium text-teal-900 mb-1">Strategic Planning Assessment</h4>
-                  <p className="text-sm text-teal-700 mb-2">Approximately 18 sections - Clauses 4, 6, 9, 10</p>
+                  <h4 className="font-medium text-[var(--text-link)] mb-1">Strategic Planning Assessment</h4>
+                  <p className="text-sm text-[var(--text-body)] mb-2">Approximately 18 sections - Clauses 4, 6, 9, 10</p>
                   <p className="text-sm text-[var(--text-muted)]">
                     Strategic-level assessment covering context, planning, performance evaluation, and
                     improvement. Suitable for annual strategic reviews.
@@ -290,7 +290,7 @@ export default function HelpPage() {
           <div className="space-y-3">
             <div className="bg-[var(--surface-sunken)] border border-[var(--border-default)] rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-8 h-8 rounded-full bg-gray-400 text-white font-semibold flex items-center justify-center text-sm">
+                <div className="w-8 h-8 rounded-full bg-[var(--status-na-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   0
                 </div>
                 <h4 className="font-medium text-[var(--text-strong)]">Not Applicable (N/A)</h4>
@@ -300,24 +300,24 @@ export default function HelpPage() {
               </p>
             </div>
 
-            <div className="bg-red-50 border border-red-300 rounded-xl p-4">
+            <div className="bg-[var(--status-fail-bg)] border border-[var(--status-fail-line)] rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-8 h-8 rounded-full bg-[var(--status-fail-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   1
                 </div>
-                <h4 className="font-medium text-red-900">Non-Compliant</h4>
+                <h4 className="font-medium text-[var(--status-fail-fg)]">Non-Compliant</h4>
               </div>
               <p className="text-sm text-[var(--text-muted)]">
                 Requirement is not met. Significant gaps exist. Immediate corrective action required.
               </p>
             </div>
 
-            <div className="bg-orange-50 border border-orange-300 rounded-xl p-4">
+            <div className="bg-orange-500/10 border border-orange-400/25 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-8 h-8 rounded-full bg-orange-500 text-white font-semibold flex items-center justify-center text-sm">
                   2
                 </div>
-                <h4 className="font-medium text-orange-900">Initial</h4>
+                <h4 className="font-medium text-orange-200">Initial</h4>
               </div>
               <p className="text-sm text-[var(--text-muted)]">
                 Basic processes exist but are informal. Documentation is minimal. Inconsistent
@@ -325,12 +325,12 @@ export default function HelpPage() {
               </p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-300 rounded-xl p-4">
+            <div className="bg-[var(--status-obs-bg)] border border-[var(--status-obs-line)] rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-8 h-8 rounded-full bg-[var(--status-obs-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   3
                 </div>
-                <h4 className="font-medium text-amber-900">Developing</h4>
+                <h4 className="font-medium text-[var(--status-obs-fg)]">Developing</h4>
               </div>
               <p className="text-sm text-[var(--text-muted)]">
                 Processes are documented and generally followed. Some monitoring in place. Room for
@@ -338,12 +338,12 @@ export default function HelpPage() {
               </p>
             </div>
 
-            <div className="bg-green-50 border border-green-300 rounded-xl p-4">
+            <div className="bg-[var(--status-pass-bg)] border border-[var(--status-pass-line)] rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-8 h-8 rounded-full bg-[var(--status-pass-solid)] text-white font-semibold flex items-center justify-center text-sm">
                   4
                 </div>
-                <h4 className="font-medium text-green-900">Established</h4>
+                <h4 className="font-medium text-[var(--status-pass-fg)]">Established</h4>
               </div>
               <p className="text-sm text-[var(--text-muted)]">
                 Processes are well-defined, consistently implemented, and monitored. Meets ISO 9001
@@ -351,12 +351,12 @@ export default function HelpPage() {
               </p>
             </div>
 
-            <div className="bg-blue-50 border border-blue-300 rounded-xl p-4">
+            <div className="bg-blue-500/10 border border-blue-400/25 rounded-xl p-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-8 h-8 rounded-full bg-blue-500 text-white font-semibold flex items-center justify-center text-sm">
                   5
                 </div>
-                <h4 className="font-medium text-blue-900">Optimizing</h4>
+                <h4 className="font-medium text-blue-200">Optimizing</h4>
               </div>
               <p className="text-sm text-[var(--text-muted)]">
                 Processes are optimized through continual improvement. Data-driven decisions. Best
