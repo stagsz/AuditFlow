@@ -21,10 +21,12 @@ interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
-  /** True once the persisted auth state has been read back from localStorage.
-   * Route guards must wait for this before treating isAuthenticated===false as
-   * "not logged in" — otherwise a hard page load/refresh reads the pre-hydration
-   * default (false) and redirects to /login even with a valid stored session. */
+  /**
+   * True once persisted auth state has been read back from localStorage.
+   * Route guards must wait for this before treating `isAuthenticated===false`
+   * as logged-out — otherwise a refresh reads the pre-hydration default and
+   * redirects to `/login` with a valid stored session.
+   */
   hasHydrated: boolean;
   setAuth: (user: User, accessToken: string, refreshToken: string) => void;
   clearAuth: () => void;

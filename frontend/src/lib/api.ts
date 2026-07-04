@@ -73,10 +73,14 @@ api.interceptors.response.use(
             refreshToken,
           });
 
-          const { accessToken } = response.data.data;
-          localStorage.setItem('accessToken', accessToken);
+          const { accessToken } =
+            response.data?.data || response.data || {};
 
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          if (accessToken) {
+            localStorage.setItem('accessToken', accessToken);
+
+            originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+          }
           isRefreshing = false;
           return api(originalRequest);
         }
