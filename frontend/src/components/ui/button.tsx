@@ -44,10 +44,11 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   loading?: boolean;
+  iconLeft?: React.ReactNode;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, loading, children, disabled, ...props }, ref) => {
+  ({ className, variant, size, loading, iconLeft, children, disabled, ...props }, ref) => {
     return (
       <button
         className={clsx(buttonVariants({ variant, size, className }))}
@@ -77,6 +78,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             />
           </svg>
         )}
+        {!loading && iconLeft && <span className="mr-2 inline-flex">{iconLeft}</span>}
         {children}
       </button>
     );
