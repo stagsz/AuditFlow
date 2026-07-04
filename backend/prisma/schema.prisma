@@ -131,6 +131,7 @@ model Organization {
   setupComplete Boolean  @default(false)
   industry      String?
   country       String?
+  allowedDomains Json?   @default("[]")
 
   users         User[]
   assessments   Assessment[]
@@ -215,6 +216,7 @@ model ISOStandardSection {
 model User {
   id              String    @id @default(uuid())
   email           String    @unique
+  emailDomain     String   @default("") @db.VarChar(255)
   passwordHash    String
   firstName       String
   lastName        String
@@ -241,6 +243,7 @@ model User {
   betaInviteUsages   BetaInviteUsage[]
 
   @@index([organizationId])
+  @@index([emailDomain])
   @@map("users")
 }
 
