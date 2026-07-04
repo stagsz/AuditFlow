@@ -108,6 +108,7 @@ export class AuthService {
           select: {
             id: true,
             name: true,
+            allowedDomains: true,
           },
         },
       },
@@ -115,6 +116,12 @@ export class AuthService {
 
     if (!user) {
       throw new AuthenticationError('Invalid credentials');
+    }
+
+    const domain = user.emailDomain?.toLowerCase();
+    const orgAllowedDomains = ((user.organization?.allowedDomains ?? []) as string[]).map((entry) => String(entry).toLowerCase());
+    if (!domain || (orgAllowedDomains.length > 0 && !orgAllowedDomains.includes(domain))) {
+      throw new AuthenticationError('Your email domain is not allowed for this organization');
     }
 
     if (!user.isActive) {
