@@ -1,38 +1,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { getPosts } from '@/lib/posts';
 
 export const metadata: Metadata = {
   title: 'Blog — AuditFlow',
   description: 'ISO 9001 quality management notes, audit tips, and product updates from AuditFlow.',
 };
-
-const posts = [
-  {
-    slug: 'iso-9001-self-assessment-checklist',
-    title: 'ISO 9001 self-assessment checklist for small teams',
-    summary:
-      'A practical checklist covering scope, interested parties, risk-based thinking, and operational controls for SMEs running internal audits.',
-    date: '2026-06-18',
-    theme: 'process', // will map to subtle accent colors
-  },
-  {
-    slug: 'ncr-tracking-best-practices',
-    title: 'NCR tracking best practices that actually close the loop',
-    summary:
-      'Why most NCR registers become paper trails, and a lightweight workflow for root cause, action planning, and effectiveness verification.',
-    date: '2026-05-29',
-    theme: 'dev',
-  },
-  {
-    slug: 'internal-audit-program',
-    title: 'How to build a repeatable internal audit program',
-    summary:
-      'From clause mapping to schedule optimization and auditor assignment — the framework we use inside AuditFlow customers.',
-    date: '2026-04-12',
-    theme: 'product',
-  },
-];
 
 const palette = {
   product: { fg: '#0e1117', bg: '#f9f8f6', accent: '#0f766e' },
@@ -40,7 +14,9 @@ const palette = {
   dev: { fg: '#0e1117', bg: '#f9f8f6', accent: '#1d4ed8' },
 } as const;
 
-export default function BlogIndex() {
+export default async function BlogIndex() {
+  const posts = await getPosts();
+
   return (
     <div className="min-h-screen bg-[#f9f8f6] text-[#0e1117] antialiased">
       {/* Global topbar */}

@@ -1,3 +1,11 @@
+---
+title: ISO 9001 self-assessment checklist for small teams
+date: 2026-06-18
+theme: process
+excerpt: A practical checklist covering scope, interested parties, risk-based thinking, and operational controls for SMEs running internal audits.
+owner: CMO (Sofia Strand)
+published: true
+---
 # Why Your SME Needs an ISO 9001 Self-Assessment Before the Auditor Arrives
 
 For small and medium-sized enterprises, ISO 9001 certification is a powerful signal: you take quality seriously, you understand your customers, and you systemize continuous improvement. But too many SMEs treat the standard as a compliance exercise to survive an external audit rather than a framework that can genuinely improve how they operate every day.

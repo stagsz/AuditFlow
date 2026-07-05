@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { AlertTriangle, Bell, CheckCircle, Clock, Download, LogOut, Menu, Search } from 'lucide-react';
+import { AlertTriangle, Bell, CheckCircle, ClipboardList, Clock, Download, LogOut, Menu, Search } from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/lib/store';
 import { orgInviteApi } from '@/lib/api';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -11,7 +11,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 const placeholderNotifications = [
   {
     id: '1',
-    type: 'warning' as const,
+    type: 'ncr' as const,
     title: 'NCR requires attention',
     message: 'Non-conformity #NCR-2024-001 is overdue for resolution',
     time: '10 minutes ago',
@@ -62,8 +62,10 @@ function getPageInfo(pathname: string) {
   return { title: 'AuditFlow', subtitle: 'Compliance Platform' };
 }
 
-function NotificationIcon({ type }: { type: 'warning' | 'info' | 'success' }) {
+function NotificationIcon({ type }: { type: 'warning' | 'info' | 'success' | 'ncr' }) {
   switch (type) {
+    case 'ncr':
+      return <ClipboardList size={16} className="text-rose-500 dark:text-rose-400" />;
     case 'warning':
       return <AlertTriangle size={16} className="text-[var(--status-obs-fg)]" />;
     case 'success':

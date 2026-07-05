@@ -261,16 +261,16 @@ export default function NewAssessmentPage() {
 
                   {/* Selected Template Info */}
                   {selectedTemplate && watchedTemplateId && (
-                    <div className="p-3 bg-blue-50 border border-blue-200 rounded-md space-y-2">
+                    <div className="p-3 bg-[var(--surface-sunken)] border border-[var(--border-subtle)] rounded-md space-y-2">
                       {selectedTemplate.description && (
-                        <p className="text-sm text-[var(--text-body)]">
+                        <p className="text-sm text-[var(--text-strong)]">
                           {selectedTemplate.description}
                         </p>
                       )}
                       {getTemplateScopeText(selectedTemplate) && (
                         <div className="flex items-center gap-2 text-sm">
-                          <span className="font-medium text-blue-900">Scope:</span>
-                          <span className="text-blue-800">
+                          <span className="font-medium text-[var(--text-strong)]">Scope:</span>
+                          <span className="text-[var(--text-body)]">
                             {getTemplateScopeText(selectedTemplate)}
                           </span>
                         </div>

@@ -1,3 +1,11 @@
+---
+title: NCR tracking best practices that actually close the loop
+date: 2026-05-29
+theme: implementation
+excerpt: Why most NCR registers become paper trails, and a lightweight workflow for root cause, action planning, and effectiveness verification.
+owner: CMO (Sofia Strand)
+published: true
+---
 # NCR Tracking Best Practices That Actually Close the Loop
 
 A nonconformity register is only useful if it changes behavior. The usual failure mode is a neat table with no ownership, no verification, and no consequences. This post is about breaking that loop—not with more bureaucracy, but with a lightweight, rigorous workflow that makes audits easier and operations genuinely better.

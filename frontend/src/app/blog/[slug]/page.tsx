@@ -1,39 +1,7 @@
-
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import fs from 'fs/promises';
-import path from 'path';
-import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-
-const POSTS_DIR = path.join(process.cwd(), '..', 'marketing', 'blog');
-
-const posts = [
-  {
-    slug: 'iso-9001-self-assessment-checklist',
-    title: 'ISO 9001 self-assessment checklist for small teams',
-    summary:
-      'A practical checklist covering scope, interested parties, risk-based thinking, and operational controls for SMEs running internal audits.',
-    date: '2026-06-18',
-    theme: 'process',
-  },
-  {
-    slug: 'ncr-tracking-best-practices',
-    title: 'NCR tracking best practices that actually close the loop',
-    summary:
-      'Why most NCR registers become paper trails, and a lightweight workflow for root cause, action planning, and effectiveness verification.',
-    date: '2026-05-29',
-    theme: 'dev',
-  },
-  {
-    slug: 'internal-audit-program',
-    title: 'How to build a repeatable internal audit program',
-    summary:
-      'From clause mapping to schedule optimization and auditor assignment — the framework we use inside AuditFlow customers.',
-    date: '2026-04-12',
-    theme: 'product',
-  },
-];
+import { getPosts, readPostMarkdown } from '@/lib/posts';
 
 const palette = {
   product: { fg: 'var(--text-strong)', bg: 'var(--surface-page)', accent: 'var(--brand)' },
@@ -41,7 +9,32 @@ const palette = {
   dev: { fg: 'var(--text-strong)', bg: 'var(--surface-page)', accent: 'var(--text-link)' },
 } as const;
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
+async function BlogBody({ slug }: { slug: string }) {
+  const source = await readPostMarkdown(slug);
+  return (
+    <div className="prose prose-neutral max-w-none">
+      <MDXRemote source={source.content} />
+      <p className="mt-4 text-base leading-relaxed text-[#0e1117]">
+        This post is published pending final Director approval. If you have feedback, contact the CMO office.
+      </p>
+    </div>
+  );
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const posts = await getPosts();
+  const post = posts.find((p) => p.slug === params.slug);
+  if (!post) return { title: 'Post not found — AuditFlow' };
+  return { title: `${post.title} — AuditFlow`, description: post.summary };
+}
+
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const posts = await getPosts();
   const post = posts.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
@@ -84,31 +77,4 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       </main>
     </div>
   );
-}
-
-async function BlogBody({ slug }: { slug: string }) {
-  const source = await readPostMarkdown(slug);
-  return (
-    <div className="max-w-none text-base leading-relaxed text-[var(--text-body)] [&_h1]:mt-10 [&_h2]:mt-10 [&_h3]:mt-8 [&_h1]:text-[var(--text-strong)] [&_h2]:text-[var(--text-strong)] [&_h3]:text-[var(--text-strong)] [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mt-1.5 [&_strong]:text-[var(--text-strong)] [&_a]:text-[var(--text-link)] [&_blockquote]:mt-4 [&_blockquote]:border-l-2 [&_blockquote]:border-[var(--border-default)] [&_blockquote]:pl-4 [&_blockquote]:text-[var(--text-muted)] [&_code]:text-[var(--text-link)] [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[var(--surface-sunken)] [&_pre]:p-4 [&_hr]:my-8 [&_hr]:border-[var(--border-subtle)]">
-      <MDXRemote source={source.content} />
-      <p className="mt-4 text-base leading-relaxed text-[var(--text-body)]">
-        This post is published pending final Director approval. If you have feedback, contact the CMO office.
-      </p>
-    </div>
-  );
-}
-
-async function readPostMarkdown(slug: string) {
-  try {
-    const filePath = path.join(POSTS_DIR, `${slug}.md`);
-    const raw = await fs.readFile(filePath, 'utf8');
-    return matter(raw);
-  } catch (error) {
-    console.error(`Failed to load blog post: ${slug}.md`, error);
-    notFound();
-  }
-}
-
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
 }
