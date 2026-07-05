@@ -33,7 +33,7 @@ const CardTitle = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHead
     <h3
       ref={ref}
       className={clsx(
-        'text-lg font-semibold leading-none tracking-tight text-gray-950',
+        'text-lg font-semibold leading-none tracking-tight text-[var(--text-strong)]',
         className
       )}
       {...props}

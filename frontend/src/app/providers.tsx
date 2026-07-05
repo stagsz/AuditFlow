@@ -22,7 +22,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         {children}
-        <Toaster position="top-right" richColors closeButton duration={4000} />
+        <Toaster position="top-right" theme="dark" richColors closeButton duration={4000} />
       </QueryClientProvider>
     </ErrorBoundary>
   );

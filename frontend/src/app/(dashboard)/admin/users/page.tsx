@@ -32,10 +32,10 @@ import { UsersListSkeleton } from '@/components/users/UsersListSkeleton';
 import { UsersEmptyState } from '@/components/users/UsersEmptyState';
 
 const roleColors: Record<string, string> = {
-  SYSTEM_ADMIN: 'bg-purple-100 text-purple-700',
-  QUALITY_MANAGER: 'bg-blue-50 text-blue-700',
-  INTERNAL_AUDITOR: 'bg-green-50 text-green-700',
-  DEPARTMENT_HEAD: 'bg-orange-100 text-orange-700',
+  SYSTEM_ADMIN: 'bg-purple-500/15 text-purple-300',
+  QUALITY_MANAGER: 'bg-blue-500/15 text-blue-300',
+  INTERNAL_AUDITOR: 'bg-[var(--status-pass-bg)] text-[var(--status-pass-fg)]',
+  DEPARTMENT_HEAD: 'bg-orange-500/15 text-orange-300',
   VIEWER: 'bg-[var(--surface-sunken)] text-[var(--text-body)]',
 };
 
@@ -268,7 +268,7 @@ export default function AdminUsersPage() {
       <div className="space-y-6">
         <Card>
           <CardContent className="py-12 text-center">
-            <ShieldOff className="mx-auto h-12 w-12 text-red-400 mb-4" />
+            <ShieldOff className="mx-auto h-12 w-12 text-[var(--status-fail-fg)] mb-4" />
             <p className="text-[var(--text-body)] font-medium">Access Denied</p>
             <p className="text-[var(--text-muted)] text-sm mt-1">
               You do not have permission to access this page.
@@ -298,13 +298,13 @@ export default function AdminUsersPage() {
         </div>
         <div className="flex items-center gap-2">
           {currentUser?.role === 'SYSTEM_ADMIN' && (
-            <div className="flex items-center gap-1 text-sm text-purple-700 bg-purple-50 px-3 py-1.5 rounded-full">
+            <div className="flex items-center gap-1 text-sm text-purple-300 bg-purple-500/15 px-3 py-1.5 rounded-full">
               <ShieldCheck className="h-4 w-4" />
               System Admin
             </div>
           )}
           {currentUser?.role === 'QUALITY_MANAGER' && (
-            <div className="flex items-center gap-1 text-sm text-blue-700 bg-blue-50 px-3 py-1.5 rounded-full">
+            <div className="flex items-center gap-1 text-sm text-blue-300 bg-blue-500/15 px-3 py-1.5 rounded-full">
               <Shield className="h-4 w-4" />
               Quality Manager
             </div>
@@ -359,7 +359,7 @@ export default function AdminUsersPage() {
       {isError ? (
         <Card>
           <CardContent className="py-12 text-center">
-            <AlertCircle className="mx-auto h-12 w-12 text-red-400 mb-4" />
+            <AlertCircle className="mx-auto h-12 w-12 text-[var(--status-fail-fg)] mb-4" />
             <p className="text-[var(--text-body)] font-medium">Failed to load users</p>
             <p className="text-[var(--text-muted)] text-sm mt-1">Please try refreshing the page</p>
           </CardContent>
@@ -378,7 +378,7 @@ export default function AdminUsersPage() {
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-[var(--surface-sunken)] border-b">
+                <thead className="bg-[var(--surface-sunken)] border-b border-[var(--border-subtle)]">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
                       <SortableColumnHeader
@@ -424,7 +424,7 @@ export default function AdminUsersPage() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-[var(--border-subtle)]">
                   {users.map((user) => (
                     <tr
                       key={user.id}
@@ -462,7 +462,7 @@ export default function AdminUsersPage() {
                       </td>
                       <td className="px-6 py-4">
                         {user.isActive ? (
-                          <span className="inline-flex items-center gap-1 text-sm text-green-600">
+                          <span className="inline-flex items-center gap-1 text-sm text-[var(--status-pass-fg)]">
                             <Check className="h-4 w-4" />
                             Active
                           </span>
@@ -495,7 +495,7 @@ export default function AdminUsersPage() {
                             <>
                               <button
                                 onClick={() => handleChangeRole(user)}
-                                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-sm font-medium text-[var(--text-muted)] hover:text-amber-600 hover:bg-amber-50 rounded-md transition-colors"
+                                className="inline-flex items-center gap-1 px-2.5 py-1.5 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--status-obs-fg)] hover:bg-[var(--status-obs-bg)] rounded-md transition-colors"
                                 aria-label={`Change role for ${user.firstName} ${user.lastName}`}
                               >
                                 <Shield className="h-4 w-4" />
@@ -505,8 +505,8 @@ export default function AdminUsersPage() {
                                 onClick={() => handleToggleStatus(user)}
                                 className={`inline-flex items-center gap-1 px-2.5 py-1.5 text-sm font-medium rounded-md transition-colors ${
                                   user.isActive
-                                    ? 'text-[var(--text-muted)] hover:text-red-600 hover:bg-red-50'
-                                    : 'text-[var(--text-muted)] hover:text-green-600 hover:bg-green-50'
+                                    ? 'text-[var(--text-muted)] hover:text-[var(--status-fail-fg)] hover:bg-[var(--status-fail-bg)]'
+                                    : 'text-[var(--text-muted)] hover:text-[var(--status-pass-fg)] hover:bg-[var(--status-pass-bg)]'
                                 }`}
                                 aria-label={`${user.isActive ? 'Deactivate' : 'Activate'} ${user.firstName} ${user.lastName}`}
                               >

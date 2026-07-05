@@ -33,9 +33,9 @@ import { AssessmentsEmptyState } from '@/components/assessments/AssessmentsEmpty
 
 const statusColors: Record<string, string> = {
   DRAFT: 'bg-[var(--surface-sunken)] text-[var(--text-body)]',
-  IN_PROGRESS: 'bg-blue-50 text-blue-700',
-  UNDER_REVIEW: 'bg-amber-50 text-amber-700',
-  COMPLETED: 'bg-green-50 text-green-700',
+  IN_PROGRESS: 'bg-[var(--brand-soft)] text-[var(--text-link)]',
+  UNDER_REVIEW: 'bg-[var(--status-obs-bg)] text-[var(--status-obs-fg)] border border-[var(--status-obs-line)]',
+  COMPLETED: 'bg-[var(--status-pass-bg)] text-[var(--status-pass-fg)] border border-[var(--status-pass-line)]',
   ARCHIVED: 'bg-[var(--surface-sunken)] text-[var(--text-muted)]',
 };
 
@@ -346,7 +346,7 @@ export default function AssessmentsPage() {
         {isError ? (
           <Card>
             <CardContent className="py-12 text-center">
-              <AlertCircle className="mx-auto h-12 w-12 text-red-400 mb-4" />
+              <AlertCircle className="mx-auto h-12 w-12 text-[var(--status-fail-fg)] mb-4" />
               <p className="text-[var(--text-body)] font-medium">Failed to load assessments</p>
               <p className="text-[var(--text-muted)] text-sm mt-1">Please try refreshing the page</p>
             </CardContent>
@@ -395,7 +395,7 @@ export default function AssessmentsPage() {
                       )}
                       <span>Responses: {assessment._count.responses}</span>
                       {assessment._count.nonConformities > 0 && (
-                        <span className="text-red-600">
+                        <span className="text-[var(--status-fail-fg)]">
                           NC: {assessment._count.nonConformities}
                         </span>
                       )}
@@ -410,10 +410,10 @@ export default function AssessmentsPage() {
                           <span
                             className={`text-2xl font-bold ${
                               (assessment.overallScore || 0) >= 70
-                                ? 'text-green-600'
+                                ? 'text-[var(--status-pass-fg)]'
                                 : (assessment.overallScore || 0) >= 50
-                                ? 'text-amber-600'
-                                : 'text-red-600'
+                                ? 'text-[var(--status-obs-fg)]'
+                                : 'text-[var(--status-fail-fg)]'
                             }`}
                           >
                             {assessment.overallScore?.toFixed(1)}%

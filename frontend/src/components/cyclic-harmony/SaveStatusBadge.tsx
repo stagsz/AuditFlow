@@ -28,9 +28,9 @@ export function SaveStatusBadge({
         return {
           icon: Loader2,
           text: 'Saving changes...',
-          bgColor: 'bg-blue-50',
-          borderColor: 'border-blue-200',
-          textColor: 'text-blue-700',
+          bgColor: 'bg-info-50',
+          borderColor: 'border-info-100',
+          textColor: 'text-info-600',
           iconClass: 'animate-spin',
         };
       case 'saved':
@@ -39,18 +39,18 @@ export function SaveStatusBadge({
           text: lastSaved
             ? `Saved ${formatTimeSince(lastSaved)}`
             : 'All changes saved',
-          bgColor: 'bg-green-50',
-          borderColor: 'border-green-200',
-          textColor: 'text-green-700',
+          bgColor: 'bg-[var(--status-pass-bg)]',
+          borderColor: 'border-[var(--status-pass-line)]',
+          textColor: 'text-[var(--status-pass-fg)]',
           iconClass: '',
         };
       case 'error':
         return {
           icon: AlertCircle,
           text: error || 'Failed to save',
-          bgColor: 'bg-red-50',
-          borderColor: 'border-red-200',
-          textColor: 'text-red-700',
+          bgColor: 'bg-[var(--status-fail-bg)]',
+          borderColor: 'border-[var(--status-fail-line)]',
+          textColor: 'text-[var(--status-fail-fg)]',
           iconClass: '',
         };
       default:

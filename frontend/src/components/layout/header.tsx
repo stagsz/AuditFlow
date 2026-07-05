@@ -64,11 +64,11 @@ function getPageInfo(pathname: string) {
 function NotificationIcon({ type }: { type: 'warning' | 'info' | 'success' }) {
   switch (type) {
     case 'warning':
-      return <AlertTriangle size={16} className="text-amber-500" />;
+      return <AlertTriangle size={16} className="text-[var(--status-obs-fg)]" />;
     case 'success':
       return <CheckCircle size={16} className="text-[var(--brand)]" />;
     default:
-      return <Clock size={16} className="text-blue-500" />;
+      return <Clock size={16} className="text-[var(--blue-100)]" />;
   }
 }
 
@@ -115,8 +115,8 @@ export function Header() {
         sidebarOpen ? 'md:left-72' : 'md:left-16'
       }`}
       style={{
-        background: 'rgba(255, 255, 255, 0.9)',
-        backdropFilter: 'blur(12px)',
+        background: 'rgba(12, 22, 25, 0.72)',
+        backdropFilter: 'blur(12px) saturate(1.4)',
         borderBottom: '1px solid var(--border-subtle)',
       }}
     >
@@ -131,7 +131,7 @@ export function Header() {
             <Menu size={24} />
           </button>
           <div className="flex flex-col">
-            <h2 className="text-xl md:text-2xl font-extrabold text-[var(--text-strong)] tracking-tight">
+            <h2 className="text-xl md:text-2xl font-medium text-[var(--text-strong)] tracking-tight">
               {pageInfo.title}
             </h2>
             {pageInfo.subtitle && (
@@ -145,7 +145,7 @@ export function Header() {
         {/* Right: search, notifications, export, logout */}
         <div className="flex items-center gap-3 md:gap-6">
           {/* Search */}
-          <div className="relative group hidden md:block">
+          <div className="relative group hidden lg:block">
             <Search
               size={18}
               className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-subtle)] group-focus-within:text-[var(--brand)] transition-colors"
@@ -153,7 +153,7 @@ export function Header() {
             <input
               type="text"
               placeholder="Search clauses, findings..."
-              className="w-56 lg:w-72 bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--border-focus)] transition-all placeholder:text-[var(--text-subtle)] text-[var(--text-strong)]"
+              className="w-56 xl:w-72 bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--border-focus)] transition-all placeholder:text-[var(--text-subtle)] text-[var(--text-strong)]"
             />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
               <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
@@ -166,13 +166,13 @@ export function Header() {
           </div>
 
           {/* Mobile search */}
-          <button className="p-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-sunken)] rounded-xl md:hidden transition-colors">
+          <button className="p-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-sunken)] rounded-xl lg:hidden transition-colors">
             <Search size={20} />
           </button>
 
           {/* Notifications */}
           <div className="ml-auto flex items-center gap-3 md:gap-4">
-            <div className="hidden md:flex flex-col items-end">
+            <div className="hidden xl:flex flex-col items-end">
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {(user?.organization?.name) || 'Organization'}
               </p>
@@ -180,7 +180,7 @@ export function Header() {
                 {(user?.role ?? '').replace(/_/g, ' ')}
               </p>
             </div>
-            <div className="h-9 w-px bg-[var(--border-subtle)]" />
+            <div className="hidden xl:block h-9 w-px bg-[var(--border-subtle)]" />
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
               className="w-10 h-10 rounded-full bg-[var(--surface-card)] border border-[var(--border-subtle)] flex items-center justify-center relative hover:border-[var(--brand)] hover:text-[var(--brand)] transition-colors"
@@ -189,7 +189,7 @@ export function Header() {
             >
               <Bell size={18} className="text-[var(--text-body)]" />
               {unreadCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-[var(--status-fail-solid)] text-white text-[10px] font-bold rounded-full border-2 border-white px-1">
+                <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] flex items-center justify-center bg-[var(--status-fail-solid)] text-white text-[10px] font-bold rounded-full border-2 border-[var(--surface-card)] px-1">
                   {unreadCount}
                 </span>
               )}
@@ -244,7 +244,7 @@ export function Header() {
           </div>
 
           {/* Export button */}
-          <button className="hidden md:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
+          <button className="hidden xl:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-[var(--text-on-brand)] px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
             <Download size={16} />
             Export Report
           </button>
@@ -259,14 +259,14 @@ export function Header() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
             {pendingInvites > 0 && (
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-[var(--status-fail-solid)] rounded-full border border-white" />
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-[var(--status-fail-solid)] rounded-full border border-[var(--surface-card)]" />
             )}
           </Link>
 
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] flex items-center justify-center hover:bg-red-50 hover:border-red-200 hover:text-red-600 text-[var(--text-muted)] transition-colors"
+            className="w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] flex items-center justify-center hover:bg-[var(--status-fail-bg)] hover:border-[var(--status-fail-line)] hover:text-[var(--status-fail-fg)] text-[var(--text-muted)] transition-colors"
             title="Logout"
           >
             <LogOut size={18} />

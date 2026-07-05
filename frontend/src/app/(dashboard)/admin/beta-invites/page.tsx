@@ -321,8 +321,8 @@ export default function AdminBetaInvitesPage() {
                     <p className="text-sm text-[var(--text-muted)]">Total Usages</p>
                     <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.totalUsages}</p>
                   </div>
-                  <div className="p-3 bg-blue-100 rounded-lg">
-                    <Users size={20} className="text-blue-600" />
+                  <div className="p-3 bg-blue-500/15 rounded-lg">
+                    <Users size={20} className="text-blue-400" />
                   </div>
                 </div>
               </CardContent>
@@ -334,8 +334,8 @@ export default function AdminBetaInvitesPage() {
                     <p className="text-sm text-[var(--text-muted)]">Converted</p>
                     <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.totalConverted}</p>
                   </div>
-                  <div className="p-3 bg-purple-100 rounded-lg">
-                    <CheckCircle size={20} className="text-purple-600" />
+                  <div className="p-3 bg-purple-500/15 rounded-lg">
+                    <CheckCircle size={20} className="text-purple-400" />
                   </div>
                 </div>
               </CardContent>
@@ -347,8 +347,8 @@ export default function AdminBetaInvitesPage() {
                     <p className="text-sm text-[var(--text-muted)]">Conversion Rate</p>
                     <p className="text-2xl font-bold text-[var(--text-strong)]">{analytics.conversionRate}%</p>
                   </div>
-                  <div className="p-3 bg-orange-100 rounded-lg">
-                    <BarChart2 size={20} className="text-orange-600" />
+                  <div className="p-3 bg-orange-500/15 rounded-lg">
+                    <BarChart2 size={20} className="text-orange-400" />
                   </div>
                 </div>
               </CardContent>
@@ -412,7 +412,7 @@ export default function AdminBetaInvitesPage() {
                       <th className="px-6 py-3 text-left text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-[var(--border-subtle)]">
                     {invites.map((invite) => (
                       <tr key={invite.id} className="hover:bg-[var(--surface-sunken)]">
                         <td className="px-6 py-4">
@@ -464,7 +464,7 @@ export default function AdminBetaInvitesPage() {
                                     size="icon"
                                     onClick={() => setReminderId(invite.id)}
                                     disabled={actioning === invite.id}
-                                    className="h-7 w-7 text-blue-600 hover:bg-blue-50"
+                                    className="h-7 w-7 text-blue-400 hover:bg-blue-500/10"
                                     title="Send reminder"
                                   >
                                     <Mail size={14} />
@@ -477,7 +477,7 @@ export default function AdminBetaInvitesPage() {
                               size="icon"
                               onClick={() => setRevokeId(invite.id)}
                               disabled={actioning === invite.id || invite.status === 'REVOKED'}
-                              className="h-7 w-7 text-red-600 hover:bg-red-50"
+                              className="h-7 w-7 text-[var(--status-fail-fg)] hover:bg-[var(--status-fail-bg)]"
                               title="Revoke invite"
                             >
                               <Trash2 size={14} />

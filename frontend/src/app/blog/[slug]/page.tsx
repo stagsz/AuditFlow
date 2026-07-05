@@ -36,9 +36,9 @@ const posts = [
 ];
 
 const palette = {
-  product: { fg: '#0e1117', bg: '#f9f8f6', accent: '#0f766e' },
-  process: { fg: '#0e1117', bg: '#f9f8f6', accent: '#b45309' },
-  dev: { fg: '#0e1117', bg: '#f9f8f6', accent: '#1d4ed8' },
+  product: { fg: 'var(--text-strong)', bg: 'var(--surface-page)', accent: 'var(--brand)' },
+  process: { fg: 'var(--text-strong)', bg: 'var(--surface-page)', accent: 'var(--status-obs-fg)' },
+  dev: { fg: 'var(--text-strong)', bg: 'var(--surface-page)', accent: 'var(--text-link)' },
 } as const;
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
@@ -48,22 +48,22 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   const c = palette[post.theme as keyof typeof palette] ?? palette.product;
 
   return (
-    <div className="min-h-screen bg-[#f9f8f6] text-[#0e1117] antialiased">
-      <nav className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[#e4e2dd] bg-[#f9f8f6]/88 px-6 md:px-10 backdrop-blur-md">
-        <Link href="/" className="text-sm font-semibold tracking-tight">
-          Audit<span className="text-[#0f766e]">Flow</span>
+    <div className="min-h-screen bg-[var(--surface-page)] text-[var(--text-body)] antialiased">
+      <nav className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[var(--border-subtle)] bg-[rgba(7,13,15,0.85)] px-6 md:px-10 backdrop-blur-md">
+        <Link href="/" className="text-sm font-semibold tracking-tight text-[var(--text-strong)]">
+          Audit<span className="text-[var(--brand)]">Flow</span>
         </Link>
         <div className="hidden items-center gap-8 md:flex">
-          <Link href="#features" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Features</Link>
-          <Link href="#how" className="text-sm text-[#6b7280] hover:text-[#0e1117]">How it works</Link>
-          <Link href="#pricing" className="text-sm text-[#6b7280] hover:text-[#0e1117]">Pricing</Link>
-          <Link href="/blog" className="text-sm font-medium text-[#0e1117]">Blog</Link>
-          <Link href="/register" className="rounded-md bg-[#0e1117] px-4 py-2 text-sm font-medium text-white hover:bg-[#0f766e]">Start 30-day free trial</Link>
+          <Link href="#features" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Features</Link>
+          <Link href="#how" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">How it works</Link>
+          <Link href="#pricing" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Pricing</Link>
+          <Link href="/blog" className="text-sm font-medium text-[var(--text-strong)]">Blog</Link>
+          <Link href="/register" className="btn-primary">Start 30-day free trial</Link>
         </div>
       </nav>
 
       <main className="mx-auto max-w-3xl px-6 pt-28 pb-20 md:px-10">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-[#6b7280] hover:text-[#0e1117]">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">
           <span aria-hidden>←</span> Back to blog
         </Link>
 
@@ -73,12 +73,12 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             {post.theme === 'process' && 'Process'}
             {post.theme === 'dev' && 'Implementation'}
           </div>
-          <h1 className="mt-3 font-serif text-[clamp(30px,4.5vw,44px)] leading-[1.1] tracking-tight">{post.title}</h1>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#6b7280]">{post.summary}</p>
-          <div className="mt-3 text-xs text-[#6b7280]">
+          <h1 className="mt-3 font-serif text-[clamp(30px,4.5vw,44px)] leading-[1.1] tracking-tight text-[var(--text-strong)]">{post.title}</h1>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--text-muted)]">{post.summary}</p>
+          <div className="mt-3 text-xs text-[var(--text-muted)]">
             Published {new Date(post.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
           </div>
-          <hr className="mt-8 mb-8 border-[#e4e2dd]" />
+          <hr className="mt-8 mb-8 border-[var(--border-subtle)]" />
           <BlogBody slug={post.slug} />
         </article>
       </main>
@@ -89,9 +89,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
 async function BlogBody({ slug }: { slug: string }) {
   const source = await readPostMarkdown(slug);
   return (
-    <div className="prose prose-neutral max-w-none">
+    <div className="max-w-none text-base leading-relaxed text-[var(--text-body)] [&_h1]:mt-10 [&_h2]:mt-10 [&_h3]:mt-8 [&_h1]:text-[var(--text-strong)] [&_h2]:text-[var(--text-strong)] [&_h3]:text-[var(--text-strong)] [&_p]:mt-4 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mt-1.5 [&_strong]:text-[var(--text-strong)] [&_a]:text-[var(--text-link)] [&_blockquote]:mt-4 [&_blockquote]:border-l-2 [&_blockquote]:border-[var(--border-default)] [&_blockquote]:pl-4 [&_blockquote]:text-[var(--text-muted)] [&_code]:text-[var(--text-link)] [&_pre]:mt-4 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[var(--surface-sunken)] [&_pre]:p-4 [&_hr]:my-8 [&_hr]:border-[var(--border-subtle)]">
       <MDXRemote source={source.content} />
-      <p className="mt-4 text-base leading-relaxed text-[#0e1117]">
+      <p className="mt-4 text-base leading-relaxed text-[var(--text-body)]">
         This post is published pending final Director approval. If you have feedback, contact the CMO office.
       </p>
     </div>

@@ -25,16 +25,16 @@ import { NCRsListSkeleton } from '@/components/non-conformities/NCRsListSkeleton
 import { NCRsEmptyState } from '@/components/non-conformities/NCRsEmptyState';
 
 const statusColors: Record<string, string> = {
-  OPEN: 'bg-red-50 text-red-700',
-  IN_PROGRESS: 'bg-amber-50 text-amber-700',
-  RESOLVED: 'bg-blue-50 text-blue-700',
-  CLOSED: 'bg-green-50 text-green-700',
+  OPEN: 'bg-[var(--status-fail-bg)] text-[var(--status-fail-fg)] border border-[var(--status-fail-line)]',
+  IN_PROGRESS: 'bg-[var(--status-obs-bg)] text-[var(--status-obs-fg)] border border-[var(--status-obs-line)]',
+  RESOLVED: 'bg-[var(--brand-soft)] text-[var(--text-link)]',
+  CLOSED: 'bg-[var(--status-pass-bg)] text-[var(--status-pass-fg)] border border-[var(--status-pass-line)]',
 };
 
 const severityColors: Record<string, string> = {
-  MINOR: 'bg-amber-50 text-amber-700',
-  MAJOR: 'bg-orange-100 text-orange-700',
-  CRITICAL: 'bg-red-50 text-red-700',
+  MINOR: 'bg-[var(--status-obs-bg)] text-[var(--status-obs-fg)] border border-[var(--status-obs-line)]',
+  MAJOR: 'bg-[var(--status-fail-bg)] text-[var(--status-fail-fg)] border border-[var(--status-fail-line)]',
+  CRITICAL: 'bg-[var(--status-fail-bg)] text-[var(--status-fail-fg)] border border-[var(--status-fail-line)]',
 };
 
 const statusOptions = [
@@ -314,7 +314,7 @@ export default function NonConformitiesPage() {
         {isError ? (
           <Card>
             <CardContent className="py-12 text-center">
-              <AlertCircle className="mx-auto h-12 w-12 text-red-400 mb-4" />
+              <AlertCircle className="mx-auto h-12 w-12 text-[var(--status-fail-fg)] mb-4" />
               <p className="text-[var(--text-body)] font-medium">Failed to load non-conformities</p>
               <p className="text-[var(--text-muted)] text-sm mt-1">Please try refreshing the page</p>
             </CardContent>

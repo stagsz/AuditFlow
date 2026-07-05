@@ -37,15 +37,19 @@ AuditFlow/
 │   │   │   ├── onboarding/   # /onboarding wizard (4 steps)
 │   │   │   └── join/         # /join/[token] invite flow
 │   │   ├── components/       # React components
+│   │   │   ├── landing/      # Marketing landing page (LandingPage.tsx + landing.css, served at /)
 │   │   │   └── onboarding/   # Step1–Step4 wizard components
 │   │   ├── lib/
 │   │   │   ├── api.ts        # All API calls (axios client)
 │   │   │   └── store/        # Zustand stores
 │   │   └── providers.tsx     # React Query + auth providers
-├── shared/           # Shared types between frontend and backend
-└── landing/          # Standalone landing page HTML (index.html)
-    └── index.html    # NOT yet integrated into Next.js — lives separately
+└── shared/           # Shared types between frontend and backend
 ```
+
+Note: the old standalone `landing/index.html` was ported into the Next.js app
+(July 2026) — the landing page is now `frontend/src/components/landing/LandingPage.tsx`,
+rendered by `frontend/src/app/page.tsx` with metadata from `lib/landing-page-metadata.ts`.
+All landing styles are scoped under the `.lp` class in `landing.css`.
 
 ---
 

@@ -1,115 +1,152 @@
 /* ==========================================================================
-   AuditFlow — Color tokens  ·  "Natural" palette
-   Warm stone neutrals · terracotta/clay brand · natural-pigment status colors.
+   AuditFlow — Color tokens  ·  "Precision instrument" palette (dark)
+   Deep teal-biased ink grounds · luminous teal brand · brass certification
+   accent · dark-adapted conformance semantics.
    Reference semantics in product code, not raw ramps (use --text-body etc).
    ========================================================================== */
 
 :root {
-  /* --- Clay / terracotta (primary brand) — warm, grounded, "quality" ----- */
-  --clay-50:  #FBF1EB;
-  --clay-100: #F4DCCD;
-  --clay-200: #E8B89B;
-  --clay-300: #D89169;
-  --clay-400: #C66E43;
-  --clay-500: #B05630;
-  --clay-600: #9C4A2A;   /* primary action */
-  --clay-700: #7E3B22;   /* hover / pressed */
-  --clay-800: #62301D;
-  --clay-900: #4A2517;
+  /* --- Ink (grounds) — teal-biased near-blacks, deepest → most raised ---- */
+  --ink-0:  #070D0F;   /* page ground */
+  --ink-1:  #0C1619;   /* sunken / sidebar */
+  --ink-2:  #122024;   /* raised card */
+  --ink-3:  #182A2F;   /* hover / highest */
 
-  /* --- Stone (warm neutrals) — structure, text, surfaces ----------------- */
-  --stone-50:  #FAF8F4;
-  --stone-100: #F1EDE5;
-  --stone-200: #E6DED2;
-  --stone-300: #D5CABA;
-  --stone-400: #AB9E8B;
-  --stone-500: #827666;
-  --stone-600: #5E564A;
-  --stone-700: #453F36;
-  --stone-800: #2D2823;
-  --stone-900: #211D18;   /* warm "ink" — strongest text & brand dark */
+  /* --- Teal (primary brand) — luminous, precise ------------------------- */
+  --teal-50:  #ECFDF9;
+  --teal-100: #CBF7EE;
+  --teal-200: #9BEDE0;
+  --teal-300: #7EE8DC;   /* bright accent text on dark */
+  --teal-400: #2DD4BF;
+  --teal-500: #14B8A6;   /* primary action */
+  --teal-600: #0D9488;
+  --teal-700: #0F766E;   /* pressed / deep */
+  --teal-800: #115E59;
+  --teal-900: #134E4A;
 
-  /* --- Conformance semantics (ISO finding outcomes, natural pigments) ----- */
-  /* Conformant / pass — moss green */
-  --green-50:  #ECF2E6;
-  --green-100: #D3E4C6;
-  --green-500: #4E8A47;
-  --green-600: #3F7339;
-  --green-700: #335E30;
+  /* --- Brass — certification seal accent, used sparingly ---------------- */
+  --brass-300: #E5C285;
+  --brass-500: #C8A45C;
+  --brass-700: #97783D;
+
+  /* --- Cloud (light text neutrals, teal-biased) -------------------------- */
+  --cloud-50:  #F2F7F6;
+  --cloud-100: #EAF1EF;   /* strongest text */
+  --cloud-300: #C2D1CD;   /* body */
+  --cloud-500: #8FA3A0;   /* muted */
+  --cloud-600: #6D8380;   /* subtle */
+
+  /* --- Conformance semantics (dark-adapted natural pigments) ------------- */
+  /* Conformant / pass — moss green (kept distinct from brand teal) */
+  --green-100: #A8D5AA;
+  --green-500: #5FA463;
+  --green-700: #3E7A42;
 
   /* Observation / minor — ochre */
-  --amber-50:  #F9EFD7;
-  --amber-100: #F0DBA8;
+  --amber-100: #E5C285;
   --amber-500: #C5891B;
-  --amber-600: #A06E13;
-  --amber-700: #7F5712;
+  --amber-700: #9A6D18;
 
-  /* Nonconformity / major — garnet (cool red, distinct from clay brand) */
-  --red-50:  #F8E9EC;
-  --red-100: #EFCBD2;
-  --red-500: #B23246;
-  --red-600: #97283A;
-  --red-700: #7A2030;
+  /* Nonconformity / major — garnet */
+  --red-100: #EBA9A1;
+  --red-500: #C4574E;
+  --red-700: #9E4038;
 
   /* Informational / guidance — dusty denim */
-  --blue-50:  #EAF0F3;
-  --blue-100: #CFDEE6;
-  --blue-500: #44708C;
-  --blue-600: #365A71;
+  --blue-100: #A9C4D4;
+  --blue-500: #5B8CA8;
+  --blue-600: #44708C;
 
   /* ====================================================================== */
   /* SEMANTIC ALIASES — prefer these in product code                        */
   /* ====================================================================== */
 
   /* Brand */
-  --brand:            var(--clay-600);
-  --brand-strong:     var(--clay-700);
-  --brand-soft:       var(--clay-50);
-  --brand-on:         #FFFFFF;
+  --brand:            var(--teal-500);
+  --brand-strong:     var(--teal-400);
+  --brand-soft:       rgba(20, 184, 166, 0.10);
+  --brand-on:         #04211D;
+  --brand-glow:       rgba(20, 184, 166, 0.35);
 
   /* Text */
-  --text-strong:      var(--stone-900);
-  --text-body:        var(--stone-700);
-  --text-muted:       var(--stone-500);
-  --text-subtle:      var(--stone-400);
-  --text-on-brand:    #FFFFFF;
-  --text-link:        var(--clay-600);
+  --text-strong:      var(--cloud-100);
+  --text-body:        var(--cloud-300);
+  --text-muted:       var(--cloud-500);
+  --text-subtle:      var(--cloud-600);
+  --text-on-brand:    #04211D;
+  --text-link:        var(--teal-300);
 
   /* Surfaces */
-  --surface-page:     var(--stone-50);
-  --surface-card:     #FFFFFF;
-  --surface-sunken:   var(--stone-100);
-  --surface-inverse:  var(--stone-900);
-  --surface-brand:    var(--clay-600);
-  --sidebar-bg:       var(--stone-900);   /* tweakable: app sidebar background */
+  --surface-page:     var(--ink-0);
+  --surface-card:     var(--ink-2);
+  --surface-sunken:   var(--ink-1);
+  --surface-raised:   var(--ink-3);
+  --surface-inverse:  var(--cloud-100);
+  --surface-brand:    var(--teal-500);
+  --sidebar-bg:       var(--ink-1);   /* tweakable: app sidebar background */
 
-  /* Borders & lines */
-  --border-subtle:    var(--stone-200);
-  --border-default:   var(--stone-300);
-  --border-strong:    var(--stone-400);
-  --border-focus:     var(--clay-500);
+  /* Borders & lines — light-alpha hairlines, not solid greys */
+  --border-subtle:    rgba(234, 241, 239, 0.07);
+  --border-default:   rgba(234, 241, 239, 0.12);
+  --border-strong:    rgba(234, 241, 239, 0.22);
+  --border-focus:     var(--teal-400);
 
   /* Finding status — surface / border / text / solid */
-  --status-pass-bg:     var(--green-50);
-  --status-pass-line:   var(--green-100);
-  --status-pass-fg:     var(--green-700);
+  --status-pass-bg:     rgba(95, 164, 99, 0.14);
+  --status-pass-line:   rgba(95, 164, 99, 0.32);
+  --status-pass-fg:     var(--green-100);
   --status-pass-solid:  var(--green-500);
 
-  --status-obs-bg:      var(--amber-50);
-  --status-obs-line:    var(--amber-100);
-  --status-obs-fg:      var(--amber-700);
+  --status-obs-bg:      rgba(197, 137, 27, 0.14);
+  --status-obs-line:    rgba(197, 137, 27, 0.34);
+  --status-obs-fg:      var(--amber-100);
   --status-obs-solid:   var(--amber-500);
 
-  --status-fail-bg:     var(--red-50);
-  --status-fail-line:   var(--red-100);
-  --status-fail-fg:     var(--red-700);
+  --status-fail-bg:     rgba(196, 87, 78, 0.14);
+  --status-fail-line:   rgba(196, 87, 78, 0.34);
+  --status-fail-fg:     var(--red-100);
   --status-fail-solid:  var(--red-500);
 
-  --status-na-bg:       var(--stone-100);
-  --status-na-line:     var(--stone-200);
-  --status-na-fg:       var(--stone-500);
-  --status-na-solid:    var(--stone-400);
+  --status-na-bg:       rgba(234, 241, 239, 0.05);
+  --status-na-line:     rgba(234, 241, 239, 0.12);
+  --status-na-fg:       var(--cloud-500);
+  --status-na-solid:    var(--cloud-600);
 
   /* Focus ring */
-  --ring: 0 0 0 3px color-mix(in srgb, var(--clay-500) 32%, transparent);
+  --ring: 0 0 0 3px rgba(45, 212, 191, 0.35);
+
+  /* ====================================================================== */
+  /* LEGACY RAMP ALIASES — old clay/stone names mapped to the dark theme    */
+  /* so any direct references keep rendering sensibly. Do not use in new    */
+  /* code; prefer the semantic aliases above.                               */
+  /* ====================================================================== */
+  --clay-50:  var(--brand-soft);
+  --clay-100: rgba(20, 184, 166, 0.18);
+  --clay-200: rgba(20, 184, 166, 0.28);
+  --clay-300: var(--teal-700);
+  --clay-400: var(--teal-600);
+  --clay-500: var(--teal-500);
+  --clay-600: var(--teal-500);
+  --clay-700: var(--teal-400);
+  --clay-800: var(--teal-300);
+  --clay-900: var(--teal-200);
+
+  --stone-50:  var(--ink-1);
+  --stone-100: var(--ink-2);
+  --stone-200: var(--border-subtle);
+  --stone-300: var(--border-default);
+  --stone-400: var(--cloud-600);
+  --stone-500: var(--cloud-500);
+  --stone-600: var(--cloud-500);
+  --stone-700: var(--cloud-300);
+  --stone-800: var(--cloud-100);
+  --stone-900: var(--cloud-100);
+
+  --green-50:  var(--status-pass-bg);
+  --green-600: var(--green-500);
+  --amber-50:  var(--status-obs-bg);
+  --amber-600: var(--amber-500);
+  --red-50:    var(--status-fail-bg);
+  --red-600:   var(--red-500);
+  --blue-50:   rgba(91, 140, 168, 0.14);
 }

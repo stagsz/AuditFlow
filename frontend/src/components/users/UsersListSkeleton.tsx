@@ -83,7 +83,7 @@ export function UsersListSkeleton({ rowCount = 5 }: UsersListSkeletonProps) {
       <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-[var(--shadow-sm)]">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-[var(--surface-sunken)] border-b">
+            <thead className="bg-[var(--surface-sunken)] border-b border-[var(--border-subtle)]">
               <tr>
                 <th className="px-6 py-3 text-left">
                   <Skeleton variant="text" width={50} height={14} />
@@ -105,7 +105,7 @@ export function UsersListSkeleton({ rowCount = 5 }: UsersListSkeletonProps) {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-[var(--border-subtle)]">
               {Array.from({ length: rowCount }).map((_, i) => (
                 <SkeletonUserRow key={i} />
               ))}

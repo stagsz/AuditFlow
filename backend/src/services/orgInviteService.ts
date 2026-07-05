@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { prisma } from '../config/database';
-import { NotFoundError, ConflictError, AuthorizationError } from '../utils/errors';
+import { NotFoundError, ConflictError, AuthorizationError, ValidationError } from '../utils/errors';
 import { UserRole } from '../types/enums';
 
 export class OrgInviteService {
