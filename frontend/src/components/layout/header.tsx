@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { AlertTriangle, Bell, CheckCircle, Clock, Download, LogOut, Menu, Search } from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/lib/store';
 import { orgInviteApi } from '@/lib/api';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const placeholderNotifications = [
   {
@@ -115,7 +116,7 @@ export function Header() {
         sidebarOpen ? 'md:left-72' : 'md:left-16'
       }`}
       style={{
-        background: 'rgba(12, 22, 25, 0.72)',
+        background: 'var(--glass-bg)',
         backdropFilter: 'blur(12px) saturate(1.4)',
         borderBottom: '1px solid var(--border-subtle)',
       }}
@@ -181,6 +182,7 @@ export function Header() {
               </p>
             </div>
             <div className="hidden xl:block h-9 w-px bg-[var(--border-subtle)]" />
+            <ThemeToggle />
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
               className="w-10 h-10 rounded-full bg-[var(--surface-card)] border border-[var(--border-subtle)] flex items-center justify-center relative hover:border-[var(--brand)] hover:text-[var(--brand)] transition-colors"

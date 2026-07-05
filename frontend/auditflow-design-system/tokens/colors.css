@@ -115,6 +115,22 @@
   /* Focus ring */
   --ring: 0 0 0 3px rgba(45, 212, 191, 0.35);
 
+  /* Frosted glass surfaces (header, overlays) */
+  --glass-bg: rgba(12, 22, 25, 0.72);
+
+  /* Primary button gradient cap */
+  --btn-grad-a: #19D3BF;
+  --btn-grad-b: var(--teal-700);
+
+  /* Informational chip (denim) */
+  --info-bg:   rgba(91, 140, 168, 0.14);
+  --info-line: rgba(91, 140, 168, 0.30);
+  --info-fg:   var(--blue-100);
+
+  /* Scrollbar */
+  --scroll-thumb:       rgba(234, 241, 239, 0.14);
+  --scroll-thumb-hover: rgba(234, 241, 239, 0.28);
+
   /* ====================================================================== */
   /* LEGACY RAMP ALIASES — old clay/stone names mapped to the dark theme    */
   /* so any direct references keep rendering sensibly. Do not use in new    */
@@ -149,4 +165,100 @@
   --red-50:    var(--status-fail-bg);
   --red-600:   var(--red-500);
   --blue-50:   rgba(91, 140, 168, 0.14);
+}
+
+/* ==========================================================================
+   LIGHT THEME — "paper instrument"
+   Same semantic names, light values: warm paper grounds, deep teal brand,
+   ink text, pigment status colors on soft tints. Toggle by setting
+   data-theme="light" on <html>; absence of the attribute = dark (default).
+   ========================================================================== */
+
+[data-theme='light'] {
+  /* Brand — deep teal for contrast on paper */
+  --brand:            var(--teal-700);
+  --brand-strong:     var(--teal-600);
+  --brand-soft:       rgba(15, 118, 110, 0.08);
+  --brand-on:         #FFFFFF;
+  --brand-glow:       rgba(15, 118, 110, 0.22);
+
+  /* Text — teal-biased inks */
+  --text-strong:      #14231F;
+  --text-body:        #3D4E49;
+  --text-muted:       #64756F;
+  --text-subtle:      #93A29C;
+  --text-on-brand:    #FFFFFF;
+  --text-link:        var(--teal-700);
+
+  /* Surfaces — warm paper */
+  --surface-page:     #F2F3EF;
+  --surface-card:     #FFFFFF;
+  --surface-sunken:   #E9EBE5;
+  --surface-raised:   #EFF1EB;
+  --surface-inverse:  #14231F;
+  --surface-brand:    var(--teal-700);
+  --sidebar-bg:       #FBFCFA;
+
+  /* Borders & lines — ink-alpha hairlines */
+  --border-subtle:    rgba(20, 35, 31, 0.08);
+  --border-default:   rgba(20, 35, 31, 0.14);
+  --border-strong:    rgba(20, 35, 31, 0.28);
+  --border-focus:     var(--teal-600);
+
+  /* Finding status — pigments on soft tints */
+  --status-pass-bg:     rgba(78, 138, 71, 0.10);
+  --status-pass-line:   rgba(78, 138, 71, 0.30);
+  --status-pass-fg:     #33582F;
+  --status-pass-solid:  #4E8A47;
+
+  --status-obs-bg:      rgba(197, 137, 27, 0.10);
+  --status-obs-line:    rgba(197, 137, 27, 0.32);
+  --status-obs-fg:      #7F5712;
+  --status-obs-solid:   #C5891B;
+
+  --status-fail-bg:     rgba(178, 50, 70, 0.08);
+  --status-fail-line:   rgba(178, 50, 70, 0.28);
+  --status-fail-fg:     #7A2030;
+  --status-fail-solid:  #B23246;
+
+  --status-na-bg:       rgba(20, 35, 31, 0.04);
+  --status-na-line:     rgba(20, 35, 31, 0.10);
+  --status-na-fg:       #64756F;
+  --status-na-solid:    #93A29C;
+
+  /* Focus ring */
+  --ring: 0 0 0 3px rgba(15, 118, 110, 0.30);
+
+  /* Frosted glass surfaces */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+
+  /* Primary button gradient cap — deep teal, white text */
+  --btn-grad-a: #0D9488;
+  --btn-grad-b: #0F766E;
+
+  /* Informational chip (denim) */
+  --info-bg:   rgba(68, 112, 140, 0.10);
+  --info-line: rgba(68, 112, 140, 0.30);
+  --info-fg:   #365A71;
+
+  /* Scrollbar */
+  --scroll-thumb:       rgba(20, 35, 31, 0.18);
+  --scroll-thumb-hover: rgba(20, 35, 31, 0.32);
+
+  /* Legacy raw-ramp aliases that don't route through semantic vars */
+  --clay-100: rgba(15, 118, 110, 0.14);
+  --clay-200: rgba(15, 118, 110, 0.24);
+  --stone-50:  #F7F8F5;
+  --stone-100: #E9EBE5;
+  --stone-400: #93A29C;
+  --stone-500: #64756F;
+  --stone-600: #64756F;
+  --stone-700: #3D4E49;
+  --stone-800: #14231F;
+  --stone-900: #14231F;
+  --green-100: #33582F;
+  --amber-100: #7F5712;
+  --red-100:   #7A2030;
+  --blue-100:  #365A71;
+  --blue-50:   rgba(68, 112, 140, 0.10);
 }

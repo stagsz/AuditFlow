@@ -50,3 +50,25 @@
   --dur-medium: 200ms;  /* @kind other */
   --dur-slow:   320ms;  /* @kind other */
 }
+
+/* Light theme — soft ink-tinted shadows; the specular edge brightens */
+[data-theme='light'] {
+  --gloss: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+  --shadow-xs: var(--gloss),
+               0 1px 2px rgba(20, 35, 31, 0.06);
+  --shadow-sm: var(--gloss),
+               0 1px 2px rgba(20, 35, 31, 0.06),
+               0 3px 8px rgba(20, 35, 31, 0.06);
+  --shadow-md: var(--gloss),
+               0 2px 4px rgba(20, 35, 31, 0.05),
+               0 10px 24px rgba(20, 35, 31, 0.09);
+  --shadow-lg: var(--gloss),
+               0 4px 8px rgba(20, 35, 31, 0.06),
+               0 24px 56px rgba(20, 35, 31, 0.14);
+
+  --shadow-glow:    0 8px 24px rgba(15, 118, 110, 0.14);
+  --shadow-glow-lg: 0 12px 40px rgba(15, 118, 110, 0.20);
+
+  --shadow-inset: inset 0 1px 3px rgba(20, 35, 31, 0.10);
+}

@@ -143,6 +143,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
       <head>
+        {/* Apply the persisted theme before first paint to avoid a flash.
+            Dark is the default; only 'light' sets the attribute. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('af-theme')==='light'){document.documentElement.setAttribute('data-theme','light')}}catch(e){}",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
