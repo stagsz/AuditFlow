@@ -49,12 +49,18 @@ export async function getPosts(): Promise<PostMeta[]> {
         const slug = file.slice(0, -3);
         const raw = await fs.readFile(path.join(POSTS_DIR, file), 'utf8');
         const { data, content } = matter(raw);
-        const date =
+        const dateRaw =
           typeof data.date === 'string'
             ? data.date
             : data.publishedDate ??
               data.published ??
-              new Date((await fs.stat(path.join(POSTS_DIR, file))).mtime).toISOString().slice(0, 10);
+              (await fs.stat(path.join(POSTS_DIR, file))).mtime;
+        const date =
+          dateRaw instanceof Date
+            ? dateRaw.toISOString().slice(0, 10)
+            : typeof dateRaw === 'string'
+              ? dateRaw
+              : new Date(dateRaw).toISOString().slice(0, 10);
         const title =
           typeof data.title === 'string' && data.title.trim().length > 0
             ? data.title.trim()
