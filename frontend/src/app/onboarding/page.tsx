@@ -20,7 +20,7 @@ function OnboardingContent() {
   const { step, betaInviteValidated, betaInviteCode, setBetaInviteCode, setBetaInviteValidated, reset } = useOnboardingStore();
 
   useEffect(() => {
-    const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
+    const code = searchParams?.get('beta_invite') || searchParams?.get('invite_code');
     if (code && !betaInviteValidated && betaInviteCode !== code) {
       const validateInvite = async () => {
         try {
@@ -76,7 +76,7 @@ function OnboardingContentInner() {
   const searchParams = useSearchParams();
   const { betaInviteValidated, betaInviteCode } = useOnboardingStore();
 
-  const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
+  const code = searchParams?.get('beta_invite') || searchParams?.get('invite_code');
   if (code && !betaInviteValidated && betaInviteCode !== code) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] px-4">

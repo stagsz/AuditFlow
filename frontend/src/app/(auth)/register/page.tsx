@@ -224,7 +224,7 @@ function RegisterPageInner() {
 
   // Check for beta_invite in query params on mount
   useEffect(() => {
-    const code = searchParams.get('beta_invite') || searchParams.get('invite_code');
+    const code = searchParams?.get('beta_invite') || searchParams?.get('invite_code');
     if (code) {
       setBetaInviteCode(code);
       validateInvite(code);
@@ -285,7 +285,7 @@ function RegisterPageInner() {
     );
   }
 
-  const showInviteBanner = betaInviteCode && betaInviteData?.valid !== false;
+  const showInviteBanner = Boolean(betaInviteCode);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] py-12 px-4 sm:px-6 lg:px-8">
