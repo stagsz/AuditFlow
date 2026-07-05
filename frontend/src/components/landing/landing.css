@@ -29,7 +29,9 @@
   font-family: var(--lp-sans);
   font-size: 16px;
   line-height: 1.65;
-  overflow-x: hidden;
+  /* clip, not hidden: hidden would make .lp a scroll container and break
+     position:sticky in the story section */
+  overflow-x: clip;
 }
 
 .lp ::selection { background: var(--lp-teal-deep); color: #fff; }
