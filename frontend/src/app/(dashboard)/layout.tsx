@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore, useUIStore } from '@/lib/store';
 import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layout/header';
+import { MotionProvider } from '@/components/providers/motion-provider';
 import { useSessionTimeout } from '@/hooks/useSessionTimeout';
 
 export default function DashboardLayout({
@@ -13,6 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { isAuthenticated, hasHydrated } = useAuthStore();
   const { sidebarOpen } = useUIStore();
 
@@ -41,7 +43,11 @@ export default function DashboardLayout({
           sidebarOpen ? 'md:ml-72' : 'md:ml-16'
         }`}
       >
-        <div className="p-4 md:p-8">{children}</div>
+        {/* keyed on the route so every navigation replays the entrance */}
+        <div key={pathname} className="p-4 md:p-8 page-enter">
+          {children}
+        </div>
+        <MotionProvider />
       </main>
     </div>
   );

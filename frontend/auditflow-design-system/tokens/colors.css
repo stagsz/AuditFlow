@@ -131,6 +131,10 @@
   --scroll-thumb:       rgba(234, 241, 239, 0.14);
   --scroll-thumb-hover: rgba(234, 241, 239, 0.28);
 
+  /* Cursor-tracking card glow (radial highlight under the pointer) */
+  --glow-radial: rgba(20, 184, 166, 0.09);
+  --glow-border: rgba(20, 184, 166, 0.28);
+
   /* ====================================================================== */
   /* LEGACY RAMP ALIASES — old clay/stone names mapped to the dark theme    */
   /* so any direct references keep rendering sensibly. Do not use in new    */
@@ -244,6 +248,10 @@
   /* Scrollbar */
   --scroll-thumb:       rgba(20, 35, 31, 0.18);
   --scroll-thumb-hover: rgba(20, 35, 31, 0.32);
+
+  /* Cursor-tracking card glow */
+  --glow-radial: rgba(15, 118, 110, 0.07);
+  --glow-border: rgba(15, 118, 110, 0.30);
 
   /* Legacy raw-ramp aliases that don't route through semantic vars */
   --clay-100: rgba(15, 118, 110, 0.14);
