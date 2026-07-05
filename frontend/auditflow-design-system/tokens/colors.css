@@ -6,6 +6,9 @@
    ========================================================================== */
 
 :root {
+  /* Native UA controls (scrollbars, pickers, autofill) follow the theme */
+  color-scheme: dark;
+
   /* --- Ink (grounds) — teal-biased near-blacks, deepest → most raised ---- */
   --ink-0:  #070D0F;   /* page ground */
   --ink-1:  #0C1619;   /* sunken / sidebar */
@@ -179,6 +182,8 @@
    ========================================================================== */
 
 [data-theme='light'] {
+  color-scheme: light;
+
   /* Brand — deep teal for contrast on paper */
   --brand:            var(--teal-700);
   --brand-strong:     var(--teal-600);

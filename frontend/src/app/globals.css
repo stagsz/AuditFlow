@@ -52,6 +52,21 @@
 
   code, kbd, samp { font-family: var(--font-mono); }
 
+  /* Form fields default to theme colors instead of UA white — a bare
+     <textarea> must never render as a light box on the dark theme.
+     Utility classes on individual fields still win over these. */
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  textarea,
+  select {
+    background-color: transparent;
+    color: var(--text-strong);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-subtle);
+  }
+
   ::selection { background: var(--teal-700); color: #fff; }
 
   .af-eyebrow {

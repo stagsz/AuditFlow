@@ -95,7 +95,7 @@ export function RootCauseAgentModal({ isOpen, onClose, ncrId, onAccept }: RootCa
               <div
                 className={`max-w-[85%] rounded-lg px-3 py-2 text-sm whitespace-pre-wrap ${
                   message.role === 'user'
-                    ? 'bg-[var(--brand)] text-white'
+                    ? 'bg-[var(--brand)] text-[var(--text-on-brand)]'
                     : 'bg-[var(--surface-sunken)] text-[var(--text-body)]'
                 }`}
               >
@@ -141,7 +141,7 @@ export function RootCauseAgentModal({ isOpen, onClose, ncrId, onAccept }: RootCa
                 rows={2}
                 placeholder="Type your answer..."
                 disabled={isSending}
-                className="flex-1 rounded-md border border-[var(--border-default)] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)] disabled:opacity-60"
+                className="flex-1 rounded-md border border-[var(--border-default)] bg-[var(--surface-sunken)] text-[var(--text-strong)] placeholder:text-[var(--text-subtle)] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)] disabled:opacity-60"
               />
               <Button onClick={handleSend} disabled={isSending || !input.trim()} size="icon">
                 <Send className="h-4 w-4" />
