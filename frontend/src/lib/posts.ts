@@ -2,37 +2,6 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
-const candidates = [
-  path.join(process.cwd(), '..', 'marketing', 'blog'),
-  path.join(process.cwd(), 'marketing', 'blog'),
-  path.join(process.cwd(), 'frontend', 'marketing', 'blog'),
-  path.join(process.cwd(), '..', '..', 'marketing', 'blog'),
-];
-
-async function resolvePostsDir() {
-  for (const dir of candidates) {
-    try {
-      await fs.access(dir);
-      return dir;
-    } catch {
-      // try next candidate
-    }
-  }
-  return null;
-}
-
-let POSTS_DIR: string | null = null;
-
-async function getPostsDir(): Promise<string> {
-  if (!POSTS_DIR) {
-    POSTS_DIR = await resolvePostsDir();
-  }
-  if (!POSTS_DIR) {
-    throw new Error('Missing blog source directory. checked: ' + candidates.join(', '));
-  }
-  return POSTS_DIR;
-}
-
 export interface PostMeta {
   slug: string;
   title: string;
@@ -62,16 +31,46 @@ function excerptFromContent(content: string, max = 180): string {
   return `${cleaned.slice(0, max).trim()}...`;
 }
 
+function toIsoDate(value: unknown): string {
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10);
+  }
+  if (typeof value === 'string' && value.trim().length > 0) {
+    return value.trim();
+  }
+  return new Date().toISOString().slice(0, 10);
+}
+
 export async function readPostMarkdown(slug: string) {
-  const dir = await getPostsDir();
+  const dir = await ensurePostsDir();
   const filePath = path.join(dir, `${slug}.md`);
   const raw = await fs.readFile(filePath, 'utf8');
   return matter(raw);
 }
 
+async function ensurePostsDir(): Promise<string> {
+  const candidates = [
+    path.join(process.cwd(), 'marketing', 'blog'),
+    path.join(process.cwd(), '..', 'marketing', 'blog'),
+    path.join(process.cwd(), '..', '..', 'marketing', 'blog'),
+    path.join(process.cwd(), 'frontend', 'marketing', 'blog'),
+  ];
+
+  for (const dir of candidates) {
+    try {
+      await fs.access(dir);
+      return dir;
+    } catch {
+      // try next candidate
+    }
+  }
+  throw new Error('Missing blog source directory. checked: ' + candidates.join(', '));
+}
+
 export async function getPosts(): Promise<PostMeta[]> {
-  const POSTS_DIR = await getPostsDir();
+  const POSTS_DIR = await ensurePostsDir();
   const files = await fs.readdir(POSTS_DIR);
+
   const entries = await Promise.all(
     files
       .filter((f) => f.endsWith('.md'))
@@ -80,18 +79,7 @@ export async function getPosts(): Promise<PostMeta[]> {
         const slug = file.slice(0, -3);
         const raw = await fs.readFile(path.join(POSTS_DIR, file), 'utf8');
         const { data, content } = matter(raw);
-        const dateRaw =
-          typeof data.date === 'string'
-            ? data.date
-            : data.publishedDate ??
-              data.published ??
-              (await fs.stat(path.join(POSTS_DIR, file))).mtime;
-        const date =
-          dateRaw instanceof Date
-            ? dateRaw.toISOString().slice(0, 10)
-            : typeof dateRaw === 'string'
-              ? dateRaw
-              : new Date(dateRaw).toISOString().slice(0, 10);
+        const date = toIsoDate(data.date ?? data.publishedDate ?? data.published);
         const title =
           typeof data.title === 'string' && data.title.trim().length > 0
             ? data.title.trim()
