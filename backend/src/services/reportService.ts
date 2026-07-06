@@ -3,12 +3,12 @@ import { prisma } from '../config/database';
 import { NotFoundError, ValidationError, AuthorizationError } from '../utils/errors';
 import { AssessmentStatus, NCRStatus, Severity, UserRole } from '../types/enums';
 
-// Optional PowerPoint support - only import if available
+// PowerPoint support
 let PptxGenJs: any;
 try {
   PptxGenJs = require('pptxgenjs');
 } catch (e) {
-  console.warn('PowerPoint support disabled: pptxgenjs not installed. Run: npm install pptxgenjs');
+  console.warn('PowerPoint support unavailable: pptxgenjs is not installed.');
 }
 
 // Color constants for the report
