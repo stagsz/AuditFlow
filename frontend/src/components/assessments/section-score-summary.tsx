@@ -35,8 +35,9 @@ type ChartType = 'bar' | 'radar';
 
 /**
  * Calculates the compliance score for a section and its children.
- * Score is based on responses where each response has a score of 1, 2, or 3.
- * The percentage is calculated as (actual score / max possible score) * 100.
+ * Responses are scored 1–5 (0 = N/A and is excluded, matching the backend
+ * assessmentService semantics). The percentage is
+ * (actual score / max possible score) * 100, capped at 100 per question.
  */
 function calculateSectionScore(
   section: ISOSection,
@@ -48,9 +49,9 @@ function calculateSectionScore(
   // Get responses for this section
   const sectionResponses = responseBySectionId.get(section.id) || [];
   for (const response of sectionResponses) {
-    if (response.score !== null) {
+    if (response.score !== null && response.score !== 0) {
       totalScore += response.score;
-      maxScore += 3; // Max score is 3 per question
+      maxScore += 5; // Scoring scale is 1–5
     }
   }
 

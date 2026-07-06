@@ -1125,9 +1125,10 @@ export class ReportService {
       color: colors.primary,
     });
 
+    // overallScore is stored as a 0–100 percentage (see assessmentService)
     const overallScore = data.assessment.overallScore || 0;
-    const scorePercentage = Math.round((overallScore / 3) * 100);
-    const scoreColor = overallScore >= 2.5 ? colors.success : overallScore >= 1.5 ? colors.warning : colors.danger;
+    const scorePercentage = Math.round(overallScore);
+    const scoreColor = scorePercentage >= 80 ? colors.success : scorePercentage >= 50 ? colors.warning : colors.danger;
 
     summarySlide.addText(`Overall Compliance Score: ${scorePercentage}%`, {
       x: 1,
@@ -1184,10 +1185,11 @@ export class ReportService {
       });
 
       // Create chart data
+      // section.score is already a 0–100 percentage (see assessmentService)
       const chartData = data.sectionBreakdown.slice(0, 10).map(section => ({
         name: section.sectionNumber,
         labels: [section.sectionNumber],
-        values: [Math.round((section.score / 3) * 100)],
+        values: [Math.round(section.score)],
       }));
 
       breakdownSlide.addChart(pptx.ChartType.bar, chartData, {

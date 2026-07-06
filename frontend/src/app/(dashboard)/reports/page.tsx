@@ -159,10 +159,11 @@ export default function ReportsPage() {
     }
   };
 
+  // overallScore is a 0–100 percentage (see backend assessmentService)
   const getScoreColor = (score: number | null) => {
     if (score === null) return 'text-[var(--text-subtle)]';
-    if (score >= 2.5) return 'text-[var(--status-pass-fg)]';
-    if (score >= 1.5) return 'text-[var(--status-obs-fg)]';
+    if (score >= 80) return 'text-[var(--status-pass-fg)]';
+    if (score >= 50) return 'text-[var(--status-obs-fg)]';
     return 'text-[var(--status-fail-fg)]';
   };
 
@@ -279,7 +280,7 @@ export default function ReportsPage() {
                         <span>Type: {assessment.auditType}</span>
                         {assessment.overallScore !== null && (
                           <span className={clsx('font-semibold', getScoreColor(assessment.overallScore))}>
-                            Score: {Math.round((assessment.overallScore / 3) * 100)}%
+                            Score: {Math.round(assessment.overallScore)}%
                           </span>
                         )}
                         <span>Auditor: {assessment.leadAuditor.firstName} {assessment.leadAuditor.lastName}</span>
