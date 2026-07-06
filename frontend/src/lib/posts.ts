@@ -2,7 +2,36 @@ import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 
-const POSTS_DIR = path.join(process.cwd(), '..', 'marketing', 'blog');
+const candidates = [
+  path.join(process.cwd(), '..', 'marketing', 'blog'),
+  path.join(process.cwd(), 'marketing', 'blog'),
+  path.join(process.cwd(), 'frontend', 'marketing', 'blog'),
+  path.join(process.cwd(), '..', '..', 'marketing', 'blog'),
+];
+
+async function resolvePostsDir() {
+  for (const dir of candidates) {
+    try {
+      await fs.access(dir);
+      return dir;
+    } catch {
+      // try next candidate
+    }
+  }
+  return null;
+}
+
+let POSTS_DIR: string | null = null;
+
+async function getPostsDir(): Promise<string> {
+  if (!POSTS_DIR) {
+    POSTS_DIR = await resolvePostsDir();
+  }
+  if (!POSTS_DIR) {
+    throw new Error('Missing blog source directory. checked: ' + candidates.join(', '));
+  }
+  return POSTS_DIR;
+}
 
 export interface PostMeta {
   slug: string;
@@ -34,12 +63,14 @@ function excerptFromContent(content: string, max = 180): string {
 }
 
 export async function readPostMarkdown(slug: string) {
-  const filePath = path.join(POSTS_DIR, `${slug}.md`);
+  const dir = await getPostsDir();
+  const filePath = path.join(dir, `${slug}.md`);
   const raw = await fs.readFile(filePath, 'utf8');
   return matter(raw);
 }
 
 export async function getPosts(): Promise<PostMeta[]> {
+  const POSTS_DIR = await getPostsDir();
   const files = await fs.readdir(POSTS_DIR);
   const entries = await Promise.all(
     files
