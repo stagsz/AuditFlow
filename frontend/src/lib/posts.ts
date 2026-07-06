@@ -41,14 +41,7 @@ function toIsoDate(value: unknown): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-export async function readPostMarkdown(slug: string) {
-  const dir = await ensurePostsDir();
-  const filePath = path.join(dir, `${slug}.md`);
-  const raw = await fs.readFile(filePath, 'utf8');
-  return matter(raw);
-}
-
-async function ensurePostsDir(): Promise<string> {
+async function resolvePostsDir(): Promise<string | null> {
   const candidates = [
     path.join(process.cwd(), 'marketing', 'blog'),
     path.join(process.cwd(), '..', 'marketing', 'blog'),
@@ -64,11 +57,25 @@ async function ensurePostsDir(): Promise<string> {
       // try next candidate
     }
   }
-  throw new Error('Missing blog source directory. checked: ' + candidates.join(', '));
+  return null;
+}
+
+export async function readPostMarkdown(slug: string) {
+  const dir = await resolvePostsDir();
+  if (!dir) {
+    throw new Error('Missing blog source directory.');
+  }
+  const filePath = path.join(dir, `${slug}.md`);
+  const raw = await fs.readFile(filePath, 'utf8');
+  return matter(raw);
 }
 
 export async function getPosts(): Promise<PostMeta[]> {
-  const POSTS_DIR = await ensurePostsDir();
+  const POSTS_DIR = await resolvePostsDir();
+  if (!POSTS_DIR) {
+    return [];
+  }
+
   const files = await fs.readdir(POSTS_DIR);
 
   const entries = await Promise.all(
