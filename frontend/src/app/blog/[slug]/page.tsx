@@ -22,20 +22,33 @@ async function BlogBody({ slug }: { slug: string }) {
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  try {
+    const posts = await getPosts();
+    return posts.map((post) => ({ slug: post.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const posts = await getPosts();
-  const post = posts.find((p) => p.slug === params.slug);
-  if (!post) return { title: 'Post not found — AuditFlow' };
-  return { title: `${post.title} — AuditFlow`, description: post.summary };
+  try {
+    const posts = await getPosts();
+    const post = posts.find((p) => p.slug === params.slug);
+    if (!post) return { title: 'Post not found — AuditFlow' };
+    return { title: `${post.title} — AuditFlow`, description: post.summary };
+  } catch {
+    return { title: 'Post not found — AuditFlow' };
+  }
 }
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const posts = await getPosts();
-  const post = posts.find((p) => p.slug === params.slug);
+  let post;
+  try {
+    const posts = await getPosts();
+    post = posts.find((p) => p.slug === params.slug);
+  } catch {
+    post = undefined;
+  }
   if (!post) notFound();
 
   const c = palette[post.theme as keyof typeof palette] ?? palette.product;
