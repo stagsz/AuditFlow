@@ -250,8 +250,23 @@ export default function ActionsPage() {
                         {action.verifiedDate && (
                           <span className="text-green-700">
                             Verified: {format(new Date(action.verifiedDate), 'MMM d, yyyy')}
+                            {action.verifiedBy && (
+                              <span className="ml-2">
+                                by {action.verifiedBy.firstName} {action.verifiedBy.lastName}
+                              </span>
+                            )}
                           </span>
                         )}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        <Link href={`/non-conformities/${action.nonConformityId}?tab=actions`}>
+                          <Button variant="outline" size="sm">
+                            <Eye className="h-4 w-4 mr-1" />
+                            Open to review/verify
+                          </Button>
+                        </Link>
                       </div>
 
                       {/* Assignee */}
@@ -266,9 +281,21 @@ export default function ActionsPage() {
                     <div className="flex gap-2">
                       <Link href={`/non-conformities/${action.nonConformityId}?tab=actions`}>
                         <Button variant="outline" size="sm">
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-4 w-4 mr-1" />
+                          Open
                         </Button>
                       </Link>
+                      {action.status === 'COMPLETED' && (
+                        <Link
+                          href={`/non-conformities/${action.nonConformityId}?tab=actions`}
+                          state={{ verifyActionId: action.id, scrollToVerification: true }}
+                        >
+                          <Button size="sm">
+                            <ShieldCheck className="h-4 w-4 mr-1" />
+                            Verify
+                          </Button>
+                        </Link>
+                      )}
                       <Button
                         variant="destructive"
                         size="sm"
