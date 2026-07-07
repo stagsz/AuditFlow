@@ -104,7 +104,7 @@ export function notFoundHandler(req: Request, res: Response): void {
  * Async Handler Wrapper
  * Convenience wrapper for async route handlers
  */
-export function asyncHandler<T extends (req: Request, res: Response, next: NextFunction) => Promise<void>>(
+export function asyncHandler<T extends (req: Request, res: Response, next: NextFunction) => Promise<unknown>>(
   handler: T
 ): (req: Request, res: Response, next: NextFunction) => Promise<void> {
   return async (req: Request, res: Response, next: NextFunction): Promise<void> => {

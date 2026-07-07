@@ -72,10 +72,10 @@
   --brand-glow:       rgba(20, 184, 166, 0.35);
 
   /* Text */
-  --text-strong:      var(--cloud-100);
-  --text-body:        var(--cloud-300);
-  --text-muted:       var(--cloud-500);
-  --text-subtle:      var(--cloud-600);
+  --text-strong:      #EAF1EF;   /* cloud-100, slightly softened from pure white */
+  --text-body:        #B0BEB9;   /* softer body text — reduces halation on ink ground */
+  --text-muted:       #8FA3A0;   /* cloud-500 */
+  --text-subtle:      #7A8C88;   /* slightly lifted from cloud-600 for date/meta readability */
   --text-on-brand:    #04211D;
   --text-link:        var(--teal-300);
 
