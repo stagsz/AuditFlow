@@ -191,13 +191,13 @@ export class ReportService {
       );
     }
 
-    // Fetch findings (questions with score < 3)
+    // Findings = attention-needed responses on the 1-5 scale: scores 1-3 need tracking
     const findings = await prisma.questionResponse.findMany({
       where: {
         assessmentId,
         isDraft: false,
         score: {
-          lt: 3,
+          lte: 3,
         },
       },
       include: {
@@ -585,7 +585,7 @@ export class ReportService {
     const stats = [
       { label: 'Overall Compliance Score', value: assessment.overallScore !== null ? `${assessment.overallScore.toFixed(1)}%` : 'N/A' },
       { label: 'Non-Compliant Findings (Score 1)', value: score1Count.toString() },
-      { label: 'Partial Compliance Findings (Score 2)', value: score2Count.toString() },
+      { label: 'Initial / Partial Findings (Score 2)', value: score2Count.toString() },
       { label: 'Total Non-Conformities', value: nonConformities.length.toString() },
       { label: 'Open NCRs', value: openNCRs.toString() },
       { label: 'Closed NCRs', value: closedNCRs.toString() },
@@ -735,7 +735,7 @@ export class ReportService {
       this.addFindingsTable(doc, score1Findings);
     }
 
-    // Partial compliance findings (Score 2)
+    // Partial findings (Score 2)
     if (score2Findings.length > 0) {
       if (score1Findings.length > 0) {
         doc.moveDown();
@@ -744,7 +744,7 @@ export class ReportService {
       doc.font('Helvetica-Bold')
         .fontSize(12)
         .fillColor(COLORS.WARNING)
-        .text(`Partial Compliance (Score 2) - ${score2Findings.length} findings`)
+        .text(`Initial / Partial (Score 2) - ${score2Findings.length} findings`)
         .moveDown(0.5);
 
       this.addFindingsTable(doc, score2Findings);
@@ -1125,10 +1125,9 @@ export class ReportService {
       color: colors.primary,
     });
 
-    // overallScore is stored as a 0–100 percentage (see assessmentService)
     const overallScore = data.assessment.overallScore || 0;
-    const scorePercentage = Math.round(overallScore);
-    const scoreColor = scorePercentage >= 80 ? colors.success : scorePercentage >= 50 ? colors.warning : colors.danger;
+    const scorePercentage = Math.round(overallScore * 10) / 10;
+    const scoreColor = overallScore >= 80 ? colors.success : overallScore >= 60 ? colors.warning : colors.danger;
 
     summarySlide.addText(`Overall Compliance Score: ${scorePercentage}%`, {
       x: 1,
@@ -1161,7 +1160,7 @@ export class ReportService {
       { text: `• Audit Type: ${data.assessment.auditType}\n`, options: { fontSize: 14 } },
       { text: `• Total Findings: ${findings.length}\n`, options: { fontSize: 14 } },
       { text: `• Non-Compliant (Score 1): ${score1Count}\n`, options: { fontSize: 14, color: colors.danger } },
-      { text: `• Partial Compliance (Score 2): ${score2Count}\n`, options: { fontSize: 14, color: colors.warning } },
+      { text: `• Initial / Partial (Score 2): ${score2Count}\n`, options: { fontSize: 14, color: colors.warning } },
       { text: `• Non-Conformities: ${data.nonConformities.length}\n`, options: { fontSize: 14 } },
       { text: `• Lead Auditor: ${data.assessment.leadAuditor.firstName} ${data.assessment.leadAuditor.lastName}`, options: { fontSize: 14 } },
     ], {
@@ -1185,7 +1184,6 @@ export class ReportService {
       });
 
       // Create chart data
-      // section.score is already a 0–100 percentage (see assessmentService)
       const chartData = data.sectionBreakdown.slice(0, 10).map(section => ({
         name: section.sectionNumber,
         labels: [section.sectionNumber],

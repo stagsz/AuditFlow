@@ -138,6 +138,7 @@ CLAUDE.md
 
 # Build artifacts
 frontend/tsconfig.tsbuildinfo
+backend/tsconfig.tsbuildinfo
 
 # Internal ops notes
 docs/legal/GDPR_COMPLIANCE_REVIEW.md

@@ -11,9 +11,9 @@ interface ScoreButtonProps {
 }
 
 const scoreConfig = {
-  0: {
-    label: 'Not Applicable',
-    shortLabel: 'N/A',
+0: {
+  label: 'Not Applicable',
+  shortLabel: '0',
     bgColor: 'bg-[var(--status-na-bg)] hover:bg-[var(--surface-raised)]',
     selectedBg: 'bg-[var(--status-na-solid)]',
     textColor: 'text-[var(--text-muted)]',

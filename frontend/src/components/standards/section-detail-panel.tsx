@@ -18,45 +18,52 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ISOSection, AuditQuestion, useQuestionsBySection } from '@/hooks/useStandards';
 
 interface ScoreCriteriaProps {
-  score1: string;
-  score2: string;
-  score3: string;
+  score1: string | null;
+  score2: string | null;
+  score3: string | null;
 }
 
 function ScoreCriteria({ score1, score2, score3 }: ScoreCriteriaProps) {
+  const criticityBadge = (score: number, colorKey: 'fail' | 'obs' | 'pass') => {
+    const map: Record<'fail' | 'obs' | 'pass', {solid: string; bg: string; fg: string}> = {
+      fail: {solid: 'var(--status-fail-solid)', bg: 'bg-red-50', fg: 'text-red-700'},
+      obs: {solid: 'var(--status-obs-solid)', bg: 'bg-amber-50', fg: 'text-amber-700'},
+      pass: {solid: 'var(--status-pass-solid)', bg: 'bg-green-50', fg: 'text-green-700'},
+    }[colorKey];
+    return (
+      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white`} style={{backgroundColor: map.solid}}>
+        {score}
+      </div>
+    );
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      {/* Score 1 - Non-compliant */}
+      {/* Score 1 – legacy minimum on a 1–5 scale */}
       <div className="rounded-xl border border-red-200 bg-red-50 p-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full bg-[var(--status-fail-solid)] text-white flex items-center justify-center text-xs font-bold">
-            1
-          </div>
+          {criticityBadge(1, 'fail')}
           <span className="text-sm font-medium text-red-700">Non-Compliant</span>
         </div>
-        <p className="text-xs text-red-600">{score1}</p>
+        <p className="text-xs text-red-600">{score1 ?? 'Critical gap — no evidence / not addressed.'}</p>
       </div>
 
-      {/* Score 2 - Partially compliant */}
+      {/* Score 2 – initial threshold on 1–5 scale */}
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full bg-[var(--status-obs-solid)] text-white flex items-center justify-center text-xs font-bold">
-            2
-          </div>
-          <span className="text-sm font-medium text-amber-700">Partially Compliant</span>
+          {criticityBadge(2, 'obs')}
+          <span className="text-sm font-medium text-amber-700">Initial / Partial</span>
         </div>
-        <p className="text-xs text-amber-600">{score2}</p>
+        <p className="text-xs text-amber-600">{score2 ?? 'Initial implementation / partially meets requirement.'}</p>
       </div>
 
-      {/* Score 3 - Fully compliant */}
+      {/* Score 3+ – developing / established / optimizing bucket for UI clue */}
       <div className="rounded-xl border border-green-200 bg-green-50 p-3">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full bg-[var(--status-pass-solid)] text-white flex items-center justify-center text-xs font-bold">
-            3
-          </div>
-          <span className="text-sm font-medium text-green-700">Fully Compliant</span>
+          {criticityBadge(3, 'pass')}
+          <span className="text-sm font-medium text-green-700">Developing+ / Established</span>
         </div>
-        <p className="text-xs text-green-600">{score3}</p>
+        <p className="text-xs text-green-600">{score3 ?? 'Process is defined, functioning and monitored.'}</p>
       </div>
     </div>
   );

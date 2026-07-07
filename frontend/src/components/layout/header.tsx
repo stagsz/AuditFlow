@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { AlertTriangle, Bell, CheckCircle, ClipboardList, Clock, Download, LogOut, Menu, UserPlus } from 'lucide-react';
+import { AlertTriangle, Bell, CheckCircle, ClipboardList, Clock, Download, LogOut, Menu, Search } from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/lib/store';
 import { orgInviteApi } from '@/lib/api';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -145,11 +145,57 @@ export function Header() {
           </div>
         </div>
 
-        {/* Right: notifications, export, logout */}
+        {/* Right: search, notifications, export, logout */}
         <div className="flex items-center gap-3 md:gap-6">
+          {/* Search */}
+          <div className="relative group hidden lg:block">
+            <Search
+              size={18}
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-subtle)] group-focus-within:text-[var(--brand)] transition-colors"
+            />
+            <button
+              id="search-launcher"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.dispatchEvent(new CustomEvent('open-command-palette'));
+              }}
+              className="w-56 xl:w-72 bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--border-focus)] transition-all placeholder:text-[var(--text-subtle)] text-left text-[var(--text-subtle)]"
+              placeholder="Search"
+            >
+              Search clauses, findings...
+            </button>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+              <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
+                Ctrl
+              </kbd>
+              <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
+                K
+              </kbd>
+            </div>
+          </div>
+
+          <div
+            className="hidden lg:block"
+            style={{ position: 'absolute', visibility: 'hidden', height: 0, overflow: 'hidden' } as any}
+          >
+            <input
+              id="search-real-input"
+              className="bg-transparent outline-none"
+              placeholder="Search"
+              autoComplete="off"
+            />
+          </div>
+
+          {/* Mobile search */}
+          <button className="p-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-sunken)] rounded-xl lg:hidden transition-colors">
+            <Search size={20} />
+          </button>
+
           {/* Notifications */}
           <div className="ml-auto flex items-center gap-3 md:gap-4">
-            <div className="hidden lg:flex flex-col items-end">
+            <div className="hidden xl:flex flex-col items-end">
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {(user?.organization?.name) || 'Organization'}
               </p>
@@ -157,7 +203,7 @@ export function Header() {
                 {(user?.role ?? '').replace(/_/g, ' ')}
               </p>
             </div>
-            <div className="hidden lg:block h-9 w-px bg-[var(--border-subtle)]" />
+            <div className="hidden xl:block h-9 w-px bg-[var(--border-subtle)]" />
             <ThemeToggle />
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
@@ -222,19 +268,20 @@ export function Header() {
           </div>
 
           {/* Export button */}
-          <button className="hidden lg:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-[var(--text-on-brand)] px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
+          <button className="hidden xl:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-[var(--text-on-brand)] px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
             <Download size={16} />
             Export Report
           </button>
 
-          {/* Pending invites */}
+          {/* Pending invites bell */}
           <Link
             href="/admin/invites"
             className="relative w-11 h-11 rounded-full bg-[var(--surface-card)] shadow-[var(--shadow-sm)] border border-[var(--border-subtle)] flex items-center justify-center hover:bg-[var(--surface-sunken)] transition-colors"
             aria-label="Pending invites"
-            title="Pending invites"
           >
-            <UserPlus size={18} className="text-[var(--text-body)]" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-[var(--text-body)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
             {pendingInvites > 0 && (
               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-[var(--status-fail-solid)] rounded-full border border-[var(--surface-card)]" />
             )}
