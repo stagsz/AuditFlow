@@ -7,8 +7,7 @@ import assessmentsApi from '@/lib/api';
 import { useDebounce } from '@/hooks/useDebounce';
 
 export type CommandItem =
-  | { id: string; type: 'assessment'; title: string; subtitle?: string; href: string }
-  | { id: string; type: 'ncr'; title: string; subtitle?: string; href: string };
+  | { id: string; type: 'assessment'; title: string; subtitle?: string; href: string };
 
 export function CommandPalette({
   open,
@@ -25,7 +24,7 @@ export function CommandPalette({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const debouncedQuery = useDebounce(query, 250);
 
-  const snackbar = useCallback((item: CommandItem) => {
+  const navigate = useCallback((item: CommandItem) => {
     onClose();
     router.push(item.href);
   }, [router, onClose]);
@@ -36,12 +35,11 @@ export function CommandPalette({
     setItems([]);
     setActive(0);
     setTimeout(() => inputRef.current?.focus(), 0);
-  }, [open]);
+  }, [open, onClose]);
 
-  useCallback(() => {
+  useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (!open) return;
+    const handler = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
         onClose();
@@ -60,12 +58,12 @@ export function CommandPalette({
       if (event.key === 'Enter') {
         event.preventDefault();
         const current = items[active];
-        if (current) snackbar(current);
+        if (current) navigate(current);
       }
     };
-    window.addEventListener('keydown', onKey, true);
-    return () => window.removeEventListener('keydown', onKey, true);
-  }, [open, items, active, onClose, snackbar]);
+    window.addEventListener('keydown', handler, true);
+    return () => window.removeEventListener('keydown', handler, true);
+  }, [open, items, active, onClose, navigate]);
 
   useEffect(() => {
     if (debouncedQuery.trim().length < 2) {
@@ -75,15 +73,11 @@ export function CommandPalette({
     let cancelled = false;
     const q = debouncedQuery.trim();
     setLoading(true);
-    const run = async () => {
+    (async () => {
       try {
-        const [assessments] = await Promise.all([
-          assessmentsApi.list({ q, pageSize: 5 }),
-        ]);
-
+        const response = await assessmentsApi.list({ q, pageSize: 5 });
+        const data = (response as any)?.data?.data as Array<any> | undefined;
         const out: CommandItem[] = [];
-
-        const data = (assessments as any)?.data?.data as Array<any> | undefined;
         if (data) {
           for (const a of data) {
             out.push({
@@ -95,7 +89,6 @@ export function CommandPalette({
             });
           }
         }
-
         if (!cancelled) {
           setItems(out.slice(0, 10));
           setActive(0);
@@ -103,24 +96,19 @@ export function CommandPalette({
       } finally {
         if (!cancelled) setLoading(false);
       }
-    };
-    run();
+    })();
     return () => {
       cancelled = true;
     };
   }, [debouncedQuery]);
 
-  const typeLabel = (type: CommandItem['type']) => (type === 'assessment' ? 'Assessment' : type === 'ncr' ? 'NCR' : 'Clause');
+  const typeLabel = useMemo(() => (type: CommandItem['type']) => (type === 'assessment' ? 'Assessment' : type === 'ncr' ? 'NCR' : 'Clause'), []);
 
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[90]">
-      <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={() => onClose()}
-      />
-
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => onClose()} />
       <div className="absolute inset-x-0 top-[18vh] mx-auto max-w-2xl">
         <div className="bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-2xl shadow-[var(--shadow-lg)] overflow-hidden">
           <div className="flex items-center gap-3 px-4 border-b border-[var(--border-subtle)]">
@@ -128,30 +116,24 @@ export function CommandPalette({
             <input
               ref={inputRef}
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Search assessments, NCRs, clauses..."
               className="w-full bg-transparent py-4 text-sm font-medium text-[var(--text-strong)] placeholder:text-[var(--text-subtle)] outline-none"
             />
-            <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
-              esc
-            </kbd>
+            <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">esc</kbd>
           </div>
           <div className="max-h-80 overflow-y-auto">
             {query.trim().length < 2 ? (
-              <div className="px-4 py-10 text-center text-xs text-[var(--text-muted)]">
-                Type at least 2 characters to search.
-              </div>
+              <div className="px-4 py-10 text-center text-xs text-[var(--text-muted)]">Type at least 2 characters to search.</div>
             ) : items.length === 0 && !loading ? (
-              <div className="px-4 py-10 text-center text-xs text-[var(--text-muted)]">
-                No matches.
-              </div>
+              <div className="px-4 py-10 text-center text-xs text-[var(--text-muted)]">No matches.</div>
             ) : (
               <div>
                 {items.map((item, index) => (
                   <button
                     key={item.id}
                     onMouseEnter={() => setActive(index)}
-                    onClick={() => snackbar(item)}
+                    onClick={() => navigate(item)}
                     className={`w-full text-left px-4 py-3 border-b border-[var(--border-subtle)] last:border-b-0 transition-colors ${
                       index === active ? 'bg-[var(--surface-sunken)]' : 'hover:bg-[var(--surface-sunken)]'
                     }`}

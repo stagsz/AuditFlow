@@ -1,12 +1,23 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { AlertTriangle, Bell, CheckCircle, ClipboardList, Clock, Download, LogOut, Menu, Search } from 'lucide-react';
+import {
+  AlertTriangle,
+  Bell,
+  CheckCircle,
+  ClipboardList,
+  Clock,
+  Download,
+  LogOut,
+  Menu,
+  Search,
+} from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/lib/store';
 import { orgInviteApi } from '@/lib/api';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { CommandPalette } from '@/components/ui/command-palette';
 
 const placeholderNotifications = [
   {
