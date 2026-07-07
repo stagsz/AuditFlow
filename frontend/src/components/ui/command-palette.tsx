@@ -1,13 +1,14 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search } from 'lucide-react';
-import assessmentsApi from '@/lib/api';
+import { assessmentsApi, nonConformitiesApi } from '@/lib/api';
 import { useDebounce } from '@/hooks/useDebounce';
 
 export type CommandItem =
-  | { id: string; type: 'assessment'; title: string; subtitle?: string; href: string };
+  | { id: string; type: 'assessment'; title: string; subtitle?: string; href: string }
+  | { id: string; type: 'ncr'; title: string; subtitle?: string; href: string };
 
 export function CommandPalette({
   open,
@@ -35,7 +36,7 @@ export function CommandPalette({
     setItems([]);
     setActive(0);
     setTimeout(() => inputRef.current?.focus(), 0);
-  }, [open, onClose]);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -75,40 +76,53 @@ export function CommandPalette({
     setLoading(true);
     (async () => {
       try {
-        const response = await assessmentsApi.list({ q, pageSize: 5 });
-        const data = (response as any)?.data?.data as Array<any> | undefined;
+        const [assessmentsRes, ncrsRes] = await Promise.all([
+          assessmentsApi.list({ q, pageSize: 5 }),
+          nonConformitiesApi.list({ search: q, pageSize: 5 }),
+        ]);
+        if (cancelled) return;
         const out: CommandItem[] = [];
-        if (data) {
-          for (const a of data) {
+        const aData = (assessmentsRes as any)?.data?.data as Array<any> | undefined;
+        if (aData) {
+          for (const a of aData) {
             out.push({
               id: `assessment:${a.id}`,
               type: 'assessment',
               title: a.title,
               subtitle: String(a.status ?? '').replace(/_/g, ' ') || 'Assessment',
-              href: `/dashboard/assessments/${a.id}`,
+              href: `/assessments/${a.id}`,
             });
           }
         }
-        if (!cancelled) {
-          setItems(out.slice(0, 10));
-          setActive(0);
+        const nData = (ncrsRes as any)?.data?.data as Array<any> | undefined;
+        if (nData) {
+          for (const n of nData) {
+            out.push({
+              id: `ncr:${n.id}`,
+              type: 'ncr',
+              title: n.title,
+              subtitle: `${String(n.severity ?? '').replace(/_/g, ' ')} · ${String(n.status ?? '').replace(/_/g, ' ')}`,
+              href: `/non-conformities/${n.id}`,
+            });
+          }
         }
+        setItems(out.slice(0, 10));
+        setActive(0);
       } finally {
         if (!cancelled) setLoading(false);
       }
     })();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [debouncedQuery]);
 
-  const typeLabel = useMemo(() => (type: CommandItem['type']) => (type === 'assessment' ? 'Assessment' : type === 'ncr' ? 'NCR' : 'Clause'), []);
+  const typeLabel = (type: CommandItem['type']) =>
+    type === 'assessment' ? 'Assessment' : 'NCR';
 
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[90]">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => onClose()} />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <div className="absolute inset-x-0 top-[18vh] mx-auto max-w-2xl">
         <div className="bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-2xl shadow-[var(--shadow-lg)] overflow-hidden">
           <div className="flex items-center gap-3 px-4 border-b border-[var(--border-subtle)]">
