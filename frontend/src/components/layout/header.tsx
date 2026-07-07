@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { AlertTriangle, Bell, CheckCircle, ClipboardList, Clock, Download, LogOut, Menu, Search, UserPlus } from 'lucide-react';
+import { AlertTriangle, Bell, CheckCircle, ClipboardList, Clock, Download, LogOut, Menu, UserPlus } from 'lucide-react';
 import { useAuthStore, useUIStore } from '@/lib/store';
 import { orgInviteApi } from '@/lib/api';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -145,37 +145,11 @@ export function Header() {
           </div>
         </div>
 
-        {/* Right: search, notifications, export, logout */}
+        {/* Right: notifications, export, logout */}
         <div className="flex items-center gap-3 md:gap-6">
-          {/* Search */}
-          <div className="relative group hidden lg:block">
-            <Search
-              size={18}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-subtle)] group-focus-within:text-[var(--brand)] transition-colors"
-            />
-            <input
-              type="text"
-              placeholder="Search clauses, findings..."
-              className="w-56 xl:w-72 bg-[var(--surface-card)] border border-[var(--border-subtle)] rounded-full py-2.5 pl-11 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[var(--ring)] focus:border-[var(--border-focus)] transition-all placeholder:text-[var(--text-subtle)] text-[var(--text-strong)]"
-            />
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-              <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
-                Ctrl
-              </kbd>
-              <kbd className="bg-[var(--surface-sunken)] text-[var(--text-subtle)] border border-[var(--border-subtle)] rounded px-1.5 py-0.5 text-[10px] font-bold">
-                K
-              </kbd>
-            </div>
-          </div>
-
-          {/* Mobile search */}
-          <button className="p-2 text-[var(--text-muted)] hover:text-[var(--text-strong)] hover:bg-[var(--surface-sunken)] rounded-xl lg:hidden transition-colors">
-            <Search size={20} />
-          </button>
-
           {/* Notifications */}
           <div className="ml-auto flex items-center gap-3 md:gap-4">
-            <div className="hidden xl:flex flex-col items-end">
+            <div className="hidden lg:flex flex-col items-end">
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {(user?.organization?.name) || 'Organization'}
               </p>
@@ -183,7 +157,7 @@ export function Header() {
                 {(user?.role ?? '').replace(/_/g, ' ')}
               </p>
             </div>
-            <div className="hidden xl:block h-9 w-px bg-[var(--border-subtle)]" />
+            <div className="hidden lg:block h-9 w-px bg-[var(--border-subtle)]" />
             <ThemeToggle />
             <button
               onClick={() => setNotificationsOpen(!notificationsOpen)}
@@ -248,7 +222,7 @@ export function Header() {
           </div>
 
           {/* Export button */}
-          <button className="hidden xl:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-[var(--text-on-brand)] px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
+          <button className="hidden lg:flex bg-[var(--brand)] hover:bg-[var(--brand-strong)] text-[var(--text-on-brand)] px-6 py-2.5 rounded-full font-bold text-sm shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all items-center gap-2 transform hover:-translate-y-0.5">
             <Download size={16} />
             Export Report
           </button>
