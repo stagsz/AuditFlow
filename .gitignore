@@ -140,6 +140,10 @@ CLAUDE.md
 frontend/tsconfig.tsbuildinfo
 backend/tsconfig.tsbuildinfo
 
+# Public assets
+frontend/public/*
+!frontend/public/og-image.png
+
 # Internal ops notes
 docs/legal/GDPR_COMPLIANCE_REVIEW.md
 
