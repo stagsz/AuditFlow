@@ -12,11 +12,25 @@ const palette = {
 async function BlogBody({ slug }: { slug: string }) {
   const source = await readPostMarkdown(slug);
   return (
-    <div className="prose prose-neutral max-w-none">
+    <div className="
+      prose prose-neutral max-w-none
+      prose-headings:font-serif prose-headings:tracking-tight prose-headings:text-[var(--text-strong)]
+      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+      prose-p:text-[var(--text-body)] prose-p:leading-relaxed
+      prose-a:text-[var(--text-link)] prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-[var(--text-strong)] prose-strong:font-semibold
+      prose-code:before:content-none prose-code:after:content-none
+      prose-code:bg-[var(--surface-sunken)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+      prose-pre:bg-[var(--surface-sunken)] prose-pre:border prose-pre:border-[var(--border-subtle)] prose-pre:rounded-xl
+      prose-blockquote:border-l-[var(--brand)] prose-blockquote:bg-[var(--surface-sunken)] prose-blockquote:rounded-r-lg prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:not-italic
+      prose-table:border prose-table:border-[var(--border-subtle)] prose-table:rounded-xl prose-table:overflow-hidden
+      prose-th:bg-[var(--surface-sunken)] prose-th:text-[var(--text-strong)] prose-th:font-semibold prose-th:text-sm prose-th:uppercase prose-th:tracking-wide
+      prose-td:border-t prose-td:border-[var(--border-subtle)] prose-td:text-[var(--text-body)]
+      prose-li:text-[var(--text-body)] prose-li:marker:text-[var(--text-muted)]
+      prose-hr:border-[var(--border-subtle)] prose-hr:my-10
+    ">
       <MDXRemote source={source.content} />
-      <p className="mt-4 text-base leading-relaxed text-[#0e1117]">
-        This post is published pending final Director approval. If you have feedback, contact the CMO office.
-      </p>
     </div>
   );
 }
