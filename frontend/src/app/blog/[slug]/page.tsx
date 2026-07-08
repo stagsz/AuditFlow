@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import { getPosts, readPostMarkdown } from '@/lib/posts';
 
 const palette = {
@@ -29,8 +30,12 @@ async function BlogBody({ slug }: { slug: string }) {
       prose-td:border-t prose-td:border-[var(--border-subtle)] prose-td:text-[var(--text-body)]
       prose-li:text-[var(--text-body)] prose-li:marker:text-[var(--text-muted)] prose-li:leading-[1.75]
       prose-hr:border-[var(--border-subtle)] prose-hr:my-10
+      prose-th:size-px prose-th:px-4 prose-th:py-3 prose-th:text-left
+      prose-td:px-4 prose-td:py-3
+      [&_input[type=checkbox]]:accent-[var(--brand)] [&_input[type=checkbox]]:mr-2 [&_input[type=checkbox]]:mt-0.5
+      [&_li:has(>input[type=checkbox])]:list-none [&_li:has(>input[type=checkbox])]:flex [&_li:has(>input[type=checkbox])]:items-start
     ">
-      <MDXRemote source={source.content} />
+      <MDXRemote source={source.content} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
     </div>
   );
 }
