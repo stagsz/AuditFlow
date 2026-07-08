@@ -79,9 +79,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
           Audit<span className="text-[var(--brand)]">Flow</span>
         </Link>
         <div className="hidden items-center gap-8 md:flex">
-          <Link href="#features" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Features</Link>
-          <Link href="#how" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">How it works</Link>
-          <Link href="#pricing" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Pricing</Link>
+          <Link href="/#features" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Features</Link>
+          <Link href="/#how" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">How it works</Link>
+          <Link href="/#pricing" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)]">Pricing</Link>
           <Link href="/blog" className="text-sm font-medium text-[var(--text-strong)]">Blog</Link>
           <Link href="/register" className="btn-primary">Start 30-day free trial</Link>
         </div>
