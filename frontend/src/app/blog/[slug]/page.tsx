@@ -23,7 +23,8 @@ async function BlogBody({ slug }: { slug: string }) {
       prose-strong:text-[var(--text-strong)] prose-strong:font-semibold
       prose-code:before:content-none prose-code:after:content-none
       prose-code:bg-[var(--surface-sunken)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
-      prose-pre:bg-[var(--surface-sunken)] prose-pre:border prose-pre:border-[var(--border-subtle)] prose-pre:rounded-xl
+      prose-pre:text-[var(--text-strong)] prose-pre:bg-[var(--surface-sunken)] prose-pre:border prose-pre:border-[var(--border-subtle)] prose-pre:rounded-xl
+      [&_pre_code]:text-[var(--text-strong)] [&_pre_code]:bg-transparent
       prose-blockquote:border-l-[var(--brand)] prose-blockquote:bg-[var(--surface-sunken)] prose-blockquote:rounded-r-lg prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:not-italic
       prose-table:border prose-table:border-[var(--border-subtle)] prose-table:rounded-xl prose-table:overflow-hidden
       prose-th:bg-[var(--surface-sunken)] prose-th:text-[var(--text-strong)] prose-th:font-semibold prose-th:text-sm prose-th:uppercase prose-th:tracking-wide
