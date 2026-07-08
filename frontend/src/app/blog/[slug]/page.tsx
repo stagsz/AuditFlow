@@ -73,7 +73,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   const c = palette[post.theme as keyof typeof palette] ?? palette.product;
 
   return (
-    <div className="min-h-screen bg-[var(--surface-page)] text-[var(--text-body)] antialiased">
+    <div data-theme="light" className="min-h-screen bg-[var(--surface-page)] text-[var(--text-body)] antialiased">
       <nav className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--glass-bg)] px-6 md:px-10 backdrop-blur-md">
         <Link href="/" className="text-sm font-semibold tracking-tight text-[var(--text-strong)]">
           Audit<span className="text-[var(--brand)]">Flow</span>
