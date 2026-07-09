@@ -191,4 +191,4 @@ Rather than a disconnected spreadsheet, AuditFlow gives you:
 
 An NCR register is a living system, not a filing cabinet. The difference between an effective quality system and a paper trail comes down to enforcement: mandatory ownership, verified evidence, followed-up actions, and linked records. If you apply those four principles to your register tomorrow, you will already be ahead of most organizations.
 
-If you’re interested in how AuditFlow can support that workflow in practice, visit [AuditFlow](https://audit-flow-zeta.vercel.app) and see how the register is meant to work.
+If you’re interested in how AuditFlow can support that workflow in practice, visit [AuditFlow](https://audit-flow.org) and see how the register is meant to work.

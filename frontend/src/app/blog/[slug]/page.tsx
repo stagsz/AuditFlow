@@ -120,7 +120,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             All posts
           </Link>
           <Link href="/" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
-            audit-flow-zeta.vercel.app
+            audit-flow.org
           </Link>
         </div>
       </footer>

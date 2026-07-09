@@ -70,7 +70,7 @@ export const config = {
     smtpPass: process.env.SMTP_PASS || '',
     fromEmail: process.env.EMAIL_FROM || 'noreply@auditflow.io',
     fromName: process.env.EMAIL_FROM_NAME || 'AuditFlow',
-    appUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow-zeta.vercel.app',
+    appUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow.org',
   },
 } as const;
 

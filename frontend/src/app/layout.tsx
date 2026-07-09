@@ -65,8 +65,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://audit-flow-zeta.vercel.app',
-    siteName: 'AuditFlow',
+    url: 'https://audit-flow.org',
+        siteName: 'AuditFlow',
     title: 'AuditFlow — Streamline Your Audit Journey',
     description: 'AuditFlow replaces scattered spreadsheets and email chains with a single platform for ISO 9001 self-assessments, audit execution, NCR tracking, and CAPA.',
     images: [

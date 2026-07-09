@@ -36,13 +36,13 @@ export const landingPageMetadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://audit-flow-zeta.vercel.app/',
+    url: 'https://audit-flow.org/',
     siteName: 'AuditFlow',
     title: 'AuditFlow — ISO 9001 Quality Management & Audit Platform',
     description: 'Streamline ISO 9001:2015 compliance with AuditFlow. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
     images: [
       {
-        url: 'https://audit-flow-zeta.vercel.app/og-image.png',
+        url: 'https://audit-flow.org/og-image.png',
         width: 1200,
         height: 630,
         alt: 'AuditFlow — ISO 9001 Quality Management Platform',
@@ -54,11 +54,11 @@ export const landingPageMetadata = {
     card: 'summary_large_image',
     title: 'AuditFlow — ISO 9001 Quality Management & Audit Platform',
     description: 'Streamline ISO 9001:2015 compliance with AuditFlow. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
-    images: ['https://audit-flow-zeta.vercel.app/og-image.png'],
+    images: ['https://audit-flow.org/og-image.png'],
     creator: '@auditflow',
   },
   alternates: {
-    canonical: 'https://audit-flow-zeta.vercel.app/',
+    canonical: 'https://audit-flow.org/',
   },
   other: {
     'theme-color': '#0f766e',
@@ -83,7 +83,7 @@ export const jsonLdStructuredData = {
       billingDuration: 'P1M',
     },
     availability: 'https://schema.org/InStock',
-    url: 'https://audit-flow-zeta.vercel.app/register',
+    url: 'https://audit-flow.org/register',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -101,23 +101,23 @@ export const jsonLdStructuredData = {
     'Reporting & Analytics',
     'Role-Based Access Control',
   ],
-  screenshot: 'https://audit-flow-zeta.vercel.app/screenshot.png',
-  logo: 'https://audit-flow-zeta.vercel.app/logo.png',
-  url: 'https://audit-flow-zeta.vercel.app/',
+  screenshot: 'https://audit-flow.org/screenshot.png',
+  logo: 'https://audit-flow.org/logo.png',
+  url: 'https://audit-flow.org/',
   publisher: {
     '@type': 'Organization',
     name: 'AuditFlow',
-    url: 'https://audit-flow-zeta.vercel.app/',
+    url: 'https://audit-flow.org/',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://audit-flow-zeta.vercel.app/logo.png',
+      url: 'https://audit-flow.org/logo.png',
     },
   },
   potentialAction: {
     '@type': 'UseAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://audit-flow-zeta.vercel.app/register',
+      urlTemplate: 'https://audit-flow.org/register',
       actionPlatform: [
         'http://schema.org/DesktopWebPlatform',
         'http://schema.org/IOSPlatform',

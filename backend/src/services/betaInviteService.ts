@@ -407,7 +407,7 @@ export class BetaInviteService {
   }
 
   async sendInviteEmail(inviteCode: string, email: string, message?: string) {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow-zeta.vercel.app';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow.org';
     const inviteUrl = `${baseUrl}/invite/${inviteCode}`;
 
     const subject = 'You\'re invited to join AuditFlow Beta';

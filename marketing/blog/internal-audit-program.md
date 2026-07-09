@@ -10,7 +10,7 @@ published: true
 
 A repeatable audit program is the difference between quality theater and actual management control. The goal is not to produce findings; it is to produce evidence that the system is being operated with intelligence.
 
-For small and medium-sized enterprises, an internal audit program is often treated as an annual checkbox — something to get through before the external auditor arrives. But the organizations that actually improve their quality management systems understand that audits are a diagnostic tool, not a compliance chore. When you build a repeatable program, shifts from reactive firefighting to proactive risk management. You stop discovering the same nonconformities every year and start building institutional memory.
+For small and medium-sized enterprises, an internal audit program is often treated as an annual checkbox — something to get through before the external auditor arrives. But the organizations that actually improve their quality management systems understand that audits are a diagnostic tool, not a compliance chore. When you build a repeatable program, it shifts from reactive firefighting to proactive risk management. You stop discovering the same nonconformities every year and start building institutional memory.
 
 ## Why repeatable matters
 
@@ -149,7 +149,7 @@ When management review becomes active rather than ceremonial, small internal aud
 
 ## 6. Keep improving the program itself
 
-Your audit schedule, clause map, and checklist should be living documents. Everyaudit cycle should be slightly sharper than the last:
+Your audit schedule, clause map, and checklist should be living documents. Every audit cycle should be slightly sharper than the last:
 
 - What questions produced weak evidence?
 - Which clauses consistently expose hidden risks?

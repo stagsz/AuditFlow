@@ -8,8 +8,8 @@ AuditFlow is an ISO 9001 Quality Management & Audit Platform for SMEs in Europe.
 It helps quality managers prepare for and manage internal/external audits, track NCRs, and run
 self-assessments mapped to ISO 9001:2015 clause structure.
 
-**Live app:** https://audit-flow-zeta.vercel.app  
-**Backend base URL:** https://audit-flow-zeta.vercel.app/_/backend/api  
+**Live app:** https://audit-flow.org  
+**Backend base URL:** https://audit-flow.org/_/backend/api  
 **Supabase project:** fqnorsqggyshqfmihivw (Pro plan — pgvector available)  
 **GitHub:** https://github.com/stagsz/AuditFlow
 
