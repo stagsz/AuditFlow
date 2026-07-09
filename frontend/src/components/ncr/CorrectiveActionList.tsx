@@ -11,6 +11,8 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  Eye,
+  ShieldCheck,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -154,6 +156,18 @@ function ActionRow({ action, isExpanded, onToggle, canEdit, onVerifyClick }: {
                   {action.priority}
                 </span>
               </div>
+
+              {canEdit && action.status === 'COMPLETED' && (
+                <div>
+                  <Button
+                    size="sm"
+                    onClick={() => onVerifyClick(action)}
+                    className="bg-green-600 hover:bg-green-700 focus:ring-green-500"
+                  >
+                    Verify Corrective Action
+                  </Button>
+                </div>
+              )}
             </div>
 
             {action.assignedTo && (

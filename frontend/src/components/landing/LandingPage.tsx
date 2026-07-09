@@ -435,8 +435,8 @@ export function LandingPage() {
             </div>
             <div className="plan reveal" data-d="1">
               <div className="plan-name">Professional</div>
-              <div className="plan-price">€0</div>
-              <div className="plan-per">per month — up to 50 users</div>
+              <div className="plan-price">Coming soon</div>
+              <div className="plan-per">up to 50 users — join the waitlist</div>
               <div className="plan-divider" />
               <ul className="plan-features">
                 <li>Everything in Free</li>

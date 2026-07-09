@@ -37,23 +37,21 @@ interface QuestionCardProps {
   className?: string;
 }
 
-const scoreColors: Record<0 | 1 | 2 | 3 | 4 | 5, string> = {
-  0: 'border-l-[var(--status-na-solid)] bg-[var(--status-na-bg)]',
-  1: 'border-l-red-500 bg-[var(--status-fail-bg)]',
-  2: 'border-l-orange-500 bg-[var(--status-obs-bg)]',
-  3: 'border-l-yellow-500 bg-[var(--status-obs-bg)]',
-  4: 'border-l-green-500 bg-[var(--status-pass-bg)]',
-  5: 'border-l-blue-500 bg-info-50',
-};
+// --- shared scoring semantics for 1–5 scale ---
+export const SCORE_LABELS = ['Not Applicable', 'Non-Compliant', 'Initial', 'Developing', 'Established', 'Optimizing'] as const;
+export const SCORE_SHORT_LABELS = ['N/A', 'NC', 'Initial', 'Developing', 'Established', 'Optimizing'] as const;
+export const SCORE_COLORS = {
+  0: { bg: 'bg-[var(--status-na-bg)]', text: 'text-[var(--status-na-fg)]', border: 'border-l-[var(--status-na-solid)]' },
+  1: { bg: 'bg-[var(--status-fail-bg)]', text: 'text-[var(--status-fail-fg)]', border: 'border-l-red-500' },
+  2: { bg: 'bg-[var(--status-obs-bg)]', text: 'text-[var(--status-obs-fg)]', border: 'border-l-orange-500' },
+  3: { bg: 'bg-[var(--status-obs-bg)]', text: 'text-[var(--status-obs-fg)]', border: 'border-l-yellow-500' },
+  4: { bg: 'bg-[var(--status-pass-bg)]', text: 'text-[var(--status-pass-fg)]', border: 'border-l-green-500' },
+  5: { bg: 'bg-info-50', text: 'text-info-700', border: 'border-l-blue-500' },
+} as const;
 
-const scoreLabels: Record<0 | 1 | 2 | 3 | 4 | 5, string> = {
-  0: 'Not Applicable',
-  1: 'Non-Compliant',
-  2: 'Initial',
-  3: 'Developing',
-  4: 'Established',
-  5: 'Optimizing',
-};
+export function badgeClassesForScore(score: number) {
+  return SCORE_COLORS[score] ?? SCORE_COLORS[4];
+}
 
 export function QuestionCard({
   question,

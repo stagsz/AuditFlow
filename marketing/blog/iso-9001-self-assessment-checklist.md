@@ -6,7 +6,7 @@ excerpt: A practical checklist covering scope, interested parties, risk-based th
 owner: CMO (Sofia Strand)
 published: true
 ---
-# Why Your SME Needs an ISO 9001 Self-Assessment Before the Auditor Arrives
+## Why Your SME Needs an ISO 9001 Self-Assessment Before the Auditor Arrives
 
 For small and medium-sized enterprises, ISO 9001 certification is a powerful signal: you take quality seriously, you understand your customers, and you systemize continuous improvement. But too many SMEs treat the standard as a compliance exercise to survive an external audit rather than a framework that can genuinely improve how they operate every day.
 
