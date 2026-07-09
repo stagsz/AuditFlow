@@ -48,6 +48,7 @@ export function LandingPage() {
   const storyRef = useRef<HTMLElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const tourVideoRef = useRef<HTMLVideoElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [storyIndex, setStoryIndex] = useState(0);
 
@@ -118,6 +119,25 @@ export function LandingPage() {
       { threshold: 0.25 }
     );
     root.querySelectorAll('.reveal, .bars').forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  /* Product tour video — play only while visible, respect reduced motion */
+  useEffect(() => {
+    const video = tourVideoRef.current;
+    if (!video) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.controls = true;
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(video);
     return () => io.disconnect();
   }, []);
 
@@ -383,6 +403,37 @@ export function LandingPage() {
                 <span className="sp-check">✓ Generated</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec-pad" id="tour">
+        <div className="wrap">
+          <div className="sec-head reveal">
+            <span className="eyebrow">Product tour</span>
+            <h2>See AuditFlow in action.</h2>
+            <p>
+              The actual product — dashboard, self-assessments, non-conformities, corrective actions and reports — in
+              under twenty seconds.
+            </p>
+          </div>
+          <div className="tour-frame reveal" data-d="1">
+            <div className="tour-chrome" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </div>
+            <video
+              ref={tourVideoRef}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/promo/auditflow-tour-poster.jpg"
+              aria-label="Product tour of AuditFlow: dashboard, self-assessments, non-conformities, corrective actions and reports"
+            >
+              <source src="/promo/auditflow-tour.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </section>

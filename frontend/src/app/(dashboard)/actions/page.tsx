@@ -15,6 +15,7 @@ import {
   CheckCircle,
   AlertCircle,
   Clock,
+  ShieldCheck,
 } from 'lucide-react';
 import { nonConformitiesApi } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -286,10 +287,7 @@ export default function ActionsPage() {
                         </Button>
                       </Link>
                       {action.status === 'COMPLETED' && (
-                        <Link
-                          href={`/non-conformities/${action.nonConformityId}?tab=actions`}
-                          state={{ verifyActionId: action.id, scrollToVerification: true }}
-                        >
+                        <Link href={`/non-conformities/${action.nonConformityId}?tab=actions`}>
                           <Button size="sm">
                             <ShieldCheck className="h-4 w-4 mr-1" />
                             Verify

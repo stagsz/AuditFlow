@@ -365,6 +365,18 @@
 .lp .sp-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--lp-teal-deep), var(--lp-teal)); box-shadow: 0 0 10px var(--lp-teal-glow); }
 .lp .sp-clause { font-size: 12.5px; color: var(--lp-tx-mid); margin-bottom: 4px; }
 
+/* ── Product tour video ── */
+.lp .tour-frame {
+  max-width: 1060px; margin: 0 auto;
+  border-radius: 18px; padding: 12px 12px 10px;
+  background: linear-gradient(180deg, var(--lp-ink-2), var(--lp-ink-1));
+  border: 1px solid rgba(234, 241, 239, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px var(--lp-teal-glow);
+}
+.lp .tour-chrome { display: flex; gap: 6px; padding: 2px 4px 10px; }
+.lp .tour-chrome i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.12); }
+.lp .tour-frame video { display: block; width: 100%; height: auto; border-radius: 10px; }
+
 /* ── Clause coverage grid ── */
 .lp .clause-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 .lp .clause {
