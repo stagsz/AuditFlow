@@ -1,4 +1,4 @@
-# Dependencies
+﻿# Dependencies
 node_modules/
 /.pnp
 .pnp.js
@@ -143,6 +143,7 @@ backend/tsconfig.tsbuildinfo
 # Public assets
 frontend/public/*
 !frontend/public/og-image.png
+!frontend/public/promo/
 
 # Internal ops notes
 docs/legal/GDPR_COMPLIANCE_REVIEW.md
