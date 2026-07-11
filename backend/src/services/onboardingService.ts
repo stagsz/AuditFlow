@@ -117,9 +117,11 @@ export class OnboardingService {
         });
       }
 
+      const domain = data.email.split('@')[1]?.toLowerCase();
       const user = await tx.user.create({
         data: {
           email: data.email,
+          emailDomain: domain ?? '',
           passwordHash,
           firstName: data.firstName,
           lastName: data.lastName,

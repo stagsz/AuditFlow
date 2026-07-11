@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { prisma } from '../config/database';
 import { config } from '../config';
-import { AuthenticationError, ValidationError, NotFoundError } from '../utils/errors';
+import { AuthenticationError, AuthorizationError, ValidationError, NotFoundError } from '../utils/errors';
 import { UserRole } from '../types/enums';
 
 interface TokenPayload {
@@ -55,6 +55,18 @@ export class AuthService {
       throw new ValidationError('Email already registered');
     }
 
+    const domain = data.email.split('@')[1]?.toLowerCase();
+
+    // Reject obviously invalid or unapproved addresses early so we never
+    // create test/personal accounts inside a tenant.
+    if (!domain) {
+      throw new ValidationError('Invalid email domain');
+    }
+    const rejectedDomains = new Set(['example.com', 'test.com']);
+    if (rejectedDomains.has(domain)) {
+      throw new ValidationError('Email domain is not allowed');
+    }
+
     // Verify organization exists
     const organization = await prisma.organization.findUnique({
       where: { id: data.organizationId },
@@ -64,6 +76,14 @@ export class AuthService {
       throw new NotFoundError('Organization', data.organizationId);
     }
 
+    const orgAllowedDomains = ((organization.allowedDomains ?? []) as string[]).map((entry) => String(entry).toLowerCase());
+    if (orgAllowedDomains.length === 0) {
+      throw new ValidationError('Organization does not allow email-based registration; use an org invite or admin-created account instead');
+    }
+    if (!orgAllowedDomains.includes(domain)) {
+      throw new AuthorizationError('Email domain is not allowed for this organization');
+    }
+
     // Hash password
     const passwordHash = await bcrypt.hash(data.password, AuthService.SALT_ROUNDS);
 
@@ -71,6 +91,7 @@ export class AuthService {
     const user = await prisma.user.create({
       data: {
         email: data.email,
+        emailDomain: domain,
         passwordHash,
         firstName: data.firstName,
         lastName: data.lastName,
