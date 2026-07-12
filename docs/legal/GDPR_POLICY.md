@@ -31,9 +31,15 @@ This policy applies to all personal data processed by AuditFlow on behalf of cus
 Subject-rights requests today are handled manually via privacy@auditflow.io. Automated fulfillment endpoints may be added in future releases.
 
 ## 6. Data Retention and Deletion
-- Retain customer data while the account is active and as needed for legal/tax/accounting obligations.
-- Upon account deletion or erasure request, we remove or anonymize records in dependency order and verify completion.
-- Audit logs are retained for accountability and incident traceability.
+Default retention periods:
+
+- User accounts and identity metadata: active lifecycle plus 3 years after closure.
+- Assessments, NCRs, corrective actions, evidence, team memberships, and invites: 3 years after assessment closure or org closure.
+- Billing/org metadata: 3 years after deactivation, or 6 years where tax/legal obligation applies.
+- Audit and security logs: 3 years.
+- Anonymized QM data may be retained longer if it no longer identifies a data subject.
+
+Erasure requests delete or redact personal identifiers first; if a legal or quality-system reason requires keeping the underlying record, the system may retain anonymized state with documentation in the erasure receipt.
 
 ## 7. Security Controls
 - Passwords and tokens are stored hashed; API roles are restricted from exposing auth secrets.
