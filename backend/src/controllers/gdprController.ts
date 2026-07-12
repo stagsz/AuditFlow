@@ -101,7 +101,7 @@ export class GdprController {
 
         const payload = {
           user: targetUser,
-          counts: { assessments: directResponses.length, responses: directResponses.length, teamMemberships: teamMemberships.length, receivedInvites: receivedInvites.length, createdInvites: createdInvites.length, inviteUsages: inviteUsages.length },
+          counts: { assessments: assessments.length, responses: directResponses.length, teamMemberships: teamMemberships.length, receivedInvites: receivedInvites.length, createdInvites: createdInvites.length, inviteUsages: inviteUsages.length },
           assessments: assessments.map((a) => ({
             id: a.id,
             title: a.title,
@@ -147,42 +147,97 @@ export class GdprController {
           return;
         }
 
-        const counts = {
-          userOrgInvites: 0,
-          assessmentTeamMembers: 0,
-          directResponses: 0,
-          questionResponses: 0,
-          evidence: 0,
-          nonConformities: 0,
-          correctiveActions: 0,
-          assessments: 0,
-          users: 0,
-          betaInvitesCreated: 0,
-          betaInviteUsages: 0,
-        };
+        // Guard: don't strand an org without an active admin/quality manager.
+        if (
+          targetUser.isActive &&
+          (targetUser.role === UserRole.SYSTEM_ADMIN || targetUser.role === UserRole.QUALITY_MANAGER)
+        ) {
+          const remaining = await prisma.user.count({
+            where: {
+              organizationId: targetUser.organizationId,
+              role: targetUser.role,
+              isActive: true,
+              id: { not: targetUserId },
+            },
+          });
+          if (remaining === 0) {
+            res.status(409).json({
+              success: false,
+              error: `Cannot anonymize the organization's last active ${targetUser.role}`,
+            });
+            return;
+          }
+        }
 
-        await writeGdprAudit({
-          action: 'erase',
-          userId: targetUserId,
-          email: targetUser.email,
-          status: 'planned-not-executed',
-          actorId,
-          counts,
-          reason: 'Erasure is disabled pending manual prod review',
-          metadata: { requestedAt: new Date().toISOString(), retentionReference: 'GDPR erasure request' },
+        // Erasure is implemented as anonymization-in-place: PII is scrubbed and
+        // the account is deactivated, but the row (and all its FK references) is
+        // retained so ISO 9001 quality/audit records stay intact.
+        const [questionResponses, evidence, teamMemberships] = await Promise.all([
+          prisma.questionResponse.count({ where: { userId: targetUserId } }),
+          prisma.evidence.count({ where: { uploadedById: targetUserId } }),
+          prisma.assessmentTeamMember.count({ where: { userId: targetUserId } }),
+        ]);
+
+        const anonymizedEmail = `anonymized+${targetUserId}@deleted.invalid`;
+        const anonymizedAt = new Date().toISOString();
+
+        const { invitesCancelled } = await prisma.$transaction(async (tx) => {
+          await tx.user.update({
+            where: { id: targetUserId },
+            data: {
+              email: anonymizedEmail,
+              emailDomain: '',
+              firstName: 'Anonymized',
+              lastName: 'User',
+              passwordHash: '',
+              refreshToken: null,
+              isActive: false,
+            },
+          });
+
+          const cancelled = await tx.userOrgInvite.updateMany({
+            where: { userId: targetUserId, status: 'PENDING' },
+            data: { status: 'REJECTED' },
+          });
+
+          const counts = {
+            responsesRetained: questionResponses,
+            evidenceRetained: evidence,
+            teamMembershipsRetained: teamMemberships,
+            invitesCancelled: cancelled.count,
+          };
+
+          await writeGdprAudit(
+            {
+              action: 'anonymize',
+              userId: targetUserId,
+              email: targetUser.email,
+              status: 'anonymized',
+              actorId,
+              counts,
+              metadata: { anonymizedAt, retentionReference: 'GDPR erasure request' },
+            },
+            tx
+          );
+
+          return { invitesCancelled: cancelled.count };
         });
 
         res.json({
           success: true,
           data: {
             userId: targetUserId,
-            email: targetUser.email,
-            status: 'planned-not-executed',
-            reason: 'Erasure is disabled pending manual prod review',
-            counts,
-            metadata: { requestedAt: new Date().toISOString(), actorId, retentionReference: 'GDPR erasure request' },
+            status: 'anonymized',
+            counts: {
+              responsesRetained: questionResponses,
+              evidenceRetained: evidence,
+              teamMembershipsRetained: teamMemberships,
+              invitesCancelled,
+            },
+            metadata: { anonymizedAt, actorId, retentionReference: 'GDPR erasure request' },
           },
         });
+        return;
       }
 
       res.status(400).json({ success: false, error: 'Unsupported action' });

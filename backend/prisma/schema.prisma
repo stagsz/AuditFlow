@@ -525,3 +525,24 @@ model BetaInviteUsage {
   @@index([userId])
   @@map("beta_invite_usages")
 }
+
+// Append-only audit trail for GDPR data-subject requests (export / anonymize).
+// Deliberately has no relation fields to User: it stores raw FK columns so the
+// User model needs no back-relation and anonymization never affects this table.
+model GdprAuditLog {
+  id           String   @id @default(uuid())
+  action       String
+  targetUserId String   @map("target_user_id")
+  targetEmail  String   @map("target_email")
+  actorId      String   @map("actor_id")
+  status       String
+  reason       String?
+  counts       Json?
+  metadata     Json?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([targetUserId])
+  @@index([actorId])
+  @@index([createdAt])
+  @@map("gdpr_audit_logs")
+}
