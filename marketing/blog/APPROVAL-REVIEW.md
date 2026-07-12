@@ -34,3 +34,15 @@
 2. EU AI Act Officer confirms no prohibited AI claims (if needed).
 3. Director approves publish.
 4. CMO publishes.
+
+---
+
+### 4. How Small Companies Can Pass ISO 9001 Without a Full Quality Department
+- **Path:** `marketing/blog/smb-iso-9001-light-qm.md`
+- **Slug:** `/blog/smb-iso-9001-light-qm`
+- **Frontend route:** `frontend/src/app/blog/smb-iso-9001-light-qm/page.mdx`
+- **Live index entry:** `frontend/src/app/blog/index.mdx`
+- **EU AI Act check:** None expected
+- **Owner:** Greisz Consulting / AuditFlow
+- **Action:** Approve / Request changes
+- **Next step:** After approval, run direct-production checklist for Vercel deploy verification
