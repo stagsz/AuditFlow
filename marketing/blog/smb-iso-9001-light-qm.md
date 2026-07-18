@@ -2,7 +2,7 @@
 title: "How Small Companies Can Pass ISO 9001 Without a Full Quality Department"
 description: "A practical guide for SMBs that need ISO 9001 certification but don’t have a dedicated quality manager. Learn what evidence auditors actually need, where most companies fail, and how to close the gap with light automation."
 publishedAt: 2026-06-29
-owner: Greisz Consulting / AuditFlow
+owner: Greisz Consulting / Normetta
 ---
 
 # How Small Companies Can Pass ISO 9001 Without a Full Quality Department
@@ -20,7 +20,7 @@ In practice, teams run processes every day — procurement checks, onboarding st
 - No consolidated record of who approved what and when
 - No clean management-review package
 
-For SMBs, the traditional fix is expensive: a full QMS rollout, a consultant engagement, or a quality department. AuditFlow is built for the alternative: a **light-QM assistant** that maps existing evidence against ISO 9001 clauses and turns it into an audit-ready package.
+For SMBs, the traditional fix is expensive: a full QMS rollout, a consultant engagement, or a quality department. Normetta is built for the alternative: a **light-QM assistant** that maps existing evidence against ISO 9001 clauses and turns it into an audit-ready package.
 
 ## What auditors actually care about
 
@@ -58,9 +58,9 @@ A practical SMB compliance model without a full quality department:
 
 This model replaces the idea of a permanent quality department with a repeatable, auditable system.
 
-## How AuditFlow fits
+## How Normetta fits
 
-AuditFlow is not a general-purpose QMS. It is built for one objective: get certified-ready evidence without forcing a full organizational transformation.
+Normetta is not a general-purpose QMS. It is built for one objective: get certified-ready evidence without forcing a full organizational transformation.
 
 Core capabilities:
 - Gap analysis: current SOPs and records mapped to ISO 9001 clauses
@@ -77,4 +77,4 @@ You don’t need a quality department. You need a system that turns what you alr
 
 Start with your existing evidence. Map it to ISO clauses. Close the gaps. Show up with documentation instead of excuses.
 
-If you want to see how AuditFlow applies this to your industry, [contact us](https://audit-flow.org/).
+If you want to see how Normetta applies this to your industry, [contact us](https://normetta.com/).

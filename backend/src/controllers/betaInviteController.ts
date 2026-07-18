@@ -122,7 +122,7 @@ export class BetaInviteController {
       return;
     }
 
-    const result = await betaInviteService.sendInviteEmailActual(invite.code, invite.email, 'This is a reminder that you have a pending invitation to join AuditFlow Beta. The invitation will expire soon.');
+    const result = await betaInviteService.sendInviteEmailActual(invite.code, invite.email, 'This is a reminder that you have a pending invitation to join Normetta Beta. The invitation will expire soon.');
 
     res.json({ success: true, data: { email: result.emailData, inviteCode: invite.code, sent: result.sent, messageId: result.messageId, error: result.error } });
   }

@@ -304,11 +304,11 @@ A self-assessment should be a mid-year pulse check, not a once-a-year sprint. Tr
 
 ---
 
-## Where AuditFlow fits
+## Where Normetta fits
 
-AuditFlow is built precisely for this workflow. The platform maps the ISO 9001 clauses into a structured assessment tool, assigns ownership, keeps evidence versioned, and turns self-assessment findings into tracked actions without you leaving the environment.
+Normetta is built precisely for this workflow. The platform maps the ISO 9001 clauses into a structured assessment tool, assigns ownership, keeps evidence versioned, and turns self-assessment findings into tracked actions without you leaving the environment.
 
-If your current process involves scattered spreadsheets, shared drive folders, and last-minute updates, AuditFlow replaces that chaos with a single, auditable workflow your whole team can trust.
+If your current process involves scattered spreadsheets, shared drive folders, and last-minute updates, Normetta replaces that chaos with a single, auditable workflow your whole team can trust.
 
 ---
 
