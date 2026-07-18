@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
-import '../types/express';
 import { prisma } from '../config/database';
 import { withValidation } from '../proxy/validationProxy';
 import { UserRole } from '../types/enums';

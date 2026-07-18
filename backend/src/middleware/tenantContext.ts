@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import '../types/express';
 
 export function tenantContext(req: Request, res: Response, next: NextFunction): void {
   try {
