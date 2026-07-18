@@ -32,6 +32,9 @@
   /* clip, not hidden: hidden would make .lp a scroll container and break
      position:sticky in the story section */
   overflow-x: clip;
+  /* stacking context so the fixed .lp-bg (z-index: -1) stays above the .lp
+     background instead of escaping behind the page */
+  isolation: isolate;
 }
 
 .lp ::selection { background: var(--lp-teal-deep); color: #fff; }
@@ -54,6 +57,49 @@
   position: fixed; inset: 0; z-index: 250; pointer-events: none;
   opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Fixed watermark background: pinned to the viewport, text drifts ── */
+.lp .lp-bg {
+  position: fixed; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+}
+.lp .lp-bg-word {
+  position: absolute;
+  top: 40%; left: 50%;
+  font-family: var(--lp-serif);
+  font-weight: 700;
+  font-size: clamp(64px, 9vw, 130px);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-text-stroke: 1px rgba(20, 184, 166, 0.22);
+  /* moving light band clipped to the letters — the visible "motion around the text" */
+  color: transparent;
+  background: linear-gradient(
+    100deg,
+    rgba(20, 184, 166, 0.05) 40%,
+    rgba(126, 232, 220, 0.35) 50%,
+    rgba(20, 184, 166, 0.05) 60%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation:
+    lp-bg-sheen 7s linear infinite,
+    lp-bg-drift 22s ease-in-out infinite alternate;
+}
+@keyframes lp-bg-sheen {
+  from { background-position: 100% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes lp-bg-drift {
+  from { transform: translate(-50%, -50%) translate(-90px, 30px); }
+  to { transform: translate(-50%, -50%) translate(90px, -30px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp .lp-bg-word { animation: none; transform: translate(-50%, -50%); }
 }
 
 /* ── Nav: transparent → glass on scroll ── */

@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://audit-flow.org',
-        siteName: 'AuditFlow',
+    siteName: 'AuditFlow',
     title: 'AuditFlow — Streamline Your Audit Journey',
     description: 'AuditFlow replaces scattered spreadsheets and email chains with a single platform for ISO 9001 self-assessments, audit execution, NCR tracking, and CAPA.',
     images: [
@@ -85,12 +85,8 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
     creator: '@auditflow_io',
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
-  },
-  manifest: '/site.webmanifest',
+  icons: [],
+  manifest: undefined,
   other: {
     'theme-color': '#0e1117',
   },
@@ -143,8 +139,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable}`}>
       <head>
-        {/* Apply the persisted theme before first paint to avoid a flash.
-            Dark is the default; only 'light' sets the attribute. */}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <script
           dangerouslySetInnerHTML={{
             __html:
