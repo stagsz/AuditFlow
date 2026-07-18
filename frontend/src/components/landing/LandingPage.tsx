@@ -141,12 +141,14 @@ export function LandingPage() {
       <div className="lp-progress" ref={progressRef} />
       <div className="grain" />
       <div className="lp-bg" aria-hidden="true">
-        <span className="lp-bg-word">ISO 9001</span>
+        <span className="lp-bg-word w1">ISO 9001</span>
+        <span className="lp-bg-word w2">ISO 9001</span>
+        <span className="lp-bg-word w3">ISO 9001</span>
       </div>
 
       <nav className={scrolled ? 'scrolled' : undefined}>
         <Link className="logo" href="/">
-          Audit<b>Flow</b>
+          Nor<b>metta</b>
         </Link>
         <div className="nav-links">
           <a href="#features">{t.nav.platform}</a>
@@ -450,7 +452,7 @@ export function LandingPage() {
           <div className="footer-inner">
             <div className="footer-brand">
               <div className="footer-logo">
-                Audit<span>Flow</span>
+                Nor<span>metta</span>
               </div>
               <div className="footer-tagline">{t.footer.tagline}</div>
             </div>
