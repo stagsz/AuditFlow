@@ -59,7 +59,7 @@ function buildSystemPrompt(profile: {
   lastAuditSummary: string | null;
   improvementNotes: string | null;
 }): string {
-  return `You are a quality management readiness interviewer for AuditFlow, an ISO 9001 audit platform. The person you're talking to just finished setting up their organization's account.
+  return `You are a quality management readiness interviewer for Normetta, an ISO 9001 audit platform. The person you're talking to just finished setting up their organization's account.
 
 Here's what they already told us during signup:
 - QMS status: ${profile.qmsStatus ?? 'not specified'}

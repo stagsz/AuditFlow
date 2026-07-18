@@ -54,10 +54,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   try {
     const posts = await getPosts();
     const post = posts.find((p) => p.slug === params.slug);
-    if (!post) return { title: 'Post not found — AuditFlow' };
-    return { title: `${post.title} — AuditFlow`, description: post.summary };
+    if (!post) return { title: 'Post not found — Normetta' };
+    return { title: `${post.title} — Normetta`, description: post.summary };
   } catch {
-    return { title: 'Post not found — AuditFlow' };
+    return { title: 'Post not found — Normetta' };
   }
 }
 
@@ -120,7 +120,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             All posts
           </Link>
           <Link href="/" className="text-sm text-[var(--text-muted)] hover:text-[var(--text-strong)] transition-colors">
-            audit-flow.org
+            normetta.com
           </Link>
         </div>
       </footer>

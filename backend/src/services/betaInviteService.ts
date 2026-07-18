@@ -407,10 +407,10 @@ export class BetaInviteService {
   }
 
   async sendInviteEmail(inviteCode: string, email: string, message?: string) {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow.org';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://normetta.com';
     const inviteUrl = `${baseUrl}/invite/${inviteCode}`;
 
-    const subject = 'You\'re invited to join AuditFlow Beta';
+    const subject = 'You\'re invited to join Normetta Beta';
     const html = `
       <!DOCTYPE html>
       <html>
@@ -420,12 +420,12 @@ export class BetaInviteService {
         </head>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #059669 0%, #047857 100%); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">AuditFlow</h1>
+            <h1 style="color: white; margin: 0; font-size: 28px; font-weight: 700;">Normetta</h1>
             <p style="color: #d1fae5; margin: 8px 0 0; font-size: 16px;">ISO 9001 Quality Management Platform</p>
           </div>
           <div style="background: white; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px; padding: 40px 30px;">
             <h2 style="color: #111827; margin: 0 0 16px; font-size: 24px;">You're invited to the Beta!</h2>
-            <p style="color: #4b5563; margin: 0 0 24px; font-size: 16px;">${message || 'You have been invited to join the AuditFlow beta program. Click the button below to get started.'}</p>
+            <p style="color: #4b5563; margin: 0 0 24px; font-size: 16px;">${message || 'You have been invited to join the Normetta beta program. Click the button below to get started.'}</p>
             <div style="text-align: center; margin: 32px 0;">
               <a href="${inviteUrl}" style="display: inline-block; background: #059669; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px;">Accept Invitation</a>
             </div>
@@ -443,22 +443,22 @@ export class BetaInviteService {
     `;
 
     const text = `
-You're invited to the AuditFlow Beta!
+You're invited to the Normetta Beta!
 
-${message || 'You have been invited to join the AuditFlow beta program.'}
+${message || 'You have been invited to join the Normetta beta program.'}
 
 Accept your invitation: ${inviteUrl}
 
 This invitation expires soon. If you didn't expect this, please ignore this email.
 
-AuditFlow - ISO 9001 Quality Management Platform
+Normetta - ISO 9001 Quality Management Platform
     `;
 
     return { subject, html, text, to: email };
   }
 
   async sendReminderEmail(inviteCode: string, email: string) {
-    return this.sendInviteEmail(inviteCode, email, 'This is a reminder that you have a pending invitation to join AuditFlow Beta. The invitation will expire soon.');
+    return this.sendInviteEmail(inviteCode, email, 'This is a reminder that you have a pending invitation to join Normetta Beta. The invitation will expire soon.');
   }
 }
 

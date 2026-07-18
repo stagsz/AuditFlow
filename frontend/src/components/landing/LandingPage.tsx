@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import './landing.css';
 import { getLocale, Locale } from '@/lib/locale';
 import { useLocaleMessages } from '@/lib/i18n/landing-messages';
 import LocaleSwitcher from '@/components/locale/LocaleSwitcher';
@@ -431,7 +430,7 @@ export function LandingPage() {
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
-              <a href={`mailto:hello@auditflow.${locale === 'sv' ? 'se' : 'io'}`} className="plan-btn plan-btn-outline">
+              <a href={`mailto:hello@normetta.com`} className="plan-btn plan-btn-outline">
                 {t.pricing.enterprise.cta}
               </a>
             </div>
@@ -470,13 +469,13 @@ export function LandingPage() {
             </div>
             <div className="footer-links-group">
               <div className="footer-links-title">{t.footer.company}</div>
-              <a href={`mailto:hello@auditflow.${locale === 'sv' ? 'se' : 'io'}`}>{t.footer.links.contact}</a>
+              <a href={`mailto:hello@normetta.com`}>{t.footer.links.contact}</a>
               <a href="#">{t.footer.links.privacy}</a>
               <a href="#">{t.footer.links.terms}</a>
             </div>
           </div>
           <div className="footer-bottom">
-            <span>© 2026 AuditFlow. {t.footer.bottom.split('AuditFlow. ')[1]}</span>
+            <span>© 2026 Normetta. {t.footer.bottom.split('Normetta. ')[1]}</span>
             <span>{t.footer.isoLabel}</span>
           </div>
         </div>

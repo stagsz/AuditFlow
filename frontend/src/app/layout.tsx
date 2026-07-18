@@ -34,10 +34,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'AuditFlow — Streamline Your Audit Journey',
-    template: '%s | AuditFlow',
+    default: 'Normetta — Streamline Your Audit Journey',
+    template: '%s | Normetta',
   },
-  description: 'AuditFlow replaces scattered spreadsheets and email chains with a single platform for ISO 9001 self-assessments, audit execution, non-conformity tracking, and corrective actions. Built for European SMEs.',
+  description: 'Normetta replaces scattered spreadsheets and email chains with a single platform for ISO 9001 self-assessments, audit execution, non-conformity tracking, and corrective actions. Built for European SMEs.',
   keywords: [
     'ISO 9001',
     'quality management',
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
     'SME quality management',
   ],
   authors: [{ name: 'Greisz Consulting', url: 'https://greisz.se' }],
-  creator: 'AuditFlow',
-  publisher: 'AuditFlow',
+  creator: 'Normetta',
+  publisher: 'Normetta',
   robots: {
     index: true,
     follow: true,
@@ -65,25 +65,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://audit-flow.org',
-    siteName: 'AuditFlow',
-    title: 'AuditFlow — Streamline Your Audit Journey',
-    description: 'AuditFlow replaces scattered spreadsheets and email chains with a single platform for ISO 9001 self-assessments, audit execution, NCR tracking, and CAPA.',
+    url: 'https://normetta.com',
+    siteName: 'Normetta',
+    title: 'Normetta — Streamline Your Audit Journey',
+    description: 'Normetta replaces scattered spreadsheets and email chains with a single platform for ISO 9001 self-assessments, audit execution, NCR tracking, and CAPA.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'AuditFlow — ISO 9001 Quality Management Platform',
+        alt: 'Normetta — ISO 9001 Quality Management Platform',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AuditFlow — Streamline Your Audit Journey',
-    description: 'AuditFlow replaces spreadsheets with a single platform for ISO 9001 self-assessments, audits, NCR tracking, and CAPA.',
+    title: 'Normetta — Streamline Your Audit Journey',
+    description: 'Normetta replaces spreadsheets with a single platform for ISO 9001 self-assessments, audits, NCR tracking, and CAPA.',
     images: ['/og-image.png'],
-    creator: '@auditflow_io',
+    creator: '@normetta',
   },
   icons: [],
   manifest: undefined,
@@ -95,7 +95,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'AuditFlow',
+  name: 'Normetta',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Cloud',
   offers: {

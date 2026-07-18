@@ -302,8 +302,8 @@ function RegisterPageInner() {
             {showInviteBanner && betaInviteData?.organization?.name
               ? `Exclusive beta access for ${betaInviteData.organization.name}`
               : showInviteBanner
-              ? 'You have been invited to join the AuditFlow beta program'
-              : mode === 'choose' && 'How would you like to use AuditFlow?'}
+              ? 'You have been invited to join the Normetta beta program'
+              : mode === 'choose' && 'How would you like to use Normetta?'}
             {mode === 'create' && !showInviteBanner && 'Enter your details to set up your organisation'}
             {mode === 'join' && !showInviteBanner && 'Enter your invite link or company slug'}
           </CardDescription>

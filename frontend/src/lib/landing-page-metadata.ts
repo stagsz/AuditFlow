@@ -4,10 +4,10 @@
 
 export const landingPageMetadata = {
   title: {
-    default: 'AuditFlow — ISO 9001 Quality Management & Audit Platform',
-    template: '%s | AuditFlow',
+    default: 'Normetta — ISO 9001 Quality Management & Audit Platform',
+    template: '%s | Normetta',
   },
-  description: 'Streamline ISO 9001:2015 compliance with AuditFlow. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
+  description: 'Streamline ISO 9001:2015 compliance with Normetta. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
   keywords: [
     'ISO 9001',
     'quality management',
@@ -19,9 +19,9 @@ export const landingPageMetadata = {
     'compliance platform',
     'SME quality management',
   ],
-  authors: [{ name: 'AuditFlow' }],
-  creator: 'AuditFlow',
-  publisher: 'AuditFlow',
+  authors: [{ name: 'Normetta' }],
+  creator: 'Normetta',
+  publisher: 'Normetta',
   robots: {
     index: true,
     follow: true,
@@ -36,29 +36,29 @@ export const landingPageMetadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://audit-flow.org/',
-    siteName: 'AuditFlow',
-    title: 'AuditFlow — ISO 9001 Quality Management & Audit Platform',
-    description: 'Streamline ISO 9001:2015 compliance with AuditFlow. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
+    url: 'https://normetta.com/',
+    siteName: 'Normetta',
+    title: 'Normetta — ISO 9001 Quality Management & Audit Platform',
+    description: 'Streamline ISO 9001:2015 compliance with Normetta. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
     images: [
       {
-        url: 'https://audit-flow.org/og-image.png',
+        url: 'https://normetta.com/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'AuditFlow — ISO 9001 Quality Management Platform',
+        alt: 'Normetta — ISO 9001 Quality Management Platform',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AuditFlow — ISO 9001 Quality Management & Audit Platform',
-    description: 'Streamline ISO 9001:2015 compliance with AuditFlow. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
-    images: ['https://audit-flow.org/og-image.png'],
-    creator: '@auditflow',
+    title: 'Normetta — ISO 9001 Quality Management & Audit Platform',
+    description: 'Streamline ISO 9001:2015 compliance with Normetta. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
+    images: ['https://normetta.com/og-image.png'],
+    creator: '@normetta',
   },
   alternates: {
-    canonical: 'https://audit-flow.org/',
+    canonical: 'https://normetta.com/',
   },
   other: {
     'theme-color': '#0f766e',
@@ -68,7 +68,7 @@ export const landingPageMetadata = {
 export const jsonLdStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'AuditFlow',
+  name: 'Normetta',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Cloud',
   offers: {
@@ -83,7 +83,7 @@ export const jsonLdStructuredData = {
       billingDuration: 'P1M',
     },
     availability: 'https://schema.org/InStock',
-    url: 'https://audit-flow.org/register',
+    url: 'https://normetta.com/register',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
@@ -92,7 +92,7 @@ export const jsonLdStructuredData = {
     bestRating: '5',
     worstRating: '1',
   },
-  description: 'Streamline ISO 9001:2015 compliance with AuditFlow. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
+  description: 'Streamline ISO 9001:2015 compliance with Normetta. Self-assessments, audit planning, NCR tracking, CAPA management, and reporting — all in one platform built for European SMEs.',
   featureList: [
     'Self-Assessment Management',
     'Audit Planning & Execution',
@@ -101,23 +101,23 @@ export const jsonLdStructuredData = {
     'Reporting & Analytics',
     'Role-Based Access Control',
   ],
-  screenshot: 'https://audit-flow.org/screenshot.png',
-  logo: 'https://audit-flow.org/logo.png',
-  url: 'https://audit-flow.org/',
+  screenshot: 'https://normetta.com/screenshot.png',
+  logo: 'https://normetta.com/logo.png',
+  url: 'https://normetta.com/',
   publisher: {
     '@type': 'Organization',
-    name: 'AuditFlow',
-    url: 'https://audit-flow.org/',
+    name: 'Normetta',
+    url: 'https://normetta.com/',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://audit-flow.org/logo.png',
+      url: 'https://normetta.com/logo.png',
     },
   },
   potentialAction: {
     '@type': 'UseAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: 'https://audit-flow.org/register',
+      urlTemplate: 'https://normetta.com/register',
       actionPlatform: [
         'http://schema.org/DesktopWebPlatform',
         'http://schema.org/IOSPlatform',

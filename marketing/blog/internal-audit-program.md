@@ -2,7 +2,7 @@
 title: How to build a repeatable internal audit program
 date: 2026-04-12
 theme: product
-excerpt: From clause mapping to schedule optimization and auditor assignment — the framework we use inside AuditFlow customers.
+excerpt: From clause mapping to schedule optimization and auditor assignment — the framework we use inside Normetta customers.
 owner: CMO (Sofia Strand)
 published: true
 ---

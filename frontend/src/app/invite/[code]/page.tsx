@@ -158,7 +158,7 @@ export default function BetaInviteLandingPage() {
             <Shield className="w-8 h-8 text-[var(--brand-strong)]" />
           </div>
           <CardTitle className="text-xl">
-            You're Invited to AuditFlow Beta
+            You're Invited to Normetta Beta
           </CardTitle>
           <CardDescription>
             {invite.organization?.name ? `Exclusive access for ${invite.organization.name}` : 'Exclusive beta access'}
@@ -185,7 +185,7 @@ export default function BetaInviteLandingPage() {
           </div>
 
           <p className="text-[var(--text-muted)] text-center mb-6">
-            Create your account to join the AuditFlow beta program and get early access to our ISO 9001 Quality Management Platform.
+            Create your account to join the Normetta beta program and get early access to our ISO 9001 Quality Management Platform.
           </p>
 
           <Button onClick={handleContinue} className="w-full" size="lg">

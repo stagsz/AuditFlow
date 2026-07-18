@@ -70,7 +70,7 @@ function getPageInfo(pathname: string) {
   for (const [path, info] of Object.entries(pageTitles)) {
     if (pathname.startsWith(path)) return info;
   }
-  return { title: 'AuditFlow', subtitle: 'Compliance Platform' };
+  return { title: 'Normetta', subtitle: 'Compliance Platform' };
 }
 
 function NotificationIcon({ type }: { type: 'warning' | 'info' | 'success' | 'ncr' }) {

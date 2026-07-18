@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { getPosts } from '@/lib/posts';
 
 export const metadata: Metadata = {
-  title: 'Blog — AuditFlow',
-  description: 'ISO 9001 quality management notes, audit tips, and product updates from AuditFlow.',
+  title: 'Blog — Normetta',
+  description: 'ISO 9001 quality management notes, audit tips, and product updates from Normetta.',
 };
 
 const palette = {

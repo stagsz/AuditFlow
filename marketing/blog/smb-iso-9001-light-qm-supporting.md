@@ -1,10 +1,10 @@
 # SMB ISO 9001 light-QM — Supporting Collateral
 
-Created for AuditFlow launch and sales follow-up.
+Created for Normetta launch and sales follow-up.
 
 ## 1. One-pager notes
 - Hook: most SMBs already do the work; the failure mode is missing evidence.
-- Promise: AuditFlow maps existing evidence to ISO 9001 clauses and produces an audit-ready package.
+- Promise: Normetta maps existing evidence to ISO 9001 clauses and produces an audit-ready package.
 - CTA: request a gap analysis or start a trial at audit-flow.org.
 
 ## 2. Sales email outline
@@ -14,7 +14,7 @@ Body:
 - Greeting
 - Pain: certification pressure with no QM staff
 - Insight: 60–80% of evidence already exists in email/CRM/tickets
-- Fix: AuditFlow light-QM workflow
+- Fix: Normetta light-QM workflow
 - Proof/path: clause mapping, gap score, export pack
 - CTA: 20-minute review with the team
 

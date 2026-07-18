@@ -69,8 +69,8 @@ export const config = {
     smtpUser: process.env.SMTP_USER || '',
     smtpPass: process.env.SMTP_PASS || '',
     fromEmail: process.env.EMAIL_FROM || 'noreply@auditflow.io',
-    fromName: process.env.EMAIL_FROM_NAME || 'AuditFlow',
-    appUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://audit-flow.org',
+    fromName: process.env.EMAIL_FROM_NAME || 'Normetta',
+    appUrl: process.env.NEXT_PUBLIC_APP_URL || 'https://normetta.com',
   },
 } as const;
 

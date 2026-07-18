@@ -32,7 +32,7 @@ export default function Hero() {
               <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-              <span className="ml-1 text-xs text-white/30">AuditFlow — Dashboard</span>
+              <span className="ml-1 text-xs text-white/30">Normetta — Dashboard</span>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-3">
               <div className="rounded-lg border border-white/6 bg-[var(--surface-card)]/5 p-3">

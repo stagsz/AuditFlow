@@ -1,7 +1,7 @@
 import { getLocale } from '@/lib/locale';
 
 const sv = {
-  brand: 'AuditFlow',
+  brand: 'Normetta',
   nav: {
     platform: 'Plattform',
     howItWorks: 'Så fungerar det',
@@ -13,7 +13,7 @@ const sv = {
   hero: {
     eyebrow: 'ISO 9001:2015 · Avancerat för svenska företag',
     h1: 'Gå in i revison med <em>förvissning</em> om utfallet.',
-    sub: 'AuditFlow kartlägger hela ditt kvalitetssystem enligt klausul 4–10, följer varje NCR till stängning och visar dig exakt var du står – månader innrevisorn gör det.',
+    sub: 'Normetta kartlägger hela ditt kvalitetssystem enligt klausul 4–10, följer varje NCR till stängning och visar dig exakt var du står – månader innrevisorn gör det.',
     actions: {
       primary: 'Starta gratisprov i 30 dagar →',
       secondary: 'Se hur det fungerar ↓',
@@ -147,11 +147,11 @@ const sv = {
   },
   tour: {
     eyebrow: 'Produktrundtur',
-    heading: 'Se AuditFlow i praktiken.',
+    heading: 'Se Normetta i praktiken.',
     sub:
       'Den faktiska produkten – dashboard, självutvärderingar, non-conformities, korrigerande åtgärder och rapporter – på under tjugo sekunder.',
     videoAria:
-      'Produktrundtur av AuditFlow: dashboard, självutvärdering, NCR, korrigerande åtgärder och rapporter',
+      'Produktrundtur av Normetta: dashboard, självutvärdering, NCR, korrigerande åtgärder och rapporter',
   },
   coverage: {
     eyebrow: 'Täckning',
@@ -230,7 +230,7 @@ const sv = {
       privacy: 'Integritetspolicy',
       terms: 'Villkor',
     },
-    bottom: '© 2026 AuditFlow. Alla rättigheter reserverade.',
+    bottom: '© 2026 Normetta. Alla rättigheter reserverade.',
     isoLabel: 'ISO 9001:2015 Kvalitetsledningsplattform',
   },
   common: {
@@ -249,7 +249,7 @@ const sv = {
 };
 
 const en = {
-  brand: 'AuditFlow',
+  brand: 'Normetta',
   nav: {
     platform: 'Platform',
     howItWorks: 'How it works',
@@ -261,7 +261,7 @@ const en = {
   hero: {
     eyebrow: 'ISO 9001:2015 · Built for European SMEs',
     h1: 'Walk into your audit <em>already certain</em> of the outcome.',
-    sub: 'AuditFlow maps your entire quality system to clauses 4–10, tracks every NCR to closure, and shows you exactly where you stand — months before the auditor does.',
+    sub: 'Normetta maps your entire quality system to clauses 4–10, tracks every NCR to closure, and shows you exactly where you stand — months before the auditor does.',
     actions: {
       primary: 'Start 30-day free trial →',
       secondary: 'See how it works ↓',
@@ -392,11 +392,11 @@ const en = {
   },
   tour: {
     eyebrow: 'Product tour',
-    heading: 'See AuditFlow in action.',
+    heading: 'See Normetta in action.',
     sub:
       'The actual product — dashboard, self-assessments, non-conformities, corrective actions and reports — in under twenty seconds.',
     videoAria:
-      'Product tour of AuditFlow: dashboard, self-assessments, non-conformities, corrective actions and reports',
+      'Product tour of Normetta: dashboard, self-assessments, non-conformities, corrective actions and reports',
   },
   coverage: {
     eyebrow: 'Coverage',
@@ -475,7 +475,7 @@ const en = {
       privacy: 'Privacy policy',
       terms: 'Terms of service',
     },
-    bottom: '© 2026 AuditFlow. All rights reserved.',
+    bottom: '© 2026 Normetta. All rights reserved.',
     isoLabel: 'ISO 9001:2015 Quality Management Platform',
   },
   common: {

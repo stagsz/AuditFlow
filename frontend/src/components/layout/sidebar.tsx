@@ -123,7 +123,7 @@ export function Sidebar() {
           </div>
           {(sidebarOpen || isMobile) && (
             <div>
-              <h1 className="font-bold text-lg tracking-tight text-[var(--text-strong)] leading-tight">AuditFlow</h1>
+              <h1 className="font-bold text-lg tracking-tight text-[var(--text-strong)] leading-tight">Normetta</h1>
               <p className="text-xs text-[var(--text-muted)] font-medium">Compliance Platform</p>
             </div>
           )}
