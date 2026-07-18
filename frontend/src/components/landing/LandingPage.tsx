@@ -140,6 +140,11 @@ export function LandingPage() {
     <div className="lp" ref={rootRef}>
       <div className="lp-progress" ref={progressRef} />
       <div className="grain" />
+      <div className="lp-bg" aria-hidden="true">
+        <span className="lp-bg-word w1">ISO 9001</span>
+        <span className="lp-bg-word w2">ISO 9001</span>
+        <span className="lp-bg-word w3">ISO 9001</span>
+      </div>
 
       <nav className={scrolled ? 'scrolled' : undefined}>
         <Link className="logo" href="/">
