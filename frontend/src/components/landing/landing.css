@@ -508,3 +508,30 @@
   .lp .reveal { opacity: 1; transform: none; }
   .lp .bars i { transform: scaleY(1); }
 }
+
+/* ── Locale switcher ── */
+.lp .locale-switcher {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--lp-tx-mid, #c8c8c8);
+  border: 1px solid rgba(234, 241, 239, 0.18);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  min-width: 58px;
+  text-align: center;
+}
+.lp .locale-switcher:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--lp-tx-hi, #f2f2f2);
+  border-color: rgba(234, 241, 239, 0.3);
+}
+.lp .locale-switcher option {
+  background: #0b1416;
+  color: #eAF1EF;
+}

@@ -3,35 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import './landing.css';
-
-const FEATURES = [
-  { icon: '◫', title: 'Self-assessment management', desc: 'Guided clause-by-clause workflows with evidence collection, scoring and gap analysis in one place.' },
-  { icon: '◔', title: 'Audit planning & execution', desc: 'Schedule audits, assign internal auditors, define scope, and run structured audit sessions with real-time progress.' },
-  { icon: '⚑', title: 'Non-conformity tracking', desc: 'Document, categorize and assign NCRs with severity grading. Full audit trail from discovery through resolution.' },
-  { icon: '✎', title: 'Corrective actions (CAPA)', desc: 'Root cause analysis, action planning, owner assignment and effectiveness verification — closed-loop CAPA.' },
-  { icon: '▤', title: 'Reporting & analytics', desc: 'Executive dashboards, trend analysis and compliance reports ready for management review and certification bodies.' },
-  { icon: '◎', title: 'Role-based access', desc: 'Admin, quality manager and auditor roles with granular permissions. Each user sees exactly what they need to act on.' },
-];
-
-const STORY_STEPS = [
-  { title: 'Plan your audit', desc: 'Define scope, select ISO 9001 clauses, set the schedule, and assign the audit team. Templates included.' },
-  { title: 'Execute & evidence', desc: 'Run structured interviews and observations. Attach evidence directly to findings while you work, not after.' },
-  { title: 'Manage findings', desc: 'Raise non-conformities and observations. Assign owners, due dates, and corrective actions immediately.' },
-  { title: 'Close the loop', desc: 'Track CAPA completion, verify effectiveness, and generate the final audit report in one click.' },
-];
-
-const CLAUSES = [
-  ['Clause 4', 'Context of the Organization'],
-  ['Clause 5', 'Leadership'],
-  ['Clause 6', 'Planning'],
-  ['Clause 7', 'Support'],
-  ['Clause 8', 'Operation'],
-  ['Clause 9', 'Performance Evaluation'],
-  ['Clause 9.2', 'Internal Audit'],
-  ['Clause 9.3', 'Management Review'],
-  ['Clause 10', 'Improvement & CAPA'],
-  ['10.2', 'Nonconformity & Corrective Action'],
-];
+import { getLocale, Locale } from '@/lib/locale';
+import { useLocaleMessages } from '@/lib/i18n/landing-messages';
+import LocaleSwitcher from '@/components/locale/LocaleSwitcher';
 
 const BAR_HEIGHTS = ['38%', '52%', '46%', '61%', '57%', '70%', '66%', '78%', '84%', '92%'];
 
@@ -43,6 +17,8 @@ function handleCardGlow(e: React.MouseEvent<HTMLDivElement>) {
 }
 
 export function LandingPage() {
+  const t = useLocaleMessages();
+  const locale = getLocale();
   const rootRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const storyRef = useRef<HTMLElement>(null);
@@ -52,11 +28,9 @@ export function LandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [storyIndex, setStoryIndex] = useState(0);
 
-  /* Nav elevation + scroll progress + sticky story index */
   useEffect(() => {
     let ticking = false;
     const mobile = window.matchMedia('(max-width: 900px)');
-
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
@@ -71,18 +45,16 @@ export function LandingPage() {
           const rect = storyRef.current.getBoundingClientRect();
           const total = storyRef.current.offsetHeight - window.innerHeight;
           const p = Math.min(Math.max(-rect.top / total, 0), 0.999);
-          setStoryIndex(Math.floor(p * STORY_STEPS.length));
+          setStoryIndex(Math.floor(p * t.story.steps.length));
         }
         ticking = false;
       });
     };
-
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [t.story.steps.length]);
 
-  /* Reveals + count-up stats + chart bars via IntersectionObserver */
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -122,7 +94,6 @@ export function LandingPage() {
     return () => io.disconnect();
   }, []);
 
-  /* Product tour video — play only while visible, respect reduced motion */
   useEffect(() => {
     const video = tourVideoRef.current;
     if (!video) return;
@@ -141,7 +112,6 @@ export function LandingPage() {
     return () => io.disconnect();
   }, []);
 
-  /* 3D tilt on the hero glass card */
   useEffect(() => {
     const stage = stageRef.current;
     const tilt = tiltRef.current;
@@ -176,40 +146,36 @@ export function LandingPage() {
           Audit<b>Flow</b>
         </Link>
         <div className="nav-links">
-          <a href="#features">Platform</a>
-          <a href="#story">How it works</a>
-          <a href="#pricing">Pricing</a>
-          <Link href="/blog">Blog</Link>
+          <a href="#features">{t.nav.platform}</a>
+          <a href="#story">{t.nav.howItWorks}</a>
+          <a href="#pricing">{t.nav.pricing}</a>
+          <Link href="/blog">{t.nav.blog}</Link>
           <Link className="btn-quiet" href="/login">
-            Sign in
+            {t.nav.signIn}
           </Link>
           <Link className="btn" href="/register">
-            Start free →
+            {t.nav.start}
           </Link>
+          <LocaleSwitcher />
         </div>
       </nav>
 
       <header className="hero">
         <div className="aurora" />
         <div>
-          <span className="eyebrow">ISO 9001:2015 · Built for European SMEs</span>
-          <h1>
-            Walk into your audit <em>already certain</em> of the outcome.
-          </h1>
-          <p className="hero-sub">
-            AuditFlow maps your entire quality system to clauses 4–10, tracks every NCR to closure, and shows you
-            exactly where you stand — months before the auditor does.
-          </p>
+          <span className="eyebrow">{t.hero.eyebrow}</span>
+          <h1 dangerouslySetInnerHTML={{ __html: t.hero.h1 }} />
+          <p className="hero-sub">{t.hero.sub}</p>
           <div className="hero-actions">
             <Link className="btn" href="/register">
-              Start 30-day free trial →
+              {t.hero.actions.primary}
             </Link>
             <a className="btn-quiet" href="#story">
-              See how it works ↓
+              {t.hero.actions.secondary}
             </a>
           </div>
           <p className="hero-note">
-            <span className="seal">✓</span> Built on the full ISO 9001:2015 clause structure
+            <span className="seal">✓</span> {t.hero.note}
           </p>
         </div>
 
@@ -223,23 +189,23 @@ export function LandingPage() {
             </span>
             <div className="gc-head">
               <div className="gc-title">
-                Audit readiness
-                <small>Example workspace · Surveillance audit in 41 days</small>
+                {t.hero.mockup.title}
+                <small>{t.hero.mockup.status}</small>
               </div>
-              <span className="gc-live">Live</span>
+              <span className="gc-live">{t.hero.mockup.live}</span>
             </div>
             <div className="kpis">
               <div className="kpi">
                 <b className="up">87%</b>
-                <span>Readiness</span>
+                <span>{t.hero.mockup.readiness}</span>
               </div>
               <div className="kpi">
                 <b>3</b>
-                <span>Open NCRs</span>
+                <span>{t.hero.mockup.openNcrs}</span>
               </div>
               <div className="kpi">
                 <b className="warn">2</b>
-                <span>Overdue actions</span>
+                <span>{t.hero.mockup.overdue}</span>
               </div>
             </div>
             <div className="bars">
@@ -250,17 +216,23 @@ export function LandingPage() {
             <div className="ncr-row">
               <code>NCR-041</code>
               <span className="grow">Calibration records missing for torque tools</span>
-              <span className="pill major">Major</span>
+              <span className={`pill ${t.common.openNcr.toLowerCase() === 'open' ? 'major' : 'major'}`}>
+                {t.common.major}
+              </span>
             </div>
             <div className="ncr-row">
               <code>NCR-039</code>
               <span className="grow">Supplier evaluation overdue</span>
-              <span className="pill minor">Minor</span>
+              <span className={`pill ${t.common.minor.toLowerCase() === 'minor' ? 'minor' : 'minor'}`}>
+                {t.common.minor}
+              </span>
             </div>
             <div className="ncr-row">
               <code>NCR-036</code>
               <span className="grow">Management review minutes — approved &amp; closed</span>
-              <span className="pill ok">Closed</span>
+              <span className={`pill ${t.common.closed.toLowerCase() === 'closed' ? 'ok' : 'ok'}`}>
+                {t.common.closed}
+              </span>
             </div>
           </div>
         </div>
@@ -270,24 +242,24 @@ export function LandingPage() {
         <div className="wrap stats-grid">
           <div className="stat reveal">
             <b>
-              <span data-count="7">0</span>
-              <i>clauses</i>
+              <span data-count={String(t.stats.clauses.count)}>0</span>
+              <i>{t.stats.clauses.label}</i>
             </b>
-            <span>full coverage of ISO 9001:2015 clauses 4 through 10 — every requirement mapped</span>
+            <span>{t.stats.clauses.detail}</span>
           </div>
           <div className="stat reveal" data-d="1">
             <b>
-              <span data-count="4">0</span>
-              <i>audit types</i>
+              <span data-count={String(t.stats.auditTypes.count)}>0</span>
+              <i>{t.stats.auditTypes.label}</i>
             </b>
-            <span>internal, external, surveillance and certification audits planned in one place</span>
+            <span>{t.stats.auditTypes.detail}</span>
           </div>
           <div className="stat reveal" data-d="2">
             <b>
-              <span data-count="0">0</span>
-              <i>spreadsheets</i>
+              <span data-count={String(t.stats.spreadsheets.count)}>0</span>
+              <i>{t.stats.spreadsheets.label}</i>
             </b>
-            <span>NCRs, corrective actions and evidence live in one system — not in Excel</span>
+            <span>{t.stats.spreadsheets.detail}</span>
           </div>
         </div>
       </section>
@@ -295,14 +267,14 @@ export function LandingPage() {
       <section className="sec-pad" id="features">
         <div className="wrap">
           <div className="sec-head reveal">
-            <span className="eyebrow">The platform</span>
-            <h2>Everything the auditor will ask for. Nothing you have to hunt down.</h2>
-            <p>Built specifically for ISO 9001 — not a generic task tracker retrofitted with compliance labels.</p>
+            <span className="eyebrow">{t.features.eyebrow}</span>
+            <h2>{t.features.heading}</h2>
+            <p>{t.features.sub}</p>
           </div>
           <div className="feat-grid">
-            {FEATURES.map((f, i) => (
+            {t.features.items.map((f, i) => (
               <div key={f.title} className="lp-feat reveal" data-d={i % 3 || undefined} onMouseMove={handleCardGlow}>
-                <div className="feat-icon">{f.icon}</div>
+                <div className="feat-icon">{f.num}</div>
                 <h3>{f.title}</h3>
                 <p>{f.desc}</p>
               </div>
@@ -314,9 +286,9 @@ export function LandingPage() {
       <section className="story" id="story" ref={storyRef}>
         <div className="story-sticky">
           <div className="story-copy">
-            <span className="eyebrow">How it works</span>
-            <h2>From first gap to signed certificate.</h2>
-            {STORY_STEPS.map((s, i) => (
+            <span className="eyebrow">{t.story.eyebrow}</span>
+            <h2>{t.story.heading}</h2>
+            {t.story.steps.map((s, i) => (
               <div key={s.title} className={`story-step${i === storyIndex ? ' active' : ''}`}>
                 <span className="story-num">{i + 1}</span>
                 <div>
@@ -327,82 +299,26 @@ export function LandingPage() {
             ))}
           </div>
           <div className="story-panels">
-            <div className={`story-panel${storyIndex === 0 ? ' active' : ''}`}>
-              <div className="sp-label">Audit plan · Scope &amp; team</div>
-              <div className="sp-row">
-                <span>Scope — clauses 4–10, production site</span>
-                <span className="sp-check">✓ Defined</span>
+            {t.story.panels.map((panel, i) => (
+              <div key={panel.label} className={`story-panel${storyIndex === i ? ' active' : ''}`}>
+                <div className="sp-label">{panel.label}</div>
+                {panel.rows
+                  ? panel.rows.map((row) => (
+                      <div key={row.text} className="sp-row">
+                        <span>{row.text}</span>
+                        <span className="sp-check">✓ {row.status}</span>
+                      </div>
+                    ))
+                  : panel.clauses?.map((clause) => (
+                      <div key={clause.name} className="sp-clause">
+                        {clause.name}
+                        <div className="sp-bar">
+                          <i style={{ width: `${clause.pct}%` }} />
+                        </div>
+                      </div>
+                    ))}
               </div>
-              <div className="sp-row">
-                <span>Lead auditor — assigned</span>
-                <span className="sp-check">✓ Ready</span>
-              </div>
-              <div className="sp-row">
-                <span>Checklist shared with team</span>
-                <span className="sp-check">✓ Sent</span>
-              </div>
-              <div className="sp-row">
-                <span>Schedule — 12–14 May</span>
-                <span className="sp-check">✓ Booked</span>
-              </div>
-            </div>
-            <div className={`story-panel${storyIndex === 1 ? ' active' : ''}`}>
-              <div className="sp-label">Self-assessment · Clause coverage</div>
-              <div className="sp-clause">Clause 4 — Context of the organization</div>
-              <div className="sp-bar">
-                <i style={{ width: '92%' }} />
-              </div>
-              <div className="sp-clause">Clause 7 — Support</div>
-              <div className="sp-bar">
-                <i style={{ width: '64%' }} />
-              </div>
-              <div className="sp-clause">Clause 8 — Operation</div>
-              <div className="sp-bar">
-                <i style={{ width: '48%' }} />
-              </div>
-              <div className="sp-clause">Clause 9 — Performance evaluation</div>
-              <div className="sp-bar">
-                <i style={{ width: '71%' }} />
-              </div>
-            </div>
-            <div className={`story-panel${storyIndex === 2 ? ' active' : ''}`}>
-              <div className="sp-label">NCR board · This week</div>
-              <div className="sp-row">
-                <span>Calibration records — torque tools</span>
-                <span className="pill major">Major</span>
-              </div>
-              <div className="sp-row">
-                <span>Supplier evaluation overdue</span>
-                <span className="pill minor">Minor</span>
-              </div>
-              <div className="sp-row">
-                <span>Training matrix — welding certs</span>
-                <span className="pill minor">Minor</span>
-              </div>
-              <div className="sp-row">
-                <span>Document control — obsolete SOP v3</span>
-                <span className="pill ok">Closed</span>
-              </div>
-            </div>
-            <div className={`story-panel${storyIndex === 3 ? ' active' : ''}`}>
-              <div className="sp-label">Close-out · Certification audit</div>
-              <div className="sp-row">
-                <span>Corrective actions verified</span>
-                <span className="sp-check">✓ Done</span>
-              </div>
-              <div className="sp-row">
-                <span>Internal audit reports (12 mo)</span>
-                <span className="sp-check">✓ Ready</span>
-              </div>
-              <div className="sp-row">
-                <span>Management review minutes</span>
-                <span className="sp-check">✓ Ready</span>
-              </div>
-              <div className="sp-row">
-                <span>Final audit report</span>
-                <span className="sp-check">✓ Generated</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -410,12 +326,9 @@ export function LandingPage() {
       <section className="sec-pad" id="tour">
         <div className="wrap">
           <div className="sec-head reveal">
-            <span className="eyebrow">Product tour</span>
-            <h2>See AuditFlow in action.</h2>
-            <p>
-              The actual product — dashboard, self-assessments, non-conformities, corrective actions and reports — in
-              under twenty seconds.
-            </p>
+            <span className="eyebrow">{t.tour.eyebrow}</span>
+            <h2>{t.tour.heading}</h2>
+            <p>{t.tour.sub}</p>
           </div>
           <div className="tour-frame reveal" data-d="1">
             <div className="tour-chrome" aria-hidden="true">
@@ -430,7 +343,7 @@ export function LandingPage() {
               playsInline
               preload="metadata"
               poster="/promo/auditflow-tour-poster.jpg"
-              aria-label="Product tour of AuditFlow: dashboard, self-assessments, non-conformities, corrective actions and reports"
+              aria-label={t.tour.videoAria}
             >
               <source src="/promo/auditflow-tour.mp4" type="video/mp4" />
             </video>
@@ -441,15 +354,23 @@ export function LandingPage() {
       <section className="sec-pad">
         <div className="wrap">
           <div className="sec-head reveal">
-            <span className="eyebrow">Coverage</span>
-            <h2>Full ISO 9001:2015 clause coverage.</h2>
-            <p>
-              Every requirement mapped — from organizational context to management review, operations, and continuous
-              improvement.
-            </p>
+            <span className="eyebrow">{t.coverage.eyebrow}</span>
+            <h2>{t.coverage.heading}</h2>
+            <p>{t.coverage.sub}</p>
           </div>
           <div className="clause-grid reveal">
-            {CLAUSES.map(([id, name]) => (
+            {[
+              ['Clause 4', locale === 'sv' ? 'Organisationskontext' : 'Context of the Organization'],
+              ['Clause 5', locale === 'sv' ? 'Ledarskap' : 'Leadership'],
+              ['Clause 6', locale === 'sv' ? 'Planering' : 'Planning'],
+              ['Clause 7', locale === 'sv' ? 'Stöd' : 'Support'],
+              ['Clause 8', locale === 'sv' ? 'Verksamhet' : 'Operation'],
+              ['Clause 9', locale === 'sv' ? 'Prestationsutvärdering' : 'Performance Evaluation'],
+              ['Clause 9.2', locale === 'sv' ? 'Intern revision' : 'Internal Audit'],
+              ['Clause 9.3', locale === 'sv' ? 'Management review' : 'Management Review'],
+              ['Clause 10', locale === 'sv' ? 'Förbättring & CAPA' : 'Improvement & CAPA'],
+              ['10.2', locale === 'sv' ? 'Nonconformity & korrigerande åtgärd' : 'Nonconformity & Corrective Action'],
+            ].map(([id, name]) => (
               <div key={id} className="clause">
                 <div className="clause-id">{id}</div>
                 <div className="clause-name">{name}</div>
@@ -462,62 +383,51 @@ export function LandingPage() {
       <section className="paper-sec sec-pad" id="pricing">
         <div className="wrap">
           <div className="sec-head reveal">
-            <span className="eyebrow">Pricing</span>
-            <h2>Straightforward plans. No surprises.</h2>
-            <p>All plans include full ISO 9001:2015 clause coverage. Free while in beta.</p>
+            <span className="eyebrow">{t.pricing.eyebrow}</span>
+            <h2>{t.pricing.heading}</h2>
+            <p>{t.pricing.sub}</p>
           </div>
           <div className="pricing-grid">
             <div className="plan featured reveal">
-              <div className="plan-name">Free</div>
-              <div className="plan-price">€0</div>
-              <div className="plan-per">forever — up to 10 users</div>
+              <div className="plan-name">{t.pricing.free.name}</div>
+              <div className="plan-price">{t.pricing.free.price}</div>
+              <div className="plan-per">{t.pricing.free.per}</div>
               <div className="plan-divider" />
               <ul className="plan-features">
-                <li>Unlimited audits</li>
-                <li>Self-assessment module</li>
-                <li>NCR &amp; CAPA tracking</li>
-                <li>Full ISO 9001:2015 clause coverage</li>
-                <li>Basic reporting &amp; dashboards</li>
-                <li>Email support</li>
+                {t.pricing.free.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
               </ul>
               <Link href="/register" className="plan-btn plan-btn-glow">
-                Start 30-day trial
+                {t.pricing.free.cta}
               </Link>
             </div>
             <div className="plan reveal" data-d="1">
-              <div className="plan-name">Professional</div>
-              <div className="plan-price">Coming soon</div>
-              <div className="plan-per">up to 50 users — join the waitlist</div>
+              <div className="plan-name">{t.pricing.pro.name}</div>
+              <div className="plan-price">{t.pricing.pro.price}</div>
+              <div className="plan-per">{t.pricing.pro.per}</div>
               <div className="plan-divider" />
               <ul className="plan-features">
-                <li>Everything in Free</li>
-                <li>Advanced analytics &amp; custom dashboards</li>
-                <li>Evidence attachment &amp; storage</li>
-                <li>Audit report generation (PDF)</li>
-                <li>Role-based access control</li>
-                <li>Multi-department &amp; division support</li>
-                <li>Priority support</li>
+                {t.pricing.pro.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
               </ul>
               <Link href="/register" className="plan-btn plan-btn-dark">
-                Start 30-day trial
+                {t.pricing.pro.cta}
               </Link>
             </div>
             <div className="plan reveal" data-d="2">
-              <div className="plan-name">Enterprise</div>
-              <div className="plan-price">Custom</div>
-              <div className="plan-per">50+ users — tailored to your org</div>
+              <div className="plan-name">{t.pricing.enterprise.name}</div>
+              <div className="plan-price">{t.pricing.enterprise.price}</div>
+              <div className="plan-per">{t.pricing.enterprise.per}</div>
               <div className="plan-divider" />
               <ul className="plan-features">
-                <li>Everything in Professional</li>
-                <li>SSO / SAML integration</li>
-                <li>Custom audit templates</li>
-                <li>API access</li>
-                <li>Multi-site management</li>
-                <li>Dedicated onboarding &amp; training</li>
-                <li>SLA-backed support</li>
+                {t.pricing.enterprise.features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
               </ul>
-              <a href="mailto:hello@auditflow.io" className="plan-btn plan-btn-outline">
-                Contact sales
+              <a href={`mailto:hello@auditflow.${locale === 'sv' ? 'se' : 'io'}`} className="plan-btn plan-btn-outline">
+                {t.pricing.enterprise.cta}
               </a>
             </div>
           </div>
@@ -525,12 +435,10 @@ export function LandingPage() {
       </section>
 
       <section className="cta">
-        <h2>
-          Your next audit could be <em>the calm one</em>.
-        </h2>
-        <p>Set up in minutes. No consultants, no training day required.</p>
+        <h2 dangerouslySetInnerHTML={{ __html: t.cta.heading }} />
+        <p>{t.cta.sub}</p>
         <Link className="btn" href="/register">
-          Start 30-day free trial →
+          {t.cta.cta}
         </Link>
       </section>
 
@@ -541,32 +449,30 @@ export function LandingPage() {
               <div className="footer-logo">
                 Audit<span>Flow</span>
               </div>
-              <div className="footer-tagline">
-                ISO 9001 quality management and audit platform. Built for teams that take compliance seriously.
-              </div>
+              <div className="footer-tagline">{t.footer.tagline}</div>
             </div>
             <div className="footer-links-group">
-              <div className="footer-links-title">Product</div>
-              <a href="#features">Features</a>
-              <a href="#pricing">Pricing</a>
-              <Link href="/blog">Blog</Link>
+              <div className="footer-links-title">{t.footer.product}</div>
+              <a href="#features">{t.footer.links.features}</a>
+              <a href="#pricing">{t.footer.links.pricing}</a>
+              <Link href="/blog">{t.footer.links.blog}</Link>
             </div>
             <div className="footer-links-group">
-              <div className="footer-links-title">Use cases</div>
-              <a href="#features">Internal audits</a>
-              <a href="#features">Self-assessments</a>
-              <a href="#story">Management review</a>
+              <div className="footer-links-title">{t.footer.useCases}</div>
+              <a href="#features">{t.footer.links.internalAudits}</a>
+              <a href="#features">{t.footer.links.selfAssessments}</a>
+              <a href="#story">{t.footer.links.managementReview}</a>
             </div>
             <div className="footer-links-group">
-              <div className="footer-links-title">Company</div>
-              <a href="mailto:hello@auditflow.io">Contact</a>
-              <a href="#">Privacy policy</a>
-              <a href="#">Terms of service</a>
+              <div className="footer-links-title">{t.footer.company}</div>
+              <a href={`mailto:hello@auditflow.${locale === 'sv' ? 'se' : 'io'}`}>{t.footer.links.contact}</a>
+              <a href="#">{t.footer.links.privacy}</a>
+              <a href="#">{t.footer.links.terms}</a>
             </div>
           </div>
           <div className="footer-bottom">
-            <span>© 2026 AuditFlow. All rights reserved.</span>
-            <span>ISO 9001:2015 Quality Management Platform</span>
+            <span>© 2026 AuditFlow. {t.footer.bottom.split('AuditFlow. ')[1]}</span>
+            <span>{t.footer.isoLabel}</span>
           </div>
         </div>
       </footer>

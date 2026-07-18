@@ -5,11 +5,37 @@ import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import { Button } from './button';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 
+const swedishFallback = {
+  title: 'Något gick fel',
+  description: 'Ett oväntat fel inträffade. Försök igen eller gå till startsidan.',
+  retry: 'Försök igen',
+  home: 'Till startsidan',
+};
+
+const englishFallback = {
+  title: 'Something went wrong',
+  description: 'An unexpected error occurred. Please try again or return to the home page.',
+  retry: 'Try Again',
+  home: 'Go to Home',
+};
+
+function pickLocaleFallback(): typeof swedishFallback {
+  try {
+    if (typeof window === 'undefined') return englishFallback;
+    const saved = window.localStorage.getItem('af-locale');
+    if (saved === 'sv') return swedishFallback;
+  } catch {
+    // ignore
+  }
+  if (typeof navigator !== 'undefined' && navigator.language?.startsWith('sv')) {
+    return swedishFallback;
+  }
+  return englishFallback;
+}
+
 interface ErrorBoundaryProps {
   children: ReactNode;
-  /** Fallback UI component (optional) */
   fallback?: ReactNode;
-  /** Callback when error is caught */
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 
@@ -19,10 +45,6 @@ interface ErrorBoundaryState {
   errorInfo: ErrorInfo | null;
 }
 
-/**
- * Global Error Boundary component to catch and handle React errors
- * Displays a user-friendly fallback UI with retry and home navigation options
- */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
@@ -38,14 +60,9 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Log error to console
     console.error('Error caught by ErrorBoundary:', error);
     console.error('Component stack:', errorInfo.componentStack);
-
-    // Update state with error info
     this.setState({ errorInfo });
-
-    // Call optional error callback (for external logging services)
     this.props.onError?.(error, errorInfo);
   }
 
@@ -63,12 +80,12 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   render(): ReactNode {
     if (this.state.hasError) {
-      // Use custom fallback if provided
       if (this.props.fallback) {
         return this.props.fallback;
       }
 
-      // Default fallback UI
+      const fallback = pickLocaleFallback();
+
       return (
         <div className="min-h-screen flex items-center justify-center bg-[var(--surface-sunken)] p-4">
           <Card className="max-w-lg w-full">
@@ -77,12 +94,12 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                 <AlertTriangle className="h-12 w-12 text-red-600" />
               </div>
               <CardTitle className="text-xl text-[var(--text-strong)]">
-                Something went wrong
+                {fallback.title}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-center text-[var(--text-muted)]">
-                An unexpected error occurred. Please try again or return to the home page.
+                {fallback.description}
               </p>
 
               {process.env.NODE_ENV === 'development' && this.state.error && (
@@ -113,7 +130,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                   className="flex items-center gap-2"
                 >
                   <RefreshCw className="h-4 w-4" />
-                  Try Again
+                  {fallback.retry}
                 </Button>
                 <Button
                   onClick={this.handleGoHome}
@@ -121,7 +138,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
                   className="flex items-center gap-2"
                 >
                   <Home className="h-4 w-4" />
-                  Go to Home
+                  {fallback.home}
                 </Button>
               </div>
             </CardContent>
