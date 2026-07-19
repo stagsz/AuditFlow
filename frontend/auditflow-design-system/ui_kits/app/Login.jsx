@@ -8,7 +8,7 @@ function Login({ onSignIn }) {
       {/* Form side */}
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 40, background: 'var(--surface-card)' }}>
         <div style={{ width: '100%', maxWidth: 360 }}>
-          <img src="../../assets/logo-full.svg" alt="AuditFlow" style={{ height: 32, marginBottom: 36 }} />
+          <img src="../../assets/logo-full.svg" alt="Normetta" style={{ height: 32, marginBottom: 36 }} />
           <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 600, color: 'var(--text-strong)', margin: '0 0 6px', letterSpacing: '-0.02em' }}>Welcome back</h1>
           <p style={{ fontSize: 15, color: 'var(--text-muted)', margin: '0 0 28px' }}>Sign in to continue your ISO 9001 self-assessment.</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -21,7 +21,7 @@ function Login({ onSignIn }) {
             <Button variant="primary" size="lg" fullWidth onClick={onSignIn} iconRight={<Icon name="arrow-right" size={17} />}>Sign in</Button>
           </div>
           <div style={{ textAlign: 'center', marginTop: 24, fontSize: 13.5, color: 'var(--text-muted)' }}>
-            New to AuditFlow? <a href="#" style={{ fontWeight: 600 }}>Start a free assessment</a>
+            New to Normetta? <a href="#" style={{ fontWeight: 600 }}>Start a free assessment</a>
           </div>
         </div>
       </div>

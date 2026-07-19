@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 /**
- * The canonical ISO finding-outcome badge. Maps the four AuditFlow conformance
+ * The canonical ISO finding-outcome badge. Maps the four Normetta conformance
  * states to their semantic color + glyph. Use this everywhere a clause or
  * finding status is shown — not a generic Badge.
  *

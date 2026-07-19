@@ -1,6 +1,6 @@
 ---
 name: auditflow-design
-description: Use this skill to generate well-branded interfaces and assets for AuditFlow (a self-assessment app for ISO 9001), either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
+description: Use this skill to generate well-branded interfaces and assets for Normetta (a self-assessment app for ISO 9001), either for production or throwaway prototypes/mocks/etc. Contains essential design guidelines, colors, type, fonts, assets, and UI kit components for prototyping.
 user-invocable: true
 ---
 
@@ -13,10 +13,13 @@ working on production code, copy assets and read the rules here to become an exp
 designing with this brand.
 
 Key facts:
-- **Brand color** terracotta/clay `--clay-600`; warm **stone** neutrals; **conformance
-  semantics** drive most color (moss green=conformant, ochre=observation,
-  garnet=nonconformity, stone=not assessed).
-- **Type:** Space Grotesk (display), IBM Plex Sans (UI), IBM Plex Mono (clause refs, IDs, data).
+- **Brand color** luminous **teal** `--teal-500` on a dark, teal-biased "precision
+  instrument" theme; **cloud** neutrals; **brass** certification accent used sparingly;
+  **conformance semantics** drive most color (moss green=conformant, ochre=observation,
+  garnet=nonconformity, stone=not assessed). Reference semantic vars (`--brand`,
+  `--text-body`), not raw ramps. Legacy `--clay-*`/`--stone-*` names remain as aliases.
+- **Type:** Fraunces (editorial serif display), IBM Plex Sans (UI/body),
+  IBM Plex Mono (clause refs, IDs, data), Space Grotesk (compact UI headings).
 - **Voice:** calm, exacting quality manager — sentence case, address the user as "you",
   exact ISO vocabulary, no emoji.
 - **Components** live in `components/`; the full app recreation in `ui_kits/app/`.

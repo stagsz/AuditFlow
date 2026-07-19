@@ -1,4 +1,4 @@
-// AuditFlow design system loader for templates.
+// Normetta design system loader for templates.
 // One line for the consumer to edit: `base` points at the design system root.
 // Previewing inside this design system, that's two levels up ('../..').
 // In a consuming project, point it at the bound _ds/<folder> tree

@@ -1,4 +1,4 @@
-// AuditFlow icon set — Lucide (MIT). Embedded path data for the UI kit so the
+// Normetta icon set — Lucide (MIT). Embedded path data for the UI kit so the
 // kit renders offline. In production, import from the `lucide-react` package.
 const ICONS = {
   'layout-dashboard': <><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></>,
