@@ -27,6 +27,22 @@ const nextConfig = {
       return override || (isProd ? '/_/backend/api' : 'http://localhost:3001/api');
     })(),
   },
-}
+  // Force the HTML document to always revalidate at the edge. The document
+  // references hashed JS chunks; if the edge served a stale HTML pointing at a
+  // pre-fix chunk, a returning visitor could keep calling the old
+  // audit-flow.org API URL. no-cache (revalidate) guarantees the HTML always
+  // reflects the current deployment. Hashed /_next/static assets stay
+  // immutable (set by Next) so they cache aggressively.
+  async headers() {
+    return [
+      {
+        source: '/:path((?!_next/static/).*)',
+        headers: [
+          { key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' },
+        ],
+      },
+    ];
+  },
+};
 
 module.exports = nextConfig
