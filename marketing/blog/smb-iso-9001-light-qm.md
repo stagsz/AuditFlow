@@ -1,8 +1,10 @@
+
 ---
 title: "How Small Companies Can Pass ISO 9001 Without a Full Quality Department"
 description: "A practical guide for SMBs that need ISO 9001 certification but don’t have a dedicated quality manager. Learn what evidence auditors actually need, where most companies fail, and how to close the gap with light automation."
 publishedAt: 2026-06-29
 owner: Greisz Consulting / Normetta
+published: true
 ---
 
 # How Small Companies Can Pass ISO 9001 Without a Full Quality Department

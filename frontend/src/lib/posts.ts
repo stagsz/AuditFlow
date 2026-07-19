@@ -70,6 +70,18 @@ export async function readPostMarkdown(slug: string) {
   return matter(raw);
 }
 
+// Files that must never be published as blog posts.
+//   APPROVAL-REVIEW*      -> review queue (deliberately kept out of the public list)
+//   *-supporting.md       -> internal sales/launch collateral
+//   *-cta-variants.md     -> internal sales CTA copy
+// #2: explicit exclusion of internal working files so they can't be swept into the public blog.
+function isExcludedFile(file: string): boolean {
+  return (
+    /^APPROVAL-REVIEW/i.test(file) ||
+    /-(supporting|cta-variants)\.md$/i.test(file)
+  );
+}
+
 export async function getPosts(): Promise<PostMeta[]> {
   const POSTS_DIR = await resolvePostsDir();
   if (!POSTS_DIR) {
@@ -81,12 +93,14 @@ export async function getPosts(): Promise<PostMeta[]> {
   const entries = await Promise.all(
     files
       .filter((f) => f.endsWith('.md'))
-      .filter((f) => !/^APPROVAL-REVIEW/i.test(f))
+      .filter((f) => !isExcludedFile(f))
       .map(async (file) => {
         const slug = file.slice(0, -3);
         const raw = await fs.readFile(path.join(POSTS_DIR, file), 'utf8');
         const { data, content } = matter(raw);
-        const date = toIsoDate(data.date ?? data.publishedDate ?? data.published);
+        // #3: default is draft. Only frontmatter `published: true` becomes a public post.
+        if (data.published !== true) return null;
+        const date = toIsoDate(data.date ?? data.publishedDate ?? data.publishedAt);
         const title =
           typeof data.title === 'string' && data.title.trim().length > 0
             ? data.title.trim()
@@ -102,5 +116,7 @@ export async function getPosts(): Promise<PostMeta[]> {
       }),
   );
 
-  return entries.sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0));
+  return entries
+    .filter((e): e is PostMeta => e !== null)
+    .sort((a, b) => (a.date > b.date ? -1 : a.date < b.date ? 1 : 0));
 }
