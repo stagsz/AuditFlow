@@ -11,14 +11,14 @@ const sv = {
     start: 'Kom igång',
   },
   hero: {
-    eyebrow: 'ISO 9001:2015 · Avancerat för svenska företag',
-    h1: 'Gå in i revison med <em>förvissning</em> om utfallet.',
-    sub: 'Normetta kartlägger hela ditt kvalitetssystem enligt klausul 4–10, följer varje NCR till stängning och visar dig exakt var du står – månader innan revisorn gör det.',
+    eyebrow: 'ISO 9001:2015 · Byggt för europeiska SME-företag',
+    h1: 'Vet att du är redo för revisionen – <em>innan</em> revisorn vet det.',
+    sub: 'Normetta kartlägger ditt kvalitetssystem mot varje klausul i ISO 9001, poängsätter din revisionsberedskap i realtid och följer varje avvikelse till stängning. Data lagras i EU och du är igång på en eftermiddag – inga konsulter, ingen införandeprocess på sex månader.',
     actions: {
-      primary: 'Starta gratisprov i 30 dagar →',
+      primary: 'Starta ditt gratisprov i 30 dagar →',
       secondary: 'Se hur det fungerar ↓',
     },
-    note: 'Byggt på den fullständiga klausulstrukturen i ISO 9001:2015',
+    note: 'Fullständig klausulstruktur i ISO 9001:2015 · data lagras i EU',
     mockup: {
       title: 'Revisionsberedskap',
       live: 'Live',
@@ -260,13 +260,13 @@ const en = {
   },
   hero: {
     eyebrow: 'ISO 9001:2015 · Built for European SMEs',
-    h1: 'Walk into your audit <em>already certain</em> of the outcome.',
-    sub: 'Normetta maps your entire quality system to clauses 4–10, tracks every NCR to closure, and shows you exactly where you stand — months before the auditor does.',
+    h1: 'Know you’re audit-ready — <em>before</em> the auditor does.',
+    sub: 'Normetta maps your quality system to every ISO 9001 clause, scores your readiness in real time, and tracks each nonconformity to closure. Hosted in the EU, set up in an afternoon — no consultants, no six-month rollout.',
     actions: {
-      primary: 'Start 30-day free trial →',
+      primary: 'Start your 30-day free trial →',
       secondary: 'See how it works ↓',
     },
-    note: 'Built on the full ISO 9001:2015 clause structure',
+    note: 'Full ISO 9001:2015 clause structure · data hosted in the EU',
     mockup: {
       title: 'Audit readiness',
       live: 'Live',

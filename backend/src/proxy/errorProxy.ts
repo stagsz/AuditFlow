@@ -30,11 +30,9 @@ export function globalErrorHandler(
   error: Error,
   req: Request,
   res: Response,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction
 ): void {
   // Log the error
-  // eslint-disable-next-line no-console
   console.error('[AUDITFLOW_ERR]', error.constructor?.name, error.message);
   logger.error('Error occurred', {
     error: error.message,

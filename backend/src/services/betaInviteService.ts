@@ -22,11 +22,6 @@ interface CreateBetaInviteInput {
   organizationId?: string;
 }
 
-interface SendInviteInput {
-  email: string;
-  message?: string;
-}
-
 interface BetaInviteUsageData {
   code: string;
   ipAddress?: string;

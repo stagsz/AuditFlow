@@ -10,13 +10,13 @@ async function safeDeleteMany(model: { deleteMany: (args: { where: object }) => 
   try {
     const result = await model.deleteMany({ where } as { where: object });
     counts[label] = result.count;
-  } catch (error) {
+  } catch {
     erred.push(label);
     counts[label] = 0;
   }
 }
 
-export async function executeUserErasure(userId: string, actorId?: string): Promise<EraseResult> {
+export async function executeUserErasure(userId: string, _actorId?: string): Promise<EraseResult> {
   const counts: Record<string, number> = {
     userOrgInvites: 0,
     assessmentTeamMembers: 0,
@@ -110,13 +110,13 @@ export async function executeUserErasure(userId: string, actorId?: string): Prom
     counts.assessments = assessmentDelete.count;
   }
 
-  const userDelete = await prisma.user.delete({ where: { id: userId } });
+  await prisma.user.delete({ where: { id: userId } });
   counts.users = 1;
 
   return { deleted: counts, erred };
 }
 
-export function assertCanErase(requestingRole: UserRole, targetUserId: string, requestingUserId: string, requestingOrgId: string): void {
+export function assertCanErase(requestingRole: UserRole, targetUserId: string, requestingUserId: string, _requestingOrgId: string): void {
   if (requestingUserId === targetUserId) {
     throw new Error('Self-erasure is not allowed');
   }

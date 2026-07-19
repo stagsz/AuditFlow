@@ -113,7 +113,6 @@ export class BetaInviteController {
 
   async sendReminder(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
-    const requestingUserId = (req as any).user.userId;
 
     const invite = await betaInviteService.getById(id);
 

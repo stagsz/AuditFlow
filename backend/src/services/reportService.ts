@@ -7,7 +7,7 @@ import { AssessmentStatus, NCRStatus, Severity, UserRole } from '../types/enums'
 let PptxGenJs: any;
 try {
   PptxGenJs = require('pptxgenjs');
-} catch (e) {
+} catch {
   console.warn('PowerPoint support unavailable: pptxgenjs is not installed.');
 }
 
@@ -21,13 +21,6 @@ const COLORS = {
   LIGHT_GRAY: '#f1f5f9',
   DARK_GRAY: '#334155',
   WHITE: '#ffffff',
-};
-
-// Score color mapping
-const SCORE_COLORS: Record<number, string> = {
-  1: COLORS.DANGER,
-  2: COLORS.WARNING,
-  3: COLORS.SUCCESS,
 };
 
 interface SectionScore {
