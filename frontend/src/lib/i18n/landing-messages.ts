@@ -13,7 +13,7 @@ const sv = {
   hero: {
     eyebrow: 'ISO 9001:2015 · Avancerat för svenska företag',
     h1: 'Gå in i revison med <em>förvissning</em> om utfallet.',
-    sub: 'Normetta kartlägger hela ditt kvalitetssystem enligt klausul 4–10, följer varje NCR till stängning och visar dig exakt var du står – månader innrevisorn gör det.',
+    sub: 'Normetta kartlägger hela ditt kvalitetssystem enligt klausul 4–10, följer varje NCR till stängning och visar dig exakt var du står – månader innan revisorn gör det.',
     actions: {
       primary: 'Starta gratisprov i 30 dagar →',
       secondary: 'Se hur det fungerar ↓',
