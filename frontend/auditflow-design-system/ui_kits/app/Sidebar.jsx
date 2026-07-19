@@ -48,7 +48,7 @@ function Sidebar({ active, onNavigate }) {
       padding: '20px 14px', gap: 4, boxSizing: 'border-box',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '4px 8px 18px' }}>
-        <img src="../../assets/logo-full-dark.svg" alt="AuditFlow" style={{ height: 30 }} />
+        <img src="../../assets/logo-full-dark.svg" alt="Normetta" style={{ height: 30 }} />
       </div>
 
       <div style={{

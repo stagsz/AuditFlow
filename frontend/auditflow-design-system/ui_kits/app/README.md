@@ -1,6 +1,6 @@
-# AuditFlow — App UI kit
+# Normetta — App UI kit
 
-High-fidelity recreation of the AuditFlow self-assessment web app, composed from
+High-fidelity recreation of the Normetta self-assessment web app, composed from
 the design system's component primitives (`window.AuditFlowDesignSystem_900961`).
 
 ## Run

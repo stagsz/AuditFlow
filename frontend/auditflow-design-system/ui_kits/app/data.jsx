@@ -1,4 +1,4 @@
-// AuditFlow mock data — ISO 9001:2015 self-assessment
+// Normetta mock data — ISO 9001:2015 self-assessment
 
 const CLAUSES = [
   { id: '4', title: 'Context of the organization', total: 12, conformant: 11, observation: 1, nonconformity: 0 },

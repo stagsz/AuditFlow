@@ -1,31 +1,33 @@
-# AuditFlow Design System
+# Normetta Design System
 
-> **AuditFlow** is a self-assessment app for **ISO 9001:2015** quality management.
+> **Normetta** is a self-assessment app for **ISO 9001:2015** quality management.
 > Quality teams use it to assess their management system against every clause,
 > capture evidence, log findings, and walk into a certification audit knowing
 > exactly where they stand.
 
-This repository is the AuditFlow design system: brand, tokens, components, and a
+This repository is the Normetta design system: brand, tokens, components, and a
 full app UI kit. Consuming projects link the single entry point **`styles.css`**.
 
 ---
 
 ## ⚠️ Provenance & substitutions (please review)
 
-No codebase, Figma, brand assets, or fonts were provided — **AuditFlow's brand was
+No codebase, Figma, brand assets, or fonts were provided — **Normetta's brand was
 designed from scratch** to fit the product domain. The following are deliberate
 inventions to be confirmed or replaced:
 
 - **Logo** (`assets/logo-*.svg`) — an original mark: a checkmark that flows upward
   (audit ✓ + forward progress). Replace with the real logo when available.
 - **Fonts** — substituted from Google Fonts (see `tokens/fonts.css`):
-  Space Grotesk (display), IBM Plex Sans (UI/body), IBM Plex Mono (data/clause refs).
-  Swap for licensed brand faces if they differ.
-- **Palette** — terracotta/clay primary + warm stone neutrals + natural-pigment
-  ISO-conformance semantics (moss / ochre / garnet), chosen for an organic, earthy feel.
+  Fraunces (editorial serif display), IBM Plex Sans (UI/body), IBM Plex Mono (data/clause
+  refs), Space Grotesk (compact UI headings). Swap for licensed brand faces if they differ.
+- **Palette** — luminous teal primary (`--teal-500`) on a dark, teal-biased "precision
+  instrument" theme + cloud neutrals + brass certification accent + natural-pigment
+  ISO-conformance semantics (moss / ochre / garnet). Legacy `--clay-*`/`--stone-*` ramp
+  names are kept as aliases mapped onto the teal theme for back-compat.
 - **Company name in the kit** ("Northwind Mfg.") is placeholder tenant data.
 
-**Sources given:** company description only — *"AuditFlow, a self assessment app for ISO 9001."*
+**Sources given:** company description only — *"Normetta, a self assessment app for ISO 9001."*
 No links, repos, or files were attached.
 
 ---
@@ -37,7 +39,7 @@ We translate dense ISO language into plain, actionable English. Confident, preci
 reassuring — we reduce audit anxiety.
 
 - **Person.** Address the user as **you** ("Continue your self-assessment",
-  "Know exactly where you stand"). The product refers to itself as **AuditFlow**, not "we".
+  "Know exactly where you stand"). The product refers to itself as **Normetta**, not "we".
 - **Casing.** Sentence case everywhere — buttons, headings, nav, table headers.
   Never Title Case UI. (`Continue self-assessment`, not `Continue Self-Assessment`.)
 - **Tone.** Direct and outcome-oriented. Lead with the state of the system, then the
@@ -62,21 +64,28 @@ reassuring — we reduce audit anxiety.
 hairline rules, restrained color until status demands attention. It should feel like a
 precision instrument, not a consumer app.
 
-### Color — "natural" palette
-- **Clay / terracotta** (`--clay-600` `#9C4A2A`) is the primary brand/action color — links,
-  primary buttons, active nav, focus rings. Warm and grounded; deliberately not the cliché SaaS blue/purple.
-- **Warm stone** neutrals carry all structure: `--stone-900` ink for headings,
-  `--stone-700` body, `--stone-500` muted, `--stone-200` borders, `--stone-50` page.
-- **Conformance semantics** are the emotional core and map to ISO outcomes, tuned to natural pigments:
-  moss green = **conformant**, ochre = **observation**, garnet red = **nonconformity**,
-  dashed stone = **not assessed**. Each has bg/line/fg/solid roles (`--status-*`). Garnet is kept
-  clearly distinct from the terracotta brand so a finding never reads as a brand action.
-- Color is used **sparingly** — surfaces are white/stone; saturated color almost always
-  means a status. The dark sidebar (`--stone-900` warm ink) anchors the app.
+### Color — "precision instrument" palette
+- **Teal** (`--teal-500` `#14B8A6`, exposed as `--brand`) is the primary brand/action color —
+  links, primary buttons, active nav, focus rings. Luminous and precise; deliberately not the
+  cliché SaaS blue/purple. `--brand-strong` (`--teal-400`) brightens it on dark grounds.
+- The default theme is **dark**: teal-biased **ink** grounds (`--ink-0` page → `--ink-3`
+  raised) with **cloud** neutrals for text (`--cloud-100` strongest → `--cloud-600` subtle).
+  Reference the semantic vars (`--text-body`, `--text-strong`, `--surface-*`, `--border`),
+  not raw ramps. A light-value variant reusing the same semantic names is defined lower in
+  `tokens/colors.css`. Legacy `--clay-*`/`--stone-*` names remain as aliases → teal.
+- **Brass** (`--brass-500`) is a certification-seal accent, used sparingly.
+- **Conformance semantics** are the emotional core and map to ISO outcomes, tuned to natural
+  pigments: moss green = **conformant**, ochre = **observation**, garnet red =
+  **nonconformity**, dashed stone = **not assessed**. Each has bg/line/fg/solid roles
+  (`--status-*`). Garnet is kept clearly distinct from the teal brand so a finding never
+  reads as a brand action.
+- Color is used **sparingly** — grounds are near-black ink; saturated color almost always
+  means brand or status.
 
 ### Type
-- **Space Grotesk** for display: page titles, card titles, big numerals. Tight tracking
-  (`-0.02em`), weights 500–700.
+- **Fraunces** (editorial serif) for display: hero headings and big numerals; its italic
+  carries the brand voice. **Space Grotesk** is retained for compact UI headings (h3–h5,
+  card titles), tight tracking (`-0.02em`), weights 500–700.
 - **IBM Plex Sans** for all UI and body, 15px default, weights 400–600.
 - **IBM Plex Mono** for data: clause refs, finding IDs, scores, dates, percentages —
   always `tabular-nums`. This mono treatment is a signature of the brand.
@@ -85,13 +94,13 @@ precision instrument, not a consumer app.
 ### Spacing & layout
 - **4px base grid** (`--space-*`). Cards pad 20–24px; page gutters 28px; control heights
   30/38/46px. Sidebar 248px.
-- Layouts are column-structured with clear hairline dividers. Tables use a stone-50
-  header row, hairline row separators, monospace for IDs/refs.
+- Layouts are column-structured with clear hairline dividers. Tables use a raised
+  (`--surface-2`) header row, hairline row separators, monospace for IDs/refs.
 
 ### Shape, borders, elevation
 - **Radii are precise, not pill-soft:** 5px controls, 8px inner, 12px cards, 16px large.
   Status pills and avatars are the only fully-round elements.
-- **Borders are hairline** (`1px var(--stone-200/300)`). Most separation is a border, not
+- **Borders are hairline** (`1px var(--border)`). Most separation is a border, not
   a shadow.
 - **Shadows are soft, warm-tinted, layered** (`--shadow-xs → lg`). Cards rest on an
   ambient `--shadow-md` so they lift off the page; depth (gradients, bevels, drop
@@ -100,7 +109,7 @@ precision instrument, not a consumer app.
   That contrast is what makes the depth read as premium rather than dated.
 
 ### Backgrounds & imagery
-- Surfaces are flat: white cards on a stone-50 page. **No decorative gradients on content.**
+- Surfaces are flat: raised ink cards (`--surface-1/2`) on the near-black `--ink-0` page. **No decorative gradients on content.**
 - The single intentional texture is a faint **blueprint grid** (32px) used only on the dark
   brand panels (login) — evoking engineering/measurement. Low opacity, never on content.
 - No photography in the core app. If imagery is added, keep it cool-toned and structural.
@@ -112,14 +121,14 @@ precision instrument, not a consumer app.
   the **ScoreGauge** counts up from 0 (easeOutCubic) on mount as the product's hero moment.
 
 ### Interaction states
-- **Hover:** primary buttons darken to `--clay-700`; secondary/ghost get a stone tint;
+- **Hover:** primary buttons deepen to `--teal-700`; secondary/ghost get a subtle cloud tint;
   nav items lighten text to white on the dark rail.
 - **Press:** the cap physically sinks — 1px downward nudge, the top-light gradient flips,
   and an inset shadow replaces the bevel highlight (buttons feel depressed).
-- **Primary buttons** carry a brushed-metal finish: a multi-stop clay gradient with a hard
+- **Primary buttons** carry a brushed-metal finish: a multi-stop teal gradient with a hard
   reflection break mid-cap and a reflected-light foot, set in a crisp bevel. The logomark
   is likewise dimensional (gradient face, top highlight, drop shadow).
-- **Focus:** 3px clay focus ring (`--ring`), never a bare outline.
+- **Focus:** 3px teal focus ring (`--ring`), never a bare outline.
 - **Selected:** tinted status background + matching 1.5px border (assessment outcome cards).
 
 ### Transparency & blur
@@ -161,6 +170,6 @@ precision instrument, not a consumer app.
 - `feedback/` — **Callout**, **Tabs**, **ScoreGauge**
 - `navigation/` — **Carousel** (page + row variants; swipe / keyboard / dots, a11y, reduced-motion)
 
-**`ui_kits/app/`** — full AuditFlow app recreation (Login, Dashboard, Assessment, Findings). See its `README.md`.
+**`ui_kits/app/`** — full Normetta app recreation (Login, Dashboard, Assessment, Findings). See its `README.md`.
 
 **`guidelines/`** — foundation specimen cards (Colors, Type, Spacing, Brand) shown in the Design System tab.
