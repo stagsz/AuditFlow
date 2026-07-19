@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { getLocale, Locale } from '@/lib/locale';
 import { useLocaleMessages } from '@/lib/i18n/landing-messages';
 import LocaleSwitcher from '@/components/locale/LocaleSwitcher';
+// NOTE: This import keeps getting dropped during rebrand/merge resolutions
+// (see commits d512c89, 6c813ed, 16e084f). Without it the landing page renders
+// completely unstyled. Do not remove.
+import './landing.css';
 
 
 const BAR_HEIGHTS = ['38%', '52%', '46%', '61%', '57%', '70%', '66%', '78%', '84%', '92%'];
