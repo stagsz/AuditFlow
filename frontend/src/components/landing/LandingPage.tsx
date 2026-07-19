@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { getLocale, Locale } from '@/lib/locale';
 import { useLocaleMessages } from '@/lib/i18n/landing-messages';
 import LocaleSwitcher from '@/components/locale/LocaleSwitcher';
+import './landing.css';
 
 const BAR_HEIGHTS = ['38%', '52%', '46%', '61%', '57%', '70%', '66%', '78%', '84%', '92%'];
 
