@@ -259,6 +259,20 @@ export const actionSchemas = {
 // Onboarding Validation Schemas
 // -----------------------------------------------------------------------------
 
+const readinessProfileSchema = z
+  .object({
+    companySize: z.enum(['MICRO', 'SMALL', 'MEDIUM', 'LARGE']).optional(),
+    qmsStatus: z.enum(['NONE', 'BUILDING', 'INFORMAL', 'DOCUMENTED']).optional(),
+    certificationStatus: z
+      .enum(['NOT_CERTIFIED', 'IN_PROGRESS', 'CERTIFIED_SURVEILLANCE', 'CERTIFIED_RECERTIFYING'])
+      .optional(),
+    lastAuditSummary: z.string().max(2000).optional(),
+    improvementNotes: z.string().max(2000).optional(),
+    standardsKnowledgeLevel: z.enum(['NONE', 'BASIC', 'TRAINED', 'CERTIFIED_AUDITOR']).optional(),
+    hoursPerWeek: z.number().int().min(0).max(168).optional(),
+  })
+  .optional();
+
 export const onboardingSchemas = {
   setup: z.object({
     firstName: z.string().min(1, 'First name required'),
@@ -275,6 +289,7 @@ export const onboardingSchemas = {
       industry: z.string().optional(),
       country: z.string().optional(),
     }),
+    profile: readinessProfileSchema,
     divisions: z.array(z.object({ name: z.string().min(1) })),
     departments: z.array(
       z.object({
@@ -300,6 +315,7 @@ export const onboardingSchemas = {
       industry: z.string().optional(),
       country: z.string().optional(),
     }),
+    profile: readinessProfileSchema,
     divisions: z.array(z.object({ name: z.string().min(1) })),
     departments: z.array(
       z.object({
@@ -336,5 +352,47 @@ export const orgInviteSchemas = {
   }),
   inviteIdParam: z.object({
     id: z.string().uuid('Invalid invite ID'),
+  }),
+};
+
+// -----------------------------------------------------------------------------
+// Beta Invite Validation Schemas
+// -----------------------------------------------------------------------------
+
+export const betaInviteSchemas = {
+  create: z.object({
+    email: z.string().email('Invalid email').optional(),
+    expiresInDays: z.coerce.number().int().min(1).max(365).default(30),
+    maxUses: z.coerce.number().int().min(1).max(100).default(1),
+    metadata: z.record(z.string(), z.any()).optional(),
+  }),
+  send: z.object({
+    email: z.string().email('Invalid email'),
+    message: z.string().max(2000).optional(),
+  }),
+  bulkCreate: z.object({
+    count: z.coerce.number().int().min(1).max(100),
+    expiresInDays: z.coerce.number().int().min(1).max(365).default(30),
+    maxUses: z.coerce.number().int().min(1).max(100).default(1),
+  }),
+  listQuery: commonSchemas.pagination.merge(commonSchemas.search).merge(
+    z.object({
+      status: z.string().transform((val) => val.split(',')).pipe(
+        z.array(z.enum(['ACTIVE', 'EXPIRED', 'USED_UP', 'REVOKED']))
+      ).optional(),
+    })
+  ),
+  codeParam: z.object({
+    code: z.string().min(1, 'Invite code is required'),
+  }),
+  inviteIdParam: z.object({
+    id: z.string().uuid('Invalid invite ID'),
+  }),
+  validateCode: z.object({
+    code: z.string().min(1, 'Invite code is required'),
+  }),
+  trackUsage: z.object({
+    code: z.string().min(1, 'Invite code is required'),
+    referrer: z.string().url().optional(),
   }),
 };
