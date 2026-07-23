@@ -86,9 +86,33 @@
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
+  /* drift always runs; the sheen only plays after the arrow light completes a
+     loop (parent adds .lit), then fades out */
+  animation: lp-bg-drift 22s ease-in-out infinite alternate;
+}
+.lp .lp-bg-word.lit {
   animation:
-    lp-bg-sheen 7s linear infinite,
+    lp-bg-sheen 2.4s linear 1,
     lp-bg-drift 22s ease-in-out infinite alternate;
+}
+
+/* ── PDCA cycle ring behind the watermark ── */
+.lp .lp-arrows {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.lp .lp-seg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 40;
+  stroke-linecap: round;
+  opacity: 0.22;
+}
+.lp .lp-seg-head { fill: currentColor; opacity: 0.22; }
+.lp .lp-arrow-light { fill: var(--lp-teal-bright); }
+@media (prefers-reduced-motion: reduce) {
+  .lp .lp-arrow-light { display: none; }
 }
 @keyframes lp-bg-sheen {
   from { background-position: 100% 0; }

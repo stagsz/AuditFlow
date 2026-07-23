@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { getLocale, Locale } from '@/lib/locale';
 import { useLocaleMessages } from '@/lib/i18n/landing-messages';
 import LocaleSwitcher from '@/components/locale/LocaleSwitcher';
+import ArrowTrail from '@/components/landing/ArrowTrail';
 // NOTE: This import keeps getting dropped during rebrand/merge resolutions
 // (see commits d512c89, 6c813ed, 16e084f). Without it the landing page renders
 // completely unstyled. Do not remove.
@@ -31,6 +32,18 @@ export function LandingPage() {
   const tourVideoRef = useRef<HTMLVideoElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [storyIndex, setStoryIndex] = useState(0);
+  const [wordLit, setWordLit] = useState(false);
+  const litTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleArrowCycle = useCallback(() => {
+    setWordLit(true);
+    if (litTimer.current) clearTimeout(litTimer.current);
+    litTimer.current = setTimeout(() => setWordLit(false), 2600);
+  }, []);
+
+  useEffect(() => () => {
+    if (litTimer.current) clearTimeout(litTimer.current);
+  }, []);
 
   useEffect(() => {
     let ticking = false;
@@ -145,7 +158,8 @@ export function LandingPage() {
       <div className="lp-progress" ref={progressRef} />
       <div className="grain" />
       <div className="lp-bg" aria-hidden="true">
-        <span className="lp-bg-word">ISO 9001</span>
+        <ArrowTrail onCycle={handleArrowCycle} />
+        <span className={`lp-bg-word${wordLit ? ' lit' : ''}`}>ISO 9001</span>
       </div>
 
       <nav className={scrolled ? 'scrolled' : undefined}>
