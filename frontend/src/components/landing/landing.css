@@ -66,8 +66,7 @@
 }
 .lp .lp-bg-word {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  top: 40%; left: 50%;
   font-family: var(--lp-serif);
   font-weight: 700;
   font-size: clamp(64px, 9vw, 130px);
@@ -87,43 +86,20 @@
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  /* Locked dead-centre inside the PDCA ring (transform is set above). Motion is
-     supplied by the ring's travelling light + the .lit sheen — no drift, so the
-     word stays concentric with the ring. */
-}
-.lp .lp-bg-word.lit {
-  animation: lp-bg-sheen 2.4s linear 1;
-}
-
-/* ── PDCA cycle ring behind the watermark ── */
-/* Square, centred on the same origin as .lp-bg-word so the ring stays concentric
-   with "ISO 9001" on every aspect ratio. Sized to comfortably clear the word. */
-.lp .lp-arrows {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(920px, 94vw);
-  height: min(920px, 94vw);
-  pointer-events: none;
-}
-.lp .lp-seg {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 40;
-  stroke-linecap: round;
-  opacity: 0.22;
-}
-.lp .lp-seg-head { fill: currentColor; opacity: 0.22; }
-.lp .lp-arrow-light { fill: var(--lp-teal-bright); }
-@media (prefers-reduced-motion: reduce) {
-  .lp .lp-arrow-light { display: none; }
+  animation:
+    lp-bg-sheen 7s linear infinite,
+    lp-bg-drift 22s ease-in-out infinite alternate;
 }
 @keyframes lp-bg-sheen {
   from { background-position: 100% 0; }
   to { background-position: -200% 0; }
 }
+@keyframes lp-bg-drift {
+  from { transform: translate(-50%, -50%) translate(-90px, 30px); }
+  to { transform: translate(-50%, -50%) translate(90px, -30px); }
+}
 @media (prefers-reduced-motion: reduce) {
-  .lp .lp-bg-word { animation: none; }
+  .lp .lp-bg-word { animation: none; transform: translate(-50%, -50%); }
 }
 
 /* ── Nav: transparent → glass on scroll ── */
